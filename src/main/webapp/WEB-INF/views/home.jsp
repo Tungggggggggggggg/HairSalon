@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSalon - Trang Chủ</title>
-    <link rel="stylesheet" href="css/style.css"> 
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -18,75 +18,51 @@
     <h1>Chào mừng đến với JSalon</h1>
     <p>Tìm kiếm, đặt lịch và trải nghiệm dịch vụ chăm sóc tóc dễ dàng và thuận tiện.</p>
     
-    <button id="openBookingModal">Đặt Lịch Ngay</button>
+    <!-- Nút Đặt Lịch Ngay -->
+    <button id="openBookingModal" onclick="showScheduleModal()">Đặt Lịch Ngay</button>
+</section>
 
-    <!-- Booking Modal -->
-    <div id="bookingModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Đặt lịch ngay</h2>
-            <form action="booking" method="POST">
-                <label for="name">Tên của bạn:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="phone">Số điện thoại:</label>
-                <input type="tel" id="phone" name="phone" required>
-
-                <label for="date">Chọn ngày:</label>
-                <div style="display: flex; align-items: center;">
-                    <input type="text" id="date" name="date" placeholder="dd/MM/yyyy" required pattern="\d{2}/\d{2}/\d{4}" title="Nhập ngày theo định dạng dd/MM/yyyy">
-                    <button type="button" id="openCalendar">📅</button> <!-- Nút hiển thị lịch -->
-                </div>
-
-                <label for="service">Chọn dịch vụ:</label>
-                <select id="service" name="service" required>
-                    <option value="haircut">Cắt tóc</option>
-                    <option value="haircare">Chăm sóc tóc</option>
-                    <option value="styling">Tạo kiểu</option>
-                </select>
-
-                <button type="submit">Đặt Lịch</button>
-            </form>
-        </div>
+<!-- Modal Đặt lịch -->
+<div id="scheduleModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('scheduleModal')">&times;</span>
+        <h2>Đặt Lịch</h2>
+        <form action="/schedule" method="post">
+            <label for="date">Chọn Ngày</label>
+            <input type="date" id="date" name="date" required>
+            <label for="time">Chọn Giờ</label>
+            <input type="time" id="time" name="time" required>
+            <label for="service">Dịch Vụ</label>
+            <select id="service" name="service">
+                <option value="haircut">Cắt Tóc</option>
+                <option value="shave">Cạo Râu</option>
+                <option value="color">Nhuộm Tóc</option>
+            </select>
+            <button type="submit">Đặt Lịch</button>
+        </form>
     </div>
+</div>
 
-    <!-- Modal Script -->
-    <script>
-        var modal = document.getElementById('bookingModal');
-        var btn = document.getElementById('openBookingModal');
-        var span = document.getElementsByClassName('close')[0];
+<!-- JavaScript cho Modal -->
+<script>
+    // Hàm hiển thị modal
+    function showScheduleModal() {
+        document.getElementById('scheduleModal').style.display = 'block';
+    }
 
-        btn.onclick = function() {
-            modal.style.display = 'block';
-        }
+    // Hàm đóng modal
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
 
-        span.onclick = function() {
+    // Đảm bảo modal có thể được đóng bằng cách nhấn vào bất kỳ đâu bên ngoài modal
+    window.onclick = function(event) {
+        var modal = document.getElementById('scheduleModal');
+        if (event.target == modal) {
             modal.style.display = 'none';
         }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-
-        // Khởi tạo Datepicker
-        $(document).ready(function() {
-            $("#date").datepicker({
-                dateFormat: 'dd/mm/yy', // Định dạng ngày hiển thị
-                onSelect: function(dateText) {
-                    $(this).val(dateText); // Đặt giá trị cho input khi chọn ngày
-                }
-            });
-
-            // Hiển thị Datepicker khi nhấn nút
-            $("#openCalendar").on("click", function() {
-                $("#date").datepicker("show");
-            });
-        });
-    </script>
-    
-</section>
+    }
+</script>
 
 <section class="services">
     <h2>Dịch vụ của chúng tôi</h2>

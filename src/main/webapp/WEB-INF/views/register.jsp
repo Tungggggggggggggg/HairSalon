@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -10,51 +10,48 @@
 </head>
 
 <body>
-<%@ include file="/WEB-INF/views/includes/header.jsp" %>
+<%@ include file="/WEB-INF/views/includes/header.jsp" %> -->
 
-    <button id="openRegisterModal">Đăng Ký</button>
+<!-- Modal cho đăng ký -->
+<!-- <div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Đăng ký</h2>
+        <form action="register" method="POST">
+            <label for="name">Tên của bạn:</label>
+            <input type="text" id="name" name="name" required>
 
-    <!-- Registration Modal -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Đăng Ký</h2>
-            <form action="/register" method="POST">
-                <label for="username">Tên đăng nhập:</label>
-                <input type="text" id="username" name="username" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+            <label for="password">Mật khẩu:</label>
+            <input type="password" id="password" name="password" required>
 
-                <label for="password">Mật khẩu:</label>
-                <input type="password" id="password" name="password" required>
-
-                <button type="submit">Đăng Ký</button>
-            </form>
-        </div>
+            <button type="submit">Đăng ký</button>
+        </form>
     </div>
+</div>
 
-    <!-- Modal Script -->
-    <script>
-        var registerModal = document.getElementById('registerModal');
-        var registerBtn = document.getElementById('openRegisterModal');
-        var registerSpan = document.getElementsByClassName('close')[0];
+<script>
+    var registerModal = document.getElementById("registerModal");
+    var registerBtn = document.getElementById("openRegisterModal");
+    var closeRegisterModal = document.getElementsByClassName("close")[0];
 
-        registerBtn.onclick = function() {
-            registerModal.style.display = 'block';
+    registerBtn.onclick = function() {
+        registerModal.style.display = "block";
+    }
+    closeRegisterModal.onclick = function() {
+        registerModal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == registerModal) {
+            registerModal.style.display = "none";
         }
+    }
+</script>
 
-        registerSpan.onclick = function() {
-            registerModal.style.display = 'none';
-        }
 
-        window.onclick = function(event) {
-            if (event.target == registerModal) {
-                registerModal.style.display = 'none';
-            }
-        }
-    </script>
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
 </body>
-</html>
+</html> -->
