@@ -1,3 +1,4 @@
+/* ================== Global Styles ================== */
 * {
     margin: 0;
     padding: 0;
@@ -11,7 +12,7 @@ body {
     line-height: 1.6;
 }
 
-/* Header */
+/* Header Styles */
 header {
     background-color: #000;
     padding: 10px 0;
@@ -34,13 +35,8 @@ nav ul {
     gap: 20px;
 }
 
-/* Phần menu bên trái */
 .nav-left {
     flex: 1;
-}
-
-.nav-left li {
-    display: inline;
 }
 
 .nav-left li a {
@@ -55,7 +51,6 @@ nav ul {
     background-color: #ff0000;
 }
 
-/* Phần đăng nhập và đăng ký bên phải */
 .nav-right .auth-btn {
     text-decoration: none;
     color: #fff;
@@ -68,7 +63,8 @@ nav ul {
 .nav-right .auth-btn:hover {
     background-color: #cc0000;
 }
-/* Banner */
+
+/* Banner Styles */
 .banner {
     background: url('images/banner.jpg') no-repeat center center/cover;
     height: 400px;
@@ -104,7 +100,7 @@ nav ul {
     background-color: #cc0000;
 }
 
-/* Services section */
+/* Services Section Styles */
 .services {
     padding: 40px 20px;
     background-color: #222;
@@ -129,55 +125,256 @@ nav ul {
     color: #ccc;
 }
 
-/* Booking form */
-.booking-form {
-    padding: 40px 20px;
-    background-color: #1f1f1f;
+/* ================== CSS cho Modal Đăng nhập và Đăng ký ================== */
+.modal-auth {
+    display: none; /* Ẩn modal theo mặc định */
+    position: fixed;
+    z-index: 1000; /* Hiển thị modal trên cùng */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Màu nền mờ */
+}
+
+/* Modal Content */
+.modal-content-auth {
+    background-color: #ffffff; /* Nền modal màu trắng */
+    margin: 10% auto; /* 10% từ trên xuống và căn giữa */
+    padding: 30px; /* Padding bên trong modal */
+    border: 1px solid #888; /* Viền màu xám nhạt */
+    width: 40%; /* Độ rộng modal */
+    max-width: 500px; /* Đảm bảo modal không quá rộng */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Đổ bóng */
+    border-radius: 12px; /* Bo tròn góc */
+    color: #333; /* Màu chữ */
+    position: relative; /* Để định vị phần tử close */
+}
+
+/* Nút đóng modal */
+.modal-auth .close-auth {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #ff0000; /* Màu đỏ */
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-auth .close-auth:hover {
+    color: #cc0000; /* Đậm hơn khi hover */
+}
+
+/* Tiêu đề modal */
+.modal-auth .title-auth {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
     text-align: center;
-    margin: 30px 0;
-    color: #fff;
+    color: #ff0000; /* Màu đỏ */
 }
 
-.booking-form h2 {
-    color: #ff0000;
-    margin-bottom: 20px;
-}
-
-.booking-form form {
-    max-width: 600px;
-    margin: 0 auto;
+/* Các thành phần bên trong modal */
+.modal-auth .form-auth {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.booking-form label {
-    text-align: left;
-    font-weight: bold;
-    color: #fff;
-}
-
-.booking-form input, .booking-form select {
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #ccc;
+/* Ô input trong modal */
+.modal-auth .input-auth {
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd; /* Viền xám nhạt */
     border-radius: 5px;
     width: 100%;
+    transition: border 0.3s, background-color 0.3s;
 }
 
-.booking-form button {
-    background-color: #ff0000;
-    color: white;
+/* Input focus */
+.modal-auth .input-auth:focus {
+    border-color: #ff0000; /* Màu đỏ khi focus */
+}
+
+/* Nút submit */
+.modal-auth .form-btn-auth {
+    background-color: #ff0000; /* Nền đỏ */
+    color: #ffffff; /* Chữ trắng */
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.modal-auth .form-btn-auth:hover {
+    background-color: #cc0000; /* Đậm hơn khi hover */
+}
+
+/* Tab buttons for switching login methods */
+.modal-auth .tab-buttons-auth {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.modal-auth .tab-button-auth {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Màu sắc cho tab đang hoạt động */
+.modal-auth .tab-button-auth.active {
+    background-color: #ff0000; /* Màu đỏ */
+    color: #fff; /* Chữ trắng */
+}
+
+/* Error message styling */
+.modal-auth .error-message-auth {
+    color: #ff0000; /* Màu đỏ cho thông báo lỗi */
+    font-size: 12px;
+    text-align: left;
+}
+
+/* Link inside modal */
+.modal-auth .page-link-auth {
+    color: #ff0000; /* Màu đỏ cho link */
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.modal-auth .page-link-auth:hover {
+    color: #cc0000; /* Đậm hơn khi hover */
+}
+
+/* Label for switching between login and signup */
+.modal-auth .sign-up-label-auth, .modal-auth .sign-in-label-auth {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.modal-auth .sign-up-link-auth a, .modal-auth .sign-in-link-auth a {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.modal-auth .sign-up-link-auth a:hover, .modal-auth .sign-in-link-auth a:hover {
+    color: #cc0000; /* Đậm hơn khi hover */
+}
+
+/* Liên kết Quên mật khẩu */
+.modal-auth .forgot-password-link {
+    color: #ff0000;
+    text-align: right;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.modal-auth .forgot-password-link:hover {
+    color: #cc0000; /* Màu đỏ đậm hơn khi hover */
+}
+
+
+
+/* ================== CSS for Booking Modal ================== */
+.modal-booking {
+    display: none; /* Ẩn modal theo mặc định */
+    position: fixed;
+    z-index: 1000; /* Hiển thị modal trên cùng */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Màu nền mờ */
+}
+
+.modal-content-booking {
+    background-color: #ffffff; /* Nền modal màu trắng */
+    margin: 5% auto; /* Căn giữa modal */
+    padding: 30px;
+    border: 1px solid #888; /* Viền màu xám nhạt */
+    width: 50%; /* Độ rộng modal */
+    max-width: 600px; /* Giới hạn độ rộng */
+    border-radius: 12px; /* Bo tròn góc */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: #333;
+    position: relative;
+}
+
+/* Nút đóng modal */
+.modal-booking .close-booking {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #ff0000; /* Màu đỏ */
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-booking .close-booking:hover {
+    color: #cc0000; /* Đậm hơn khi hover */
+}
+
+/* Tiêu đề của modal */
+.modal-booking h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ff0000; /* Màu đỏ */
+}
+
+/* Form trong modal */
+.modal-booking form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-booking label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.modal-booking input, .modal-booking select, .modal-booking textarea {
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ddd; /* Viền xám nhạt */
+    border-radius: 5px;
+    width: 100%;
+    transition: border 0.3s;
+}
+
+.modal-booking input:focus, .modal-booking select:focus, .modal-booking textarea:focus {
+    border-color: #ff0000; /* Đổi màu viền khi focus */
+}
+
+/* Nút submit */
+.modal-booking button[type="submit"] {
+    background-color: #ff0000; /* Nền đỏ */
+    color: #ffffff; /* Chữ trắng */
     border: none;
     padding: 15px 20px;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    font-size: 1.2em;
 }
 
-.booking-form button:hover {
-    background-color: #cc0000;
+.modal-booking button[type="submit"]:hover {
+    background-color: #cc0000; /* Đậm hơn khi hover */
 }
+
 
 /* Footer */
 footer {
@@ -186,84 +383,4 @@ footer {
     text-align: center;
     padding: 20px;
     position: relative;
-}
-
-/* Responsive cho các phần */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-    }
-
-    .nav-left, .nav-right {
-        justify-content: center;
-    }
-
-    .nav-left, .nav-right {
-        flex-direction: row;
-        gap: 10px;
-    }
-
-    .banner h1 {
-        font-size: 2.5em;
-    }
-
-    .banner p {
-        font-size: 1.2em;
-    }
-
-    .services {
-        padding: 20px 10px;
-    }
-
-    .booking-form {
-        padding: 20px;
-        max-width: 100%;
-    }
-
-    .booking-form h2 {
-        font-size: 1.8em;
-    }
-
-    .booking-form button {
-        font-size: 1em;
-        padding: 10px 15px;
-    }
-}
-
-
-/* Modal styles */
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0, 0, 0, 0.5); 
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; 
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    position: relative;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
 }
