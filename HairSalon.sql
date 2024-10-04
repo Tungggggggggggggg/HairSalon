@@ -16,7 +16,7 @@ CREATE TABLE DichVu (
     dich_vu_id INT IDENTITY(1,1) PRIMARY KEY,
     ten_dich_vu NVARCHAR(100) NOT NULL,
     mo_ta NVARCHAR(MAX),
-    gia DECIMAL(10, 2) NOT NULL,
+    gia INT NOT NULL,
     thoi_gian INT NOT NULL, -- Thoi gian dich vu tinh bang phut
     ngay_tao DATETIME DEFAULT GETDATE()
 );
@@ -27,7 +27,7 @@ CREATE TABLE DatLich (
     dat_lich_id INT IDENTITY(1,1) PRIMARY KEY,
     nguoi_dung_id INT NOT NULL,
     dich_vu_id INT NOT NULL,
-    tho_cuat_id INT NOT NULL,
+    tho_cat_id INT NOT NULL,
     ngay_gio_dat DATETIME NOT NULL,
     trang_thai NVARCHAR(50) CHECK (trang_thai IN ('Cho duyet', 'da duyet', 'Bi tu choi', 'Hoan thanh')) DEFAULT 'Cho duyet',
     phan_hoi NVARCHAR(MAX),
@@ -43,7 +43,7 @@ GO
 CREATE TABLE DoanhThu (
     doanh_thu_id INT IDENTITY(1,1) PRIMARY KEY,
     salon_id INT NOT NULL,
-    tong_doanh_thu DECIMAL(10, 2) NOT NULL,
+    tong_doanh_thu INT NOT NULL,
     thang_nam DATE NOT NULL,
     ngay_tao DATETIME DEFAULT GETDATE()
 );
@@ -52,12 +52,12 @@ GO
 -- Bang quan ly luong va hoa hong
 CREATE TABLE LuongVaHoaHong (
     luong_id INT IDENTITY(1,1) PRIMARY KEY,
-    tho_cuat_id INT NOT NULL,
-    luong_coban DECIMAL(10, 2) NOT NULL,
-    ti_le_hoa_hong DECIMAL(5, 2) NOT NULL, -- Ty le hoa hong
+    tho_cat_id INT NOT NULL,
+    luong_coban INT NOT NULL,
+    ti_le_hoa_hong INT NOT NULL, -- Ty le hoa hong
     thang_nam DATE NOT NULL,
     ngay_tao DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (tho_cuat_id) REFERENCES NguoiDung(nguoi_dung_id)
+    FOREIGN KEY (tho_cat_id) REFERENCES NguoiDung(nguoi_dung_id)
 );
 GO
 
