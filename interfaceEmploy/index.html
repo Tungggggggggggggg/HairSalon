@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao Diện Nhân Viên</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        background-color: #000; /* Nền đen */
+        color: #ff0000; /* Chữ đỏ */
+        margin: 0;
+        }
+        header, footer {
+            background-color: #333; /* Nền xám cho header và footer */
+            color: #ff0000; /* Chữ đỏ */
+            padding: 15px;
+            text-align: center;
+        }
+        #calendar {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: #222; /* Nền xám cho calendar */
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .notification {
+            background-color: #ff3333; /* Thông báo màu đỏ sáng */
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+            color: #000;
+        }
+        .event {
+            padding: 10px;
+            background-color: #ffcc00; /* Màu vàng cho sự kiện */
+            border: 1px solid #d3d3d3;
+            border-radius: 5px;
+            cursor: move;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            color: #ff0000; /* Chữ đỏ cho bảng */
+        }
+        th {
+            background-color: #444; /* Nền xám cho tiêu đề bảng */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Giao Diện Nhân Viên</h1>
+    </header>
+
+    <div id="calendar"></div>
+    <div class="notification"><B>Thông báo: Có lịch hẹn mới!</B></div>
+
+    <h2 style="text-align: center;">Danh Sách Yêu Cầu Đặt Lịch</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Mã yêu cầu</th>
+                <th>Tên khách hàng</th>
+                <th>Trạng thái</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>001</td>
+                <td>Nguyễn Văn A</td>
+                <td>Đang xử lý</td>
+            </tr>
+            <tr>
+                <td>002</td>
+                <td>Trần Thị B</td>
+                <td>Đã hoàn thành</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <footer>
+        <p>&copy; 2024 Công ty XYZ. Tất cả quyền lợi được bảo lưu.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.11/interact.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Khởi tạo FullCalendar
+            $('#calendar').fullCalendar({
+                editable: true,
+                events: [
+                    {
+                        id: '3',
+                        title: 'Lịch Hẹn 1',
+                        start: '2024-10-10T10:00:00',
+                    },
+                    {
+                        id: '4',
+                        title: 'Lịch Hẹn 2',
+                        start: '2024-10-12T12:00:00',
+                    },
+                    {
+                        id: '1',
+                        title: 'Làm việc',
+                        start: '2024-10-10',
+                    },
+                    {
+                        id: '2',
+                        title: 'Làm việc',
+                        start: '2024-10-12',
+                    }
+                ],
+                eventRender: function(event, element) {
+                    element.addClass('event');
+                    element.attr('draggable', 'true');
+                },
+                eventDrop: function(event, delta, revertFunc) {
+                    // Cập nhật sự kiện sau khi kéo thả
+                    console.log("Sự kiện đã được kéo thả:", event);
+                }
+            });
+
+            // Tính năng kéo thả cho sự kiện
+            interact('.event').draggable({
+                listeners: {
+                    move(event) {
+                        const target = event.target;
+
+                        // Lấy vị trí hiện tại
+                        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+                        // Di chuyển phần tử
+                        target.style.transform = `translate(${x}px, ${y}px)`;
+
+                        // Cập nhật vị trí mới
+                        target.setAttribute('data-x', x);
+                        target.setAttribute('data-y', y);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
