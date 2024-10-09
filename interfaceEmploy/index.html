@@ -4,56 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giao Diện Nhân Viên</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
-    <style>
-        body {
-        font-family: Arial, sans-serif;
-        background-color: #000; /* Nền đen */
-        color: #ff0000; /* Chữ đỏ */
-        margin: 0;
-        }
-        header, footer {
-            background-color: #333; /* Nền xám cho header và footer */
-            color: #ff0000; /* Chữ đỏ */
-            padding: 15px;
-            text-align: center;
-        }
-        #calendar {
-            max-width: 900px;
-            margin: 40px auto;
-            background-color: #222; /* Nền xám cho calendar */
-            border-radius: 8px;
-            padding: 20px;
-        }
-        .notification {
-            background-color: #ff3333; /* Thông báo màu đỏ sáng */
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            color: #000;
-        }
-        .event {
-            padding: 10px;
-            background-color: #ffcc00; /* Màu vàng cho sự kiện */
-            border: 1px solid #d3d3d3;
-            border-radius: 5px;
-            cursor: move;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-            color: #ff0000; /* Chữ đỏ cho bảng */
-        }
-        th {
-            background-color: #444; /* Nền xám cho tiêu đề bảng */
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 </head>
 <body>
     <header>
@@ -61,96 +14,84 @@
     </header>
 
     <div id="calendar"></div>
-    <div class="notification"><B>Thông báo: Có lịch hẹn mới!</B></div>
+    <div class="notification"><strong>Thông báo: Có lịch hẹn mới!</strong></div>
 
     <h2 style="text-align: center;">Danh Sách Yêu Cầu Đặt Lịch</h2>
+
+    <!-- Ô tìm kiếm và lọc trạng thái -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm theo tên khách hàng..." onkeyup="filterTable()">
+        <select id="statusFilter" onchange="filterTable()">
+            <option value="">Tất cả trạng thái</option>
+            <option value="Đang xử lý">Đang xử lý</option>
+            <option value="Đã hoàn thành">Đã hoàn thành</option>
+            <option value="Đã hủy">Đã hủy</option>
+        </select>
+    </div>
+
     <table>
         <thead>
             <tr>
                 <th>Mã yêu cầu</th>
                 <th>Tên khách hàng</th>
+                <th>Dịch vụ</th>
                 <th>Trạng thái</th>
+                <th>Hành động</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="requestTableBody">
             <tr>
                 <td>001</td>
                 <td>Nguyễn Văn A</td>
-                <td>Đang xử lý</td>
+                <td>Cắt tóc</td>
+                <td class="status">Đang xử lý</td>
+                <td>
+                    <button onclick="updateStatus(this)">Cập nhật trạng thái</button>
+                    <button onclick="acceptOrder(this)">Nhận đơn</button>
+                    <button onclick="cancelOrder(this)">Hủy đơn</button>
+                </td>
             </tr>
             <tr>
                 <td>002</td>
                 <td>Trần Thị B</td>
-                <td>Đã hoàn thành</td>
+                <td>Nhuộm tóc</td>
+                <td class="status">Đã hoàn thành</td>
+                <td>
+                    <button onclick="updateStatus(this)">Cập nhật trạng thái</button>
+                    <button onclick="acceptOrder(this)">Nhận đơn</button>
+                    <button onclick="cancelOrder(this)">Hủy đơn</button>
+                </td>
+            </tr>
+            <tr>
+                <td>003</td>
+                <td>Nguyễn Văn C</td>
+                <td>Cạo râu</td>
+                <td class="status">Đang xử lý</td>
+                <td>
+                    <button onclick="updateStatus(this)">Cập nhật trạng thái</button>
+                    <button onclick="acceptOrder(this)">Nhận đơn</button>
+                    <button onclick="cancelOrder(this)">Hủy đơn</button>
+                </td>
             </tr>
         </tbody>
     </table>
+
+    <!-- Hộp thoại chọn thời gian -->
+    <div id="timePickerDialog" title="Chọn thời gian cho đơn hàng" style="display:none;">
+        <label for="orderDate">Ngày:</label>
+        <input type="text" id="orderDate" class="datepicker">
+        <label for="orderTime">Giờ:</label>
+        <input type="time" id="orderTime">
+    </div>
 
     <footer>
         <p>&copy; 2024 Công ty XYZ. Tất cả quyền lợi được bảo lưu.</p>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.11/interact.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // Khởi tạo FullCalendar
-            $('#calendar').fullCalendar({
-                editable: true,
-                events: [
-                    {
-                        id: '3',
-                        title: 'Lịch Hẹn 1',
-                        start: '2024-10-10T10:00:00',
-                    },
-                    {
-                        id: '4',
-                        title: 'Lịch Hẹn 2',
-                        start: '2024-10-12T12:00:00',
-                    },
-                    {
-                        id: '1',
-                        title: 'Làm việc',
-                        start: '2024-10-10',
-                    },
-                    {
-                        id: '2',
-                        title: 'Làm việc',
-                        start: '2024-10-12',
-                    }
-                ],
-                eventRender: function(event, element) {
-                    element.addClass('event');
-                    element.attr('draggable', 'true');
-                },
-                eventDrop: function(event, delta, revertFunc) {
-                    // Cập nhật sự kiện sau khi kéo thả
-                    console.log("Sự kiện đã được kéo thả:", event);
-                }
-            });
-
-            // Tính năng kéo thả cho sự kiện
-            interact('.event').draggable({
-                listeners: {
-                    move(event) {
-                        const target = event.target;
-
-                        // Lấy vị trí hiện tại
-                        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
-                        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
-
-                        // Di chuyển phần tử
-                        target.style.transform = `translate(${x}px, ${y}px)`;
-
-                        // Cập nhật vị trí mới
-                        target.setAttribute('data-x', x);
-                        target.setAttribute('data-y', y);
-                    }
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
