@@ -1,15 +1,21 @@
 /* ================== Global Styles ================== */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    font-family: "Roboto", sans-serif;
+}
+
 body {
-    font-family: 'Arial', sans-serif;
     background-color: #121212;
     color: #fff;
     line-height: 1.6;
+    padding-top: 70px;
 }
 
 /* Header Styles */
@@ -18,11 +24,16 @@ header {
     padding: 10px 0;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    z-index: 1000; 
 }
 
 nav {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
     max-width: 1200px;
     margin: 0 auto;
@@ -64,250 +75,253 @@ nav ul {
     background-color: #cc0000;
 }
 
-/* Banner Styles */
+button:hover {
+    transform: scale(1.05); 
+    transition: all 0.3s ease-in-out; 
+}
+
+a:hover {
+    color: #ff0000; 
+}
+
+/* Banner Section Styling */
 .banner {
-    background: url('images/banner.jpg') no-repeat center center/cover;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background-color: #121212;
+    background-image: url('../images/banner.jpg'); 
+    background-size: cover;
+    background-position: center;
+    padding: 120px 0;
+    color: #ffffff;
     text-align: center;
+    position: relative;
+    box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
 }
 
 .banner h1 {
-    font-size: 3em;
-    color: #fff;
-    margin-bottom: 10px;
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); 
 }
 
 .banner p {
-    font-size: 1.5em;
-    color: #ff0000;
+    font-size: 18px; 
+    max-width: 800px; 
+    margin: 0 auto 20px;
+    line-height: 1.6;
+    color: #f0f0f0;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5); 
 }
 
 .banner button {
-    background-color: #ff0000;
-    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    background-color: #ff0000; 
+    color: #fff;
     border: none;
-    padding: 15px 30px;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 1.2em;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
 }
 
 .banner button:hover {
-    background-color: #cc0000;
+    background-color:#cc0000;
+    transform: scale(1.05); 
 }
 
-/* Services Section Styles */
-.services {
-    padding: 40px 20px;
-    background-color: #222;
+
+/* Phần slider dịch vụ */
+.service-slider {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.service-slider h1 {
+    font-size: 3em;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #fff;
+}
+
+.service-container {
+    display: flex;
+    transition: transform 1s ease-in-out;
+    position: relative;
+    height: auto;
+}
+
+.service-slide {
+    min-width: 100%;
+    opacity: 0; /* Ẩn slide ban đầu */
+    transition: opacity 1s ease-in-out; /* Chuyển đổi mờ dần mượt */
+    position: absolute;
+    top: 0;
+    left: 0;
     text-align: center;
 }
 
-.services h2 {
-    color: #ff0000;
-    margin-bottom: 30px;
+.service-slide.active {
+    opacity: 1; 
+    position: relative;
 }
 
-.service-item {
+.service-slide.fade-in {
+    opacity: 1;
+}
+
+.service-slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
     margin-bottom: 20px;
 }
 
-.service-item h3 {
+.service-slide h3 {
+    font-size: 36px;
     color: #fff;
-    font-size: 1.5em;
 }
 
-.service-item p {
+.service-slide p {
+    font-size:  24px;
     color: #ccc;
 }
 
-/* ================== CSS cho Modal Đăng nhập và Đăng ký ================== */
-.modal-auth {
-    display: none; /* Ẩn modal theo mặc định */
-    position: fixed;
-    z-index: 1000; /* Hiển thị modal trên cùng */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7); /* Màu nền mờ */
+/* Phần đánh giá khách hàng */
+.reviews-section {
+    padding: 50px 0;
+    background-color: #121212;
 }
 
-/* Modal Content */
-.modal-content-auth {
-    background-color: #ffffff; /* Nền modal màu trắng */
-    margin: 10% auto; /* 10% từ trên xuống và căn giữa */
-    padding: 30px; /* Padding bên trong modal */
-    border: 1px solid #888; /* Viền màu xám nhạt */
-    width: 40%; /* Độ rộng modal */
-    max-width: 500px; /* Đảm bảo modal không quá rộng */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Đổ bóng */
-    border-radius: 12px; /* Bo tròn góc */
-    color: #333; /* Màu chữ */
-    position: relative; /* Để định vị phần tử close */
-}
-
-/* Nút đóng modal */
-.modal-auth .close-auth {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    color: #ff0000; /* Màu đỏ */
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.modal-auth .close-auth:hover {
-    color: #cc0000; /* Đậm hơn khi hover */
-}
-
-/* Tiêu đề modal */
-.modal-auth .title-auth {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 15px;
+.section-title {
     text-align: center;
-    color: #ff0000; /* Màu đỏ */
+    margin-bottom: 30px;
+    font-size: 3em;
+    color: #fff; 
 }
 
-/* Các thành phần bên trong modal */
-.modal-auth .form-auth {
+/* Hiển thị 3 đánh giá trên cùng một hàng */
+.reviews-container {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-/* Ô input trong modal */
-.modal-auth .input-auth {
-    padding: 12px;
-    font-size: 14px;
-    border: 1px solid #ddd; /* Viền xám nhạt */
-    border-radius: 5px;
-    width: 100%;
-    transition: border 0.3s, background-color 0.3s;
-}
-
-/* Input focus */
-.modal-auth .input-auth:focus {
-    border-color: #ff0000; /* Màu đỏ khi focus */
-}
-
-/* Nút submit */
-.modal-auth .form-btn-auth {
-    background-color: #ff0000; /* Nền đỏ */
-    color: #ffffff; /* Chữ trắng */
-    border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.modal-auth .form-btn-auth:hover {
-    background-color: #cc0000; /* Đậm hơn khi hover */
-}
-
-/* Tab buttons for switching login methods */
-.modal-auth .tab-buttons-auth {
-    display: flex;
-    justify-content: center;
+.review-item {
+    flex: 1; /* Chiếm 1/3 không gian */
+    text-align: center;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
     margin-bottom: 20px;
 }
 
-.modal-auth .tab-button-auth {
-    background-color: #f1f1f1;
-    border: none;
-    padding: 10px 20px;
-    margin: 0 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+.customer-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 2px solid #ff0000;
 }
 
-/* Màu sắc cho tab đang hoạt động */
-.modal-auth .tab-button-auth.active {
-    background-color: #ff0000; /* Màu đỏ */
-    color: #fff; /* Chữ trắng */
-}
-
-/* Error message styling */
-.modal-auth .error-message-auth {
-    color: #ff0000; /* Màu đỏ cho thông báo lỗi */
-    font-size: 12px;
-    text-align: left;
-}
-
-/* Link inside modal */
-.modal-auth .page-link-auth {
-    color: #ff0000; /* Màu đỏ cho link */
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.modal-auth .page-link-auth:hover {
-    color: #cc0000; /* Đậm hơn khi hover */
-}
-
-/* Label for switching between login and signup */
-.modal-auth .sign-up-label-auth, .modal-auth .sign-in-label-auth {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-}
-
-.modal-auth .sign-up-link-auth a, .modal-auth .sign-in-link-auth a {
-    color: #ff0000;
+.customer-name {
     font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #ffffff; 
 }
 
-.modal-auth .sign-up-link-auth a:hover, .modal-auth .sign-in-link-auth a:hover {
-    color: #cc0000; /* Đậm hơn khi hover */
+.customer-review {
+    font-style: italic;
+    color: #ccc;
 }
 
-/* Liên kết Quên mật khẩu */
-.modal-auth .forgot-password-link {
-    color: #ff0000;
-    text-align: right;
-    font-size: 14px;
-    cursor: pointer;
+/* Đảm bảo responsive: hiển thị dạng cột trên thiết bị nhỏ */
+@media only screen and (max-width: 768px) {
+    .reviews-container {
+        flex-direction: column; /* Chuyển sang hiển thị theo cột khi màn hình nhỏ */
+    }
 }
 
-.modal-auth .forgot-password-link:hover {
-    color: #cc0000; /* Màu đỏ đậm hơn khi hover */
+/* Responsive cho thiết bị di động */
+@media only screen and (max-width: 768px) {
+    .service-slider h2 {
+        font-size: 1.5em;
+    }
+
+    .service-slide img {
+        width: 100%;
+        height: auto;
+    }
+
+    .service-slide h3 {
+        font-size: 20px;
+    }
+
+    .service-slide p {
+        font-size: 14px;
+    }
 }
 
+@media only screen and (max-width: 480px) {
+    .service-slider h2 {
+        font-size: 1.2em;
+    }
 
+    .service-slide img {
+        width: 100%;
+        height: auto;
+    }
 
-/* ================== CSS for Booking Modal ================== */
+    .service-slide h3 {
+        font-size: 18px;
+    }
+
+    .service-slide p {
+        font-size: 12px;
+    }
+}
+
+/* ================== CSS cho Modal Đặt lịch ================== */
 .modal-booking {
-    display: none; /* Ẩn modal theo mặc định */
+    display: none; 
     position: fixed;
-    z-index: 1000; /* Hiển thị modal trên cùng */
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7); /* Màu nền mờ */
+    background-color: rgba(0, 0, 0, 0.7); 
+    opacity: 0;
+    transform: translateY(-50px); 
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.modal-booking.show {
+    opacity: 1;
+    transform: translateY(0); 
 }
 
 .modal-content-booking {
-    background-color: #ffffff; /* Nền modal màu trắng */
-    margin: 5% auto; /* Căn giữa modal */
+    background-color: #ffffff;
+    margin: 5% auto;
     padding: 30px;
-    border: 1px solid #888; /* Viền màu xám nhạt */
-    width: 50%; /* Độ rộng modal */
-    max-width: 600px; /* Giới hạn độ rộng */
-    border-radius: 12px; /* Bo tròn góc */
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 600px;
+    border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    color: #333;
     position: relative;
+}
+
+/* Hiển thị khi modal được bật */
+.modal-booking .show .modal-content-booking {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Nút đóng modal */
@@ -315,14 +329,14 @@ nav ul {
     position: absolute;
     top: 15px;
     right: 20px;
-    color: #ff0000; /* Màu đỏ */
+    color: #ff0000;
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
 }
 
 .modal-booking .close-booking:hover {
-    color: #cc0000; /* Đậm hơn khi hover */
+    color: #cc0000;
 }
 
 /* Tiêu đề của modal */
@@ -331,7 +345,7 @@ nav ul {
     font-weight: bold;
     margin-bottom: 20px;
     text-align: center;
-    color: #ff0000; /* Màu đỏ */
+    color: #ff0000;
 }
 
 /* Form trong modal */
@@ -347,23 +361,27 @@ nav ul {
     margin-bottom: 5px;
 }
 
-.modal-booking input, .modal-booking select, .modal-booking textarea {
+.modal-booking input,
+.modal-booking select,
+.modal-booking textarea {
     padding: 12px;
     font-size: 14px;
-    border: 1px solid #ddd; /* Viền xám nhạt */
+    border: 1px solid #ddd;
     border-radius: 5px;
     width: 100%;
     transition: border 0.3s;
 }
 
-.modal-booking input:focus, .modal-booking select:focus, .modal-booking textarea:focus {
-    border-color: #ff0000; /* Đổi màu viền khi focus */
+.modal-booking input:focus,
+.modal-booking select:focus,
+.modal-booking textarea:focus {
+    border-color: #ff0000;
 }
 
 /* Nút submit */
 .modal-booking button[type="submit"] {
-    background-color: #ff0000; /* Nền đỏ */
-    color: #ffffff; /* Chữ trắng */
+    background-color: #ff0000;
+    color: #ffffff;
     border: none;
     padding: 15px 20px;
     border-radius: 5px;
@@ -372,15 +390,105 @@ nav ul {
 }
 
 .modal-booking button[type="submit"]:hover {
-    background-color: #cc0000; /* Đậm hơn khi hover */
+    background-color: #cc0000;
 }
 
+.modal-booking .show .modal-content-booking {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 /* Footer */
 footer {
     background-color: #000;
     color: #fff;
-    text-align: center;
-    padding: 20px;
-    position: relative;
+    text-align: left;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quick-links,
+.store-info,
+.social-links {
+    flex: 1;
+    padding: 10px;
+}
+
+.footer-container h4 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.footer-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-container ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.footer-container ul li a:hover {
+    color: #ff0000;
+}
+
+.social-links a {
+    color: #fff;
+    margin: 0 10px;
+    font-size: 24px;
+}
+
+.social-links a:hover {
+    color: #ff0000;
+}
+
+/* Responsive cho Footer */
+@media only screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .quick-links,
+    .store-info,
+    .social-links {
+        margin-bottom: 20px;
+    }
+}
+
+/* Responsive cho Modal */
+@media only screen and (max-width: 768px) {
+    .modal-content-booking {
+        width: 90%; /* Mở rộng modal cho thiết bị nhỏ */
+    }
+}
+
+/* Responsive cho toàn trang */
+@media only screen and (max-width: 480px) {
+    .banner h1 {
+        font-size: 2em;
+    }
+
+    .banner p {
+        font-size: 1.2em;
+    }
+
+    .service-slide h3 {
+        font-size: 18px;
+    }
+
+    .service-slide p {
+        font-size: 14px;
+    }
 }

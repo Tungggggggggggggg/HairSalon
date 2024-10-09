@@ -1,1 +1,2 @@
-# HairSalon
+mvn spring-boot:run
+# HairSalon 
