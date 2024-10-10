@@ -13,6 +13,13 @@ pageEncoding="UTF-8"%>
     <body>
         <header>
             <nav>
+
+                <div class="logo">
+                    <a href="#top">
+                        <img src="${pageContext.request.contextPath}/images/logo.jpg" alt="JSalon Logo" />
+                    </a>
+                </div>
+
                 <ul class="nav-left">
                     <li><a href="#top">Trang chủ</a></li> 
                     <li><a href="#about">Giới thiệu</a></li>

@@ -20,21 +20,20 @@ pageEncoding="UTF-8"%>
         <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
         <section id="about" class="banner">
+            <!-- Thêm logo vào đây -->
+            <!-- <img src="${pageContext.request.contextPath}/images/logo.jpg" alt="JSalon Logo" class="banner-logo" /> -->
+            
             <h1>Chào mừng đến với JSalon</h1>
             <p>
-                JSalon tự hào mang đến cho bạn các dịch vụ chăm sóc tóc chuyên
-                nghiệp và hiện đại. Từ việc cắt tóc thời thượng, nhuộm tóc sáng
-                tạo đến uốn tóc bồng bềnh, chúng tôi luôn sẵn sàng đáp ứng mọi
-                nhu cầu làm đẹp của bạn. Với đội ngũ chuyên gia có nhiều năm
-                kinh nghiệm, chúng tôi cam kết đem lại sự hài lòng tuyệt đối cho
-                bạn trong từng lần ghé thăm.
+                JSalon tự hào mang đến cho bạn các dịch vụ chăm sóc tóc chuyên nghiệp và hiện đại.
+                Từ việc cắt tóc thời thượng, nhuộm tóc sáng tạo đến uốn tóc bồng bềnh, chúng tôi luôn
+                sẵn sàng đáp ứng mọi nhu cầu làm đẹp của bạn. Với đội ngũ chuyên gia có nhiều năm
+                kinh nghiệm, chúng tôi cam kết đem lại sự hài lòng tuyệt đối cho bạn trong từng lần ghé thăm.
             </p>
             <p>
-                Bạn có thể dễ dàng tìm kiếm và đặt lịch thông qua hệ thống trực
-                tuyến của chúng tôi, tiết kiệm thời gian và đảm bảo có lịch hẹn
-                phù hợp. Trải nghiệm quy trình đơn giản và tiện lợi với một vài
-                bước click chuột, để có được mái tóc ưng ý mà không cần phải lo
-                lắng về việc chờ đợi.
+                Bạn có thể dễ dàng tìm kiếm và đặt lịch thông qua hệ thống trực tuyến của chúng tôi,
+                tiết kiệm thời gian và đảm bảo có lịch hẹn phù hợp. Trải nghiệm quy trình đơn giản và tiện lợi
+                với một vài bước click chuột, để có được mái tóc ưng ý mà không cần phải lo lắng về việc chờ đợi.
             </p>
             <button id="openBookingModal" onclick="showScheduleModal()">
                 Đặt Lịch Ngay
@@ -137,11 +136,11 @@ pageEncoding="UTF-8"%>
                 <div class="reviews-container">
                     <div class="review-item">
                         <img
-                            src="${pageContext.request.contextPath}/images/jack.jpg"
+                            src="${pageContext.request.contextPath}/images/son.jpg"
                             class="customer-photo"
                             alt="Customer Photo 1"
                         />
-                        <p class="customer-name">Jack</p>
+                        <p class="customer-name">Sơn</p>
                         <p class="customer-review">
                             "Dịch vụ tuyệt vời, mình rất hài lòng với kiểu tóc
                             mới!"
@@ -150,11 +149,11 @@ pageEncoding="UTF-8"%>
 
                     <div class="review-item">
                         <img
-                            src="${pageContext.request.contextPath}/images/j97.jpg"
+                            src="${pageContext.request.contextPath}/images/tung.jpg"
                             class="customer-photo"
                             alt="Customer Photo 2"
                         />
-                        <p class="customer-name">J97</p>
+                        <p class="customer-name">Tùng</p>
                         <p class="customer-review">
                             "Nhân viên rất nhiệt tình, mình sẽ quay lại lần
                             sau."
@@ -163,11 +162,11 @@ pageEncoding="UTF-8"%>
 
                     <div class="review-item">
                         <img
-                            src="${pageContext.request.contextPath}/images/meomeo.jpg"
+                            src="${pageContext.request.contextPath}/images/m-tp.jpg"
                             class="customer-photo"
                             alt="Customer Photo 3"
                         />
-                        <p class="customer-name">Meo Meo</p>
+                        <p class="customer-name">M-TP</p>
                         <p class="customer-review">
                             "Không gian thoáng mát, dịch vụ đa dạng, rất đáng
                             thử!"

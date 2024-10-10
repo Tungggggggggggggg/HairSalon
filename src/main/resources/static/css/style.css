@@ -29,6 +29,14 @@ header {
     left: 0;
     width: 100%; 
     z-index: 1000; 
+    height: 70px;
+    overflow: hidden; 
+}
+
+.logo img {
+    height: 120px; 
+    width: auto;  
+    display: block;
 }
 
 nav {
@@ -38,6 +46,12 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    height: 55px; 
+
+}
+
+nav .logo {
+    flex-shrink: 0; /* Đảm bảo logo không bị thu nhỏ */
 }
 
 nav ul {
@@ -47,7 +61,14 @@ nav ul {
 }
 
 .nav-left {
+    display: flex;
+    gap: 20px;
     flex: 1;
+}
+
+.nav-right {
+    display: flex;
+    gap: 20px;
 }
 
 .nav-left li a {
@@ -87,7 +108,7 @@ a:hover {
 /* Banner Section Styling */
 .banner {
     background-color: #121212;
-    background-image: url('../images/banner.jpg'); 
+    background-image: url('../images/logo.jpg'); 
     background-size: cover;
     background-position: center;
     padding: 120px 0;
@@ -95,6 +116,12 @@ a:hover {
     text-align: center;
     position: relative;
     box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.5);
+}
+
+.banner-logo {
+    width: 150px;  
+    display: block;
+    margin: 0 auto 20px;  
 }
 
 .banner h1 {
@@ -241,6 +268,10 @@ a:hover {
 
 /* Đảm bảo responsive: hiển thị dạng cột trên thiết bị nhỏ */
 @media only screen and (max-width: 768px) {
+    .logo img {
+        height: 60px; /* Điều chỉnh kích thước logo nhỏ hơn trên thiết bị nhỏ */
+    }
+    
     .reviews-container {
         flex-direction: column; /* Chuyển sang hiển thị theo cột khi màn hình nhỏ */
     }
