@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý phản hồi</title>
+    <link rel="stylesheet" href="./main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="admin-container">
+      <h2>Quản lý phản hồi</h2>
+
+      <!-- Bộ lọc -->
+      <div class="filter-container">
+        <div class="filter-group">
+          <label for="rating-filter">Lọc theo xếp hạng:</label>
+          <select id="rating-filter">
+            <option value="">Tất cả xếp hạng</option>
+            <option value="5">5 Sao</option>
+            <option value="4">4 Sao</option>
+            <option value="3">3 Sao</option>
+            <option value="2">2 Sao</option>
+            <option value="1">1 Sao</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="status-filter">Lọc theo trạng thái:</label>
+          <select id="status-filter">
+            <option value="">Tất cả trạng thái</option>
+            <option value="replied">Đã trả lời</option>
+            <option value="not-replied">Chưa trả lời</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="date-filter">Lọc theo ngày:</label>
+          <input type="date" id="date-filter" />
+        </div>
+      </div>
+
+      <!-- Danh sách phản hồi -->
+      <div class="feedback-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Tên</th>
+              <th>E-mail</th>
+              <th>Đánh giá</th>
+              <th>Bình luận</th>
+              <th>Ngày</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody id="feedback-table-body">
+            <!-- Các hàng phản hồi sẽ được render tại đây -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="./scrip.js"></script>
+  </body>
+</html>

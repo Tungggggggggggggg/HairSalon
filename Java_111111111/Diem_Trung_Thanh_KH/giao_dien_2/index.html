@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Page</title>
+    <link rel="stylesheet" href="./main2.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="booking-container">
+      <h2>Đặt Lịch Hẹn</h2>
+
+      <!-- Form đặt lịch -->
+      <form id="booking-form">
+        <div class="form-group">
+          <label for="service">Chọn dịch vụ:</label>
+          <select id="service" name="service" required>
+            <option value="haircut">Haircut - $50</option>
+            <option value="spa">Spa - $100</option>
+          </select>
+        </div>
+
+        <!-- Thông tin điểm trung thành -->
+        <div class="points-info">
+          <p>bạn có <span id="available-points">120</span> điểm</p>
+          <label for="use-points">Sử dụng điểm để giảm giá?</label>
+          <input type="checkbox" id="use-points" name="use-points" />
+          <p id="discount-info" style="display: none">
+            Sử dụng <span id="points-used">0</span> điểm để được giảm giá $<span
+              id="discount-amount"
+              >0</span
+            >
+          </p>
+        </div>
+
+        <!-- Button đặt lịch -->
+        <div class="form-group">
+          <button type="submit">Đặt ngay</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="./main_scrip.js"></script>
+  </body>
+</html>

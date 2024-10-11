@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yêu cầu hỗ trợ</title>
+    <link rel="stylesheet" href="./main4.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="support-container">
+      <h2>Yêu cầu hỗ trợ khách hàng</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Tên</th>
+            <th>E-mail</th>
+            <th>Trạng thái</th>
+            <th>Hoạt động</th>
+          </tr>
+        </thead>
+        <tbody id="request-list">
+          <!-- Các yêu cầu sẽ được hiển thị ở đây -->
+          <tr>
+            <td>1</td>
+            <td>Nguyen Van A</td>
+            <td>nguyenvana@example.com</td>
+            <td><span class="status pending">Chưa giải quyết</span></td>
+            <td>
+              <button class="view-button" onclick="viewRequest(1)">Xem</button>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Tran Thi B</td>
+            <td>tranthib@example.com</td>
+            <td><span class="status processing">Xử lý</span></td>
+            <td>
+              <button class="view-button" onclick="viewRequest(2)">Xem</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id="request-detail" class="hidden">
+        <h3>Yêu cầu chi tiết</h3>
+        <p id="request-info"></p>
+        <label for="update-status">Cập nhật trạng thái:</label>
+        <select id="update-status">
+          <option value="pending">Chưa giải quyết</option>
+          <option value="processing">Xử lý</option>
+          <option value="resolved">Đã giải quyết</option>
+        </select>
+        <button id="update-button">Cập nhật trạng thái</button>
+        <h4>Gửi phản hồi:</h4>
+        <textarea
+          id="response-message"
+          rows="4"
+          placeholder="Type your response here..."
+        ></textarea>
+        <button id="send-response">Gửi phản hồi</button>
+      </div>
+    </div>
+
+    <script src="./main5_scrip.js"></script>
+  </body>
+</html>
