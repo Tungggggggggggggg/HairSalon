@@ -1,0 +1,105 @@
+<html>
+
+<head>
+    <title>Danh sách Lịch Đặt</title>
+    <link rel="stylesheet" href="giaodien.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Danh sách Lịch Đặt</h1>
+
+        <label for="statusFilter">Lọc theo trạng thái:</label>
+        <select id="statusFilter" onchange="filterByStatus()">
+            <option value="all">Tất cả</option>
+            <option value="pending">Đang chờ</option>
+            <option value="approved">Đã phê duyệt</option>
+            <option value="declined">Đã từ chối</option>
+        </select>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tên khách hàng</th>
+                    <th>Dịch vụ</th>
+                    <th>Ngày</th>
+                    <th>Giờ</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="bookingList">
+                <!-- Dữ liệu sẽ được thêm vào đây -->
+            </tbody>
+        </table>
+        <button class="btn-back" onclick="goBack()">Quay lại</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back(); // Quay lại trang trước
+        }
+
+        function filterByStatus() {
+            const filterValue = document.getElementById('statusFilter').value;
+            const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            const bookingList = document.getElementById('bookingList');
+
+            // Xóa các hàng hiện có
+            bookingList.innerHTML = '';
+
+            // Hiển thị các lịch đã đặt theo trạng thái
+            bookings.forEach(booking => {
+                if (filterValue === 'all' || booking.status === filterValue) {
+                    const newRow = bookingList.insertRow();
+                    newRow.insertCell(0).innerText = booking.customerName; // Tên khách hàng
+                    newRow.insertCell(1).innerText = booking.service; // Dịch vụ
+                    newRow.insertCell(2).innerText = booking.date; // Ngày
+                    newRow.insertCell(3).innerText = booking.time; // Giờ
+
+                    // Cập nhật trạng thái hiển thị
+                    const statusCell = newRow.insertCell(4);
+                    if (booking.status === 'pending') {
+                        statusCell.innerText = 'Đang chờ phê duyệt'; // Hiển thị trạng thái đang chờ
+                    } else {
+                        statusCell.innerText = booking.status === 'approved' ? 'Đã phê duyệt' : 'Đã từ chối';
+                    }
+
+                    // Cột hành động
+                    const actionCell = newRow.insertCell(5);
+                    if (booking.status === 'pending') {
+                        const approveButton = document.createElement('button');
+                        approveButton.innerText = 'Phê duyệt';
+                        approveButton.className = 'approve';
+                        approveButton.onclick = function () { updateStatus(booking.id, 'approved'); };
+                        actionCell.appendChild(approveButton);
+
+                        const declineButton = document.createElement('button');
+                        declineButton.innerText = 'Từ chối';
+                        declineButton.className = 'decline';
+                        declineButton.onclick = function () { updateStatus(booking.id, 'declined'); };
+                        actionCell.appendChild(declineButton);
+                    }
+                }
+            });
+        }
+
+        function updateStatus(id, status) {
+            let bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+            bookings = bookings.map(booking => {
+                if (booking.id === id) {
+                    booking.status = status; // Cập nhật trạng thái
+                }
+                return booking;
+            });
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+            alert('Cập nhật trạng thái thành công!');
+            filterByStatus(); // Cập nhật danh sách sau khi thay đổi trạng thái
+        }
+
+        // Khi trang được tải, hiển thị danh sách
+        document.addEventListener('DOMContentLoaded', filterByStatus);
+    </script>
+</body>
+
+</html>
