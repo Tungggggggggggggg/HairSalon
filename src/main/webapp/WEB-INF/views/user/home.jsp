@@ -12,17 +12,15 @@ pageEncoding="UTF-8"%>
         />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/auth.css" />
+        <link rel="stylesheet" href="../../../resources/user/css/style.css" />
+        <link rel="stylesheet" href="../../../resources/user/css/auth.css" />
     </head>
 
     <body id="top">
-        <%@ include file="/WEB-INF/views/includes/header.jsp" %>
+        <%@ include file="/WEB-INF/views/user/includes/header.jsp" %>
 
         <section id="about" class="banner">
-            <!-- Thêm logo vào đây -->
-            <!-- <img src="${pageContext.request.contextPath}/images/logo.jpg" alt="JSalon Logo" class="banner-logo" /> -->
-            
+
             <h1>Chào mừng đến với JSalon</h1>
             <p>
                 JSalon tự hào mang đến cho bạn các dịch vụ chăm sóc tóc chuyên nghiệp và hiện đại.
@@ -96,7 +94,7 @@ pageEncoding="UTF-8"%>
             <div class="service-container">
                 <div class="service-slide active">
                     <img
-                        src="${pageContext.request.contextPath}/images/cattoc.webp"
+                        src="../../../resources/user/images/cattoc.webp"
                         alt="Dịch vụ 1"
                     />
                     <h3>Cắt tóc chuyên nghiệp</h3>
@@ -104,7 +102,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="service-slide">
                     <img
-                        src="${pageContext.request.contextPath}/images/chamsoctoc.avif"
+                        src="../../../resources/user/images/chamsoctoc.avif"
                         alt="Dịch vụ 2"
                     />
                     <h3>Chăm sóc tóc</h3>
@@ -112,7 +110,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="service-slide">
                     <img
-                        src="${pageContext.request.contextPath}/images/nhuomtoc.jpg"
+                        src="../../../resources/user/images/nhuomtoc.jpg"
                         alt="Dịch vụ 3"
                     />
                     <h3>Nhuộm tóc sáng tạo</h3>
@@ -120,7 +118,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="service-slide">
                     <img
-                        src="${pageContext.request.contextPath}/images/uontoc.webp"
+                        src="../../../resources/user/images/uontoc.webp"
                         alt="Dịch vụ 4"
                     />
                     <h3>Uốn tóc tạo kiểu</h3>
@@ -136,7 +134,7 @@ pageEncoding="UTF-8"%>
                 <div class="reviews-container">
                     <div class="review-item">
                         <img
-                            src="${pageContext.request.contextPath}/images/son.jpg"
+                            src="../../../resources/user/images/son.jpg"
                             class="customer-photo"
                             alt="Customer Photo 1"
                         />
@@ -149,7 +147,7 @@ pageEncoding="UTF-8"%>
 
                     <div class="review-item">
                         <img
-                            src="${pageContext.request.contextPath}/images/tung.jpg"
+                            src="../../../resources/user/images/tung.jpg"
                             class="customer-photo"
                             alt="Customer Photo 2"
                         />
@@ -162,7 +160,7 @@ pageEncoding="UTF-8"%>
 
                     <div class="review-item">
                         <img
-                            src="${pageContext.request.contextPath}/images/m-tp.jpg"
+                            src="../../../resources/user/images/m-tp.jpg"
                             class="customer-photo"
                             alt="Customer Photo 3"
                         />
@@ -250,6 +248,6 @@ pageEncoding="UTF-8"%>
             });
         </script>
 
-        <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
+        <%@ include file="/WEB-INF/views/user/includes/footer.jsp" %>
     </body>
 </html>

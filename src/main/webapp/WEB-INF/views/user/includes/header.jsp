@@ -16,16 +16,17 @@ pageEncoding="UTF-8"%>
 
                 <div class="logo">
                     <a href="#top">
-                        <img src="${pageContext.request.contextPath}/images/logo.jpg" alt="JSalon Logo" />
+                        <img src="../../../../resources/user/images/logo.jpg" alt="JSalon Logo" />
                     </a>
                 </div>
 
                 <ul class="nav-left">
-                    <li><a href="#top">Trang chủ</a></li> 
-                    <li><a href="#about">Giới thiệu</a></li>
-                    <li><a href="#services">Dịch vụ</a></li> 
-                    <li><a href="#reviews">Đánh giá</a></li>
-                    <li><a href="#contact">Liên hệ</a></li>
+                    <li><a href="/home#top">Trang chủ</a></li> 
+                    <li><a href="/home#about">Giới thiệu</a></li>
+                    <li><a href="/home#services">Dịch vụ</a></li> 
+                    <li><a href="/home#reviews">Đánh giá</a></li>
+                    <li><a href="/home#contact">Liên hệ</a></li>
+                    <li><a href="/user/appointments">Lịch hẹn</a></li>
                 </ul>
                 <ul class="nav-right">
                     <li>
