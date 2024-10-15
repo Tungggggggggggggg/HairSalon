@@ -5,38 +5,38 @@
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <div class="sb-sidenav-menu-heading">Features</div>
-                <a class="nav-link" href="index.html">
+                <div class="sb-sidenav-menu-heading">Menu</div>
+                <a class="nav-link" href="/admin">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Trang chính
                 </a>
 
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin/customer_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Quản lí khách hàng
                 </a>
 
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin/calendar_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Quản lí lịch hẹn
                 </a>
 
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin/personnel_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Quản lí nhân viên
                 </a>
 
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin/service_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Quản lí dịch vụ
                 </a>
 
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin/revenue_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Báo cáo doanh thu
                 </a>
 
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="/admin/response_list">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Phản hồi
                 </a>
