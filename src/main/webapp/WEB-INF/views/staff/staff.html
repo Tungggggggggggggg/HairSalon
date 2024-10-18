@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giao Diện Nhân Viên</title>
-    <link rel="stylesheet" href="../../../resources/staff/css/style.css">
+    <link rel="stylesheet" href="../../../resources/staff/css/staff.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 </head>
@@ -29,52 +29,54 @@
         </select>
     </div>
 
+
     <table>
         <thead>
-            <tr>
-                <th>Mã yêu cầu</th>
-                <th>Tên khách hàng</th>
-                <th>Dịch vụ</th>
-                <th>Trạng thái</th>
-                <th>Hành động</th>
-            </tr>
+        <tr>
+            <th>Mã yêu cầu</th>
+            <th>Tên khách hàng</th>
+            <th>Dịch vụ</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
         </thead>
         <tbody id="requestTableBody">
-            <tr>
-                <td>001</td>
-                <td>Nguyễn Văn A</td>
-                <td>Cắt tóc</td>
-                <td class="status">Đang xử lý</td>
-                <td>
-                    <button onclick="updateStatus(this)">Cập nhật trạng thái</button>
-                    <button onclick="acceptOrder(this)">Nhận đơn</button>
-                    <button onclick="cancelOrder(this)">Hủy đơn</button>
-                </td>
-            </tr>
-            <tr>
-                <td>002</td>
-                <td>Trần Thị B</td>
-                <td>Nhuộm tóc</td>
-                <td class="status">Đã hoàn thành</td>
-                <td>
-                    <button onclick="updateStatus(this)">Cập nhật trạng thái</button>
-                    <button onclick="acceptOrder(this)">Nhận đơn</button>
-                    <button onclick="cancelOrder(this)">Hủy đơn</button>
-                </td>
-            </tr>
-            <tr>
-                <td>003</td>
-                <td>Nguyễn Văn C</td>
-                <td>Cạo râu</td>
-                <td class="status">Đang xử lý</td>
-                <td>
-                    <button onclick="updateStatus(this)">Cập nhật trạng thái</button>
-                    <button onclick="acceptOrder(this)">Nhận đơn</button>
-                    <button onclick="cancelOrder(this)">Hủy đơn</button>
-                </td>
-            </tr>
+        <tr>
+            <td>001</td>
+            <td>Nguyễn Văn A</td>
+            <td>Cắt tóc</td>
+            <td class="status">Đang xử lý</td>
+            <td>
+                <button onclick="updateStatus(this)">Cập nhật trạng thái</button>
+                <button onclick="acceptOrder(this)">Nhận đơn</button>
+                <button onclick="cancelOrder(this)">Hủy đơn</button>
+            </td>
+        </tr>
+        <tr>
+            <td>002</td>
+            <td>Trần Thị B</td>
+            <td>Nhuộm tóc</td>
+            <td class="status">Đã hoàn thành</td>
+            <td>
+                <button onclick="updateStatus(this)">Cập nhật trạng thái</button>
+                <button onclick="acceptOrder(this)">Nhận đơn</button>
+                <button onclick="cancelOrder(this)">Hủy đơn</button>
+            </td>
+        </tr>
+        <tr>
+            <td>003</td>
+            <td>Nguyễn Văn C</td>
+            <td>Cạo râu</td>
+            <td class="status">Đang xử lý</td>
+            <td>
+                <button onclick="updateStatus(this)">Cập nhật trạng thái</button>
+                <button onclick="acceptOrder(this)">Nhận đơn</button>
+                <button onclick="cancelOrder(this)">Hủy đơn</button>
+            </td>
+        </tr>
         </tbody>
     </table>
+
 
     <!-- Hộp thoại chọn thời gian -->
     <div id="timePickerDialog" title="Chọn thời gian cho đơn hàng" style="display:none;">
@@ -92,6 +94,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-    <script src="../../../resources/staff/js/script.js"></script>
+    <script src="../../../resources/staff/js/staff.js"></script>
 </body>
 </html>

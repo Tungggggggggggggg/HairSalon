@@ -1,5 +1,15 @@
 $(document).ready(function() {
     // Khởi tạo FullCalendar
+    initializeCalendar();
+    // Khởi tạo datepicker
+    initializeDatePicker();
+    // Tính năng kéo thả cho sự kiện
+    initializeDraggableEvents();
+    // Kiểm tra sự kiện ban đầu
+    checkAppointments();
+});
+
+function initializeCalendar() {
     $('#calendar').fullCalendar({
         editable: true,
         events: [
@@ -18,20 +28,24 @@ $(document).ready(function() {
         },
         eventDrop: function(event, delta, revertFunc) {
             console.log("Sự kiện đã được kéo thả:", event);
+        },
+        eventRemove: function(event) {
+            checkAppointments(); // Kiểm tra lịch hẹn sau khi xóa
         }
     });
+}
 
-    // Khởi tạo datepicker
+function initializeDatePicker() {
     $(".datepicker").datepicker({
         dateFormat: "yy-mm-dd"
     });
+}
 
-    // Tính năng kéo thả cho sự kiện
+function initializeDraggableEvents() {
     interact('.event').draggable({
         listeners: {
             move(event) {
                 const target = event.target;
-
                 const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
                 const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
 
@@ -41,7 +55,7 @@ $(document).ready(function() {
             }
         }
     });
-});
+}
 
 function updateStatus(button) {
     const row = button.closest('tr');
@@ -54,11 +68,8 @@ function updateStatus(button) {
         return;
     }
 
-    if (currentStatus === "Đang xử lý") {
-        statusCell.textContent = "Đã hoàn thành";
-    } else if (currentStatus === "Đã hủy") {
-        statusCell.textContent = "Đang xử lý";
-    }
+    // Cập nhật trạng thái
+    statusCell.textContent = (currentStatus === "Đang xử lý") ? "Đã hoàn thành" : "Đang xử lý";
 }
 
 function acceptOrder(button) {
@@ -120,10 +131,32 @@ function filterTable() {
         const matchesSearch = customerName.includes(searchInput);
         const matchesStatus = statusFilter === "" || status === statusFilter;
 
-        if (matchesSearch && matchesStatus) {
-            row.style.display = ""; // Hiện hàng
-        } else {
-            row.style.display = "none"; // Ẩn hàng
+        row.style.display = (matchesSearch && matchesStatus) ? "" : "none"; // Hiện hoặc ẩn hàng
+    });
+}
+
+function checkAppointments() {
+    const events = $('#calendar').fullCalendar('clientEvents');
+    const notification = $('.notification');
+
+    // Lọc ra các lịch hẹn
+    const appointmentEvents = events.filter(event => event.title === 'Lịch hẹn');
+
+    // Lấy tất cả trạng thái từ bảng
+    const rows = document.querySelectorAll("#requestTableBody tr");
+    let hasActiveAppointments = false;
+
+    rows.forEach(row => {
+        const status = row.querySelector('.status').textContent.trim();
+        if (status === "Đang xử lý") {
+            hasActiveAppointments = true; // Có ít nhất một lịch hẹn đang xử lý
         }
     });
+
+    // Kiểm tra các lịch hẹn
+    if (appointmentEvents.length === 0 || !hasActiveAppointments) {
+        notification.html('<strong>Hiện không có lịch hẹn mới!</strong>');
+    } else {
+        notification.html('<strong>Thông báo: Có lịch hẹn mới!</strong>');
+    }
 }
