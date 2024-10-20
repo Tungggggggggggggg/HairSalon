@@ -33,11 +33,11 @@ public class DashboardController {
 
         return "admin/dashboard/personnel_management";
     }
-    @GetMapping("/admin/calendar_management")
+    @GetMapping("/admin/booking")
     public String calendarManagement(Model model){
         //danh sach khach hang
 
-        return "admin/dashboard/calendar_management";
+        return "admin/dashboard/booking";
     }
     @GetMapping("/admin/revenue_management")
     public String revenueManagement(Model model){

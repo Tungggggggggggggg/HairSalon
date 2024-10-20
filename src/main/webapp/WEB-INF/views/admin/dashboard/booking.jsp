@@ -4,7 +4,8 @@
 <html>
 <head>
     <title>Đặt lịch hẹn</title>
-    <link rel="stylesheet" href="giaodien.css">
+    <link href="../../../../resources/admin/css/giaodien.css" rel="stylesheet" />
+
 </head>
 
 <body>

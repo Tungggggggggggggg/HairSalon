@@ -16,7 +16,7 @@
                     Quản lí khách hàng
                 </a>
 
-                <a class="nav-link" href="/admin/calendar_management">
+                <a class="nav-link" href="/admin/booking">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Quản lí lịch hẹn
                 </a>
