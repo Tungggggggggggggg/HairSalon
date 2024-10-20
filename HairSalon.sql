@@ -93,3 +93,10 @@ VALUES
     (1, 1, 1, '2024-10-20 10:00:00', N'Chờ duyệt'),
     (1, 2, 2, '2024-10-21 14:00:00', N'Chờ duyệt');
 GO
+
+
+-- SET IDENTITY_INSERT NguoiDung ON;
+-- SET IDENTITY_INSERT DichVu ON;
+-- SET IDENTITY_INSERT ThoCat ON;
+-- SET IDENTITY_INSERT DatLich ON;
+-- SET IDENTITY_INSERT VaiTro ON;

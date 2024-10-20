@@ -13,17 +13,19 @@ pageEncoding="UTF-8"%>
     <body>
         <header>
             <nav>
-
                 <div class="logo">
                     <a href="#top">
-                        <img src="../../../../resources/user/images/logo.jpg" alt="JSalon Logo" />
+                        <img
+                            src="../../../../resources/user/images/logo.jpg"
+                            alt="JSalon Logo"
+                        />
                     </a>
                 </div>
 
                 <ul class="nav-left">
-                    <li><a href="/home#top">Trang chủ</a></li> 
+                    <li><a href="/home#top">Trang chủ</a></li>
                     <li><a href="/home#about">Giới thiệu</a></li>
-                    <li><a href="/home#services">Dịch vụ</a></li> 
+                    <li><a href="/home#services">Dịch vụ</a></li>
                     <li><a href="/home#reviews">Đánh giá</a></li>
                     <li><a href="/home#contact">Liên hệ</a></li>
                     <li><a href="/user/appointments">Lịch hẹn</a></li>
@@ -78,7 +80,7 @@ pageEncoding="UTF-8"%>
                         class="input-auth email-input"
                         placeholder="Email"
                         type="text"
-                        name="Email"
+                        name="username"
                         required
                     />
                     <input
@@ -94,7 +96,7 @@ pageEncoding="UTF-8"%>
                         class="input-auth"
                         placeholder="Mật khẩu"
                         type="password"
-                        name="Password"
+                        name="password"
                         required
                     />
 
@@ -112,9 +114,7 @@ pageEncoding="UTF-8"%>
                 <p class="sign-up-label-auth">
                     Chưa có tài khoản?
                     <span class="sign-up-link-auth"
-                        ><a href="javascript:switchToSignup()">
-                            Đăng ký</a
-                        ></span
+                        ><a href="javascript:switchToSignup()">Đăng ký</a></span
                     >
                 </p>
             </div>
@@ -187,83 +187,6 @@ pageEncoding="UTF-8"%>
                 </p>
             </div>
         </div>
-
-        <!-- JavaScript cho Modal -->
-        <script>
-            // Hiển thị modal với hiệu ứng mượt mà
-            function showModal(modalId) {
-                const modal = document.getElementById(modalId);
-                modal.style.display = "block"; 
-                setTimeout(() => {
-                    modal.classList.add("show"); 
-                }, 10);
-
-                // Đặt tab mặc định khi mở modal Đăng nhập
-                if (modalId === "loginModal") {
-                    switchToEmailLogin();
-                }
-            }
-
-            // Đóng modal với hiệu ứng mượt mà
-            function closeModal(modalId) {
-                const modal = document.getElementById(modalId);
-                modal.classList.remove("show");
-                setTimeout(() => {
-                    modal.style.display = "none"; 
-                }, 500);
-            }
-
-            // Chuyển sang đăng nhập bằng Email
-            function switchToEmailLogin() {
-                document.getElementById("loginEmail").style.display = "block";
-                document.getElementById("loginPhone").style.display = "none";
-                document.getElementById("emailTab").classList.add("active");
-                document.getElementById("phoneTab").classList.remove("active");
-            }
-
-            // Chuyển sang đăng nhập bằng Số Điện Thoại
-            function switchToPhoneLogin() {
-                document.getElementById("loginEmail").style.display = "none";
-                document.getElementById("loginPhone").style.display = "block";
-                document.getElementById("phoneTab").classList.add("active");
-                document.getElementById("emailTab").classList.remove("active");
-            }
-
-            // Kiểm tra mật khẩu khi đăng ký
-            function validatePassword(event) {
-                event.preventDefault();
-                const password = document.getElementById("regPassword").value;
-                const confirmPassword =
-                    document.getElementById("confirmPassword").value;
-                const errorMessage = document.getElementById(
-                    "passwordErrorMessage"
-                );
-
-                if (password !== confirmPassword) {
-                    errorMessage.textContent =
-                        "Mật khẩu không khớp. Vui lòng nhập lại.";
-                } else {
-                    errorMessage.textContent = "";
-                    alert("Đăng ký thành công!");
-                }
-            }
-
-            // Hiển thị thông báo Quên mật khẩu
-            function showForgotPasswordModal() {
-                alert("Quên mật khẩu? Tính năng này sẽ được bổ sung sau.");
-            }
-
-            // Chuyển sang modal Đăng ký
-            function switchToSignup() {
-                closeModal("loginModal");
-                showModal("registerModal");
-            }
-
-            // Chuyển sang modal Đăng nhập
-            function switchToLogin() {
-                closeModal("registerModal");
-                showModal("loginModal");
-            }
-        </script>
+        <script src="../../../../resources/user/js/auth.js"></script>
     </body>
 </html>
