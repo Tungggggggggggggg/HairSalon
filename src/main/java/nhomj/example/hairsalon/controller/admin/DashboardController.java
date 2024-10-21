@@ -67,9 +67,9 @@ public class DashboardController {
         return "admin/dashboard/revenue_management";
     }
 
-    @GetMapping("/admin/response_list")
+    @GetMapping("/admin/response_management")
     public String responseList(Model model) {
-        return "admin/dashboard/response_list";
+        return "admin/dashboard/response_management";
     }
 
 }

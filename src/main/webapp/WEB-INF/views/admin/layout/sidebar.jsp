@@ -36,9 +36,9 @@
                     Quản lý doanh thu
                 </a>
 
-                <a class="nav-link" href="/admin/response_list">
+                <a class="nav-link" href="/admin/response_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Phản hồi
+                    Quản lý phản hồi
                 </a>
 
 
