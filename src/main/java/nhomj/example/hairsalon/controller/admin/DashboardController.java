@@ -21,36 +21,37 @@ public class DashboardController {
         return "admin/dashboard/customer_management";
     }
 
-    @GetMapping("/admin/service_management")
-    public String serviceManagement(Model model){
-        //danh sach khach hang
+    @GetMapping("/admin/notification")
+    public String notification(Model model){
 
-        return "admin/dashboard/service_management";
-    }
-    @GetMapping("/admin/personnel_management")
-    public String Management(Model model){
-        //danh sach khach hang
-
-        return "admin/dashboard/personnel_management";
-    }
-    @GetMapping("/admin/booking")
-    public String calendarManagement(Model model){
-        //danh sach khach hang
-
-        return "admin/dashboard/booking";
-    }
-    @GetMapping("/admin/revenue_management")
-    public String revenueManagement(Model model){
-        //danh sach khach hang
-
-        return "admin/dashboard/revenue_management";
+        return "admin/notification/show";
     }
 
-    @GetMapping("/admin/response_list")
-    public String responseList(Model model){
-        //danh sach khach hang
+    @GetMapping("/admin/notification/create")
+    public String createNotification(Model model){
 
-        return "admin/dashboard/response_list";
+        return "admin/notification/create";
     }
+
+    @GetMapping("/admin/notification/update")
+    public String updateNotification(Model model){
+
+        return "admin/notification/update";
+    }
+
+    @GetMapping("/admin/notification/delete")
+    public String deleteNotification(Model model){
+
+        return "admin/notification/delete";
+    }
+
+    @GetMapping("/admin/notification/detail")
+    public String detailNotification(Model model){
+
+        return "admin/notification/detail";
+    }
+
+
+
 
 }

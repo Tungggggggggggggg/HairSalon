@@ -26,7 +26,7 @@
                     Quản lí nhân viên
                 </a>
 
-                <a class="nav-link" href="/admin/service_management">
+                <a class="nav-link" href="/admin/service">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                     Quản lí dịch vụ
                 </a>
