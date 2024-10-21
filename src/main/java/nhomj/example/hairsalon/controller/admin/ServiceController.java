@@ -37,4 +37,6 @@ public class ServiceController {
 
         return "admin/service/detail";
     }
+
+    
 }

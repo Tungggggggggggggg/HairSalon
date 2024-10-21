@@ -13,27 +13,27 @@
 
                 <a class="nav-link" href="/admin/customer_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Quản lí khách hàng
+                    Quản lý khách hàng
                 </a>
 
-                <a class="nav-link" href="/admin/booking">
+                <a class="nav-link" href="/admin/booking_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Quản lí lịch hẹn
+                    Quản lý lịch hẹn
                 </a>
 
-                <a class="nav-link" href="/admin/personnel_management">
+                <a class="nav-link" href="/admin/staff_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Quản lí nhân viên
+                    Quản lý nhân viên
                 </a>
 
                 <a class="nav-link" href="/admin/service">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Quản lí dịch vụ
+                    Quản lý dịch vụ
                 </a>
 
                 <a class="nav-link" href="/admin/revenue_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Báo cáo doanh thu
+                    Quản lý doanh thu
                 </a>
 
                 <a class="nav-link" href="/admin/response_list">
