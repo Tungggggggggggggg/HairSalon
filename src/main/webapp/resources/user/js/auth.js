@@ -73,24 +73,22 @@ function switchToLogin() {
 function handleLogin(event) {
     event.preventDefault(); // Ngăn chặn việc gửi form
 
-    const username = document.querySelector('input[name="ten_dang_nhap"]').value; // Thay đổi tên trường
-    const password = document.querySelector('input[name="mat_khau"]').value; // Thay đổi tên trường
+    const username = document.querySelector('input[name="username"]').value; // Thay đổi tên trường
+    const password = document.querySelector('input[name="password"]').value; // Thay đổi tên trường
 
-    // Gửi thông tin đăng nhập đến server
-    fetch('/api/login', { // Thay đổi đường dẫn API
+    fetch('/api/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ten_dang_nhap: username, mat_khau: password }), // Cập nhật tên thuộc tính
+        body: JSON.stringify({ ten_dang_nhap: username, mat_khau: password }),
     })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Mạng phản hồi không hợp lệ');
-            }
+            console.log('Response status:', response.status);
             return response.json();
         })
         .then(data => {
+            console.log('Response data:', data); // Thêm log để xem dữ liệu phản hồi
             if (data.success) {
                 // Chuyển hướng dựa vào vai trò
                 switch (data.vai_tro_id) {

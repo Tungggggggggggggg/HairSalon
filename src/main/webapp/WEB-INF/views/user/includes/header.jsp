@@ -74,7 +74,7 @@ pageEncoding="UTF-8"%>
                         Số Điện Thoại
                     </button>
                 </div>
-                <form class="form-auth">
+                <form class="form-auth" onsubmit="handleLogin(event)">
                     <input
                         id="loginEmail"
                         class="input-auth email-input"

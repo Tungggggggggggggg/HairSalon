@@ -10,6 +10,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")  // Đường dẫn cơ bản cho API
+@Controller
 public class LoginController {
     @Autowired
     private UserService userService;
@@ -21,7 +22,7 @@ public class LoginController {
         if (authenticatedUser != null) {
             return ResponseEntity.ok(Map.of("success", true, "vai_tro_id", authenticatedUser.getVaiTroId()));
         } else {
-            return ResponseEntity.ok(Map.of("success", false));
+            return ResponseEntity.ok(Map.of("success", false, "message", "Đăng nhập thất bại."));
         }
     }
 }

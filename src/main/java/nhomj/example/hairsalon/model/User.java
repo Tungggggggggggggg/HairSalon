@@ -1,11 +1,20 @@
 package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
-import jdk.jfr.DataAmount;
-import java.util.List;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 @Table(name = "NguoiDung")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "nguoi_dung_id") // Thêm thuộc tính id
+    private Long id;
 
     @Column(name = "ten_dang_nhap", unique = true, nullable = false)
     private String username;
@@ -17,6 +26,14 @@ public class User {
     private int vaiTroId;
 
     // Getter và Setter
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return username;
     }
