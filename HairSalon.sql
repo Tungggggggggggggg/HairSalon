@@ -1,10 +1,6 @@
 -- Tạo cơ sở dữ liệu
-CREATE DATABASE HairSalon;
-GO
 
--- Sử dụng cơ sở dữ liệu
-USE HairSalon;
-GO
+
 
 -- Tạo bảng vai trò
 CREATE TABLE VaiTro (
@@ -75,7 +71,7 @@ GO
 INSERT INTO DichVu (ten_dich_vu, mo_ta, gia, thoi_gian)
 VALUES 
     (N'Cắt tóc chuyên nghiệp', N'Đội ngũ chuyên gia với nhiều năm kinh nghiệm.', 150000, 30),
-    (N'Chăm sóc tóc', N'Sản phẩm chất lượng cao cho mái tóc khỏe mạnh.', 50000, 20);
+    (N'Chăm sóc tóc', N'Sản phẩm chất lượng cao cho mái tóc khỏe mạnh.', 50000, 20),
     (N'Nhuộm tóc sáng tạo', N'Màu tóc bền, đẹp và an toàn.', 150000, 30),
     (N'Uốn tóc tạo kiểu', N'Tạo kiểu tóc bồng bềnh, đẹp tự nhiên.', 50000, 20);
 GO
