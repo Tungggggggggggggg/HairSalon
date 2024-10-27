@@ -5,11 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 
-
 public class BookingController {
 
     @GetMapping("/user/appointments")
     public String viewAppointments() {
         return "user/appointments";  // Trả về trang appointments.jsp
     }
+
+
 }

@@ -8,7 +8,7 @@
             <meta charset="utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-            <title>Quản lý nhân viên</title>
+            <title>Quản lý khách hàng</title>
             <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
             <link href="/admin_style/css/styles.css" rel="stylesheet" />
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -22,59 +22,62 @@
                 <div id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Quản lý nhân viên</h1>
+                            <h1 class="mt-4">Quản lý khách hàng</h1>
                             <ol class="breadcrumb mb-4">
                                 <li class="breadcrumb-item"><a href="/admin">Trang chủ</a></li>
-                                <li class="breadcrumb-item active">Quản lý nhân viên</li>
+                                <li class="breadcrumb-item active">Quản lý thông báo</li>
                             </ol>
 
-                            <!-- Nút thêm nhân viên mới -->
+                            <!-- Nút thêm khách hàng mới -->
                             <div class="mb-3">
-                                <button class="btn btn-primary" onclick="openStaffModal('new')">
-                                    <i class="fas fa-user-plus"></i> Thêm mới nhân viên
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customerModal"
+                                    onclick="openModal('new')">
+                                    <i class="fas fa-user-plus"></i> Thêm mới thông báo mới
                                 </button>
                             </div>
 
-                            <!-- Bảng danh sách nhân viên -->
+                            <!-- Bảng danh sách khách hàng -->
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
-                                    Danh sách nhân viên
+                                    Danh sách khách hàng
                                 </div>
                                 <div class="card-body">
-                                    <table id="staffTable" class="table table-bordered table-hover">
+                                    <table id="datatablesSimple" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Tên nhân viên</th>
-                                                <th>Email</th>
-                                                <th>Số điện thoại</th>
-                                                <th>Chức vụ</th>
+                                                <th>Người dùng</th>
+                                                <th>Nội dung</th>
+                                                <th>Ngày tạo</th>
+                                                <th>Trạng thái</th>
                                                 <th>Hành động</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <!-- Dữ liệu mẫu -->
-                                            <c:forEach var="staff" items="${staffs}">
+                                            <c:forEach var="notification" items="${notifications}">
                                                 <tr>
-                                                    <td>${staff.id}</td>
-                                                    <td>${staff.name}</td>
-                                                    <td>${staff.email}</td>
-                                                    <td>${staff.phone}</td>
-                                                    <td>${staff.role}</td>
+                                                    <td>${notification.id} </td>
+                                                    <td>${notification.user} </td>
+                                                    <td>${notification.message} </td>
+                                                    <td>${notification.notificationDate} </td>
+                                                    <td>${notification.status} </td>
                                                     <td>
-                                                        <button class="btn btn-sm btn-warning"
-                                                            onclick="openStaffModal('edit', 1, 'Nhân viên 1', 'nhanvien1@gmail.com', '0901234567')">
+                                                        <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                                            data-bs-target="#customerModal"
+                                                            onclick="openModal('edit', 1, 'Chỉnh sửa nhân viên', 'chỉnh sửa số này sinh của nhân viên ABC', '12:22:12 20/11/2024', 'Active')">
                                                             <i class="fas fa-edit"></i> Sửa
                                                         </button>
-                                                        <a href="/admin/staff/delete/1" class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Bạn có chắc chắn muốn xóa nhân viên này?')">
+                                                        <a href="/admin/customer/delete/${notification.id}"
+                                                            class="btn btn-sm btn-danger"
+                                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
                                                             <i class="fas fa-trash-alt"></i> Xóa
                                                         </a>
                                                     </td>
                                                 </tr>
-                                            </c:forEach>
-                                                <!-- Thêm các dữ liệu mẫu khác tương tự... -->
+                                            </c:forEach>    
+                                                <!-- Thêm dữ liệu mẫu khác... -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -82,31 +85,32 @@
                         </div>
                     </main>
 
-                    <!-- Modal thêm/sửa nhân viên -->
-                    <div class="modal fade" id="staffModal" tabindex="-1" aria-labelledby="staffModalLabel"
+                    <!-- Modal thêm/sửa khách hàng -->
+                    <div class="modal fade" id="customerModal" tabindex="-1" aria-labelledby="customerModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staffModalLabel">Thêm mới nhân viên</h5>
+                                    <h5 class="modal-title" id="customerModalLabel">Thêm mới khách hàng</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Đóng"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="staffForm" action="/admin/staff/save" method="post">
-                                        <input type="hidden" id="staffId" name="id">
+                                    <form id="customerForm" action="/admin/customer/save" method="post">
+                                        <input type="hidden" id="customerId" name="id">
                                         <div class="mb-3">
-                                            <label for="staffName" class="form-label">Tên nhân viên</label>
-                                            <input type="text" class="form-control" id="staffName" name="name" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="staffEmail" class="form-label">Email</label>
-                                            <input type="email" class="form-control" id="staffEmail" name="email"
+                                            <label for="customerName" class="form-label">Tên tiêu đề</label>
+                                            <input type="text" class="form-control" id="customerName" name="name"
                                                 required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="staffPhone" class="form-label">Số điện thoại</label>
-                                            <input type="text" class="form-control" id="staffPhone" name="phone"
+                                            <label for="customerContent" class="form-label">Nội dung</label>
+                                            <textarea type="email" class="form-control" id="customerContent"
+                                                name="content" required rows="5"></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="customerTime" class="form-label">Ngày tạo</label>
+                                            <input type="text" class="form-control" id="customerTime" name="time"
                                                 required>
                                         </div>
                                         <div class="modal-footer">
@@ -128,8 +132,7 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script
                 src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
-            <script src="/admin_style/js/staff_management.js"></script>
-
+            <script src="/admin_style/js/notification_management.js"></script>
         </body>
 
         </html>

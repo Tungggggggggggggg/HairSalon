@@ -1,66 +1,40 @@
 package nhomj.example.hairsalon.controller.admin;
 
+import nhomj.example.hairsalon.model.Notification;
+import nhomj.example.hairsalon.service.NotificationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class DashboardController {
 
+    public NotificationService notificationService;
+
+    @Autowired
+    public DashboardController(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
+
     @GetMapping("/admin")
-    public String admin() {
+    public String admin(Model model) {
+
         return "admin/dashboard/show";
     }
 
-    @GetMapping("/admin/notification")
+    @GetMapping("/admin/notification_management")
     public String notification(Model model) {
-
-        return "admin/notification/show";
+        List<Notification> notifications = this.notificationService.getAllNotifications();
+        model.addAttribute("notifications", notifications);
+        return "admin/dashboard/notification_management";
     }
 
-    @GetMapping("/admin/notification/create")
-    public String createNotification(Model model) {
 
-        return "admin/notification/create";
-    }
 
-    @GetMapping("/admin/notification/update")
-    public String updateNotification(Model model) {
-
-        return "admin/notification/update";
-    }
-
-    @GetMapping("/admin/notification/delete")
-    public String deleteNotification(Model model) {
-
-        return "admin/notification/delete";
-    }
-
-    @GetMapping("/admin/notification/detail")
-    public String detailNotification(Model model) {
-
-        return "admin/notification/detail";
-    }
-
-    @GetMapping("/admin/customer_management")
-    public String customerManagement(Model model) {
-        return "admin/dashboard/customer_management";
-    }
-
-    @GetMapping("/admin/service_management")
-    public String serviceManagement(Model model) {
-        return "admin/dashboard/service_management";
-    }
-
-    @GetMapping("/admin/staff_management")
-    public String Management(Model model) {
-        return "admin/dashboard/staff_management";
-    }
-
-    @GetMapping("/admin/booking_management")
-    public String calendarManagement(Model model) {
-        return "admin/dashboard/booking_management";
-    }
 
     @GetMapping("/admin/revenue_management")
     public String revenueManagement(Model model) {
@@ -71,10 +45,8 @@ public class DashboardController {
     public String responseManagement(Model model) {
         return "admin/dashboard/response_management";
     }
-    @GetMapping("/admin/salary_management")
-    public String salaryManagement(Model model) {
-        return "admin/dashboard/salary_management";
-    }
+
+
 
 
 }

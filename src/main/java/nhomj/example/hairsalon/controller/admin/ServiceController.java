@@ -1,42 +1,29 @@
 package nhomj.example.hairsalon.controller.admin;
 
-
+import nhomj.example.hairsalon.model.Service;
+import nhomj.example.hairsalon.service.ServiceShopService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Controller
 public class ServiceController {
+    public final ServiceShopService serviceShopService;
 
-    @GetMapping("admin/service")
-    public String service() {
-
-
-        return "admin/service/show";
+    @Autowired
+    public ServiceController(ServiceShopService serviceShopService) {
+        this.serviceShopService = serviceShopService;
     }
 
-    @GetMapping("admin/service/create")
-    public String createSevice() {
-
-        return "admin/service/create";
+    @GetMapping("/admin/service_management")
+    public String showService(Model model) {
+        List<Service> serviceShops = this.serviceShopService.getAllServiceShops();
+        model.addAttribute("serviceShops", serviceShops);
+        return "admin/dashboard/service_management";
     }
 
-    @GetMapping("admin/service/update")
-    public String updateSevice() {
 
-        return "admin/service/update";
-    }
-
-    @GetMapping("admin/service/delete")
-    public String deleteSevice() {
-
-        return "admin/service/delete";
-    }
-
-    @GetMapping("admin/service/detail")
-    public String detailSevice() {
-
-        return "admin/service/detail";
-    }
-
-    
 }

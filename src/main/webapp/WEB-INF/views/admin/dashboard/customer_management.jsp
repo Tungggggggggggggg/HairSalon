@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Quản lý khách hàng</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <link href="../../../../resources/admin/css/styles.css" rel="stylesheet" />
+    <link href="/admin_style/css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
@@ -53,38 +53,24 @@
                                 </thead>
                                 <tbody>
                                     <!-- Dữ liệu mẫu -->
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Khách hàng 1</td>
-                                        <td>khachhang1@gmail.com</td>
-                                        <td>0123456789</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#customerModal"
-                                                onclick="openModal('edit', 1, 'Khách hàng 1', 'khachhang1@gmail.com', '0123456789', 'Active')">
-                                                <i class="fas fa-edit"></i> Sửa
-                                            </button>
-                                            <a href="/admin/customer/delete/1" class="btn btn-sm btn-danger" 
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                                <i class="fas fa-trash-alt"></i> Xóa
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Khách hàng 2</td>
-                                        <td>khachhang2@gmail.com</td>
-                                        <td>0123456789</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#customerModal"
-                                                onclick="openModal('edit', 2, 'Khách hàng 2', 'khachhang2@gmail.com', '0123456789', 'Inactive')">
-                                                <i class="fas fa-edit"></i> Sửa
-                                            </button>
-                                            <a href="/admin/customer/delete/2" class="btn btn-sm btn-danger" 
-                                                onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                                <i class="fas fa-trash-alt"></i> Xóa
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <c:forEach var="user" items="${users}">
+                                        <tr>
+                                            <td>${user.id}</td>
+                                            <td>${user.name}</td>
+                                            <td>${user.email}</td>
+                                            <td>${user.phone}</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#customerModal"
+                                                    onclick="openModal('edit', 1, 'Khách hàng 1', 'khachhang1@gmail.com', '0123456789', 'Active')">
+                                                    <i class="fas fa-edit"></i> Sửa
+                                                </button>
+                                                <a href="/admin/customer/delete/1" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
+                                                    <i class="fas fa-trash-alt"></i> Xóa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     <!-- Thêm dữ liệu mẫu khác... -->
                                 </tbody>
                             </table>
@@ -133,6 +119,6 @@
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
-    <script src="../../../../resources/admin/js/customer_management.js"></script>
+    <script src="/admin_style/js/customer_management.js"></script>
 </body>
 </html>

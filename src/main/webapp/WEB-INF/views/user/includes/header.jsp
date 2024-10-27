@@ -5,8 +5,8 @@ pageEncoding="UTF-8"%>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/auth.css" />
+        <link rel="stylesheet" href="user_style/style.css" />
+        <link rel="stylesheet" href="user_style/auth.css" />
         <title>Header</title>
     </head>
 
@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
                 <div class="logo">
                     <a href="#top">
                         <img
-                            src="../../../../resources/user/images/logo.jpg"
+                            src="/user_style/images/logo.jpg"
                             alt="JSalon Logo"
                         />
                     </a>
@@ -33,7 +33,7 @@ pageEncoding="UTF-8"%>
                 <ul class="nav-right">
                     <li>
                         <a
-                            href="javascript:void(0);"
+                            href="#"
                             onclick="showModal('loginModal')"
                             class="auth-btn"
                             >Đăng nhập</a
@@ -41,7 +41,7 @@ pageEncoding="UTF-8"%>
                     </li>
                     <li>
                         <a
-                            href="javascript:void(0);"
+                            href="#"
                             onclick="showModal('registerModal')"
                             class="auth-btn"
                             >Đăng ký</a
@@ -74,7 +74,8 @@ pageEncoding="UTF-8"%>
                         Số Điện Thoại
                     </button>
                 </div>
-                <form class="form-auth" onsubmit="handleLogin(event)">
+                <form class="form-auth"  action="/authenticateTheUser" method="post">
+<%--                    onsubmit="handleLogin(event)"--%>
                     <input
                         id="loginEmail"
                         class="input-auth email-input"
@@ -101,7 +102,7 @@ pageEncoding="UTF-8"%>
                     />
 
                     <a
-                        href="javascript:void(0);"
+                        href="#"
                         onclick="showForgotPasswordModal()"
                         class="forgot-password-link"
                         >Quên mật khẩu?</a
@@ -114,7 +115,7 @@ pageEncoding="UTF-8"%>
                 <p class="sign-up-label-auth">
                     Chưa có tài khoản?
                     <span class="sign-up-link-auth"
-                        ><a href="javascript:switchToSignup()">Đăng ký</a></span
+                        ><a href="#" onclick="switchToSignup()">Đăng ký</a></span
                     >
                 </p>
             </div>
@@ -127,7 +128,7 @@ pageEncoding="UTF-8"%>
                     >&times;</span
                 >
                 <h2 class="title-auth">Đăng ký</h2>
-                <form class="form-auth">
+                <form class="form-auth" action="" method="post" ModelAttribute="">
                     <input
                         type="text"
                         class="input-auth"
@@ -180,13 +181,11 @@ pageEncoding="UTF-8"%>
                 <p class="sign-in-label-auth">
                     Đã có tài khoản?
                     <span class="sign-in-link-auth"
-                        ><a href="javascript:switchToLogin()">
-                            Đăng nhập</a
-                        ></span
-                    >
+                        ><a href="javascript:switchToLogin()">Đăng nhập</a>
+                    </span>
                 </p>
             </div>
         </div>
-        <script src="../../../../resources/user/js/auth.js"></script>
+        <script src="user_style/js/auth.js"></script>
     </body>
 </html>

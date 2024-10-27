@@ -1,11 +1,11 @@
 // package nhomj.example.hairsalon.controller.user;
-
+//
 // import org.springframework.stereotype.Controller;
 // import org.springframework.web.bind.annotation.GetMapping;
-
+//
 // @Controller
 // public class CustomerController {
-
+//
 //     @GetMapping("/home")
 //     public String home() {
 //         return "user/home"; // Trả về tên file JSP (home.jsp)
@@ -22,7 +22,7 @@
 //         }
 // }
 // }
-
-
-
-
+//
+//
+//
+//

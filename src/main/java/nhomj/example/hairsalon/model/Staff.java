@@ -1,30 +1,39 @@
 package nhomj.example.hairsalon.model;
 
-public class Staff extends People{
+import jakarta.persistence.*;
 
-    private float salary;
-    //Chức vự
-    private String position;
+import java.util.List;
 
-    public Staff(long id, String name, String address, String phone, String email, float salary, String position) {
-        super(id, name, address, phone, email);
-        this.salary = salary;
-        this.position = position;
-    }
+//staff ở đây là chỉ cho stylist
+@Entity
+@Table(name = "staff")
+public class Staff {
 
-    public float getSalary() {
-        return salary;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public void setSalary(float salary) {
-        this.salary = salary;
-    }
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public String getPosition() {
-        return position;
-    }
+    private String name;
+    private String experience;
+    private String specialty;
 
-    public void setPosition(String position) {
-        this.position = position;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
+    private List<Booking> bookings;
+
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
+    private List<StaffSalary> salaries;
+
+
+    // Getters and Setters
+    // Enum Status (Available, Unavailable)
+    public enum Status {
+        AVAILABLE, UNAVAILABLE
     }
 }

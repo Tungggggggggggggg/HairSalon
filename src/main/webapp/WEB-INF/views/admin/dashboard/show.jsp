@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-    <link href="../../../../resources/admin/css/styles.css" rel="stylesheet" />
+    <link href="/admin_style/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
@@ -47,7 +47,7 @@
                                 <h2 style="font-size: 2em; margin: 0;">12</h2>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small stretched-link" href="/admin/notification">Xem thêm</a>
+                                <a class="small stretched-link" href="/admin/notification_management">Xem thêm</a>
                                 <div class="small"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -392,8 +392,8 @@
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
-<script src="../../../../resources/admin/js/datatables-simple-demo.js"></script>
-<script src="../../../../resources/admin/js/scripts.js"></script>
+<script src="/admin_style/js/datatables-simple-demo.js"></script>
+<script src="/admin_style/js/scripts.js"></script>
 </body>
 
 </html>

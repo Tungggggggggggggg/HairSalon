@@ -12,8 +12,8 @@ pageEncoding="UTF-8"%>
         />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-        <link rel="stylesheet" href="../../../resources/user/css/style.css" />
-        <link rel="stylesheet" href="../../../resources/user/css/auth.css" />
+        <link rel="stylesheet" href="/user_style/css/style.css" />
+        <link rel="stylesheet" href="/user_style/css/auth.css" />
     </head>
 
     <body id="top">
@@ -94,7 +94,7 @@ pageEncoding="UTF-8"%>
             <div class="service-container">
                 <div class="service-slide active">
                     <img
-                        src="../../../resources/user/images/cattoc.webp"
+                        src="/user_style/images/cattoc.webp"
                         alt="Dịch vụ 1"
                     />
                     <h3>Cắt tóc chuyên nghiệp</h3>
@@ -102,7 +102,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="service-slide">
                     <img
-                        src="../../../resources/user/images/chamsoctoc.avif"
+                        src="/user_style/images/chamsoctoc.avif"
                         alt="Dịch vụ 2"
                     />
                     <h3>Chăm sóc tóc</h3>
@@ -110,7 +110,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="service-slide">
                     <img
-                        src="../../../resources/user/images/nhuomtoc.jpg"
+                        src="/user_style/images/nhuomtoc.jpg"
                         alt="Dịch vụ 3"
                     />
                     <h3>Nhuộm tóc sáng tạo</h3>
@@ -118,7 +118,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="service-slide">
                     <img
-                        src="../../../resources/user/images/uontoc.webp"
+                        src="/user_style/images/uontoc.webp"
                         alt="Dịch vụ 4"
                     />
                     <h3>Uốn tóc tạo kiểu</h3>
@@ -134,7 +134,7 @@ pageEncoding="UTF-8"%>
                 <div class="reviews-container">
                     <div class="review-item">
                         <img
-                            src="../../../resources/user/images/son.jpg"
+                            src="/user_style/images/son.jpg"
                             class="customer-photo"
                             alt="Customer Photo 1"
                         />
@@ -147,7 +147,7 @@ pageEncoding="UTF-8"%>
 
                     <div class="review-item">
                         <img
-                            src="../../../resources/user/images/tung.jpg"
+                            src="/user_style/images/tung.jpg"
                             class="customer-photo"
                             alt="Customer Photo 2"
                         />
@@ -160,7 +160,7 @@ pageEncoding="UTF-8"%>
 
                     <div class="review-item">
                         <img
-                            src="../../../resources/user/images/m-tp.jpg"
+                            src="/user_style/images/m-tp.jpg"
                             class="customer-photo"
                             alt="Customer Photo 3"
                         />

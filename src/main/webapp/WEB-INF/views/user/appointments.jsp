@@ -6,9 +6,9 @@ pageEncoding="UTF-8"%>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lịch hẹn của bạn</title>
-    <link rel="stylesheet" href="/resources/user/css/style.css" />
-    <link rel="stylesheet" href="/resources/user/css/auth.css" />
-    <link rel="stylesheet" href="/resources/user/css/appointments.css" />
+    <link rel="stylesheet" href="/user_style/css/style.css" />
+    <link rel="stylesheet" href="/user_style/css/auth.css" />
+    <link rel="stylesheet" href="/user_style/css/appointments.css" />
 </head>
 <body>
     <%@ include file="/WEB-INF/views/user/includes/header.jsp" %>
@@ -36,6 +36,6 @@ pageEncoding="UTF-8"%>
     </div>
 
     <%@ include file="/WEB-INF/views/user/includes/footer.jsp" %>
-    <script src="/resources/user/js/appointments.js"></script>
+    <script src="/user_style/js/appointments.js"></script>
 </body>
 </html>
