@@ -5,7 +5,7 @@ import nhomj.example.hairsalon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +23,22 @@ public class UserController {
     public String customerManagement(Model model) {
         List<User> users = this.userService.findAllByRole(User.Role.CUSTOMER);
         model.addAttribute("users", users);
+        model.addAttribute("newCustomer", new User());
+        model.addAttribute("deleteCustomer", new User()); // Thêm deleteCustomer vào Model
         return "admin/dashboard/customer_management";
+    }
+
+    @PostMapping("/admin/customer_management/save")
+    public String customerManagementSave(@ModelAttribute("newCustomer") User user) {
+        user.setCreatedDate(this.userService.date());
+        user.setRole(User.Role.CUSTOMER);
+        this.userService.saveUser(user);
+        return "redirect:/admin/customer_management";
+    }
+
+    @PostMapping("/admin/customer_management/delete")
+    public String customerManagementDelete(@ModelAttribute("deleteCustomer") User user) {
+        this.userService.deleteById(user.getId());  // Xóa người dùng theo ID
+        return  "redirect:/admin/customer_management";
     }
 }

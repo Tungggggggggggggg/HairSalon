@@ -17,7 +17,7 @@ public class Staff {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String name;
+    private String name = user.getName();
     private String experience;
     private String specialty;
 
@@ -30,6 +30,69 @@ public class Staff {
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
     private List<StaffSalary> salaries;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public String getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
+
+    public List<StaffSalary> getSalaries() {
+        return salaries;
+    }
+
+    public void setSalaries(List<StaffSalary> salaries) {
+        this.salaries = salaries;
+    }
 
     // Getters and Setters
     // Enum Status (Available, Unavailable)

@@ -185,7 +185,7 @@
                 src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.0/dist/xlsx.full.min.js"></script>
             <script src="/admin_style/js/salary_management.js"></script>
-
+            <script src="/admin_style/js/scripts.js"></script>
         </body>
 
         </html>

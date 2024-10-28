@@ -89,5 +89,6 @@
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/admin_style/js/response_management.js"></script>
+    <script src="/admin_style/js/scripts.js"></script>
 </body>
 </html>

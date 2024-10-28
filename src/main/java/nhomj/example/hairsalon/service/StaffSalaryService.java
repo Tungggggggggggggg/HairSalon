@@ -21,6 +21,7 @@ public class StaffSalaryService {
         return this.staffSalaryRepository.findAll();
     }
 
+
     public Double getTotalSalary(List<StaffSalary> staffSalaries) {
         Double totalSalary = 0.0;
         for (StaffSalary staffSalary : staffSalaries) {

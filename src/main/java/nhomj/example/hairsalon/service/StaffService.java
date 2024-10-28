@@ -1,6 +1,5 @@
 package nhomj.example.hairsalon.service;
 
-import nhomj.example.hairsalon.model.Staff;
 import nhomj.example.hairsalon.model.User;
 import nhomj.example.hairsalon.repository.StaffRepository;
 import nhomj.example.hairsalon.repository.UserRepository;
@@ -19,8 +18,9 @@ public class StaffService {
         this.userRepository = userRepository;
     }
 
-
     public List<User> getUserRoleStaff(User.Role role) {
         return this.userRepository.findAllByRoleNot(role);
     }
+
+
 }

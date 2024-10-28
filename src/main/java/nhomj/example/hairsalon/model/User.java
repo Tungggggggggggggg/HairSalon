@@ -33,10 +33,11 @@ public class User {
 
     private String gender;
 
-    private String birthday;
-
     @Temporal(TemporalType.DATE)
-    private LocalDate createdDate;
+    private LocalDate birthday;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime createdDate;
 
     @OneToMany(mappedBy = "customer")
     private List<Booking> bookingCustomers;
@@ -51,7 +52,7 @@ public class User {
         super();
     }
 
-    public User(Long id, String name, String email, String password, String phone, String address, String gender, String birthday, List<Booking> bookingCustomers, List<Revenue> revenueCustomers, Role role) {
+    public User(Long id, String name, String email, String password, String phone, String address, String gender, LocalDate birthday, LocalDateTime createdDate, List<Booking> bookingCustomers, List<Revenue> revenueCustomers, Role role) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -60,9 +61,18 @@ public class User {
         this.address = address;
         this.gender = gender;
         this.birthday = birthday;
+        this.createdDate = createdDate;
         this.bookingCustomers = bookingCustomers;
         this.revenueCustomers = revenueCustomers;
         this.role = role;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Long getId() {
@@ -121,11 +131,11 @@ public class User {
         this.gender = gender;
     }
 
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

@@ -113,5 +113,6 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales-all.global.min.js"></script>
     <script src="/staff_style/js/staff.js"></script>
+    <script src="/admin_style/js/scripts.js"></script>
 </body>
 </html>

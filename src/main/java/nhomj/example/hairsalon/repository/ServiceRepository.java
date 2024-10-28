@@ -6,6 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface ServiceRepository extends JpaRepository<Service, Integer> {
+public interface ServiceRepository extends JpaRepository<Service, Long> {
     List<Service> findAll();
+
+    Service save(Service service);
+
+    Service findById(long id);
+
+
 }

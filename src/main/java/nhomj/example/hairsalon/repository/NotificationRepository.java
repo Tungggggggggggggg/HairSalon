@@ -8,4 +8,10 @@ import java.util.List;
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     List<Notification> findAll();
+
+    Notification findById(long id);
+
+    Notification save(Notification notification);
+
+    void deleteById(long id);
 }
