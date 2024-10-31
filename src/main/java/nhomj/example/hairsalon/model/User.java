@@ -36,7 +36,10 @@ public class User {
     @Temporal(TemporalType.DATE)
     private LocalDate birthday;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL )
+    private Staff staff;
+
+    @Column(name = "created_date")
     private LocalDateTime createdDate;
 
     @OneToMany(mappedBy = "customer")
@@ -164,7 +167,7 @@ public class User {
     }
 
     public enum Role {
-        CUSTOMER, STAFF, ADMIN
+        NGUOIDUNG, NHANVIEN, ADMIN
     }
 
 

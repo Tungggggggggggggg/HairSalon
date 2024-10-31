@@ -15,12 +15,16 @@ const datatablesSimple = new simpleDatatables.DataTable("#datatablesSimple", {
 });
 
 // Hàm mở modal và thiết lập dữ liệu
-function openModal(type, id = '', name = '', email = '', phone = '', status = '') {
+function openModal(type, id = '', name = '', email = '', password = '', phone = '',address = '', gender = '', birthday = '', createdDate = '') {
     const modalTitle = document.getElementById('customerModalLabel');
     const customerId = document.getElementById('customerId');
     const customerName = document.getElementById('customerName');
     const customerEmail = document.getElementById('customerEmail');
+    const customerPassword = document.getElementById('customerPassword');
     const customerPhone = document.getElementById('customerPhone');
+    const customerAddress = document.getElementById('customerAddress');
+    const customerGender = document.getElementById('customerGender');
+    const customerBirthday = document.getElementById('customerBirthday');
 
     if (type === 'new') {
         modalTitle.textContent = 'Thêm mới khách hàng';
@@ -28,12 +32,20 @@ function openModal(type, id = '', name = '', email = '', phone = '', status = ''
         customerName.value = '';
         customerEmail.value = '';
         customerPhone.value = '';
+        customerPassword.value = '';
+        customerAddress.value = '';
+        customerGender.value = '';
+        customerBirthday.value = '';
     } else if (type === 'edit') {
         modalTitle.textContent = 'Chỉnh sửa khách hàng';
         customerId.value = id;
         customerName.value = name;
         customerEmail.value = email;
         customerPhone.value = phone;
+        customerPassword.value = password;
+        customerAddress.value = address;
+        customerGender.value = gender;
+        customerBirthday.value = birthday;
     }
 }
 
@@ -45,10 +57,11 @@ function openDeleteModal(id, name) {
 }
 
 
-function viewDetails(id, name, email, phone, address, gender, birthday, createdDate) {
+function viewDetails(id, name, email, password, phone, address, gender, birthday, createdDate) {
     document.getElementById("detailId").textContent = id;
     document.getElementById("detailName").textContent = name;
     document.getElementById("detailEmail").textContent = email;
+    document.getElementById("detailPassword").textContent = password;
     document.getElementById("detailPhone").textContent = phone;
     document.getElementById("detailAddress").textContent = address;
     document.getElementById("detailGender").textContent = gender;

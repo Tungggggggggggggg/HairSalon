@@ -17,7 +17,6 @@ public class Staff {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String name = user.getName();
     private String experience;
     private String specialty;
 
@@ -46,13 +45,6 @@ public class Staff {
         this.user = user;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getExperience() {
         return experience;
@@ -94,9 +86,11 @@ public class Staff {
         this.salaries = salaries;
     }
 
+
     // Getters and Setters
     // Enum Status (Available, Unavailable)
     public enum Status {
-        AVAILABLE, UNAVAILABLE
+        TRONG, COLICH
+        //TRỐNG VÀ CÓ LỊCH
     }
 }

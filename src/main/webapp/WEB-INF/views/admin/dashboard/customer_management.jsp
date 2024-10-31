@@ -65,20 +65,18 @@
                                                         <td>
                                                             <button class="btn btn-sm btn-info" data-bs-toggle="modal"
                                                                 data-bs-target="#detailModal"
-                                                                onclick="viewDetails('${user.id}', '${user.name}', '${user.email}', '${user.phone}', '${user.address}', '${user.gender}', '${user.birthday}', '${user.createdDate}')">
-                                                                <i class="fas fa-eye"></i> Chi tiết
+                                                                onclick="viewDetails('${user.id}', '${user.name}', '${user.email}', '${user.password}', '${user.phone}', '${user.address}', '${user.gender}', '${user.birthday}', '${user.createdDate}')">
+                                                                <i class="fas fa-eye"></i> Chi tiết 
                                                             </button>
                                                             <button class="btn btn-sm btn-warning"
                                                                 data-bs-toggle="modal" data-bs-target="#customerModal"
-                                                                onclick="openModal('edit','${user.id}' , '${user.name}', '${user.email}', '${user.phone}', 'Active')">
+                                                                onclick="openModal('edit','${user.id}', '${user.name}', '${user.email}', '${user.password}', '${user.phone}', '${user.address}', '${user.gender}', '${user.birthday}')">
                                                                 <i class="fas fa-edit"></i> Sửa
                                                             </button>
                                                             <button type="button" class="btn btn-sm btn-danger"
                                                                 onclick="openDeleteModal('${user.id}', '${user.name}')">
                                                                 <i class="fas fa-trash-alt"></i> Xóa
                                                             </button>
-
-
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -103,13 +101,14 @@
                                         <p><strong>ID:</strong> <span id="detailId"></span></p>
                                         <p><strong>Tên khách hàng:</strong> <span id="detailName"></span></p>
                                         <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+                                        <p><strong>PassWord:</strong> <span id="detailPassword"></span></p>
                                         <p><strong>Số điện thoại:</strong> <span id="detailPhone"></span></p>
                                         <p><strong>Địa chỉ:</strong> <span id="detailAddress"></span></p>
                                         <p><strong>Giới tính:</strong> <span id="detailGender"></span></p>
                                         <p><strong>Năm sinh:</strong> <span id="detailBirthday"></span></p>
                                         <p><strong>Ngày tạo:</strong> <span id="detailCreatedDate"></span></p>
                                     </div>
-                                    
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Đóng</button>
@@ -154,19 +153,19 @@
 
                                                 <div class="col-12 col-md-5">
                                                     <label for="customerPhone" class="form-label">PassWord</label>
-                                                    <form:input type="text" class="form-control" id="customerPhone"
+                                                    <form:input type="text" class="form-control" id="customerPassword"
                                                         path="password" />
                                                 </div>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="customerPhone" class="form-label">Địa chỉ</label>
-                                                <form:input type="text" class="form-control" id="customerPhone"
+                                                <form:input type="text" class="form-control" id="customerAddress"
                                                     path="address" />
                                             </div>
                                             <div class="mb-3 row">
                                                 <div class="col-12 col-md-6">
                                                     <label for="customerPhone" class="form-label">Giới tính</label>
-                                                    <form:select class="form-select" path="gender">
+                                                    <form:select class="form-select" path="gender" id="customerGender">
                                                         <form:option value="">Trống</form:option>
                                                         <form:option value="Nam">Nam</form:option>
                                                         <form:option value="Nữ">Nữ</form:option>
