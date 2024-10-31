@@ -131,7 +131,7 @@
                                     <div class="modal-body col-12 mx-auto">
                                         <form:form id="customerForm" action="/admin/customer_management/save"
                                             method="post" modelAttribute="newCustomer">
-                                            <form:input type="hidden" id="customerId" path="id" />
+                                            <form:input type="hidden" id="customerId" path="id"  />
                                             <div class="mb-3 row">
                                                 <div class="col-12 col-md-6">
                                                     <label for="customerName" class="form-label">Tên khách hàng</label>
@@ -167,9 +167,9 @@
                                                     <label for="customerPhone" class="form-label">Giới tính</label>
                                                     <form:select class="form-select" path="gender" id="customerGender">
                                                         <form:option value="">Trống</form:option>
-                                                        <form:option value="Nam">Nam</form:option>
-                                                        <form:option value="Nữ">Nữ</form:option>
-                                                        <form:option value="Ẩn">Ẩn</form:option>
+                                                        <form:option value="NAM">Nam</form:option>
+                                                        <form:option value="NU">Nữ</form:option>
+                                                        <form:option value="OTHER">Ẩn</form:option>
                                                     </form:select>
                                                 </div>
                                                 <div class="col-12 col-md-6">

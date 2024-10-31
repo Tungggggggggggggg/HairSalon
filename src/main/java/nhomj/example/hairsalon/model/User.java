@@ -48,6 +48,9 @@ public class User {
     @OneToMany(mappedBy = "customer")
     private List<Revenue> revenueCustomers;
 
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notificationCustomers;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
