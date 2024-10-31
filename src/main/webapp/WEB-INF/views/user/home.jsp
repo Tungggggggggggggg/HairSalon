@@ -17,21 +17,24 @@ pageEncoding="UTF-8"%>
     </head>
 
     <body id="top">
-        <%@ include file="/WEB-INF/views/user/includes/header.jsp" %>
+        <jsp:include page="/WEB-INF/views/user/includes/header.jsp" />
 
         <section id="about" class="banner">
-
             <h1>Chào mừng đến với JSalon</h1>
             <p>
-                JSalon tự hào mang đến cho bạn các dịch vụ chăm sóc tóc chuyên nghiệp và hiện đại.
-                Từ việc cắt tóc thời thượng, nhuộm tóc sáng tạo đến uốn tóc bồng bềnh, chúng tôi luôn
-                sẵn sàng đáp ứng mọi nhu cầu làm đẹp của bạn. Với đội ngũ chuyên gia có nhiều năm
-                kinh nghiệm, chúng tôi cam kết đem lại sự hài lòng tuyệt đối cho bạn trong từng lần ghé thăm.
+                JSalon tự hào mang đến cho bạn các dịch vụ chăm sóc tóc chuyên
+                nghiệp và hiện đại. Từ việc cắt tóc thời thượng, nhuộm tóc sáng
+                tạo đến uốn tóc bồng bềnh, chúng tôi luôn sẵn sàng đáp ứng mọi
+                nhu cầu làm đẹp của bạn. Với đội ngũ chuyên gia có nhiều năm
+                kinh nghiệm, chúng tôi cam kết đem lại sự hài lòng tuyệt đối cho
+                bạn trong từng lần ghé thăm.
             </p>
             <p>
-                Bạn có thể dễ dàng tìm kiếm và đặt lịch thông qua hệ thống trực tuyến của chúng tôi,
-                tiết kiệm thời gian và đảm bảo có lịch hẹn phù hợp. Trải nghiệm quy trình đơn giản và tiện lợi
-                với một vài bước click chuột, để có được mái tóc ưng ý mà không cần phải lo lắng về việc chờ đợi.
+                Bạn có thể dễ dàng tìm kiếm và đặt lịch thông qua hệ thống trực
+                tuyến của chúng tôi, tiết kiệm thời gian và đảm bảo có lịch hẹn
+                phù hợp. Trải nghiệm quy trình đơn giản và tiện lợi với một vài
+                bước click chuột, để có được mái tóc ưng ý mà không cần phải lo
+                lắng về việc chờ đợi.
             </p>
             <button id="openBookingModal" onclick="showScheduleModal()">
                 Đặt Lịch Ngay
@@ -93,10 +96,7 @@ pageEncoding="UTF-8"%>
             <h1>Dịch vụ của chúng tôi</h1>
             <div class="service-container">
                 <div class="service-slide active">
-                    <img
-                        src="/user_style/images/cattoc.webp"
-                        alt="Dịch vụ 1"
-                    />
+                    <img src="/user_style/images/cattoc.webp" alt="Dịch vụ 1" />
                     <h3>Cắt tóc chuyên nghiệp</h3>
                     <p>Đội ngũ chuyên gia với nhiều năm kinh nghiệm.</p>
                 </div>
@@ -117,10 +117,7 @@ pageEncoding="UTF-8"%>
                     <p>Màu tóc bền, đẹp và an toàn.</p>
                 </div>
                 <div class="service-slide">
-                    <img
-                        src="/user_style/images/uontoc.webp"
-                        alt="Dịch vụ 4"
-                    />
+                    <img src="/user_style/images/uontoc.webp" alt="Dịch vụ 4" />
                     <h3>Uốn tóc tạo kiểu</h3>
                     <p>Tạo kiểu tóc bồng bềnh, đẹp tự nhiên.</p>
                 </div>
@@ -200,19 +197,19 @@ pageEncoding="UTF-8"%>
             // Hiển thị modal với hiệu ứng mượt mà
             function showScheduleModal() {
                 const modal = $("#scheduleModal");
-                modal.css("display", "block"); 
+                modal.css("display", "block");
                 setTimeout(() => {
                     modal.addClass("show");
-                }, 10); 
+                }, 10);
             }
 
             // Đóng modal với hiệu ứng mượt mà
             function closeModal(modalId) {
                 const modal = $("#" + modalId);
-                modal.removeClass("show"); 
+                modal.removeClass("show");
                 setTimeout(() => {
-                    modal.css("display", "none"); 
-                }, 500); 
+                    modal.css("display", "none");
+                }, 500);
             }
 
             let currentSlide = 0;
@@ -222,9 +219,9 @@ pageEncoding="UTF-8"%>
             function showSlide(index) {
                 slides.forEach((slide, i) => {
                     if (i === index) {
-                        slide.classList.add("active"); 
+                        slide.classList.add("active");
                     } else {
-                        slide.classList.remove("active"); 
+                        slide.classList.remove("active");
                     }
                 });
             }
@@ -248,6 +245,6 @@ pageEncoding="UTF-8"%>
             });
         </script>
 
-        <%@ include file="/WEB-INF/views/user/includes/footer.jsp" %>
+        <jsp:include page="/WEB-INF/views/user/includes/footer.jsp" />
     </body>
 </html>

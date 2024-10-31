@@ -33,9 +33,6 @@ public class DashboardController {
         return "admin/dashboard/notification_management";
     }
 
-
-
-
     @GetMapping("/admin/revenue_management")
     public String revenueManagement(Model model) {
         return "admin/dashboard/revenue_management";
