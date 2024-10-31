@@ -15,27 +15,52 @@ const serviceTable = new simpleDatatables.DataTable("#serviceTable", {
 
 let serviceModal;
 
-function openServiceModal(type, id = '', name = '', price = '', duration = '') {
+function openServiceModal(type, id = '', name = '', description = '', shortDescription = '', price = '', duration = '',) {
     const modalTitle = document.getElementById('serviceModalLabel');
     const serviceId = document.getElementById('serviceId');
     const serviceNameInput = document.getElementById('serviceName');
+    const serviceDescription = document.getElementById('serviceDescription');
+    const serviceShortDescription = document.getElementById('serviceShortDescription');
     const servicePriceInput = document.getElementById('servicePrice');
-    const serviceDurationInput = document.getElementById('serviceDuration');
+    const serviceDurationInput = document.getElementById('serviceDurationMinutes');
 
     if (type === 'new') {
         modalTitle.textContent = 'Thêm mới dịch vụ';
         serviceId.value = '';
         serviceNameInput.value = '';
+        serviceDescription.value = '';
+        serviceShortDescription.value = '';
         servicePriceInput.value = '';
         serviceDurationInput.value = '';
+
     } else if (type === 'edit') {
         modalTitle.textContent = 'Chỉnh sửa dịch vụ';
         serviceId.value = id;
         serviceNameInput.value = name;
+        serviceDescription.value = description;
+        serviceShortDescription.value = shortDescription;
         servicePriceInput.value = price;
         serviceDurationInput.value = duration;
+
     }
 
-    serviceModal = new bootstrap.Modal(document.getElementById('serviceModal'));
-    serviceModal.show();
+    // serviceModal = new bootstrap.Modal(document.getElementById('serviceModal'));
+    // serviceModal.show();
+}
+
+function openDeleteModal(id, name) {
+    document.getElementById("deleteServiceId").value = id;
+    document.getElementById("deleteServiceName").innerText = name;
+    new bootstrap.Modal(document.getElementById('deleteServiceModal')).show();
+}
+
+
+function viewDetails(id, name, description, price, durationMinutes) {
+    document.getElementById("detailId").textContent = id;
+    document.getElementById("detailName").textContent = name;
+    document.getElementById("detailName1").textContent = name;
+    document.getElementById("detailDescription").textContent = description;
+    document.getElementById("detailPrice").textContent = price;
+    document.getElementById("detailDurationMinutes").textContent = durationMinutes;
+
 }

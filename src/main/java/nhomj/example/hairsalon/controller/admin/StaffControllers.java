@@ -41,6 +41,7 @@ public class StaffControllers {
     public String saveStaff(@ModelAttribute("newStaff") UserStaffDTO newStaff, Model model) {
         User user = this.userService.findOneById(newStaff.getId());
         newStaff.setCreatedDate(this.staffService.date());
+        newStaff.setRole(User.Role.NHANVIEN);
         if(user != null) {
             this.staffService.updateUserStaff(newStaff);
         }else {
@@ -48,6 +49,7 @@ public class StaffControllers {
         }
         return "redirect:/admin/staff_management";
     }
+
 
     @PostMapping("/admin/staff_management/delete")
     public String deleteStaff(@ModelAttribute("deleteStaff") UserStaffDTO deleteStaff, Model model) {

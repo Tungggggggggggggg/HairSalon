@@ -1,7 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-        <!DOCTYPE html>
+<!DOCTYPE html>
         <html lang="vi">
 
         <head>
@@ -59,21 +60,25 @@
                                             <c:forEach var="notification" items="${notifications}">
                                                 <tr>
                                                     <td>${notification.id} </td>
-                                                    <td>${notification.user} </td>
+                                                    <td>${notification.user.name} </td>
                                                     <td>${notification.message} </td>
                                                     <td>${notification.notificationDate} </td>
                                                     <td>${notification.status} </td>
                                                     <td>
+                                                        <button class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                                data-bs-target="#detailModal"
+                                                                onclick="viewDetails('${user.id}', '${user.name}', '${user.email}', '${user.password}', '${user.phone}', '${user.address}', '${user.gender}', '${user.birthday}', '${user.createdDate}')">
+                                                                <i class="fas fa-eye"></i> Chi tiết 
+                                                            </button>
                                                         <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                                            data-bs-target="#customerModal"
+                                                            data-bs-target="#notificationModal"
                                                             onclick="openModal('edit', 1, 'Chỉnh sửa nhân viên', 'chỉnh sửa số này sinh của nhân viên ABC', '12:22:12 20/11/2024', 'Active')">
                                                             <i class="fas fa-edit"></i> Sửa
                                                         </button>
-                                                        <a href="/admin/customer/delete/${notification.id}"
-                                                            class="btn btn-sm btn-danger"
-                                                            onclick="return confirm('Bạn có chắc chắn muốn xóa?')">
-                                                            <i class="fas fa-trash-alt"></i> Xóa
-                                                        </a>
+                                                        <button type="button" class="btn btn-sm btn-danger"
+                                                                onclick="openDeleteModal('${user.id}', '${user.name}')">
+                                                                <i class="fas fa-trash-alt"></i> Xóa
+                                                            </button>
                                                     </td>
                                                 </tr>
                                             </c:forEach>    
@@ -85,8 +90,34 @@
                         </div>
                     </main>
 
+                    <!-- Modal Xem chi tiết khách hàng -->
+                    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="detailModalLabel">Chi tiết khách hàng</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Đóng"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>ID:</strong> <span id="detailId"></span></p>
+                                    <p><strong>Tên người dùng:</strong> <span id="detailUser"></span></p>
+                                    <p><strong>Nội dung:</strong> <span id="detailMessage"></span></p>
+                                    <p><strong>Ngày tạo:</strong> <span id="detailNotificationDate"></span></p>
+                                    <p><strong>Trang thái:</strong> <span id="detailStatus"></span></p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Đóng</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Modal thêm/sửa khách hàng -->
-                    <div class="modal fade" id="customerModal" tabindex="-1" aria-labelledby="customerModalLabel"
+                    <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -96,12 +127,17 @@
                                         aria-label="Đóng"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="customerForm" action="/admin/customer/save" method="post">
+                                    <form id="customerForm" action="/admin/notification_management/save" method="post" modelAttribute="newNotification">
                                         <input type="hidden" id="customerId" name="id">
                                         <div class="mb-3">
                                             <label for="customerName" class="form-label">Tên tiêu đề</label>
                                             <input type="text" class="form-control" id="customerName" name="name"
                                                 required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="customerName" class="form-label">Tên người dùng</label>
+                                            <input type="text" class="form-control" id="customerNameUser" name="name"
+                                                   required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="customerContent" class="form-label">Nội dung</label>
@@ -124,6 +160,33 @@
                         </div>
                     </div>
 
+                    <!-- Modal xác nhận xóa khách hàng -->
+                    <div class="modal fade" id="deleteNotificationModal" tabindex="-1"
+                         aria-labelledby="deleteNotificationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteNotificationModalLabel">Xác nhận xóa thông báo
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Bạn có chắc chắn muốn xóa thông báo <strong
+                                            id="deleteNotificationName"></strong>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form:form id="deleteNotificationForm" action="/admin/Notification_management/delete"
+                                               method="post" modelAttribute="deleteNotification">
+                                        <form:input type="hidden" id="deleteNotificationId" path="id" />
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Hủy</button>
+                                        <button type="submit" class="btn btn-danger">Xóa</button>
+                                    </form:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <jsp:include page="../layout/footer.jsp" />
                 </div>
             </div>

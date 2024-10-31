@@ -30,8 +30,15 @@ public class DashboardController {
     public String notification(Model model) {
         List<Notification> notifications = this.notificationService.getAllNotifications();
         model.addAttribute("notifications", notifications);
+        model.addAttribute("newNotification", new Notification());
+        model.addAttribute("deleteNotification", new Notification());
         return "admin/dashboard/notification_management";
     }
+
+
+
+
+
 
     @GetMapping("/admin/revenue_management")
     public String revenueManagement(Model model) {
