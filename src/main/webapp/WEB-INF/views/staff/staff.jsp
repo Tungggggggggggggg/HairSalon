@@ -18,16 +18,15 @@
 </head>
 
 <body class="sb-nav-fixed">
-<%@ include file="/WEB-INF/views/admin/layout/header.jsp" %>
-<div id="layoutSidenav">
-    <%@ include file="/WEB-INF/views/admin/layout/sidebar.jsp" %>
+    <jsp:include page="/WEB-INF/views/staff/layout/header.jsp" />
 
+<div id="layoutSidenav">
+    <jsp:include page="/WEB-INF/views/staff/layout/sidebar.jsp" />
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
                     <h1 class="mt-4">Trang nhân viên</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item"><a href="/staff">Trang chủ</a></li>
                         <li class="breadcrumb-item active">Trang nhân viên</li>
                     </ol>
 
@@ -102,7 +101,7 @@
                 </div>
             </main>
 
-            <%@ include file="/WEB-INF/views/admin/layout/footer.jsp" %>
+            <jsp:include page="/WEB-INF/views/staff/layout/footer.jsp" />
 
         </div>
     </div>
