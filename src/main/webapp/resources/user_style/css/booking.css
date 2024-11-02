@@ -1,0 +1,131 @@
+/* General container styling */
+.booking-container {
+    max-width: 1340px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.booking-container:hover {
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.appointment-section, .user-info-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.appointment-section {
+    border-right: 1px solid #ddd;
+}
+
+/* Section titles */
+.booking-container h2 {
+    font-size: 1.8em;
+    color: #333333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #1e90ff;
+    padding-bottom: 10px;
+}
+
+/* Form labels */
+.booking-container label {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 5px;
+    color: #666666;
+}
+
+/* Input fields */
+.booking-container input[type="text"],
+.booking-container input[type="tel"],
+.booking-container input[type="email"],
+.booking-container input[type="date"],
+.booking-container input[type="time"],
+.booking-container select
+{
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #f7f7f7;
+    color: #333333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Time Input Styling */
+.time-input {
+    padding-left: 40px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 20px 20px;
+}
+
+/* Input field focus */
+.booking-container input:focus,
+.booking-container select:focus,
+.booking-container textarea:focus {
+    border-color: #1e90ff;
+    outline: none;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(30, 144, 255, 0.3);
+}
+
+/* Submit button styling */
+.submit-button {
+    background-color: #1e90ff;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-bottom: 1%;
+}
+
+.submit-button:hover {
+    background-color: #0096ff;
+    transform: scale(1.05);
+}
+
+.submit-button:active {
+    transform: scale(0.95);
+}
+
+/* Center button */
+.center-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Textarea styling */
+.booking-container textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .booking-container {
+        flex-direction: column;
+        gap: 0px;
+    }
+    .appointment-section, .user-info-section {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 20px;
+    }
+    .center-button {
+        margin-top: 15px;
+    }
+}

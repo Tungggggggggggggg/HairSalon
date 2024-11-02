@@ -12,6 +12,7 @@ public class HomeController {
     public String home() {
         return "user/home"; // Trả về tên file JSP (home.jsp)
     }
+
 }
 
 

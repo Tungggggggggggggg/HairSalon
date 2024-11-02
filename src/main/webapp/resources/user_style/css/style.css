@@ -79,6 +79,7 @@ nav ul {
 }
 
 .nav-left li a:hover {
+    color: #ffffff; 
     background-color: #1e90ff; /* Đổi màu nhấn từ đỏ (#ff0000) sang xanh dương (#1e90ff) */
 }
 
@@ -101,7 +102,7 @@ button:hover {
 }
 
 a:hover {
-    color: #1e90ff; 
+    color: #ffffff; 
 }
 
 /* Banner Section Styling */
@@ -519,4 +520,10 @@ footer {
     .service-slide p {
         font-size: 14px;
     }
+}
+
+.logo, .nav-left {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
