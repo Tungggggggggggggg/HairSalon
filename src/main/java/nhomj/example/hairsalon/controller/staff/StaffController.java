@@ -7,10 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class StaffController {
 
-    // Phương thức này sẽ xử lý yêu cầu GET tới "/home"
     @GetMapping("/staff")
-    public String home() {
-        return "staff/staff"; // Trả về tên file JSP (home.jsp)
+    public String satff() {
+        return "staff/staff";
+    }
+
+    @GetMapping("/Staff_Salary")
+    public String StaffSalary() {
+        return "staff/Staff_Salary";
+    }
+
+    @GetMapping("/Staff_Information")
+    public String StaffInformation() {
+        return "staff/Staff_Information";
     }
 }
 

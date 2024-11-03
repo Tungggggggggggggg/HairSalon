@@ -25,9 +25,9 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Trang nhân viên</h1>
+                    <h1 class="mt-4">Lịch làm việc</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Trang nhân viên</li>
+                        <li class="breadcrumb-item active">Lịch làm việc</li>
                     </ol>
 
                     <!-- Lịch tháng -->
@@ -40,64 +40,61 @@
                         </div>
                     </div>
 
-                    <!-- Modal thông tin sự kiện -->
-                    <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="eventModalLabel">Thông tin chi tiết sự kiện</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p><strong>Tên sự kiện:</strong> <span id="eventTitle"></span></p>
-                                    <p><strong>Khách hàng:</strong> <span id="eventCustomer"></span></p>
-                                    <p><strong>Thời gian bắt đầu:</strong> <span id="eventStart"></span></p>
-                                    <p><strong>Thời gian kết thúc:</strong> <span id="eventEnd"></span></p>
-                                    <p><strong>Trạng thái:</strong> <span id="eventStatus"></span></p>
-                                    <p><strong>Mô tả:</strong> <span id="eventDescription"></span></p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success" id="btnComplete">Hoàn thành</button>
-                                    <button type="button" class="btn btn-secondary" id="btnIncomplete">Chưa hoàn thành</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                </div>
 
-                    <!-- Lương hàng tháng -->
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Quản lý lịch hẹn</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item active">Lịch hẹn</li>
+                    </ol>
+
+                    <!-- Bảng quản lý lịch hẹn -->
                     <div class="card mb-4">
                         <div class="card-header">
-                            <i class="fas fa-money-bill-wave me-1"></i> Lương hàng tháng
+                            <i class="fas fa-calendar-check me-1"></i> Danh sách lịch hẹn
                         </div>
                         <div class="card-body">
-                            <table id="monthlySalaryTable" class="table table-bordered table-hover">
+                            <table id="appointmentTable" class="table table-bordered table-hover">
                                 <thead>
-                                    <tr>
-                                        <th>Tháng/Năm</th>
-                                        <th>Lương cơ bản (VNĐ)</th>
-                                        <th>Thưởng (VNĐ)</th>
-                                        <th>Tổng lương (VNĐ)</th>
-                                    </tr>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Khách hàng</th>
+                                    <th>Dịch vụ</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Trạng thái</th>
+                                    <th>Hành động</th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Dữ liệu mẫu -->
+                                <!-- Dữ liệu lịch hẹn sẽ được lặp qua đây -->
+                                <c:forEach var="appointment" items="${appointments}">
                                     <tr>
-                                        <td>09/2024</td>
-                                        <td>5,000,000</td>
-                                        <td>500,000</td>
-                                        <td>5,500,000</td>
+                                        <td>${appointment.id}</td>
+                                        <td>${appointment.customerName}</td>
+                                        <td>${appointment.serviceName}</td>
+                                        <td>${appointment.bookingDate}</td>
+                                        <td>${appointment.status}</td>
+                                        <td>
+                                            <form action="acceptAppointment" method="post" style="display:inline;">
+                                                <input type="hidden" name="appointmentId" value="${appointment.id}">
+                                                <button type="submit" class="btn btn-success btn-sm">Nhận</button>
+                                            </form>
+                                            <form action="updateAppointment" method="post" style="display:inline;">
+                                                <input type="hidden" name="appointmentId" value="${appointment.id}">
+                                                <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+                                                    <option value="">Chọn trạng thái</option>
+                                                    <option value="CONFIRMED">Xác nhận</option>
+                                                    <option value="CANCELED">Hủy</option>
+                                                </select>
+                                            </form>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>08/2024</td>
-                                        <td>5,000,000</td>
-                                        <td>300,000</td>
-                                        <td>5,300,000</td>
-                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
                 </div>
             </main>
 
