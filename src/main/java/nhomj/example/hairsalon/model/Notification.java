@@ -13,20 +13,13 @@ public class Notification {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "staff_id", nullable = false)
+    private Staff staff;
 
     private String message;
 
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime notificationDate;
-
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
-    public enum Status {
-        UNREAD, READ
-    }
 
     public Long getId() {
         return id;
@@ -36,13 +29,6 @@ public class Notification {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getMessage() {
         return message;
@@ -60,11 +46,11 @@ public class Notification {
         this.notificationDate = notificationDate;
     }
 
-    public Status getStatus() {
-        return status;
+    public Staff getStaff() {
+        return staff;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStaff(Staff staff) {
+        this.staff = staff;
     }
 }

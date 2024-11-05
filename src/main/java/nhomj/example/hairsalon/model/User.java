@@ -25,60 +25,24 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
 
-    private String password;
-
     private String phone;
 
     private String address;
 
-    private String gender;
-
     @Temporal(TemporalType.DATE)
     private LocalDate birthday;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL )
-    private Staff staff;
-
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @OneToMany(mappedBy = "customer")
     private List<Booking> bookingCustomers;
 
-    @OneToMany(mappedBy = "customer")
-    private List<Revenue> revenueCustomers;
+    private LocalDateTime createdDate;
 
-    @OneToMany(mappedBy = "user")
-    private List<Notification> notificationCustomers;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
 
     public User() {
         super();
-    }
-
-    public User(Long id, String name, String email, String password, String phone, String address, String gender, LocalDate birthday, LocalDateTime createdDate, List<Booking> bookingCustomers, List<Revenue> revenueCustomers, Role role) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.address = address;
-        this.gender = gender;
-        this.birthday = birthday;
-        this.createdDate = createdDate;
-        this.bookingCustomers = bookingCustomers;
-        this.revenueCustomers = revenueCustomers;
-        this.role = role;
-    }
-
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(LocalDateTime createdDate) {
-        this.createdDate = createdDate;
     }
 
     public Long getId() {
@@ -105,14 +69,6 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -129,20 +85,20 @@ public class User {
         this.address = address;
     }
 
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public LocalDate getBirthday() {
         return birthday;
     }
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public List<Booking> getBookingCustomers() {
@@ -153,26 +109,17 @@ public class User {
         this.bookingCustomers = bookingCustomers;
     }
 
-    public List<Revenue> getRevenueCustomers() {
-        return revenueCustomers;
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
     }
 
-    public void setRevenueCustomers(List<Revenue> revenueCustomers) {
-        this.revenueCustomers = revenueCustomers;
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public Role getRole() {
-        return role;
+    public enum Gender {
+        Nam, Nu
     }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public enum Role {
-        NGUOIDUNG, NHANVIEN, ADMIN
-    }
-
 
 
 }

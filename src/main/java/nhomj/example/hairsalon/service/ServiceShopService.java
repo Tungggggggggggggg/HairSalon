@@ -8,10 +8,12 @@ import java.util.List;
 @org.springframework.stereotype.Service
 public class ServiceShopService {
     public ServiceRepository serviceRepository;
+    public UpLoadService upLoadService;
 
     @Autowired
-    public ServiceShopService(ServiceRepository serviceRepository) {
+    public ServiceShopService(ServiceRepository serviceRepository , UpLoadService upLoadService) {
         this.serviceRepository = serviceRepository;
+        this.upLoadService = upLoadService;
     }
 
     public List<Service> getAllServiceShops() {
@@ -27,6 +29,8 @@ public class ServiceShopService {
     }
 
     public void deleteServiceById(long id) {
+        Service service = getServiceById(id);
+        upLoadService.deleteFile(service.getAvatar(), "service");
         this.serviceRepository.deleteById(id);
     }
 

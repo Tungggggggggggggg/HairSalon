@@ -66,40 +66,30 @@
                             <table id="revenueTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Ngày</th>
-                                        <th>Dịch vụ</th>
-                                        <th>Số lượng</th>
+                                        <th>Số Dịch vụ</th>
+                                        <th>Số lượng booking</th>
                                         <th>Tổng tiền (VNĐ)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Dữ liệu mẫu -->
-                                    <tr>
-                                        <td>2024-10-25</td>
-                                        <td>Cắt tóc</td>
-                                        <td>15</td>
-                                        <td>1,500,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2024-10-25</td>
-                                        <td>Gội đầu</td>
-                                        <td>10</td>
-                                        <td>500,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2024-10-26</td>
-                                        <td>Nhuộm tóc</td>
-                                        <td>5</td>
-                                        <td>2,000,000</td>
-                                    </tr>
-                                    <!-- Thêm các dữ liệu mẫu khác tương tự... -->
+                                    <c:forEach var="revenue" items="${revenues}">
+                                        <tr>
+                                            <td>${revenue.summaryId} </td>
+                                            <td>${revenue.summaryDate} </td>
+                                            <td>${revenue.totalServices} </td>
+                                            <td>${revenue.numberOfBookings} </td>
+                                            <td>${revenue.totalRevenue} </td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th colspan="3">Tổng doanh thu</th>
-                                        <th id="totalRevenue">4,000,000</th>
-                                    </tr>
-                                </tfoot>
+<%--                                <tfoot>--%>
+<%--                                    <tr>--%>
+<%--                                        <th colspan="3">Tổng doanh thu</th>--%>
+<%--                                        <th id="totalRevenue">4,000,000</th>--%>
+<%--                                    </tr>--%>
+<%--                                </tfoot>--%>
                             </table>
                         </div>
                     </div>
@@ -113,6 +103,52 @@
                         <div class="card-body">
                             <canvas id="revenueChart" width="100%" height="30"></canvas>
                         </div>
+                        <script>
+                            const ctx = document.getElementById('revenueChart').getContext('2d');
+                            const revenueChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: ['2024-11-1', '2024-11-2', '2024-11-3','2024-11-4','2024-11-5','2024-11-6','2024-11-7','2024-11-8','2024-11-9','2024-11-10','2024-11-11','2024-11-12','2024-11-13','2024-11-14','2024-11-15','2024-11-16','2024-11-17','2024-11-18','2024-11-19','2024-11-20','2024-11-21','2024-11-22','2024-11-23','2024-11-24','2024-11-25','2024-11-26','2024-11-27','2024-11-28','2024-11-29','2024-11-30',], // Dữ liệu mẫu
+                                    datasets: [{
+                                        label: 'Doanh thu (VNĐ)',
+                                        data: [2000000, 2500000, 3000000], // Dữ liệu mẫu
+                                        fill: false,
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        tension: 0.1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    plugins: {
+                                        legend: {
+                                            position: 'top',
+                                        },
+                                        tooltip: {
+                                            callbacks: {
+                                                label: function(tooltipItem) {
+                                                    return tooltipItem.raw.toLocaleString('vi-VN') + ' VNĐ';
+                                                }
+                                            }
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            title: {
+                                                display: true,
+                                                text: 'Ngày'
+                                            }
+                                        },
+                                        y: {
+                                            title: {
+                                                display: true,
+                                                text: 'Doanh thu (VNĐ)'
+                                            },
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
                     </div>
                 </div>
             </main>
@@ -126,5 +162,6 @@
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
     <script src="/admin_style/js/revenue_management.js"></script>
     <script src="/admin_style/js/scripts.js"></script>
+
 </body>
 </html>

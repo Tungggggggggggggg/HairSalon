@@ -40,10 +40,7 @@ public class DashboardController {
 
 
 
-    @GetMapping("/admin/revenue_management")
-    public String revenueManagement(Model model) {
-        return "admin/dashboard/revenue_management";
-    }
+
 
     @GetMapping("/admin/response_management")
     public String responseManagement(Model model) {

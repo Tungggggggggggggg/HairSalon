@@ -29,9 +29,9 @@ function openModal(type, id = '', customerName = '', bookingDateTime = '', servi
         bookingId.value = '';
         customerNameInput.value = '';
         bookingDateTimeInput.value = '';
-        serviceInput.value = 'Cắt tóc';
+        serviceInput.value = '';
         staffInput.value = '';
-        statusInput.value = 'Chưa xác nhận';
+        statusInput.value = '';
     } else if (type === 'edit') {
         modalTitle.textContent = 'Chỉnh sửa lịch hẹn';
         bookingId.value = id;
@@ -46,23 +46,20 @@ function openModal(type, id = '', customerName = '', bookingDateTime = '', servi
     bookingModal.show();
 }
 
-function changeStatus(element) {
-    const currentStatus = element.getAttribute('data-status');
-    const id = element.getAttribute('data-id');
+function openDeleteModal(id, name) {
+    document.getElementById("deleteId").value = id;
+    document.getElementById("deleteName").innerText = name;
+    new bootstrap.Modal(document.getElementById('deleteModal')).show();
+}
 
-    if (currentStatus === 'Chưa xác nhận') {
-        // Hiển thị lựa chọn để thay đổi trạng thái
-        const newStatus = prompt('Thay đổi trạng thái thành:\n1. Đã xác nhận\n2. Đã hủy');
-        if (newStatus === '1') {
-            element.classList.remove('bg-secondary');
-            element.classList.add('bg-success');
-            element.textContent = 'Đã xác nhận';
-            element.setAttribute('data-status', 'Đã xác nhận');
-        } else if (newStatus === '2') {
-            element.classList.remove('bg-secondary');
-            element.classList.add('bg-danger');
-            element.textContent = 'Đã hủy';
-            element.setAttribute('data-status', 'Đã hủy');
-        }
-    }
+
+function viewDetails(id, name, nameStaff, service, date, satrtTime, endTime, status) {
+    document.getElementById("detailId").textContent = id;
+    document.getElementById("detailUser").textContent = name;
+    document.getElementById("detailService").textContent = nameStaff;
+    document.getElementById("detailStaff").textContent = service;
+    document.getElementById("detailDate").textContent = date;
+    document.getElementById("detailStartTime").textContent = satrtTime;
+    document.getElementById("detailEndTime").textContent = endTime;
+    document.getElementById("detailStatus").textContent = status;
 }

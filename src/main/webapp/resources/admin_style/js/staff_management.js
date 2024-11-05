@@ -15,9 +15,10 @@ const staffTable = new simpleDatatables.DataTable("#staffTable", {
 
 let staffModal;
 
-function openModal(type, id = '', name = '', email = '', password = '', phone = '', address = '', gender = '', birthday = '', experience = '', specialty = '', status = '', role = '') {
+function openModal(type, id = '', avatar = '' ,name = '', email = '', password = '', phone = '', address = '', gender = '', birthday = '', experience = '', specialty = '', status = '', role = '') {
     const modalTitle = document.getElementById('staffModalLabel');
     const staffId = document.getElementById('staffId');
+    const staffAvatar = document.getElementById('avatarFile');
     const staffNameInput = document.getElementById('staffName');
     const staffEmailInput = document.getElementById('staffEmail');
     const staffPassword = document.getElementById('staffPassword');
@@ -34,6 +35,7 @@ function openModal(type, id = '', name = '', email = '', password = '', phone = 
     if (type === 'new') {
         modalTitle.textContent = 'Thêm mới nhân viên';
         staffId.value = '';
+        staffAvatar.value = '';
         staffNameInput.value = '';
         staffEmailInput.value = '';
         staffPassword.value = '';
@@ -48,6 +50,7 @@ function openModal(type, id = '', name = '', email = '', password = '', phone = 
     } else if (type === 'edit') {
         modalTitle.textContent = 'Chỉnh sửa nhân viên';
         staffId.value = id;
+        staffAvatar.value = "";
         staffNameInput.value = name;
         staffEmailInput.value = email;
         staffPassword.value = password;
@@ -72,7 +75,7 @@ function openDeleteModal(id, name) {
 }
 
 
-function viewDetails(id, name, email, password, phone, address, gender, birthday, experience, specialty, status, role, createdDate) {
+function viewDetails(id, name, email, password, phone, address, gender, birthday, experience, role, ) {
     document.getElementById("detailId").textContent = id;
     document.getElementById("detailName").textContent = name;
     document.getElementById("detailEmail").textContent = email;
@@ -82,8 +85,6 @@ function viewDetails(id, name, email, password, phone, address, gender, birthday
     document.getElementById("detailGender").textContent = gender;
     document.getElementById("detailBirthday").textContent = birthday;
     document.getElementById("detailExperience").textContent = experience;
-    document.getElementById("detailSpecialty").textContent = specialty;
-    document.getElementById("detailStatus").textContent = status;
     document.getElementById("detailRole").textContent = role;
-    document.getElementById("detailCreatedDate").textContent = createdDate;
+
 }

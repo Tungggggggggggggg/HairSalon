@@ -106,9 +106,8 @@ public class StaffSalary {
         this.status = status;
     }
 
-    // Enum Status (Paid, Unpaid)
     public enum Status {
-        PAID, UNPAID
+        DaThanhToan, ChuaThanhToan
     }
 
 

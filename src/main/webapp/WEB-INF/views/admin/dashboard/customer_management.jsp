@@ -30,12 +30,12 @@
                                 </ol>
 
                                 <!-- Nút thêm khách hàng mới -->
-                                <div class="mb-3">
-                                    <button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#customerModal" onclick="openModal('new')">
-                                        <i class="fas fa-user-plus"></i> Thêm mới khách hàng
-                                    </button>
-                                </div>
+<%--                                <div class="mb-3">--%>
+<%--                                    <button class="btn btn-primary" data-bs-toggle="modal"--%>
+<%--                                        data-bs-target="#customerModal" onclick="openModal('new')">--%>
+<%--                                        <i class="fas fa-user-plus"></i> Thêm mới khách hàng--%>
+<%--                                    </button>--%>
+<%--                                </div>--%>
 
                                 <!-- Bảng danh sách khách hàng -->
                                 <div class="card mb-4">
@@ -65,18 +65,18 @@
                                                         <td>
                                                             <button class="btn btn-sm btn-info" data-bs-toggle="modal"
                                                                 data-bs-target="#detailModal"
-                                                                onclick="viewDetails('${user.id}', '${user.name}', '${user.email}', '${user.password}', '${user.phone}', '${user.address}', '${user.gender}', '${user.birthday}', '${user.createdDate}')">
+                                                                onclick="viewDetails('${user.id}', '${user.name}', '${user.email}', '${user.phone}', '${user.address}', '${user.gender}', '${user.birthday}', '${user.createdDate}')">
                                                                 <i class="fas fa-eye"></i> Chi tiết 
                                                             </button>
-                                                            <button class="btn btn-sm btn-warning"
-                                                                data-bs-toggle="modal" data-bs-target="#customerModal"
-                                                                onclick="openModal('edit','${user.id}', '${user.name}', '${user.email}', '${user.password}', '${user.phone}', '${user.address}', '${user.gender}', '${user.birthday}')">
-                                                                <i class="fas fa-edit"></i> Sửa
-                                                            </button>
-                                                            <button type="button" class="btn btn-sm btn-danger"
-                                                                onclick="openDeleteModal('${user.id}', '${user.name}')">
-                                                                <i class="fas fa-trash-alt"></i> Xóa
-                                                            </button>
+<%--                                                            <button class="btn btn-sm btn-warning"--%>
+<%--                                                                data-bs-toggle="modal" data-bs-target="#customerModal"--%>
+<%--                                                                onclick="openModal('edit','${user.id}', '${user.name}', '${user.email}', '${user.password}', '${user.phone}', '${user.address}', '${user.gender}', '${user.birthday}')">--%>
+<%--                                                                <i class="fas fa-edit"></i> Sửa--%>
+<%--                                                            </button>--%>
+<%--                                                            <button type="button" class="btn btn-sm btn-danger"--%>
+<%--                                                                onclick="openDeleteModal('${user.id}', '${user.name}')">--%>
+<%--                                                                <i class="fas fa-trash-alt"></i> Xóa--%>
+<%--                                                            </button>--%>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
@@ -119,106 +119,106 @@
 
 
                         <!-- Modal thêm/sửa khách hàng -->
-                        <div class="modal fade " id="customerModal" tabindex="-1" aria-labelledby="customerModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-lg ">
-                                <div class="modal-content ">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="customerModalLabel">Thêm mới khách hàng</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Đóng"></button>
-                                    </div>
-                                    <div class="modal-body col-12 mx-auto">
-                                        <form:form id="customerForm" action="/admin/customer_management/save"
-                                            method="post" modelAttribute="newCustomer">
-                                            <form:input type="hidden" id="customerId" path="id"  />
-                                            <div class="mb-3 row">
-                                                <div class="col-12 col-md-6">
-                                                    <label for="customerName" class="form-label">Tên khách hàng</label>
-                                                    <form:input type="text" class="form-control" id="customerName"
-                                                        path="name" />
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <label for="customerPhone" class="form-label">Số điện thoại</label>
-                                                    <form:input type="text" class="form-control" id="customerPhone"
-                                                        path="phone" />
-                                                </div>
-                                            </div>
-                                            <div class="mb-3 row">
-                                                <div class="col-12 col-md-7">
-                                                    <label for="customerEmail" class="form-label">Email</label>
-                                                    <form:input type="email" class="form-control" id="customerEmail"
-                                                        path="email" />
-                                                </div>
+<%--                        <div class="modal fade " id="customerModal" tabindex="-1" aria-labelledby="customerModalLabel"--%>
+<%--                            aria-hidden="true">--%>
+<%--                            <div class="modal-dialog modal-lg ">--%>
+<%--                                <div class="modal-content ">--%>
+<%--                                    <div class="modal-header">--%>
+<%--                                        <h5 class="modal-title" id="customerModalLabel">Thêm mới khách hàng</h5>--%>
+<%--                                        <button type="button" class="btn-close" data-bs-dismiss="modal"--%>
+<%--                                            aria-label="Đóng"></button>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="modal-body col-12 mx-auto">--%>
+<%--                                        <form:form id="customerForm" action="/admin/customer_management/save"--%>
+<%--                                            method="post" modelAttribute="newCustomer">--%>
+<%--                                            <form:input type="hidden" id="customerId" path="id"  />--%>
+<%--                                            <div class="mb-3 row">--%>
+<%--                                                <div class="col-12 col-md-6">--%>
+<%--                                                    <label for="customerName" class="form-label">Tên khách hàng</label>--%>
+<%--                                                    <form:input type="text" class="form-control" id="customerName"--%>
+<%--                                                        path="name" />--%>
+<%--                                                </div>--%>
+<%--                                                <div class="col-12 col-md-6">--%>
+<%--                                                    <label for="customerPhone" class="form-label">Số điện thoại</label>--%>
+<%--                                                    <form:input type="text" class="form-control" id="customerPhone"--%>
+<%--                                                        path="phone" />--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="mb-3 row">--%>
+<%--                                                <div class="col-12 col-md-7">--%>
+<%--                                                    <label for="customerEmail" class="form-label">Email</label>--%>
+<%--                                                    <form:input type="email" class="form-control" id="customerEmail"--%>
+<%--                                                        path="email" />--%>
+<%--                                                </div>--%>
 
-                                                <div class="col-12 col-md-5">
-                                                    <label for="customerPhone" class="form-label">PassWord</label>
-                                                    <form:input type="text" class="form-control" id="customerPassword"
-                                                        path="password" />
-                                                </div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="customerPhone" class="form-label">Địa chỉ</label>
-                                                <form:input type="text" class="form-control" id="customerAddress"
-                                                    path="address" />
-                                            </div>
-                                            <div class="mb-3 row">
-                                                <div class="col-12 col-md-6">
-                                                    <label for="customerPhone" class="form-label">Giới tính</label>
-                                                    <form:select class="form-select" path="gender" id="customerGender">
-                                                        <form:option value="">Trống</form:option>
-                                                        <form:option value="NAM">Nam</form:option>
-                                                        <form:option value="NU">Nữ</form:option>
-                                                        <form:option value="OTHER">Ẩn</form:option>
-                                                    </form:select>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                    <label for="customerBirthday" class="form-label">Năm sinh</label>
-                                                    <input type="date" class="form-control" id="customerBirthday"
-                                                        name="birthday" placeholder="dd-MM-yyyy" />
-                                                </div>
+<%--                                                <div class="col-12 col-md-5">--%>
+<%--                                                    <label for="customerPhone" class="form-label">PassWord</label>--%>
+<%--                                                    <form:input type="text" class="form-control" id="customerPassword"--%>
+<%--                                                        path="password" />--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                            <div class="mb-3">--%>
+<%--                                                <label for="customerPhone" class="form-label">Địa chỉ</label>--%>
+<%--                                                <form:input type="text" class="form-control" id="customerAddress"--%>
+<%--                                                    path="address" />--%>
+<%--                                            </div>--%>
+<%--                                            <div class="mb-3 row">--%>
+<%--                                                <div class="col-12 col-md-6">--%>
+<%--                                                    <label for="customerPhone" class="form-label">Giới tính</label>--%>
+<%--                                                    <form:select class="form-select" path="gender" id="customerGender">--%>
+<%--                                                        <form:option value="">Trống</form:option>--%>
+<%--                                                        <form:option value="NAM">Nam</form:option>--%>
+<%--                                                        <form:option value="NU">Nữ</form:option>--%>
+<%--                                                        <form:option value="OTHER">Ẩn</form:option>--%>
+<%--                                                    </form:select>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="col-12 col-md-6">--%>
+<%--                                                    <label for="customerBirthday" class="form-label">Năm sinh</label>--%>
+<%--                                                    <input type="date" class="form-control" id="customerBirthday"--%>
+<%--                                                        name="birthday" placeholder="dd-MM-yyyy" />--%>
+<%--                                                </div>--%>
 
-                                            </div>
+<%--                                            </div>--%>
 
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Hủy</button>
-                                                <button type="submit" class="btn btn-primary">Lưu</button>
-                                            </div>
-                                        </form:form>
-                                    </div>
+<%--                                            <div class="modal-footer">--%>
+<%--                                                <button type="button" class="btn btn-secondary"--%>
+<%--                                                    data-bs-dismiss="modal">Hủy</button>--%>
+<%--                                                <button type="submit" class="btn btn-primary">Lưu</button>--%>
+<%--                                            </div>--%>
+<%--                                        </form:form>--%>
+<%--                                    </div>--%>
 
-                                </div>
-                            </div>
-                        </div>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
 
                         <!-- Modal xác nhận xóa khách hàng -->
-                        <div class="modal fade" id="deleteCustomerModal" tabindex="-1"
-                            aria-labelledby="deleteCustomerModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteCustomerModalLabel">Xác nhận xóa khách hàng
-                                        </h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Bạn có chắc chắn muốn xóa khách hàng <strong
-                                                id="deleteCustomerName"></strong>?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form:form id="deleteCustomerForm" action="/admin/customer_management/delete"
-                                            method="post" modelAttribute="deleteCustomer">
-                                            <form:input type="hidden" id="deleteCustomerId" path="id" />
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Hủy</button>
-                                            <button type="submit" class="btn btn-danger">Xóa</button>
-                                        </form:form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<%--                        <div class="modal fade" id="deleteCustomerModal" tabindex="-1"--%>
+<%--                            aria-labelledby="deleteCustomerModalLabel" aria-hidden="true">--%>
+<%--                            <div class="modal-dialog">--%>
+<%--                                <div class="modal-content">--%>
+<%--                                    <div class="modal-header">--%>
+<%--                                        <h5 class="modal-title" id="deleteCustomerModalLabel">Xác nhận xóa khách hàng--%>
+<%--                                        </h5>--%>
+<%--                                        <button type="button" class="btn-close" data-bs-dismiss="modal"--%>
+<%--                                            aria-label="Close"></button>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="modal-body">--%>
+<%--                                        <p>Bạn có chắc chắn muốn xóa khách hàng <strong--%>
+<%--                                                id="deleteCustomerName"></strong>?</p>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="modal-footer">--%>
+<%--                                        <form:form id="deleteCustomerForm" action="/admin/customer_management/delete"--%>
+<%--                                            method="post" modelAttribute="deleteCustomer">--%>
+<%--                                            <form:input type="hidden" id="deleteCustomerId" path="id" />--%>
+<%--                                            <button type="button" class="btn btn-secondary"--%>
+<%--                                                data-bs-dismiss="modal">Hủy</button>--%>
+<%--                                            <button type="submit" class="btn btn-danger">Xóa</button>--%>
+<%--                                        </form:form>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
 
 
                         <jsp:include page="../layout/footer.jsp" />

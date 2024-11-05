@@ -7,6 +7,7 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,30 +22,93 @@ public class Booking {
     private User customer;
 
     @ManyToOne
+    @JoinColumn(name = "staffShift_id")
+    private StaffShift staffShift;
+
+    @ManyToOne
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;
 
-    @ManyToOne
-    @JoinColumn(name = "service_id", nullable = false)
-    private Service service;
+    @ManyToMany
+    @JoinTable(
+            name = "booking_service",
+            joinColumns = @JoinColumn(name = "booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "service_id")
+    )
+    private List<Service> services = new ArrayList<>();
 
-    @OneToMany(mappedBy = "booking")
-    private List<Revenue> revenues;
-
-    @Temporal(TemporalType.DATE)
-    private LocalDate bookingDate;
-    @Temporal(TemporalType.TIME)
-    private LocalTime bookingTime;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime createDateTime;
+    private LocalDate date;
+    private LocalTime time;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status = Status.DangChoGiaiQuyet;
 
     public enum Status {
-        PENDING, CONFIRMED, COMPLETED, CANCELED
+        DangChoGiaiQuyet, DaXacNhan, DaHoanThanh, DaHuy
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(User customer) {
+        this.customer = customer;
+    }
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public StaffShift getStaffShift() {
+        return staffShift;
+    }
+
+    public void setStaffShift(StaffShift staffShift) {
+        this.staffShift = staffShift;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
 

@@ -14,6 +14,17 @@
                 <link href="/admin_style/css/styles.css" rel="stylesheet" />
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL).css({ "display": "block" });
+                            avatarFile.on('load', () => URL.revokeObjectURL(imgURL));  // Giải phóng bộ nhớ
+                        });
+                    });
+                </script>
             </head>
 
             <body class="sb-nav-fixed">
@@ -48,8 +59,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
+                                                    <th>Avatar</th>
                                                     <th>Tên dịch vụ</th>
-                                                    <th>Mô tả ngắn</th>
                                                     <th>Giá (VNĐ)</th>
                                                     <th>Thời gian (phút)</th>
                                                     <th>Hành động</th>
@@ -60,8 +71,8 @@
                                                 <c:forEach var="service" items="${services}">
                                                     <tr>
                                                         <td>${service.id} </td>
+                                                        <td><img style="width: 100px; height: 100px;" src="/images/service/${service.avatar}" onerror="this.src='/images/service/default.jpg';" alt="Avatar"></td>
                                                         <td>${service.name}</td>
-                                                        <td>${service.shortDescription}</td>
                                                         <td>${service.price}</td>
                                                         <td>${service.durationMinutes}</td>
                                                         <td>
@@ -72,7 +83,7 @@
                                                             </button>
                                                             <button class="btn btn-sm btn-warning"
                                                                 data-bs-toggle="modal" data-bs-target="#serviceModal"
-                                                                onclick="openServiceModal('edit','${service.id}', '${service.name}', '${service.description}', '${service.shortDescription}' , '${service.price}', '${service.durationMinutes}')">
+                                                                onclick="openServiceModal('edit','${service.id}', '${service.name}', '${service.description}', '${service.price}', '${service.durationMinutes}')">
                                                                 <i class="fas fa-edit"></i> Sửa
                                                             </button>
                                                             <button type="button" class="btn btn-sm btn-danger"
@@ -129,34 +140,40 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Đóng"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        <form:form id="serviceForm" action="/admin/service/save" method="post"
-                                            modelAttribute="newService">
+                                    <div class="modal-body col-12 mx-auto">
+                                        <form:form id="serviceForm" action="/admin/service_management/save" method="post"
+                                            modelAttribute="newService" enctype="multipart/form-data">
                                             <form:input type="hidden" id="serviceId" name="id" path="id" />
-                                            <div class="mb-3">
+                                            <div class="mb-3 ">
                                                 <label for="serviceName" class="form-label">Tên dịch vụ</label>
                                                 <form:input type="text" class="form-control" id="serviceName"
                                                     name="name" path="name" />
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3 ">
                                                 <label for="servicePrice" class="form-label">Mô tả chi tiết</label>
                                                 <form:textarea rows="3" class="form-control" id="serviceDescription"
                                                     name="description" path="description"></form:textarea>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="servicePrice" class="form-label">Mô tả ngắn gọn</label>
-                                                <form:input  class="form-control"
-                                                    id="serviceShortDescription" name="shortDescription" path="shortDescription" />
-                                            </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3 ">
                                                 <label for="servicePrice" class="form-label">Giá (VNĐ)</label>
                                                 <form:input type="number" class="form-control" id="servicePrice"
                                                     name="price" path="price" />
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3 ">
                                                 <label for="serviceDurationMinutes" class="form-label">Thời gian (phút)</label>
                                                 <form:input type="number" class="form-control" id="serviceDurationMinutes"
                                                     path="durationMinutes" name="durationMinutes" />
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <div class="col-12 col-md-8">
+                                                    <label for="avatarFile" class="form-label">Avatar:</label>
+                                                    <input class="form-control" type="file" id="avatarFile"
+                                                           accept=".png, .jpg, .jpeg" name="file" />
+                                                </div>
+                                                <div class="col-12 col-md-4">
+                                                    <img style="max-height: 100px; display: none;" alt="avatar preview"
+                                                         id="avatarPreview" />
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"

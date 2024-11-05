@@ -21,7 +21,7 @@ public class UserController {
 
     @GetMapping("/admin/customer_management")
     public String customerManagement(Model model) {
-        List<User> users = this.userService.findAllByRole(User.Role.NGUOIDUNG);
+        List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users);
         model.addAttribute("newCustomer", new User());
         model.addAttribute("deleteCustomer", new User()); // Thêm deleteCustomer vào Model
@@ -30,8 +30,6 @@ public class UserController {
 
     @PostMapping("/admin/customer_management/save")
     public String customerManagementSave(@ModelAttribute("newCustomer") User user) {
-        user.setCreatedDate(this.userService.date());
-        user.setRole(User.Role.NGUOIDUNG);
         this.userService.saveUser(user);
         return "redirect:/admin/customer_management";
     }

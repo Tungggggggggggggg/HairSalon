@@ -13,27 +13,50 @@ public class Revenue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer summaryId;
 
-    @ManyToOne
-    @JoinColumn(name = "booking_id", nullable = false)
-    private Booking booking;
+    private LocalDate summaryDate;
+    private BigDecimal totalRevenue;
+    private Integer numberOfBookings;
+    private Integer totalServices;
 
-    @ManyToOne
-    @JoinColumn(name = "service_id", nullable = false)
-    private Service service;
+    public Integer getSummaryId() {
+        return summaryId;
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "staff_id", nullable = false)
-    private Staff staff;
+    public void setSummaryId(Integer summaryId) {
+        this.summaryId = summaryId;
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private User customer;
+    public LocalDate getSummaryDate() {
+        return summaryDate;
+    }
 
-    private float revenueAmount;
+    public void setSummaryDate(LocalDate summaryDate) {
+        this.summaryDate = summaryDate;
+    }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime revenueDate;
+    public BigDecimal getTotalRevenue() {
+        return totalRevenue;
+    }
 
+    public void setTotalRevenue(BigDecimal totalRevenue) {
+        this.totalRevenue = totalRevenue;
+    }
+
+    public Integer getNumberOfBookings() {
+        return numberOfBookings;
+    }
+
+    public void setNumberOfBookings(Integer numberOfBookings) {
+        this.numberOfBookings = numberOfBookings;
+    }
+
+    public Integer getTotalServices() {
+        return totalServices;
+    }
+
+    public void setTotalServices(Integer totalServices) {
+        this.totalServices = totalServices;
+    }
 }

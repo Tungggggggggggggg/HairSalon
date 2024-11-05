@@ -15,12 +15,11 @@ const serviceTable = new simpleDatatables.DataTable("#serviceTable", {
 
 let serviceModal;
 
-function openServiceModal(type, id = '', name = '', description = '', shortDescription = '', price = '', duration = '',) {
+function openServiceModal(type, id = '', name = '', description = '', price = '', duration = '',) {
     const modalTitle = document.getElementById('serviceModalLabel');
     const serviceId = document.getElementById('serviceId');
     const serviceNameInput = document.getElementById('serviceName');
     const serviceDescription = document.getElementById('serviceDescription');
-    const serviceShortDescription = document.getElementById('serviceShortDescription');
     const servicePriceInput = document.getElementById('servicePrice');
     const serviceDurationInput = document.getElementById('serviceDurationMinutes');
 
@@ -29,7 +28,6 @@ function openServiceModal(type, id = '', name = '', description = '', shortDescr
         serviceId.value = '';
         serviceNameInput.value = '';
         serviceDescription.value = '';
-        serviceShortDescription.value = '';
         servicePriceInput.value = '';
         serviceDurationInput.value = '';
 
@@ -38,7 +36,6 @@ function openServiceModal(type, id = '', name = '', description = '', shortDescr
         serviceId.value = id;
         serviceNameInput.value = name;
         serviceDescription.value = description;
-        serviceShortDescription.value = shortDescription;
         servicePriceInput.value = price;
         serviceDurationInput.value = duration;
 

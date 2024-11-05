@@ -13,28 +13,22 @@ import java.util.List;
 public class UserService {
     private UserRepository userRepository;
 
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public User authenticate(String username, String password) {
-        // Kiểm tra thông tin đăng nhập trong cơ sở dữ liệu
-        return userRepository.findByNameAndPassword(username, password); // Phương thức này cần được cài đặt trong UserRepository
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
     }
 
-    public List<User> findAllByRole(User.Role role) {
-        return this.userRepository.findAllByRole(role);
-    }
-
-    public List<User> findAllByRoleNot(User.Role role) {
-        return this.userRepository.findAllByRole(role);
-    }
 
     public User findOneById(long id) {
         return this.userRepository.findOneById(id);
     }
 
     public User saveUser(User user) {
+        user.setCreatedDate(LocalDateTime.now());
         return this.userRepository.save(user);
     }
 

@@ -2,6 +2,7 @@ package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 //staff ở đây là chỉ cho stylist
@@ -12,22 +13,66 @@ public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    private String experience;
-    private String specialty;
-
+    private String avatar;
+    private String name;
+    private String email;
+    private String phone;
+    private String address;
     @Enumerated(EnumType.STRING)
-    private Status status;
-
+    private GenderStaff gender;
+    private LocalDate birthday;
+    private String password;
+    private String experience;
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.NhanVien;
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
     private List<StaffSalary> salaries;
+
+    @OneToMany(mappedBy = "staff" ,cascade = CascadeType.ALL)
+    private List<StaffShift> shifts;
+
+    @OneToMany(mappedBy = "staff")
+    private List<Notification> notifications;
+    // Getters and Setters
+
+    public enum GenderStaff {
+        Nam, Nu
+    }
+
+    public GenderStaff getGender() {
+        return gender;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setGender(GenderStaff gender) {
+        this.gender = gender;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public Long getId() {
         return id;
@@ -37,14 +82,37 @@ public class Staff {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setName(String name) {
+        this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getExperience() {
         return experience;
@@ -54,20 +122,12 @@ public class Staff {
         this.experience = experience;
     }
 
-    public String getSpecialty() {
-        return specialty;
+    public Role getRole() {
+        return role;
     }
 
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public List<Booking> getBookings() {
@@ -86,11 +146,25 @@ public class Staff {
         this.salaries = salaries;
     }
 
-
-    // Getters and Setters
-    // Enum Status (Available, Unavailable)
-    public enum Status {
-        TRONG, COLICH
-        //TRỐNG VÀ CÓ LỊCH
+    public List<StaffShift> getShifts() {
+        return shifts;
     }
+
+    public void setShifts(List<StaffShift> shifts) {
+        this.shifts = shifts;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public enum Role {
+        NhanVien, Admin
+    }
+
+
 }

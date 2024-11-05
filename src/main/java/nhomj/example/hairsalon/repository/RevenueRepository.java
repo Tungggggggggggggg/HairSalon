@@ -9,4 +9,6 @@ import java.util.List;
 public interface RevenueRepository extends JpaRepository<Revenue, Long> {
 
     List<Revenue> findAll();
+
+
 }

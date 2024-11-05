@@ -2,31 +2,30 @@ package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-
+@Table(name = "service")
 public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String avatar;
+
     private String name;
 
     private String description;
 
-    private String shortDescription;
-
-    private float price;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal price;
 
     private Integer durationMinutes;
 
-    @OneToMany(mappedBy = "service")
+    @ManyToMany(mappedBy = "services")
     private List<Booking> bookings;
-
-    @OneToMany(mappedBy = "service")
-    private List<Revenue> revenues;
 
     public Long getId() {
         return id;
@@ -34,6 +33,14 @@ public class Service {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getName() {
@@ -52,19 +59,11 @@ public class Service {
         this.description = description;
     }
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
-    }
-
-    public float getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -82,13 +81,5 @@ public class Service {
 
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
-    }
-
-    public List<Revenue> getRevenues() {
-        return revenues;
-    }
-
-    public void setRevenues(List<Revenue> revenues) {
-        this.revenues = revenues;
     }
 }

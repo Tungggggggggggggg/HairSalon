@@ -1,17 +1,23 @@
-const revenueTable = new simpleDatatables.DataTable("#revenueTable", {
-    perPageSelect: false,
-    searchable: true,
-    fixedHeight: true,
-    labels: {
-        placeholder: "Tìm kiếm...",
-        noRows: "Không có dữ liệu",
-        info: "Hiển thị {start} đến {end} của {rows} doanh thu",
-        pagination: {
-            previous: "Trước",
-            next: "Tiếp theo"
+
+    const revenueTable = new simpleDatatables.DataTable("#revenueTable", {
+        perPageSelect: false,
+        searchable: true,
+        fixedHeight: true,
+        perPage: 10, // Số hàng mặc định trên mỗi trang
+        labels: {
+            placeholder: "Tìm kiếm...",
+            noRows: "Không có dữ liệu",
+            info: "Hiển thị {start} đến {end} của {rows} doanh thu",
+            pagination: {
+                previous: "Trước",
+                next: "Tiếp theo"
+            }
+        },
+        data: {
+            // Sắp xếp giảm dần theo cột ID (cột đầu tiên)
+            sort: { column: 0, order: "desc" } // Sắp xếp cột ID theo thứ tự giảm dần
         }
-    }
-});
+    });
 
 // Lọc doanh thu theo ngày
 function filterRevenue() {
@@ -29,50 +35,7 @@ function filterRevenue() {
 }
 
 // Khởi tạo biểu đồ doanh thu
-const ctx = document.getElementById('revenueChart').getContext('2d');
-const revenueChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['2024-10-25', '2024-10-26', '2024-10-27'], // Dữ liệu mẫu
-        datasets: [{
-            label: 'Doanh thu (VNĐ)',
-            data: [2000000, 2500000, 3000000], // Dữ liệu mẫu
-            fill: false,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            tension: 0.1
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            tooltip: {
-                callbacks: {
-                    label: function(tooltipItem) {
-                        return tooltipItem.raw.toLocaleString('vi-VN') + ' VNĐ';
-                    }
-                }
-            }
-        },
-        scales: {
-            x: {
-                title: {
-                    display: true,
-                    text: 'Ngày'
-                }
-            },
-            y: {
-                title: {
-                    display: true,
-                    text: 'Doanh thu (VNĐ)'
-                },
-                beginAtZero: true
-            }
-        }
-    }
-});
+
 
 // Hàm xuất dữ liệu ra file Excel
 function exportToExcel() {
