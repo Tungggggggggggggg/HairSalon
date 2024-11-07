@@ -38,7 +38,10 @@ public class ServiceController {
     @PostMapping("/admin/service_management/save")
     public String saveService(Model model,@ModelAttribute("newService") Service service , @RequestParam("file") MultipartFile file) {
         String avatar = this.upLoadService.handleSaveUploadFile(file, "service");
-        Service checkService = serviceShopService.getServiceById(service.getId());
+        Service checkService = null;
+        if(service.getId() != null) {
+            checkService = serviceShopService.getServiceById(service.getId());
+        }
         if(checkService != null) {
             checkService.setAvatar(avatar);
             checkService.setName(service.getName());

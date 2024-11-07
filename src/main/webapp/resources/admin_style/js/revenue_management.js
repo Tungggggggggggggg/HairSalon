@@ -13,10 +13,6 @@
                 next: "Tiếp theo"
             }
         },
-        data: {
-            // Sắp xếp giảm dần theo cột ID (cột đầu tiên)
-            sort: { column: 0, order: "desc" } // Sắp xếp cột ID theo thứ tự giảm dần
-        }
     });
 
 // Lọc doanh thu theo ngày
@@ -37,9 +33,9 @@ function filterRevenue() {
 // Khởi tạo biểu đồ doanh thu
 
 
-// Hàm xuất dữ liệu ra file Excel
-function exportToExcel() {
-    const table = document.getElementById('revenueTable');
-    const wb = XLSX.utils.table_to_book(table, { sheet: "Doanh thu" });
-    XLSX.writeFile(wb, 'Doanh_thu.xlsx');
-}
+// // Hàm xuất dữ liệu ra file Excel
+// function exportToExcel() {
+//     const table = document.getElementById('revenueTable');
+//     const wb = XLSX.utils.table_to_book(table, { sheet: "Doanh thu" });
+//     XLSX.writeFile(wb, 'Doanh_thu.xlsx');
+// }

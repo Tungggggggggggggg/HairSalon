@@ -94,24 +94,32 @@
                         </div>
                     </div>
 
+
                     <!-- Biểu đồ doanh thu -->
                     <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-chart-line me-1"></i>
-                            Biểu đồ doanh thu
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-chart-line me-1"></i> Biểu đồ doanh thu</span>
+
+                            <!-- Nhóm nút chọn khoảng thời gian -->
+                            <div class="btn-group" role="group" aria-label="Time Filter">
+                                <button type="button" class="btn btn-outline-primary" onclick="updateChart('week')">Tuần</button>
+                                <button type="button" class="btn btn-outline-primary" onclick="updateChart('month')">Tháng</button>
+                                <button type="button" class="btn btn-outline-primary" onclick="updateChart('year')">Năm</button>
+                            </div>
                         </div>
                         <div class="card-body">
                             <canvas id="revenueChart" width="100%" height="30"></canvas>
                         </div>
                         <script>
+                            // Khởi tạo biểu đồ với dữ liệu trống ban đầu
                             const ctx = document.getElementById('revenueChart').getContext('2d');
                             const revenueChart = new Chart(ctx, {
                                 type: 'line',
                                 data: {
-                                    labels: ['2024-11-1', '2024-11-2', '2024-11-3','2024-11-4','2024-11-5','2024-11-6','2024-11-7','2024-11-8','2024-11-9','2024-11-10','2024-11-11','2024-11-12','2024-11-13','2024-11-14','2024-11-15','2024-11-16','2024-11-17','2024-11-18','2024-11-19','2024-11-20','2024-11-21','2024-11-22','2024-11-23','2024-11-24','2024-11-25','2024-11-26','2024-11-27','2024-11-28','2024-11-29','2024-11-30',], // Dữ liệu mẫu
+                                    labels: [], // Khởi tạo với nhãn trống
                                     datasets: [{
                                         label: 'Doanh thu (VNĐ)',
-                                        data: [2000000, 2500000, 3000000], // Dữ liệu mẫu
+                                        data: [], // Khởi tạo với dữ liệu trống
                                         fill: false,
                                         borderColor: 'rgba(75, 192, 192, 1)',
                                         tension: 0.1
@@ -135,7 +143,7 @@
                                         x: {
                                             title: {
                                                 display: true,
-                                                text: 'Ngày'
+                                                text: 'Thời gian'
                                             }
                                         },
                                         y: {
@@ -148,8 +156,41 @@
                                     }
                                 }
                             });
+
+                            // Hàm cập nhật biểu đồ dựa trên khoảng thời gian được chọn
+                            function updateChart(timeFilter) {
+                                let labels = [];
+                                let data = [];
+                                const currentDate = new Date();
+                                const currentMonth = currentDate.getMonth() + 1;
+                                const daysInCurrentMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+                                const currentYear = currentDate.getFullYear();
+                                if (timeFilter === "week") {
+                                    labels = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'];
+                                    data = ${week}; // Dữ liệu giả lập cho tuần
+                                } else if (timeFilter === "month") {
+                                    for (let i = 1; i <= daysInCurrentMonth; i++) {
+                                        labels.push(`Ngày ` + i.toString()+'/' + currentMonth.toString() + '/' + currentYear.toString() );
+                                    }
+                                    labels;
+                                    data = ${month}; // Dữ liệu giả lập cho tháng
+                                    console.log(labels);
+                                } else if (timeFilter === "year") {
+                                    labels = ['Tháng 1'+ '/' + currentYear.toString(), 'Tháng 2'+ '/' + currentYear.toString(), 'Tháng 3'+ '/' + currentYear.toString(), 'Tháng 4'+ '/' + currentYear.toString(), 'Tháng 5'+ '/' + currentYear.toString(), 'Tháng 6'+ '/' + currentYear.toString(), 'Tháng 7'+ '/' + currentYear.toString(), 'Tháng 8'+ '/' + currentYear.toString(), 'Tháng 9'+ '/' + currentYear.toString(), 'Tháng 10'+ '/' + currentYear.toString(), 'Tháng 11'+ '/' + currentYear.toString(), 'Tháng 12'+ '/' + currentYear.toString()];
+                                    data = ${year}; // Dữ liệu giả lập cho năm
+                                }
+
+                                // Cập nhật dữ liệu biểu đồ
+                                revenueChart.data.labels = labels;
+                                revenueChart.data.datasets[0].data = data;
+                                revenueChart.update();
+                            }
+
+                            // Gọi hàm updateChart('week') khi tải trang để hiển thị dữ liệu tuần mặc định
+                            updateChart('week');
                         </script>
                     </div>
+
                 </div>
             </main>
 

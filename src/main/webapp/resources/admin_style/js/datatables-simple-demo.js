@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', event => {
                 info: "Hiển thị {start} đến {end} trong tổng {rows} mục",
                 // Nếu cần thêm các nhãn khác, bạn có thể thêm ở đây
             },
+            order: [[4, 'desc']],
             // Bạn có thể thêm các tùy chọn khác nếu cần
         });
     }

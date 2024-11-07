@@ -46,7 +46,10 @@ public class StaffControllers {
     public String saveStaff(@ModelAttribute("newStaff") Staff staff,@RequestParam("file") MultipartFile file) {
         String avatar = this.upLoadService.handleSaveUploadFile(file, "avatar");
         String password = this.passwordEncoder.encode(staff.getPassword());
-        Staff checkStaff = staffService.getStaffById(staff.getId());
+        Staff checkStaff = null;
+        if(staff.getId() != null) {
+            checkStaff = staffService.getStaffById(staff.getId());
+        }
         if(checkStaff != null) {
             checkStaff.setName(staff.getName());
             checkStaff.setEmail(staff.getEmail());
