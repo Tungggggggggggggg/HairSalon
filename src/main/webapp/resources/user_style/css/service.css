@@ -1,0 +1,110 @@
+/* Container chính */
+.services-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.services-container h1 {
+    font-size: 2.5em;
+    color: #003366;
+    margin-bottom: 40px;
+}
+
+/* Danh sách dịch vụ */
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+/* Chi tiết dịch vụ */
+.service-detail {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.service-detail:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Ảnh dịch vụ */
+.image-container {
+    flex-shrink: 0;
+    width: 200px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.service-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Nội dung dịch vụ */
+.service-content {
+    text-align: left;
+    flex-grow: 1;
+}
+
+.service-content h2 {
+    font-size: 1.8em;
+    color: #003366;
+    margin-bottom: 10px;
+}
+
+.service-content p {
+    font-size: 1em;
+    color: #666666;
+    line-height: 1.6;
+    margin: 8px 0;
+}
+
+.service-content p strong {
+    color: #333333;
+}
+
+/* Nút đặt lịch */
+.booking-button {
+    margin-top: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #1e90ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.booking-button:hover {
+    background-color: #0096ff;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .service-detail {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .image-container {
+        width: 100%;
+        height: auto;
+    }
+}

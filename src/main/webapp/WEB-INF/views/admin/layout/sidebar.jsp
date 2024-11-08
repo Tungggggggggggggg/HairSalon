@@ -37,20 +37,16 @@
                     Quản lý doanh thu
                 </a>
 
-                <a class="nav-link" href="/admin/response_management">
+                <!-- <a class="nav-link" href="/admin/response_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
                     Quản lý phản hồi
-                </a>
+                </a> -->
 
                 <a class="nav-link" href="/admin/salary_management">
                     <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
                     Quản lý lương
                 </a>
 
-                <a class="nav-link" href="/staff">
-                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                    Nhân viên
-                </a>
             </div>
         </div>
         <div class="sb-sidenav-footer">

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html lang="vi">
     <head>
@@ -35,99 +37,35 @@ pageEncoding="UTF-8"%>
                 bước click chuột, để có được mái tóc ưng ý mà không cần phải lo
                 lắng về việc chờ đợi.
             </p>
-            <form action="/booking" method="get" style="display:inline;">
+            <form action="/booking" method="get" style="display: inline">
                 <button type="submit">Đặt lịch ngay</button>
             </form>
-    
         </section>
 
-        <!-- Modal Đặt lịch ngay -->
-        <div id="scheduleModal" class="modal-booking">
-            <div class="modal-content-booking">
-                <span
-                    class="close-booking"
-                    onclick="closeModal('scheduleModal')"
-                    >&times;</span
-                >
-                <h2>Đặt Lịch Ngay</h2>
-                <form action="/schedule" method="post">
-                    <div>
-                        <label for="service">Chọn Dịch Vụ</label>
-                        <select id="service" name="service">
-                            <option value="haircut">Cắt Tóc</option>
-                            <option value="shampoo">Gội Đầu</option>
-                            <option value="color">Nhuộm Tóc</option>
-                            <option value="shave">Cạo Râu</option>
-                        </select>
+        <section class="services-section">
+            <h1>DỊCH VỤ</h1>
+            <div class="services-container">
+                <c:forEach var="service" items="${services}">
+                    <div class="service-card-wrapper">
+                        <a href="/user/service/${service.id}" class="service-link">
+                            <div class="service-card">
+                                <div class="image-container">
+                                    <img src="/images/service/${service.avatar}" alt="${service.name}" />
+                                </div>
+                                <h3>${service.name}</h3>
+                                <p>${service.description}</p>
+                                <p class="price">Giá từ <fmt:formatNumber value="${service.price}" pattern="#,###" />đ</p>
+                            </div>
+                        </a>
                     </div>
-
-                    <div>
-                        <label for="stylist">Chọn Nhà Tạo Mẫu</label>
-                        <select id="stylist" name="stylist">
-                            <option value="stylist1">Nhà tạo mẫu A</option>
-                            <option value="stylist2">Nhà tạo mẫu B</option>
-                            <option value="stylist3">Nhà tạo mẫu C</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label for="date">Chọn Ngày</label>
-                        <input
-                            type="text"
-                            id="datePicker"
-                            name="date"
-                            placeholder="dd/MM/yyyy"
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label for="time">Chọn Giờ</label>
-                        <input type="time" id="time" name="time" required />
-                    </div>
-
-                    <button type="submit">Xác Nhận</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Slider dịch vụ -->
-        <section id="services" class="service-slider">
-            <h1>Dịch vụ của chúng tôi</h1>
-            <div class="service-container">
-                <div class="service-slide active">
-                    <img src="/user_style/images/cattoc.webp" alt="Dịch vụ 1" />
-                    <h3>Cắt tóc chuyên nghiệp</h3>
-                    <p>Đội ngũ chuyên gia với nhiều năm kinh nghiệm.</p>
-                </div>
-                <div class="service-slide">
-                    <img
-                        src="/user_style/images/chamsoctoc.avif"
-                        alt="Dịch vụ 2"
-                    />
-                    <h3>Chăm sóc tóc</h3>
-                    <p>Sản phẩm chất lượng cao cho mái tóc khỏe mạnh.</p>
-                </div>
-                <div class="service-slide">
-                    <img
-                        src="/user_style/images/nhuomtoc.jpg"
-                        alt="Dịch vụ 3"
-                    />
-                    <h3>Nhuộm tóc sáng tạo</h3>
-                    <p>Màu tóc bền, đẹp và an toàn.</p>
-                </div>
-                <div class="service-slide">
-                    <img src="/user_style/images/uontoc.webp" alt="Dịch vụ 4" />
-                    <h3>Uốn tóc tạo kiểu</h3>
-                    <p>Tạo kiểu tóc bồng bềnh, đẹp tự nhiên.</p>
-                </div>
+                </c:forEach>
             </div>
         </section>
 
         <!-- Phần đánh giá khách hàng -->
         <section id="reviews" class="reviews-section">
             <div class="container">
-                <h1 class="section-title">Khách hàng nói gì về chúng tôi</h1>
+                <h1 class="section-title">ĐÁNH GIÁ CỦA KHÁCH HÀNG</h1>
                 <div class="reviews-container">
                     <div class="review-item">
                         <img
@@ -141,7 +79,6 @@ pageEncoding="UTF-8"%>
                             mới!"
                         </p>
                     </div>
-
                     <div class="review-item">
                         <img
                             src="/user_style/images/tung.jpg"
@@ -154,7 +91,6 @@ pageEncoding="UTF-8"%>
                             sau."
                         </p>
                     </div>
-
                     <div class="review-item">
                         <img
                             src="/user_style/images/m-tp.jpg"
@@ -171,80 +107,7 @@ pageEncoding="UTF-8"%>
             </div>
         </section>
 
-        <!-- JavaScript cho Datepicker, Modal và Slider -->
-        <script>
-            $(function () {
-                $("#datePicker").datepicker({
-                    dateFormat: "dd/mm/yy",
-                    minDate: 0,
-                });
-
-                const now = new Date();
-                const timeInput = document.getElementById("time");
-
-                // Cập nhật giá trị min cho time input để chặn giờ trong quá khứ
-                timeInput.addEventListener("change", function () {
-                    const selectedTime = new Date();
-                    const timeParts = this.value.split(":");
-                    selectedTime.setHours(timeParts[0], timeParts[1]);
-
-                    if (selectedTime < now) {
-                        alert("Bạn không thể chọn thời gian trong quá khứ!");
-                        this.value = ""; // Reset lại giá trị của input
-                    }
-                });
-            });
-            // Hiển thị modal với hiệu ứng mượt mà
-            function showScheduleModal() {
-                const modal = $("#scheduleModal");
-                modal.css("display", "block");
-                setTimeout(() => {
-                    modal.addClass("show");
-                }, 10);
-            }
-
-            // Đóng modal với hiệu ứng mượt mà
-            function closeModal(modalId) {
-                const modal = $("#" + modalId);
-                modal.removeClass("show");
-                setTimeout(() => {
-                    modal.css("display", "none");
-                }, 500);
-            }
-
-            let currentSlide = 0;
-            const slides = document.querySelectorAll(".service-slide");
-            const totalSlides = slides.length;
-
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    if (i === index) {
-                        slide.classList.add("active");
-                    } else {
-                        slide.classList.remove("active");
-                    }
-                });
-            }
-
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % totalSlides;
-                showSlide(currentSlide);
-            }
-
-            // Khởi tạo slide đầu tiên
-            showSlide(currentSlide);
-            setInterval(nextSlide, 3000);
-            $('a[href^="#"]').on("click", function (event) {
-                event.preventDefault();
-                $("html, body").animate(
-                    {
-                        scrollTop: $($.attr(this, "href")).offset().top,
-                    },
-                    500
-                );
-            });
-        </script>
-
+        <jsp:include page="/WEB-INF/views/user/includes/contact.jsp" />
         <jsp:include page="/WEB-INF/views/user/includes/footer.jsp" />
     </body>
 </html>

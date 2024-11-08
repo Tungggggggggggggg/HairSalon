@@ -1,14 +1,9 @@
 package nhomj.example.hairsalon.model;
 
-
 import jakarta.persistence.*;
-
-import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -38,7 +33,8 @@ public class Booking {
     private List<Service> services = new ArrayList<>();
 
     private LocalDate date;
-    private LocalTime time;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.DangChoGiaiQuyet;
@@ -47,6 +43,7 @@ public class Booking {
         DangChoGiaiQuyet, DaXacNhan, DaHoanThanh, DaHuy
     }
 
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -87,20 +84,20 @@ public class Booking {
         this.date = date;
     }
 
-    public StaffShift getStaffShift() {
-        return staffShift;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
-    public void setStaffShift(StaffShift staffShift) {
-        this.staffShift = staffShift;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
-    public LocalTime getTime() {
-        return time;
+    public LocalTime getEndTime() {
+        return endTime;
     }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     public Status getStatus() {
@@ -111,4 +108,3 @@ public class Booking {
         this.status = status;
     }
 }
-

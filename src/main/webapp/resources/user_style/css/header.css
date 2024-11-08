@@ -1,0 +1,111 @@
+/* ================== Global Styles ================== */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background-color: #f0f0f0; /* Đổi từ #121212 sang màu trắng nhạt */
+    color: #333333; /* Đổi màu chữ từ trắng (#ffffff) sang xám đậm (#333333) */
+    line-height: 1.6;
+    padding-top: 70px;
+}
+
+/* Header Styles */
+header {
+    background-color: #ffffff; /* Đổi từ đen sang trắng nhạt */
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    z-index: 1000; 
+    height: 70px;
+    overflow: hidden; 
+}
+
+.logo img {
+    height: 100px; 
+    width: auto;  
+    display: block;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 55px; 
+}
+
+nav .logo {
+    flex-shrink: 0; /* Đảm bảo logo không bị thu nhỏ */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-left {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+}
+
+.nav-right {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-left li a {
+    text-decoration: none;
+    color: #333333; /* Đổi màu chữ từ trắng (#ffffff) sang xám đậm (#333333) */
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.nav-left li a:hover {
+    color: #ffffff; 
+    background-color: #1e90ff; /* Đổi màu nhấn từ đỏ (#ff0000) sang xanh dương (#1e90ff) */
+}
+
+.nav-right .auth-btn {
+    text-decoration: none;
+    color: #ffffff; /* Đổi màu chữ từ trắng (#ffffff) sang xám đậm (#333333) */
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: #1e90ff; /* Đổi màu nhấn từ đỏ (#ff0000) sang xanh dương (#1e90ff) */
+}
+
+.nav-right .auth-btn:hover {
+    background-color: #0096ff; /* Đổi màu nhấn từ đỏ đậm (#cc0000) sang xanh dương đậm (#0096ff) */
+}
+
+button:hover {
+    transform: scale(1.05); 
+    transition: all 0.3s ease-in-out; 
+}
+
+a:hover {
+    color: #ffffff; 
+}
+.logo, .nav-left {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}

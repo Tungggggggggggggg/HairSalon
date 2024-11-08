@@ -1,0 +1,68 @@
+/* Footer */
+footer {
+    background-color: #ffffff; /* Đổi từ đen sang trắng nhạt */
+    color: #333333; /* Đổi từ trắng sang xám đậm */
+    text-align: left;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quick-links,
+.store-info,
+.social-links {
+    flex: 1;
+    padding: 10px;
+}
+
+.footer-container h4 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.footer-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-container ul li a {
+    color: #333333; /* Đổi từ trắng sang xám đậm */
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.footer-container ul li a:hover {
+    color: #1e90ff; /* Đổi màu khi hover từ đỏ (#ff0000) sang xanh dương (#1e90ff) */
+}
+
+.social-links a {
+    color: #333333; /* Đổi từ trắng sang xám đậm */
+    margin: 0 10px;
+    font-size: 24px;
+}
+
+.social-links a:hover {
+    color: #1e90ff; /* Đổi màu khi hover từ đỏ (#ff0000) sang xanh dương (#1e90ff) */
+}
+
+/* Responsive cho Footer */
+@media only screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .quick-links,
+    .store-info,
+    .social-links {
+        margin-bottom: 20px;
+    }
+}

@@ -6,7 +6,7 @@ pageEncoding="UTF-8"%>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-        <link rel="stylesheet" href="user_style/style.css" />
+        <link rel="stylesheet" href="/user_style/css/footer.css" />
     </head>
 
     <body>
@@ -26,7 +26,7 @@ pageEncoding="UTF-8"%>
                 <!-- Mạng xã hội -->
                 <div class="social-links">
                     <h4>Kết nối với chúng tôi</h4>
-                    <a href="https://facebook.com" target="_blank"
+                    <a href="https://facebook.com/JSalonnn" target="_blank"
                         ><i class="fab fa-facebook-f"></i
                     ></a>
                     <a href="https://instagram.com" target="_blank"
