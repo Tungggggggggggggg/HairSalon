@@ -17,7 +17,10 @@ public class RevenueService {
 
     public final RevenueRepository revenueRepository;
 
-
+    public long countReven()
+    {
+        return revenueRepository.count();
+    }
     public RevenueService(RevenueRepository revenueRepository) {
         this.revenueRepository = revenueRepository;
     }

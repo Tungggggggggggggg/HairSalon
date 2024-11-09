@@ -31,10 +31,10 @@
                             <div class="card-body">
                                 <h3>Tổng doanh thu</h3>
                                 <hr>
-                                <h2 style="font-size: 2em; margin: 0;">$12,340</h2>
+                                <h2 style="font-size: 2em; margin: 0;">${doanhthu}đ</h2>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small stretched-link" href="#">Xem thêm</a>
+                                <a class="small stretched-link" href="/admin/revenue_management">Xem thêm</a>
                                 <div class="small"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                             <div class="card-body">
                                 <h3>Thông báo</h3>
                                 <hr>
-                                <h2 style="font-size: 2em; margin: 0;">12</h2>
+                                <h2 style="font-size: 2em; margin: 0;">${countNotication}</h2>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <a class="small stretched-link" href="/admin/notification_management">Xem thêm</a>
@@ -57,10 +57,10 @@
                             <div class="card-body">
                                 <h3>Số lượng đặt lịch</h3>
                                 <hr>
-                                <h2 style="font-size: 2em; margin: 0;">12345</h2>
+                                <h2 style="font-size: 2em; margin: 0;">${countBooking}</h2>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small stretched-link" href="#">Xem thêm</a>
+                                <a class="small stretched-link" href="/admin/booking_management">Xem thêm</a>
                                 <div class="small"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                             <div class="card-body">
                                 <h3>Phản hồi</h3>
                                 <hr>
-                                <h2 style="font-size: 2em; margin: 0;">123</h2>
+                                <h2 style="font-size: 2em; margin: 0;">${countReven}</h2>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <a class="small stretched-link" href="#">Xem thêm</a>

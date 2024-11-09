@@ -16,6 +16,10 @@ public class NotificationService {
         this.notificationRepository = notificationRepository;
     }
 
+    public long countNotifications()
+    {
+        return notificationRepository.count();
+    }
     public List<Notification> getAllNotifications() {
         return notificationRepository.findAll();
     }

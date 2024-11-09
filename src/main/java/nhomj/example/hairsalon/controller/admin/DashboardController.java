@@ -1,7 +1,11 @@
 package nhomj.example.hairsalon.controller.admin;
 
+import nhomj.example.hairsalon.model.Booking;
 import nhomj.example.hairsalon.model.Notification;
+import nhomj.example.hairsalon.model.Service;
+import nhomj.example.hairsalon.service.BookingService;
 import nhomj.example.hairsalon.service.NotificationService;
+import nhomj.example.hairsalon.service.RevenueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,16 +16,41 @@ import java.util.List;
 
 @Controller
 public class DashboardController {
-
+    private final RevenueService revenueService;
+    private final BookingService bookingService;
     public NotificationService notificationService;
 
     @Autowired
-    public DashboardController(NotificationService notificationService) {
+    public DashboardController(RevenueService revenueService, BookingService bookingService, NotificationService notificationService) {
+        this.revenueService = revenueService;
+        this.bookingService = bookingService;
         this.notificationService = notificationService;
     }
 
     @GetMapping("/admin")
     public String admin(Model model) {
+        long countReven = this.revenueService.countReven();
+        long countBooking = this.bookingService.countBooking();
+        long countNotication = this.notificationService.countNotifications();
+
+        List<Booking> bookings = this.bookingService.getAllBookings();
+        double tongDoanhThu = 0;
+        if(bookings != null)
+        {
+            for(Booking booking : bookings)
+            {
+                List<Service> services = booking.getServices();
+                for(Service service : services)
+                {
+                      tongDoanhThu += service.getPrice().doubleValue();
+                }
+
+            }
+        }
+        model.addAttribute("countReven", countReven);
+        model.addAttribute("countBooking", countBooking);
+        model.addAttribute("countNotication", countNotication);
+        model.addAttribute("doanhthu", tongDoanhThu);
 
         return "admin/dashboard/show";
     }

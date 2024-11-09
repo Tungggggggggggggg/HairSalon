@@ -18,6 +18,10 @@ public class BookingService {
         this.serviceRepository = serviceRepository;
     }
 
+    public long countBooking()
+    {
+        return bookingRepository.count();
+    }
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }
