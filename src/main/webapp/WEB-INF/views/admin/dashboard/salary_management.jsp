@@ -112,7 +112,11 @@
                                         <input type="hidden" id="salaryId" name="id">
                                         <div class="mb-3">
                                             <label for="staffName" class="form-label">Tên nhân viên</label>
-                                            <input type="text" class="form-control" id="staffName" name="name" required>
+                                            <select class="form-select" id="staffName" name="staffId" required>
+                                                <c:forEach var="staff" items="${staffList}">
+                                                    <option value="${staff.id}">${staff.name}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="baseSalary" class="form-label">Lương cơ bản (VNĐ)</label>

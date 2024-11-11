@@ -12,15 +12,20 @@ import java.util.List;
 public class StaffSalaryService {
 
     StaffSalaryRepository staffSalaryRepository;
+    StaffRepository staffRepository;
 
-    public StaffSalaryService(StaffSalaryRepository staffSalaryRepository) {
+    public StaffSalaryService(StaffSalaryRepository staffSalaryRepository, StaffRepository staffRepository) {
         this.staffSalaryRepository = staffSalaryRepository;
+        this.staffRepository = staffRepository;
     }
 
     public List<StaffSalary> getAllStaff() {
         return this.staffSalaryRepository.findAll();
     }
 
+    public List<Staff> getAllStaffName() {
+        return this.staffRepository.findAll();
+    }
 
     public Double getTotalSalary(List<StaffSalary> staffSalaries) {
         Double totalSalary = 0.0;
