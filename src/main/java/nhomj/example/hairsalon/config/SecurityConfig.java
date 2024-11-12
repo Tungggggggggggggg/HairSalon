@@ -43,38 +43,35 @@ public class SecurityConfig {
         return authProvider;
     }
 
-//    @Bean
-//    public AuthenticationSuccessHandler customSuccessHandler() {
-//        return new CustomSuccessHandler();
-//    }
-//
-//    @Bean
-//    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests(authorize -> authorize
-//                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
-//                                DispatcherType.INCLUDE) .permitAll()
-//                        .requestMatchers("/login",
-//                                "/admin_style/**",
-//                                "/staff_style/**",
-//                                "/user_style/**",
-//                                "/images/**"
-////                                "/admin/**",
-////                                "/staff/**",
-////                                "/user/**"
-//                        ).permitAll()
-//                        .requestMatchers("/admin/**").hasRole("Admin")
-//
-//                        .anyRequest().authenticated())
-//
-//                .formLogin(formLogin -> formLogin
-//                        .loginPage("/login")
-//                        .failureUrl("/login?error")
-//                        .successHandler(customSuccessHandler())
-//                        .permitAll())
-//                .exceptionHandling(ex -> ex.accessDeniedPage("/accessdenied"))
-//        ;
-//
-//        return http.build();
-//    }
+    @Bean
+    public AuthenticationSuccessHandler customSuccessHandler() {
+        return new CustomSuccessHandler();
+    }
+
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(authorize -> authorize
+                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                                DispatcherType.INCLUDE) .permitAll()
+                        .requestMatchers("/login",
+                                "/admin_style/**",
+                                "/staff_style/**",
+                                "/user_style/**",
+                                "/images/**"
+
+                        ).permitAll()
+                        .requestMatchers("/admin/**").hasRole("Admin")
+
+                        .anyRequest().authenticated())
+
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .failureUrl("/login?error")
+                        .successHandler(customSuccessHandler())
+                        .permitAll())
+                .exceptionHandling(ex -> ex.accessDeniedPage("/accessdenied"))
+        ;
+        return http.build();
+    }
 }
