@@ -8,8 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/api")  // Đường dẫn cơ bản cho API
+@Controller
 public class LoginController {
 
     private UserService userService;
@@ -19,14 +18,13 @@ public class LoginController {
         this.userService = userService;
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody User user) {
-//        User authenticatedUser = userService.authenticate(user.getUsername(), user.getPassword());
-//
-//        if (authenticatedUser != null) {
-//            return ResponseEntity.ok(Map.of("success", true, "vai_tro_id", authenticatedUser.getVaiTroId()));
-//        } else {
-//            return ResponseEntity.ok(Map.of("success", false, "message", "Đăng nhập thất bại."));
-//        }
-//    }
+    @GetMapping("/login")
+    public String getLoginPage() {
+        return "admin/login";
+    }
+
+    @GetMapping("/accessdenied")
+    public String getDenyPage() {
+        return "admin/deny";
+    }
 }

@@ -44,8 +44,10 @@ public class StaffControllers {
     //Dùng để lưu khi tạo nhân viên mới và lưa khi chỉnh sửa nhân viên
     @PostMapping("/admin/staff_management/save")
     public String saveStaff(@ModelAttribute("newStaff") Staff staff,@RequestParam("file") MultipartFile file) {
-        String avatar = this.upLoadService.handleSaveUploadFile(file, "avatar");
-        String password = this.passwordEncoder.encode(staff.getPassword());
+        String avatar = "";
+        if(!file.isEmpty()){
+            avatar = this.upLoadService.handleSaveUploadFile(file, "avatar");
+        }
         Staff checkStaff = null;
         if(staff.getId() != null) {
             checkStaff = staffService.getStaffById(staff.getId());
@@ -58,13 +60,12 @@ public class StaffControllers {
             if(avatar != null) {
                 checkStaff.setAvatar(avatar);
             }
-            if(password != staff.getPassword()) {
-                checkStaff.setPassword(password);
-            }
+            checkStaff.setPassword(staff.getPassword());
+
             checkStaff.setRole(staff.getRole());
-            staffService.saveStaff(staff);
+            staffService.saveStaff(checkStaff);
         }else{
-            staff.setPassword(password);
+            staff.setPassword(this.passwordEncoder.encode(staff.getPassword()));
             staff.setAvatar(avatar);
             staff.setRole(Staff.Role.NhanVien);
             staffService.saveStaff(staff);

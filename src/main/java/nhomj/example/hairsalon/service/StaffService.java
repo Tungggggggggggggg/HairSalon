@@ -45,4 +45,8 @@ public class StaffService {
         upLoadService.deleteFile(checkStaff.getAvatar(),"avatar" );
         staffRepository.delete(checkStaff);
     }
+
+    public Staff getStaffByEmail(String email) {
+        return this.staffRepository.findStaffByEmail(email);
+    }
 }
