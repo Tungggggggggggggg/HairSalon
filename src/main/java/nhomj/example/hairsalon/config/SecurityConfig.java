@@ -55,6 +55,7 @@ public class SecurityConfig {
                         .dispatcherTypeMatchers(DispatcherType.FORWARD,
                                 DispatcherType.INCLUDE) .permitAll()
                         .requestMatchers("/login",
+                                "/home/**",
                                 "/admin_style/**",
                                 "/staff_style/**",
                                 "/user_style/**",
