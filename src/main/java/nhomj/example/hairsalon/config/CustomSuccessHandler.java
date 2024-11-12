@@ -41,6 +41,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         if (session == null) {
             return;
         }
+
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 
