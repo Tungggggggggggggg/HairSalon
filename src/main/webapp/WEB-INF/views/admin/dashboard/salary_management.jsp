@@ -47,49 +47,47 @@
                                 <div class="card-body">
                                     <table id="salaryTable" class="table table-bordered table-hover">
                                         <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Tên nhân viên</th>
-                                                <th>Lương cơ bản (VNĐ)</th>
-                                                <th>Thưởng (VNĐ)</th>
-                                                <th>Tổng lương (VNĐ)</th>
-                                                <th>Ngày tạo</th>
-                                                <th>Trạng thái</th>
-                                                <th>Hành động</th>
-                                            </tr>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Tên nhân viên</th>
+                                            <th>Lương cơ bản (VNĐ)</th>
+                                            <th>Thưởng (VNĐ)</th>
+                                            <th>Tổng lương (VNĐ)</th>
+                                            <th>Ngày tạo</th>
+                                            <th>Trạng thái</th>
+                                            <th>Hành động</th>
+                                        </tr>
                                         </thead>
-                                        <tbody>
-                                            <!-- Dữ liệu mẫu -->
-                                            <c:forEach var="staffSalary" items="${staffSalarys}">
-                                                <tr>
-                                                    <td>${staffSalary.id}</td>
-                                                    <td>${staffSalary.name}</td>
-                                                    <td>${staffSalary.baseSalary}</td>
-                                                    <td>${staffSalary.bonus}</td>
-                                                    <td>${staffSalary.totalSalary}</td>
-                                                    <td>${staffSalary.createDate}</td>
-                                                    <td>${staffSalary.status}</td>
-
-                                                    <td>
-                                                        <button class="btn btn-sm btn-warning"
-                                                            onclick="openSalaryModal('edit', 1, 'Nhân viên 1', 5000000, 1000000)">
-                                                            <i class="fas fa-edit"></i> Sửa
-                                                        </button>
-                                                        <button class="btn btn-sm btn-info"
-                                                            onclick="openHistoryModal('Nguyễn Văn A')">
-                                                            <i class="fas fa-history"></i> Lịch sử lương
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
-                                            <!-- Thêm các dữ liệu mẫu khác tương tự... -->
+                                        <tbody id="salaryTableBody">
+                                        <!-- Dữ liệu sẽ được thêm vào đây thông qua JavaScript -->
+                                        <c:forEach var="staffSalary" items="${staffSalarys}">
+                                            <tr>
+                                                <td>${staffSalary.id}</td>
+                                                <td>${staffSalary.name}</td>
+                                                <td>${staffSalary.baseSalary}</td>
+                                                <td>${staffSalary.bonus}</td>
+                                                <td>${staffSalary.totalSalary}</td>
+                                                <td>${staffSalary.createDate}</td>
+                                                <td>${staffSalary.status}</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-warning"
+                                                            onclick="openSalaryModal('edit', ${staffSalary.id}, '${staffSalary.name}', ${staffSalary.baseSalary}, ${staffSalary.bonus})">
+                                                        <i class="fas fa-edit"></i> Sửa
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info"
+                                                            onclick="openHistoryModal('${staffSalary.name}')">
+                                                        <i class="fas fa-history"></i> Lịch sử lương
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                         <tfoot>
-                                            <tr>
-                                                <th colspan="4">Tổng lương</th>
-                                                <th>${totalSalary}</th>
-                                                <th></th>
-                                            </tr>
+                                        <tr>
+                                            <th colspan="4">Tổng lương</th>
+                                            <th>${totalSalary}</th>
+                                            <th></th>
+                                        </tr>
                                         </tfoot>
                                     </table>
                                 </div>
