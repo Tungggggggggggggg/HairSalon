@@ -1,3 +1,5 @@
+// booking.js
+
 document.addEventListener("DOMContentLoaded", function () {
     // Khởi tạo Flatpickr cho trường ngày hẹn chỉ với định dạng ngày, ngôn ngữ tiếng Việt
     flatpickr("#appointmentDate", {
@@ -60,10 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
         if (confirm("Bạn có chắc chắn muốn đặt lịch không?")) {
             window.scrollTo({ top: 0, behavior: "smooth" });
-            setTimeout(() => {
-                alert("Đặt lịch thành công!");
-                document.getElementById("appointmentForm").submit();
-            }, 500);
+            document.getElementById("bookingForm").submit();
         }
     });
 });

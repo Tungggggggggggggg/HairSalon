@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -26,6 +25,7 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public UserDetailsService userDetailsService(StaffService staffService) {
         return new CustomUserDetailsService(staffService);
@@ -50,29 +50,34 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // http
+        //         .authorizeHttpRequests(authorize -> authorize
+        //                 .dispatcherTypeMatchers(DispatcherType.FORWARD,
+        //                         DispatcherType.INCLUDE)
+        //                 .permitAll()
+        //                 .requestMatchers("/login",
+        //                         "/home/**",
+        //                         "/admin_style/**",
+        //                         "/staff_style/**",
+        //                         "/user_style/**",
+        //                         "/images/**"
+
+        //                 ).permitAll()
+        //                 .requestMatchers("/admin/**").hasRole("Admin")
+
+        //                 .anyRequest().authenticated())
+
+        //         .formLogin(formLogin -> formLogin
+        //                 .loginPage("/login")
+        //                 .failureUrl("/login?error")
+        //                 .successHandler(customSuccessHandler())
+        //                 .permitAll())
+        //         .exceptionHandling(ex -> ex.accessDeniedPage("/accessdenied"));
+        // return http.build();
+
         http
-                .authorizeHttpRequests(authorize -> authorize
-                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
-                                DispatcherType.INCLUDE) .permitAll()
-                        .requestMatchers("/login",
-                                "/home/**",
-                                "/admin_style/**",
-                                "/staff_style/**",
-                                "/user_style/**",
-                                "/images/**"
+                .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
 
-                        ).permitAll()
-                        .requestMatchers("/admin/**").hasRole("Admin")
-
-                        .anyRequest().authenticated())
-
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login")
-                        .failureUrl("/login?error")
-                        .successHandler(customSuccessHandler())
-                        .permitAll())
-                .exceptionHandling(ex -> ex.accessDeniedPage("/accessdenied"))
-        ;
         return http.build();
     }
 }

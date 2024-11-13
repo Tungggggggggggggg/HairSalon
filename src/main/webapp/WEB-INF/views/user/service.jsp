@@ -38,11 +38,8 @@ prefix="c" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
                                 <strong>Thời gian thực hiện:</strong>
                                 ${service.durationMinutes} phút
                             </p>
-                            <button
-                                class="booking-button"
-                                onclick="window.location.href='/booking?serviceId=${service.id}';"
-                            >
-                                Đặt lịch
+                            <button class="booking-button" onclick="window.location.href='/booking?serviceId=${service.id}';">Đặt lịch ngay</button>
+
                             </button>
                         </div>
                     </div>

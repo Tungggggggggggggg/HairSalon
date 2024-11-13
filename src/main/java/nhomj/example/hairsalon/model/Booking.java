@@ -1,6 +1,7 @@
 package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -17,33 +18,38 @@ public class Booking {
     private User customer;
 
     @ManyToOne
-    @JoinColumn(name = "staffShift_id")
-    private StaffShift staffShift;
-
-    @ManyToOne
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;
 
+    @ManyToOne
+    @JoinColumn(name = "staff_shift_id")
+    private StaffShift staffShift;
+
     @ManyToMany
     @JoinTable(
-            name = "booking_service",
-            joinColumns = @JoinColumn(name = "booking_id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id")
+        name = "booking_service",
+        joinColumns = @JoinColumn(name = "booking_id"),
+        inverseJoinColumns = @JoinColumn(name = "service_id")
     )
     private List<Service> services = new ArrayList<>();
 
+    @NotNull(message = "Ngày hẹn không được để trống")
     private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
+
+    @NotNull(message = "Giờ hẹn không được để trống")
+    private LocalTime appointmentTime; // Thêm trường giờ hẹn
 
     @Enumerated(EnumType.STRING)
-    private Status status = Status.DangChoGiaiQuyet;
+    private Status status = Status.DaDat;
 
     public enum Status {
-        DangChoGiaiQuyet, DaXacNhan, DaHoanThanh, DaHuy
+        DaDat, // Đã Đặt
+        HoanThanh, // Hoàn Thành
+        DaHuy // Đã Hủy
     }
 
-    // Getters and setters
+    // Getters và Setters
+
     public Long getId() {
         return id;
     }
@@ -68,6 +74,14 @@ public class Booking {
         this.staff = staff;
     }
 
+    public StaffShift getStaffShift() {
+        return staffShift;
+    }
+
+    public void setStaffShift(StaffShift staffShift) {
+        this.staffShift = staffShift;
+    }
+
     public List<Service> getServices() {
         return services;
     }
@@ -84,20 +98,12 @@ public class Booking {
         this.date = date;
     }
 
-    public LocalTime getStartTime() {
-        return startTime;
+    public LocalTime getAppointmentTime() {
+        return appointmentTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
+    public void setAppointmentTime(LocalTime appointmentTime) {
+        this.appointmentTime = appointmentTime;
     }
 
     public Status getStatus() {

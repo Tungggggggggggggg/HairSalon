@@ -18,8 +18,9 @@ public class StaffShift {
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;
 
-    @OneToMany(mappedBy = "staffShift")
-    private List<Booking> bookings ;
+    @OneToMany(mappedBy = "staffShift", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Booking> bookings;
+    
 
     private LocalDate shiftDate;
     private String time;

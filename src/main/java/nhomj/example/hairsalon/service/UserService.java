@@ -5,9 +5,9 @@ import nhomj.example.hairsalon.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -22,13 +22,16 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-
     public User findOneById(long id) {
         return this.userRepository.findOneById(id);
     }
 
+    public Optional<User> findOneByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
     public User saveUser(User user) {
-        user.setCreatedDate(LocalDateTime.now());
+        user.setCreatedDate(getCurrentDateTime());
         return this.userRepository.save(user);
     }
 
@@ -36,7 +39,7 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
-    public LocalDateTime date(){
+    public LocalDateTime getCurrentDateTime(){
         return LocalDateTime.now();
     }
 }

@@ -1,15 +1,8 @@
 package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import org.eclipse.tags.shaded.org.apache.regexp.RE;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -29,8 +22,7 @@ public class User {
 
     private String address;
 
-    @Temporal(TemporalType.DATE)
-    private LocalDate birthday;
+    private LocalDate birthday; // Sử dụng LocalDate không cần @Temporal
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
@@ -44,6 +36,8 @@ public class User {
     public User() {
         super();
     }
+
+    // Getters và Setters
 
     public Long getId() {
         return id;
@@ -120,6 +114,5 @@ public class User {
     public enum Gender {
         Nam, Nu
     }
-
 
 }
