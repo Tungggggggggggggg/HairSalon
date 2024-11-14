@@ -37,35 +37,31 @@
                         <form>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Tên</label>
-                                <input type="text" class="form-control" id="name" value="${staff.name}" readonly>
+                                <input type="text" class="form-control" id="name" value="${staff.name}" readonly aria-label="Tên">
                             </div>
                             <div class="mb-3">
-                                <label for="username" class="form-label">Tên đăng nhập</label>
-                                <input type="text" class="form-control" id="username" value="${staff.username}" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Mật khẩu</label>
-                                <input type="password" class="form-control" id="password" value="${staff.password}" readonly>
+                                <label for="email" class="form-label">Email (Tên đăng nhập)</label>
+                                <input type="text" class="form-control" id="email" value="${staff.email}" readonly aria-label="Email">
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Số điện thoại</label>
-                                <input type="tel" class="form-control" id="phone" value="${staff.phone}" readonly>
+                                <input type="tel" class="form-control" id="phone" value="${staff.phone}" readonly aria-label="Số điện thoại">
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" value="${staff.address}" readonly>
+                                <input type="text" class="form-control" id="address" value="${staff.address}" readonly aria-label="Địa chỉ">
                             </div>
                             <div class="mb-3">
                                 <label for="gender" class="form-label">Giới tính</label>
-                                <input type="text" class="form-control" id="gender" value="${staff.gender}" readonly>
+                                <input type="text" class="form-control" id="gender" value="${staff.gender}" readonly aria-label="Giới tính">
                             </div>
                             <div class="mb-3">
                                 <label for="birthday" class="form-label">Ngày sinh</label>
-                                <input type="date" class="form-control" id="birthday" value="${staff.birthday}" readonly>
+                                <input type="date" class="form-control" id="birthday" value="${staff.birthday}" readonly aria-label="Ngày sinh">
                             </div>
                             <div class="mb-3">
                                 <label for="experience" class="form-label">Kinh nghiệm làm việc</label>
-                                <input type="text" class="form-control" id="experience" value="${staff.experience}" readonly>
+                                <input type="text" class="form-control" id="experience" value="${staff.experience}" readonly aria-label="Kinh nghiệm làm việc">
                             </div>
                         </form>
                     </div>

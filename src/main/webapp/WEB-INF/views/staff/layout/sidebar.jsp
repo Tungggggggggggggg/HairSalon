@@ -11,10 +11,12 @@
                     Lịch làm việc
                 </a>
 
-                <a class="nav-link" href="../Staff_Information">
-                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                    Thông tin nhân viên
-                </a>
+                <c:if test="${not empty loggedInStaff}">
+                    <a class="nav-link" href="../Staff_Information/${loggedInStaff.id}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                        Thông tin nhân viên: ${loggedInStaff.name}
+                    </a>
+                </c:if>
 
                 <a class="nav-link" href="../Staff_Salary">
                     <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
