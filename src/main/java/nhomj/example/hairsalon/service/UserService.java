@@ -11,35 +11,66 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Lấy danh sách tất cả người dùng.
+     *
+     * @return danh sách người dùng
+     */
     public List<User> getAllUsers() {
         return this.userRepository.findAll();
     }
 
+    /**
+     * Tìm người dùng dựa trên ID.
+     *
+     * @param id ID của người dùng
+     * @return đối tượng User nếu tìm thấy, ngược lại trả về null
+     */
     public User findOneById(long id) {
         return this.userRepository.findOneById(id);
     }
 
-    public Optional<User> findOneByEmail(String email) {
-        return this.userRepository.findByEmail(email);
-    }
-
-    public User saveUser(User user) {
-        user.setCreatedDate(getCurrentDateTime());
-        return this.userRepository.save(user);
-    }
-
+    /**
+     * Xóa người dùng dựa trên ID.
+     *
+     * @param id ID của người dùng cần xóa
+     */
     public void deleteById(long id) {
         this.userRepository.deleteById(id);
     }
 
-    public LocalDateTime getCurrentDateTime(){
+    /**
+     * Tìm người dùng dựa trên email.
+     *
+     * @param email Email của người dùng
+     * @return Optional chứa User nếu tìm thấy, ngược lại Optional.empty()
+     */
+    public Optional<User> findOneByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    /**
+     * Lưu thông tin người dùng vào cơ sở dữ liệu.
+     *
+     * @param user Đối tượng User cần lưu
+     */
+    public void saveUser(User user) {
+        userRepository.save(user);
+    }
+
+    /**
+     * Lấy thời gian hiện tại.
+     *
+     * @return Thời gian hiện tại dưới dạng LocalDateTime
+     */
+    public LocalDateTime getCurrentDateTime() {
         return LocalDateTime.now();
     }
 }

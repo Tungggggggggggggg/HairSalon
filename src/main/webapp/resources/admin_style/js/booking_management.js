@@ -19,6 +19,10 @@ const datatablesSimple = new simpleDatatables.DataTable("#datatablesSimple", {
     },
 });
 
+// Biến để lưu các instance của Flatpickr
+let bookingDatePicker;
+let appointmentTimePicker;
+let customerBirthdayPicker; // Thêm biến này
 let bookingModal;
 
 // Gán hàm openModal vào window để nó có thể được gọi từ mọi nơi
@@ -47,8 +51,6 @@ window.openModal = function(
     const customerAddressInput = document.getElementById("customerAddress");
     const customerBirthdayInput = document.getElementById("customerBirthday");
     const customerGenderSelect = document.getElementById("customerGender");
-    const bookingDateInput = document.getElementById("bookingDate");
-    const appointmentTimeSelect = document.getElementById("appointmentTime");
     const serviceSelect = document.getElementById("service");
     const statusSelect = document.getElementById("status");
     const staffSelect = document.getElementById("staff");
@@ -60,11 +62,11 @@ window.openModal = function(
         customerEmailInput.value = "";
         customerPhoneInput.value = "";
         customerAddressInput.value = "";
-        customerBirthdayInput.value = "";
+        customerBirthdayPicker.clear(); // Sử dụng Flatpickr instance
         customerGenderSelect.value = "";
-        bookingDateInput.value = "";
-        appointmentTimeSelect.value = "";
-        serviceSelect.value = "";
+        bookingDatePicker.clear(); // Clear Flatpickr input
+        appointmentTimePicker.clear(); // Clear Flatpickr time picker
+        serviceSelect.selectedIndex = -1; // Đặt lại select dịch vụ
         statusSelect.value = "DaDat"; // Đặt trạng thái mặc định là Đã Đặt
         staffSelect.value = "";
     } else if (type === "edit") {
@@ -74,10 +76,10 @@ window.openModal = function(
         customerEmailInput.value = customerEmail;
         customerPhoneInput.value = customerPhone;
         customerAddressInput.value = customerAddress;
-        customerBirthdayInput.value = customerBirthday;
+        customerBirthdayPicker.setDate(customerBirthday, true, "d/m/Y"); // Đặt ngày đã định dạng
         customerGenderSelect.value = customerGender;
-        bookingDateInput.value = date;
-        appointmentTimeSelect.value = appointmentTime;
+        bookingDatePicker.setDate(date, true, "d/m/Y"); // Đặt ngày đã định dạng
+        appointmentTimePicker.setDate(appointmentTime, true, "H:i"); // Đặt giờ đã định dạng
         serviceSelect.value = serviceId;
         statusSelect.value = status;
         staffSelect.value = staffId;
@@ -93,6 +95,67 @@ window.openModal = function(
     }
 }
 
+// Khởi tạo Flatpickr cho trường ngày hẹn trong modal thêm/sửa
+bookingDatePicker = flatpickr("#bookingDate", {
+    dateFormat: "d/m/Y", // Định dạng dd/MM/yyyy
+    minDate: "today",
+    locale: "vi",
+    onChange: function(selectedDates, dateStr, instance) {
+        const selectedDate = selectedDates[0];
+        const today = new Date();
+
+        // Nếu người dùng chọn ngày hôm nay, đặt giới hạn giờ là giờ hiện tại
+        if (selectedDate && selectedDate.toDateString() === today.toDateString()) {
+            const currentHour = today.getHours();
+            const currentMinute = today.getMinutes();
+            const minTime = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
+
+            // Cập nhật Flatpickr cho giờ hẹn với minTime là giờ hiện tại
+            appointmentTimePicker.set('minTime', minTime);
+        } else {
+            // Nếu là ngày khác, đặt minTime là giờ mở cửa (ví dụ: 08:00)
+            appointmentTimePicker.set('minTime', "08:00");
+        }
+    }
+});
+
+// Khởi tạo Flatpickr cho trường ngày sinh trong modal thêm/sửa và gán vào biến customerBirthdayPicker
+customerBirthdayPicker = flatpickr("#customerBirthday", {
+    dateFormat: "d/m/Y", // Định dạng dd/MM/yyyy
+    maxDate: "today",
+    locale: "vi",
+    defaultDate: null
+});
+
+// Khởi tạo Flatpickr cho trường giờ hẹn trong modal thêm/sửa
+appointmentTimePicker = flatpickr("#appointmentTime", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true,
+    minuteIncrement: 30,
+    minTime: "08:00",
+    maxTime: "21:00",
+    onOpen: function(selectedDates, dateStr, instance) {
+        const bookingDate = bookingDatePicker.input.value;
+        if (bookingDate) {
+            const [day, month, year] = bookingDate.split('/');
+            const selectedDate = new Date(`${year}-${month}-${day}`);
+            const today = new Date();
+            if (
+                selectedDate.toDateString() === today.toDateString()
+            ) {
+                const currentHour = today.getHours();
+                const currentMinute = today.getMinutes();
+                const minTime = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
+                instance.set('minTime', minTime);
+            } else {
+                instance.set('minTime', "08:00");
+            }
+        }
+    }
+});
+
 function viewDetails(
     id,
     name,
@@ -100,15 +163,18 @@ function viewDetails(
     service,
     date,
     appointmentTime,
-    status
+    statusDisplayName
 ) {
     document.getElementById("detailId").textContent = id;
     document.getElementById("detailUser").textContent = name;
     document.getElementById("detailService").textContent = service;
     document.getElementById("detailStaff").textContent = nameStaff;
-    document.getElementById("detailDate").textContent = date;
+    // Format date to dd/MM/yyyy
+    const [day, month, year] = date.split("/");
+    const formattedDate = `${day}/${month}/${year}`;
+    document.getElementById("detailDate").textContent = formattedDate;
     document.getElementById("detailAppointmentTime").textContent = appointmentTime;
-    document.getElementById("detailStatus").textContent = status;
+    document.getElementById("detailStatus").textContent = statusDisplayName;
 }
 
 function openCancelModal(id, name) {
@@ -122,20 +188,4 @@ document.querySelectorAll('button[onclick^="openModal"]').forEach(button => {
     button.addEventListener('click', () => {
         console.log('openModal được gọi');
     });
-});
-
-// Thêm kiểm tra khi chọn giờ hẹn không được đặt ở quá khứ
-document.getElementById("bookingForm").addEventListener("submit", function(event) {
-    const bookingDate = document.getElementById("bookingDate").value;
-    const appointmentTime = document.getElementById("appointmentTime").value;
-
-    if (bookingDate && appointmentTime) {
-        const selectedDateTime = new Date(`${bookingDate}T${appointmentTime}`);
-        const now = new Date();
-
-        if (selectedDateTime < now) {
-            event.preventDefault();
-            alert("Giờ hẹn không được đặt ở quá khứ.");
-        }
-    }
 });

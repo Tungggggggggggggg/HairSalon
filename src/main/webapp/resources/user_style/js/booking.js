@@ -1,46 +1,46 @@
 // booking.js
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Khởi tạo Flatpickr cho trường ngày hẹn chỉ với định dạng ngày, ngôn ngữ tiếng Việt
-    flatpickr("#appointmentDate", {
-        dateFormat: "d/m/Y",
+    // Khởi tạo Flatpickr cho trường ngày hẹn với định dạng dd/MM/yyyy, ngôn ngữ tiếng Việt
+    const appointmentDatePicker = flatpickr("#appointmentDate", {
+        dateFormat: "d/m/Y", // dd/MM/yyyy
         minDate: "today",
         locale: "vi",
         onChange: function(selectedDates, dateStr, instance) {
             const selectedDate = selectedDates[0];
             const today = new Date();
-            
+
             // Nếu người dùng chọn ngày hôm nay, đặt giới hạn giờ là giờ hiện tại
             if (selectedDate && selectedDate.toDateString() === today.toDateString()) {
                 const currentHour = today.getHours();
                 const currentMinute = today.getMinutes();
                 const minTime = `${String(currentHour).padStart(2, '0')}:${String(currentMinute).padStart(2, '0')}`;
-                
-                // Cập nhật Timepicker với minTime là giờ hiện tại
-                $("#appointmentTime").timepicker("option", "minTime", minTime);
+
+                // Cập nhật Flatpickr cho giờ hẹn với minTime là giờ hiện tại
+                appointmentTimePicker.set('minTime', minTime);
             } else {
                 // Nếu là ngày khác, đặt minTime là giờ mở cửa (ví dụ: 08:00)
-                $("#appointmentTime").timepicker("option", "minTime", "08:00");
+                appointmentTimePicker.set('minTime', "08:00");
             }
         }
     });
 
-    // Khởi tạo jQuery Timepicker cho trường giờ hẹn
-    $("#appointmentTime").timepicker({
-        timeFormat: "HH:mm",
-        interval: 30,
-        minTime: "08:00",
-        maxTime: "20:00",
-        dynamic: false,
-        dropdown: true,
-        scrollbar: true
-    });
-
-    // Khởi tạo Flatpickr cho trường ngày sinh với định dạng ngày và ngôn ngữ tiếng Việt
+    // Khởi tạo Flatpickr cho trường ngày sinh
     flatpickr("#dateOfBirth", {
-        dateFormat: "d/m/Y",
+        dateFormat: "d/m/Y", // dd/MM/yyyy
         maxDate: "today",
         locale: "vi"
+    });
+
+    // Khởi tạo Flatpickr cho trường giờ hẹn như một time picker
+    const appointmentTimePicker = flatpickr("#appointmentTime", {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        time_24hr: true,
+        minuteIncrement: 30,
+        minTime: "08:00",
+        maxTime: "21:00"
     });
 
     // Hiệu ứng focus vào các trường nhập liệu
@@ -56,13 +56,82 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Hiệu ứng mượt cho nút xác nhận đặt lịch
-    const submitButton = document.querySelector(".submit-button");
-    submitButton.addEventListener("click", function (event) {
-        event.preventDefault();
-        if (confirm("Bạn có chắc chắn muốn đặt lịch không?")) {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            document.getElementById("bookingForm").submit();
+    // Xử lý khi mở modal xác nhận
+    const confirmModal = document.getElementById('confirmModal');
+    confirmModal.addEventListener('show.bs.modal', function (event) {
+        // Lấy các giá trị từ form
+        const form = document.getElementById('bookingForm');
+        const formData = new FormData(form);
+
+        // Lấy thông tin lịch hẹn
+        const date = formData.get('date') || 'Không có';
+        const time = formData.get('appointmentTime') || 'Không có';
+        
+        // Lấy danh sách dịch vụ đã chọn
+        const servicesSelect = document.getElementById('serviceType');
+        const selectedOptions = Array.from(servicesSelect.selectedOptions);
+        const services = selectedOptions.map(option => option.textContent.trim());
+        const servicesList = services.length > 0 ? services.join(', ') : 'Không có';
+
+        // Lấy thông tin nhân viên phụ trách
+        const staffId = formData.get('staff.id');
+        let staffName = 'Không có';
+        if (staffId) {
+            const staffOption = document.querySelector(`#stylist option[value="${staffId}"]`);
+            if (staffOption) {
+                staffName = staffOption.textContent.trim();
+            }
+        }
+
+        // Lấy thông tin khách hàng
+        const fullName = formData.get('customer.name') || 'Không có';
+        const phone = formData.get('customer.phone') || 'Không có';
+        const email = formData.get('customer.email') || 'Không có';
+        const gender = formData.get('customer.gender') || 'Không có';
+        const birthday = formData.get('customer.birthday') || 'Không có';
+        const address = formData.get('customer.address') || 'Không có';
+
+        // Xử lý giới tính để hiển thị đầy đủ
+        let genderText = 'Không có';
+        if (gender === 'Nam') genderText = 'Nam';
+        else if (gender === 'Nu') genderText = 'Nữ';
+        else if (gender === 'Khac') genderText = 'Khác';
+
+        // Điền thông tin vào modal
+        document.getElementById('confirmDate').textContent = date;
+        document.getElementById('confirmTime').textContent = time;
+        document.getElementById('confirmServices').textContent = servicesList;
+        document.getElementById('confirmStylist').textContent = staffName;
+
+        document.getElementById('confirmFullName').textContent = fullName;
+        document.getElementById('confirmPhone').textContent = phone;
+        document.getElementById('confirmEmail').textContent = email;
+        document.getElementById('confirmGender').textContent = genderText;
+        document.getElementById('confirmBirthday').textContent = birthday;
+        document.getElementById('confirmAddress').textContent = address;
+    });
+
+    // Xử lý khi nhấn nút "Xác nhận đặt lịch" trong modal
+    document.getElementById('confirmSubmit').addEventListener('click', function () {
+        // Gửi form
+        document.getElementById('bookingForm').submit();
+    });
+
+    // Kiểm tra khi chọn giờ hẹn không được đặt ở quá khứ
+    document.getElementById("bookingForm").addEventListener("submit", function(event) {
+        const bookingDate = appointmentDatePicker.input.value;
+        const appointmentTime = appointmentTimePicker.input.value;
+
+        if (bookingDate && appointmentTime) {
+            // Chuyển đổi định dạng ngày từ d/m/Y sang yyyy-MM-dd để tạo đối tượng Date chính xác
+            const [day, month, year] = bookingDate.split('/');
+            const selectedDateTime = new Date(`${year}-${month}-${day}T${appointmentTime}`);
+            const now = new Date();
+
+            if (selectedDateTime < now) {
+                event.preventDefault();
+                alert("Giờ hẹn không được đặt ở quá khứ.");
+            }
         }
     });
 });

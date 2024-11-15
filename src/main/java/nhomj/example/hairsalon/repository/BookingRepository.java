@@ -1,3 +1,4 @@
+// BookingRepository.java
 package nhomj.example.hairsalon.repository;
 
 import nhomj.example.hairsalon.model.Booking;

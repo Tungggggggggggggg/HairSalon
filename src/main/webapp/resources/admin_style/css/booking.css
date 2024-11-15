@@ -1,33 +1,36 @@
 /* General container styling */
 .booking-container {
-    max-width: 1200px;
-    margin: 40px auto;
+    max-width: 1340px;
+    margin: 20px auto;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-}
-
-/* Apply Flexbox to the form inside booking-container */
-.booking-container form {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-/* Sections styling */
-.booking-container .appointment-section, 
-.booking-container .user-info-section {
-    flex: 1 1 48%; /* Chiếm khoảng 48% chiều rộng mỗi phần */
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    display: flex;
+    gap: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+    box-sizing: border-box; /* Đảm bảo padding và border được tính vào kích thước */
+}
+
+.booking-container:hover {
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.appointment-section, .user-info-section {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box; /* Đảm bảo padding và border được tính vào kích thước */
+}
+
+.appointment-section {
+    border-right: 1px solid #ddd;
 }
 
 /* Section titles */
 .booking-container h2 {
     font-size: 1.8em;
+    color: #333333;
     margin-bottom: 20px;
     border-bottom: 2px solid #1e90ff;
     padding-bottom: 10px;
@@ -38,21 +41,22 @@
     display: block;
     font-size: 1em;
     margin-bottom: 5px;
-    color: #555555;
+    color: #666666;
 }
 
 /* Input fields */
 .booking-container input[type="text"],
 .booking-container input[type="tel"],
 .booking-container input[type="email"],
-.booking-container select {
+.booking-container select
+{
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1em;
-    background-color: #f9f9f9;
+    background-color: #f7f7f7;
     color: #333333;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
@@ -72,55 +76,43 @@
     background-color: #1e90ff;
     color: #ffffff;
     border: none;
-    padding: 14px 28px;
-    font-size: 1.1em;
+    padding: 12px 24px;
+    font-size: 1em;
     font-weight: bold;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+    margin-bottom: 1%;
 }
 
-/* Submit button hover and active states */
 .submit-button:hover {
-    background-color: #1c86ee;
+    background-color: #0096ff;
     transform: scale(1.05);
 }
 
 .submit-button:active {
-    background-color: #1874cd;
     transform: scale(0.95);
 }
 
 /* Center button */
 .center-button {
-    flex-basis: 100%;
     text-align: center;
     margin-top: 20px;
 }
 
 /* Responsive adjustments */
-@media (max-width: 992px) {
-    .booking-container form {
-        flex-direction: column;
-    }
-    .booking-container .appointment-section, 
-    .booking-container .user-info-section {
-        flex: 1 1 100%;
-    }
-}
-
-@media (max-width: 576px) {
+@media (max-width: 768px) {
     .booking-container {
-        padding: 20px;
+        flex-direction: column;
+        gap: 0px;
     }
-
-    .booking-container h2 {
-        font-size: 1.5em;
+    .appointment-section, .user-info-section {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 20px;
     }
-
-    .submit-button {
-        width: 100%;
-        padding: 12px;
+    .center-button {
+        margin-top: 15px;
     }
 }
 
@@ -131,9 +123,7 @@
     border-radius: 5px;
 }
 
-.flatpickr-day.selected, 
-.flatpickr-day.startRange, 
-.flatpickr-day.endRange {
+.flatpickr-day.selected, .flatpickr-day.startRange, .flatpickr-day.endRange {
     background-color: #1e90ff;
     color: #ffffff;
 }
@@ -141,29 +131,4 @@
 .flatpickr-day:hover {
     background-color: #87cefa;
     color: #ffffff;
-}
-
-/* Styling cho Modal Confirm */
-#confirmModal .modal-header {
-    background-color: #1e90ff;
-    color: #ffffff;
-}
-
-#confirmModal .modal-title {
-    font-weight: bold;
-}
-
-#confirmModal .list-group-item strong {
-    width: 150px;
-    display: inline-block;
-}
-
-#confirmSubmit {
-    background-color: #1e90ff;
-    border-color: #1e90ff;
-}
-
-#confirmSubmit:hover {
-    background-color: #1c86ee;
-    border-color: #1c86ee;
 }

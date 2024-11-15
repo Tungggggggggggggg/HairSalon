@@ -1,3 +1,4 @@
+// BookingsController.java
 package nhomj.example.hairsalon.controller.admin;
 
 import nhomj.example.hairsalon.model.Booking;
@@ -87,6 +88,7 @@ public class BookingsController {
                 // Nếu không tồn tại, tạo mới người dùng
                 customer.setCreatedDate(userService.getCurrentDateTime());
                 userService.saveUser(customer);
+                booking.setCustomer(customer); // Đảm bảo set lại khách hàng mới vào booking
             }
         } else {
             // Xử lý khi thông tin khách hàng không đầy đủ

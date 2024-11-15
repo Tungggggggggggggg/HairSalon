@@ -1,5 +1,8 @@
 package nhomj.example.hairsalon.controller.admin;
 
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import nhomj.example.hairsalon.service.UpLoadService;
@@ -7,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +35,17 @@ public class StaffControllers {
         this.upLoadService = upLoadService;
         this.passwordEncoder = passwordEncoder;
 
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                setValue(LocalDate.parse(text, dateFormatter));
+            }
+        });
     }
 
     @GetMapping("/admin/staff_management")

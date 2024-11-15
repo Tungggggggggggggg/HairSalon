@@ -190,9 +190,9 @@
                                                 </div>
                                                 <div class="col-12 col-md-4">
                                                     <label for="staffBirthday" class="form-label">Năm sinh</label>
-                                                    <form:input type="date" class="form-control" id="staffBirthday"
-                                                        name="birthday" path="birthday" placeholder="dd-MM-yyyy" />
+                                                    <form:input type="text" class="form-control" id="staffBirthday" path="birthday" placeholder="dd/MM/yyyy" />
                                                 </div>
+                                                
                                                 <div class="col-12 col-md-4">
                                                     <label for="staffPhone" class="form-label">Kinh nghiệm</label>
                                                     <form:select class="form-select" path="experience" id="staffExperience">
@@ -275,13 +275,18 @@
                         <jsp:include page="../layout/footer.jsp" />
                     </div>
                 </div>
-
                 <!-- JavaScript -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
                 <script
                     src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
-                <script src="/admin_style/js/staff_management.js"></script>
                 <script src="/admin_style/js/scripts.js"></script>
+                <!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="/admin_style/js/vi.js"></script>
+<script src="/admin_style/js/staff_management.js"></script>
+
             </body>
 
             </html>

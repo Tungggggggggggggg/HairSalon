@@ -13,58 +13,59 @@ const staffTable = new simpleDatatables.DataTable("#staffTable", {
     }
 });
 
+// Biến để lưu Flatpickr instance cho ngày sinh
+let staffBirthdayPicker;
+
+// Khởi tạo Flatpickr cho trường "Ngày sinh"
+staffBirthdayPicker = flatpickr("#staffBirthday", {
+    dateFormat: "d/m/Y", // Định dạng ngày: dd/MM/yyyy
+    maxDate: "today", // Ngày sinh không thể chọn trong tương lai
+    locale: "vi",
+    defaultDate: null
+});
+
 let staffModal;
 
-function openModal(type, id = '', avatar = '' ,name = '', email = '', password = '', phone = '', address = '', gender = '', birthday = '', experience = '', specialty = '', status = '', role = '') {
+// Hàm openModal để thêm/sửa nhân viên
+function openModal(type, id = '', avatar = '', name = '', email = '', password = '', phone = '', address = '', gender = '', birthday = '', experience = '', role = '') {
     const modalTitle = document.getElementById('staffModalLabel');
     const staffId = document.getElementById('staffId');
-    const staffAvatar = document.getElementById('avatarFile');
     const staffNameInput = document.getElementById('staffName');
     const staffEmailInput = document.getElementById('staffEmail');
     const staffPassword = document.getElementById('staffPassword');
     const staffPhone = document.getElementById('staffPhone');
     const staffAddress = document.getElementById('staffAddress');
     const staffGender = document.getElementById('staffGender');
-    const staffBirthday = document.getElementById('staffBirthday');
     const staffExperience = document.getElementById('staffExperience');
-    const staffSpecialty = document.getElementById('staffSpecialty');
-    const staffStatus = document.getElementById('staffStatus');
     const staffRole = document.getElementById('staffRole');
-
 
     if (type === 'new') {
         modalTitle.textContent = 'Thêm mới nhân viên';
         staffId.value = '';
-        staffAvatar.value = '';
         staffNameInput.value = '';
         staffEmailInput.value = '';
         staffPassword.value = '';
-        staffPhone.value = '';
-        staffAddress.value = '';
+        staffPhoneInput.value = '';
+        staffAddressInput.value = '';
         staffGender.value = '';
-        staffBirthday.value = '';
+        staffBirthdayPicker.clear();
         staffExperience.value = '';
-        staffSpecialty.value = '';
-        staffStatus.value = '';
-        staffRole.value = '';
+        staffRole.value = 'NhanVien';
     } else if (type === 'edit') {
         modalTitle.textContent = 'Chỉnh sửa nhân viên';
         staffId.value = id;
-        staffAvatar.value = "";
         staffNameInput.value = name;
         staffEmailInput.value = email;
         staffPassword.value = password;
         staffPhone.value = phone;
         staffAddress.value = address;
         staffGender.value = gender;
-        staffBirthday.value = birthday;
+        staffBirthdayPicker.setDate(birthday, true, "d/m/Y");
         staffExperience.value = experience;
-        staffSpecialty.value = specialty;
-        staffStatus.value = status;
         staffRole.value = role;
     }
 
-    // staffModal = new bootstrap.Modal(document.getElementById('staffModal'));
+    // const staffModal = new bootstrap.Modal(document.getElementById('staffModal'));
     // staffModal.show();
 }
 
