@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form:form id="salaryForm" action="/admin/salary_management/save" method="post"
-                                          modelAttribute="newService" enctype="multipart/form-data">
+                                          modelAttribute="newSalary" enctype="multipart/form-data">
                                         <input type="hidden" id="salaryId" name="id"/>
                                         <div class="mb-3">
                                             <label for="staffName" class="form-label">Tên nhân viên</label>
