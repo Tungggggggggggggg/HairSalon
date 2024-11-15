@@ -1,4 +1,3 @@
-<!-- booking.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -16,15 +15,12 @@
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
     />
-    <!-- Font Awesome (nếu cần) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
-    <!-- Bootstrap CSS (Nếu chưa được bao gồm trong header.jsp) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <jsp:include page="/WEB-INF/views/user/includes/header.jsp" />
     <div class="booking-container">
-        <!-- Form bắt đầu tại đây -->
         <form:form
             id="bookingForm"
             action="/booking/submit"
@@ -176,9 +172,7 @@
     </div>
 
     <jsp:include page="/WEB-INF/views/user/includes/footer.jsp" />
-    <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <!-- Bootstrap JS (Nếu chưa được bao gồm trong footer.jsp) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/user_style/js/vi.js"></script>
     <script src="/user_style/js/booking.js"></script>

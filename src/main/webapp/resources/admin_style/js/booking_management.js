@@ -1,6 +1,3 @@
-// booking_management.js
-
-// Kiểm tra xem file JS có được tải hay không
 console.log("booking_management.js đã được tải thành công");
 
 // Khởi tạo DataTable
@@ -22,7 +19,7 @@ const datatablesSimple = new simpleDatatables.DataTable("#datatablesSimple", {
 // Biến để lưu các instance của Flatpickr
 let bookingDatePicker;
 let appointmentTimePicker;
-let customerBirthdayPicker; // Thêm biến này
+let customerBirthdayPicker;
 let bookingModal;
 
 // Gán hàm openModal vào window để nó có thể được gọi từ mọi nơi

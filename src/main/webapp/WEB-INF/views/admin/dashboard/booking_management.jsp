@@ -1,4 +1,3 @@
-<!-- booking_management.jsp -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -10,24 +9,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Quản lý lịch hẹn</title>
-
-    <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="/admin_style/css/styles.css" rel="stylesheet" />
     <link href="/admin_style/css/booking.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <!-- Flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-    <!-- Font Awesome -->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="sb-nav-fixed">
-    <!-- Header -->
     <jsp:include page="../layout/header.jsp" />
 
     <div id="layoutSidenav">
-        <!-- Sidebar -->
         <jsp:include page="../layout/sidebar.jsp" />
 
         <div id="layoutSidenav_content">
@@ -71,8 +64,8 @@
                                         <tr>
                                             <td>${booking.id}</td>
                                             <td>${booking.customer.name}</td>
-                                            <td>${booking.formattedDate}</td> <!-- Sử dụng getter đã tạo -->
-                                            <td>${booking.formattedAppointmentTime}</td> <!-- Sử dụng getter đã tạo -->
+                                            <td>${booking.formattedDate}</td> 
+                                            <td>${booking.formattedAppointmentTime}</td> 
                                             <td>
                                                 <c:forEach var="service" items="${booking.services}">
                                                     ${service.name}<br/>
@@ -241,11 +234,9 @@
         </div>
     </div>
 
-    <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Bao gồm jQuery trước các thư viện sử dụng jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
-    <!-- Flatpickr JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="/admin_style/js/vi.js"></script>
     <script src="/admin_style/js/booking_management.js"></script>

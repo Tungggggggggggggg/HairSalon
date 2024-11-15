@@ -1,4 +1,3 @@
-// BookingsController.java
 package nhomj.example.hairsalon.controller.admin;
 
 import nhomj.example.hairsalon.model.Booking;

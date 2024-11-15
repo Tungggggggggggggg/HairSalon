@@ -1,4 +1,3 @@
-// HomeController.java
 package nhomj.example.hairsalon.controller.user;
 
 import nhomj.example.hairsalon.model.Service;

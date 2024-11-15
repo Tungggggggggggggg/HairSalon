@@ -1,5 +1,3 @@
-// booking.js
-
 document.addEventListener("DOMContentLoaded", function () {
     // Khởi tạo Flatpickr cho trường ngày hẹn với định dạng dd/MM/yyyy, ngôn ngữ tiếng Việt
     const appointmentDatePicker = flatpickr("#appointmentDate", {

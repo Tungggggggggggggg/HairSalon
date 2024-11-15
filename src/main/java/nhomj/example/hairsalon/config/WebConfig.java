@@ -1,4 +1,3 @@
-// WebConfig.java
 package nhomj.example.hairsalon.config;
 
 import org.springframework.context.annotation.Configuration;

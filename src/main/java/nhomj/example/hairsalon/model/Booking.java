@@ -1,4 +1,3 @@
-// Booking.java
 package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
@@ -48,9 +47,9 @@ public class Booking {
     private Status status = Status.DaDat;
 
     public enum Status {
-        DaDat,       // Đã Đặt
-        HoanThanh,   // Hoàn Thành
-        DaHuy        // Đã Hủy
+        DaDat,
+        HoanThanh,
+        DaHuy
     }
 
     // Getters và Setters
