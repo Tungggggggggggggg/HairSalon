@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-//staff ở đây là chỉ cho stylist
 @Entity
 @Table(name = "staff")
 public class Staff {

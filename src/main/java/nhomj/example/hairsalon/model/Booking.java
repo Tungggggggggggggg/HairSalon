@@ -2,8 +2,10 @@ package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,18 +36,20 @@ public class Booking {
     private List<Service> services = new ArrayList<>();
 
     @NotNull(message = "Ngày hẹn không được để trống")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate date;
 
     @NotNull(message = "Giờ hẹn không được để trống")
-    private LocalTime appointmentTime; // Thêm trường giờ hẹn
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime appointmentTime;
 
     @Enumerated(EnumType.STRING)
     private Status status = Status.DaDat;
 
     public enum Status {
-        DaDat, // Đã Đặt
-        HoanThanh, // Hoàn Thành
-        DaHuy // Đã Hủy
+        DaDat,
+        HoanThanh,
+        DaHuy
     }
 
     // Getters và Setters
@@ -112,5 +116,35 @@ public class Booking {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+    
+    // Phương thức trả về ngày đã định dạng
+    public String getFormattedDate() {
+        if (this.date != null) {
+            return this.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        }
+        return "";
+    }
+
+    // Phương thức trả về giờ đã định dạng
+    public String getFormattedAppointmentTime() {
+        if (this.appointmentTime != null) {
+            return this.appointmentTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        }
+        return "";
+    }
+
+    // Phương thức trả về tên hiển thị của trạng thái
+    public String getStatusDisplayName() {
+        switch (this.status) {
+            case DaDat:
+                return "Đã Đặt";
+            case HoanThanh:
+                return "Hoàn Thành";
+            case DaHuy:
+                return "Đã Hủy";
+            default:
+                return "";
+        }
     }
 }

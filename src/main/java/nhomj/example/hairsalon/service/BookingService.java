@@ -19,8 +19,7 @@ public class BookingService {
         this.serviceRepository = serviceRepository;
     }
 
-    public long countBooking()
-    {
+    public long countBooking() {
         return bookingRepository.count();
     }
 
@@ -42,6 +41,4 @@ public class BookingService {
     public List<Service> getAllServices() {
         return serviceRepository.findAll();
     }
-
-    
 }
