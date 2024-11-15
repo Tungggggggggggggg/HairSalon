@@ -10,4 +10,6 @@ import java.util.List;
 public interface StaffSalaryRepository extends JpaRepository<StaffSalary, Long> {
 
     List<StaffSalary> findAll();
+    List<StaffSalary> findByStaffId(Long staffId);
+    List<StaffSalary> findByMonthAndYear(Integer month, Integer year);
 }

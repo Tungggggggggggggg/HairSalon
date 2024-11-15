@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
         <!DOCTYPE html>
         <html lang="vi">
@@ -62,8 +63,8 @@
                                         <!-- Dữ liệu sẽ được thêm vào đây thông qua JavaScript -->
                                         <c:forEach var="staffSalary" items="${staffSalarys}">
                                             <tr>
-                                                <td>${staffSalary.id}</td>
-                                                <td>${staffSalary.name}</td>
+                                                <td>${staffSalary.salaryId}</td>
+                                                <td>${staffSalary.staff.name}</td>
                                                 <td>${staffSalary.baseSalary}</td>
                                                 <td>${staffSalary.bonus}</td>
                                                 <td>${staffSalary.totalSalary}</td>
@@ -71,11 +72,11 @@
                                                 <td>${staffSalary.status}</td>
                                                 <td>
                                                     <button class="btn btn-sm btn-warning"
-                                                            onclick="openSalaryModal('edit', ${staffSalary.id}, '${staffSalary.name}', ${staffSalary.baseSalary}, ${staffSalary.bonus})">
+                                                            onclick="openSalaryModal('edit', ${staffSalary.salaryId}, '${staffSalary.staff.name}', ${staffSalary.baseSalary}, ${staffSalary.bonus})">
                                                         <i class="fas fa-edit"></i> Sửa
                                                     </button>
                                                     <button class="btn btn-sm btn-info"
-                                                            onclick="openHistoryModal('${staffSalary.name}')">
+                                                            onclick="openHistoryModal('${staffSalary.staff.name}')">
                                                         <i class="fas fa-history"></i> Lịch sử lương
                                                     </button>
                                                 </td>
@@ -96,18 +97,17 @@
                     </main>
 
                     <!-- Modal thêm/sửa lương -->
-                    <div class="modal fade" id="salaryModal" tabindex="-1" aria-labelledby="salaryModalLabel"
-                        aria-hidden="true">
+                    <div class="modal fade" id="salaryModal" tabindex="-1" aria-labelledby="salaryModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="salaryModalLabel">Thêm mới lương</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Đóng"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="salaryForm" action="/admin/salary/save" method="post">
-                                        <input type="hidden" id="salaryId" name="id">
+                                    <form:form id="salaryForm" action="/admin/salary_management/save" method="post"
+                                          modelAttribute="newService" enctype="multipart/form-data">
+                                        <input type="hidden" id="salaryId" name="id"/>
                                         <div class="mb-3">
                                             <label for="staffName" class="form-label">Tên nhân viên</label>
                                             <select class="form-select" id="staffName" name="staffId" required>
@@ -118,19 +118,17 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="baseSalary" class="form-label">Lương cơ bản (VNĐ)</label>
-                                            <input type="number" class="form-control" id="baseSalary" name="baseSalary"
-                                                required>
+                                            <input type="number" class="form-control" id="baseSalary" name="baseSalary" required min="0">
                                         </div>
                                         <div class="mb-3">
                                             <label for="bonus" class="form-label">Thưởng (VNĐ)</label>
-                                            <input type="number" class="form-control" id="bonus" name="bonus">
+                                            <input type="number" class="form-control" id="bonus" name="bonus" min="0">
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Hủy</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                                             <button type="submit" class="btn btn-primary">Lưu</button>
                                         </div>
-                                    </form>
+                                    </form:form>
                                 </div>
                             </div>
                         </div>
