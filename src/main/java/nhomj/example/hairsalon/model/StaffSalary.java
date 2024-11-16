@@ -72,6 +72,7 @@ public class StaffSalary {
 
     public void setBaseSalary(float baseSalary) {
         this.baseSalary = baseSalary;
+        calculateTotalSalary();
     }
 
     public float getBonus() {
@@ -80,10 +81,15 @@ public class StaffSalary {
 
     public void setBonus(float bonus) {
         this.bonus = bonus;
+        calculateTotalSalary();
     }
 
     public float getTotalSalary() {
         return totalSalary;
+    }
+
+    private void calculateTotalSalary() {
+        this.totalSalary = this.baseSalary + this.bonus;
     }
 
     public void setTotalSalary(float totalSalary) {
