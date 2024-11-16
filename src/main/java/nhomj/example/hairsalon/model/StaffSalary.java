@@ -16,35 +16,23 @@ public class StaffSalary {
     private Long salaryId;
 
     @ManyToOne
-    @JoinColumn(name = "staff_id", nullable = false)
+    @JoinColumn(name = "staff_id")
     private Staff staff;
 
-    @Column(nullable = false)
     private Integer month;
-
-    @Column(nullable = false)
     private Integer year;
+    private float baseSalary;
+    private float bonus;
+    private float totalSalary;
 
-    @Column(name = "base_salary", nullable = false, precision = 15, scale = 2, columnDefinition = "DECIMAL(15, 2)")
-    private BigDecimal baseSalary;
-
-    @Column(name = "bonus", precision = 15, scale = 2, columnDefinition = "DECIMAL(15, 2)")
-    private BigDecimal bonus;
-
-
-    private double totalSalary;
-
-    @Column(name = "create_date", nullable = false)
+    @Temporal(TemporalType.DATE)
     private LocalDate createDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false, columnDefinition = "NVARCHAR(50)")
     private Status status;
 
     // Getters and Setters
-    public enum Status {
-        DaThanhToan, ChuaThanhToan
-    }
+
 
     public Long getSalaryId() {
         return salaryId;
@@ -78,27 +66,27 @@ public class StaffSalary {
         this.year = year;
     }
 
-    public BigDecimal getBaseSalary() {
+    public float getBaseSalary() {
         return baseSalary;
     }
 
-    public void setBaseSalary(BigDecimal baseSalary) {
+    public void setBaseSalary(float baseSalary) {
         this.baseSalary = baseSalary;
     }
 
-    public BigDecimal getBonus() {
+    public float getBonus() {
         return bonus;
     }
 
-    public void setBonus(BigDecimal bonus) {
+    public void setBonus(float bonus) {
         this.bonus = bonus;
     }
 
-    public Double getTotalSalary() {
+    public float getTotalSalary() {
         return totalSalary;
     }
 
-    public void setTotalSalary(Double totalSalary) {
+    public void setTotalSalary(float totalSalary) {
         this.totalSalary = totalSalary;
     }
 
@@ -117,4 +105,10 @@ public class StaffSalary {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    public enum Status {
+        DaThanhToan, ChuaThanhToan
+    }
+
+
 }

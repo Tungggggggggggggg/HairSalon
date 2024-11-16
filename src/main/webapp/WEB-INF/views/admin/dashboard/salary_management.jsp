@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <form:form id="salaryForm" action="/admin/salary_management/save" method="post"
-                                          modelAttribute="newService" enctype="multipart/form-data">
+                                          modelAttribute="newSalary" enctype="multipart/form-data">
                                         <input type="hidden" id="salaryId" name="id"/>
                                         <div class="mb-3">
                                             <label for="staffName" class="form-label">Tên nhân viên</label>
@@ -123,6 +123,18 @@
                                         <div class="mb-3">
                                             <label for="bonus" class="form-label">Thưởng (VNĐ)</label>
                                             <input type="number" class="form-control" id="bonus" name="bonus" min="0">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="createDate" class="form-label">Ngày tạo</label>
+                                            <input type="date" class="form-control" id="createDate" name="createDate" placeholder="dd/MM/yyyy" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Trạng thái</label>
+                                            <select class="form-select" id="status" name="status" required>
+                                                <option value="DaThanhToan">Đã Thanh Toán</option>
+                                                <option value="ChuaThanhToan">Chưa Thanh Toán</option>
+                                            </select>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
