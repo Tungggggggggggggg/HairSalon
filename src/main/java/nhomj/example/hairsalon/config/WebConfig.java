@@ -18,7 +18,11 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addFormatterForFieldType(LocalDate.class, new org.springframework.format.Formatter<LocalDate>() {
             @Override
             public LocalDate parse(String text, Locale locale) {
-                return LocalDate.parse(text, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                // Thêm kiểm tra để chấp nhận định dạng yyyy-MM-dd
+                if (text != null && text.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                    return LocalDate.parse(text);
+                }
+                return LocalDate.parse(text, DateTimeFormatter.ofPattern("dd/MM/yyyy", locale));
             }
 
             @Override

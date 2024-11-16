@@ -124,6 +124,18 @@
                                             <label for="bonus" class="form-label">Thưởng (VNĐ)</label>
                                             <input type="number" class="form-control" id="bonus" name="bonus" min="0">
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="createDate" class="form-label">Ngày tạo</label>
+                                            <input type="date" class="form-control" id="createDate" name="createDate" placeholder="dd/MM/yyyy" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="status" class="form-label">Trạng thái</label>
+                                            <select class="form-select" id="status" name="status" required>
+                                                <option value="DaThanhToan">Đã Thanh Toán</option>
+                                                <option value="ChuaThanhToan">Chưa Thanh Toán</option>
+                                            </select>
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
                                             <button type="submit" class="btn btn-primary">Lưu</button>

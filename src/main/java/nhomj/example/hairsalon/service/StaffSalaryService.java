@@ -31,7 +31,6 @@ public class StaffSalaryService {
         staffSalaryRepository.save(staffSalary);
     }
 
-
     public Double getTotalSalary(List<StaffSalary> staffSalaries) {
         Double totalSalary = 0.0;
         for (StaffSalary staffSalary : staffSalaries) {
