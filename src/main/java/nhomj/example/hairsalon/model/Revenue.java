@@ -9,15 +9,23 @@ import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
+@Table(name = "revenue")
 public class Revenue {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer summaryId;
 
+    @Column(name = "summary_date", nullable = false)
     private LocalDate summaryDate;
+
+    @Column(name = "total_revenue", nullable = false, precision = 15, scale = 2, columnDefinition = "DECIMAL(15, 2)")
     private BigDecimal totalRevenue;
+
+    @Column(name = "number_of_bookings", nullable = false)
     private Integer numberOfBookings;
+
+    @Column(name = "total_services", nullable = false)
     private Integer totalServices;
 
     public Integer getSummaryId() {

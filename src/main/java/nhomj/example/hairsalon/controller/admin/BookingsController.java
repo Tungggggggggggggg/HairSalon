@@ -1,9 +1,11 @@
 package nhomj.example.hairsalon.controller.admin;
 
 import nhomj.example.hairsalon.model.Booking;
+import nhomj.example.hairsalon.model.EmailDetails;
 import nhomj.example.hairsalon.model.Staff;
 import nhomj.example.hairsalon.model.User;
 import nhomj.example.hairsalon.service.BookingService;
+import nhomj.example.hairsalon.service.EmailService;
 import nhomj.example.hairsalon.service.StaffService;
 import nhomj.example.hairsalon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +29,14 @@ public class BookingsController {
     private final BookingService bookingService;
     private final UserService userService;
     private final StaffService staffService;
+    private final EmailService emailService;
 
     @Autowired
-    public BookingsController(final BookingService bookingService, final UserService userService, final StaffService staffService) {
+    public BookingsController(final BookingService bookingService, final UserService userService, final StaffService staffService, EmailService emailService) {
         this.bookingService = bookingService;
         this.userService = userService;
         this.staffService = staffService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/admin/booking_management")

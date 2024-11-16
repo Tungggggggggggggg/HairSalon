@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "booking")
 public class Booking {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,21 +31,24 @@ public class Booking {
 
     @ManyToMany
     @JoinTable(
-        name = "booking_service",
-        joinColumns = @JoinColumn(name = "booking_id"),
-        inverseJoinColumns = @JoinColumn(name = "service_id")
+            name = "booking_service",
+            joinColumns = @JoinColumn(name = "booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "service_id")
     )
     private List<Service> services = new ArrayList<>();
 
     @NotNull(message = "Ngày hẹn không được để trống")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = false, columnDefinition = "DATE")
     private LocalDate date;
 
     @NotNull(message = "Giờ hẹn không được để trống")
     @DateTimeFormat(pattern = "HH:mm")
+    @Column(nullable = false, columnDefinition = "TIME")
     private LocalTime appointmentTime;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "NVARCHAR(20)")
     private Status status = Status.DaDat;
 
     public enum Status {

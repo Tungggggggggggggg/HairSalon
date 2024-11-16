@@ -101,7 +101,6 @@
                                         <p><strong>ID:</strong> <span id="detailId"></span></p>
                                         <p><strong>Tên khách hàng:</strong> <span id="detailName"></span></p>
                                         <p><strong>Email:</strong> <span id="detailEmail"></span></p>
-                                        <p><strong>PassWord:</strong> <span id="detailPassword"></span></p>
                                         <p><strong>Số điện thoại:</strong> <span id="detailPhone"></span></p>
                                         <p><strong>Địa chỉ:</strong> <span id="detailAddress"></span></p>
                                         <p><strong>Giới tính:</strong> <span id="detailGender"></span></p>

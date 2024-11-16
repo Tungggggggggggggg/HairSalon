@@ -57,11 +57,10 @@ function openDeleteModal(id, name) {
 }
 
 
-function viewDetails(id, name, email, password, phone, address, gender, birthday, createdDate) {
+function viewDetails(id, name, email, phone, address, gender, birthday, createdDate) {
     document.getElementById("detailId").textContent = id;
     document.getElementById("detailName").textContent = name;
     document.getElementById("detailEmail").textContent = email;
-    document.getElementById("detailPassword").textContent = password;
     document.getElementById("detailPhone").textContent = phone;
     document.getElementById("detailAddress").textContent = address;
     document.getElementById("detailGender").textContent = gender;

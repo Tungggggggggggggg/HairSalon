@@ -7,24 +7,32 @@ import java.time.LocalDate;
 
 
 @Entity
+@Table(name = "invoice")
 public class Invoice {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long íd;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "booking_id", nullable = false)
     private Booking booking;
 
+    @Column(name = "invoice_date", nullable = false, columnDefinition = "DATE")
     private LocalDate invoiceDate = LocalDate.now();
+
+    @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "payment_method", nullable = false, columnDefinition = "NVARCHAR(50)")
     private PaymentMethod paymentMethod;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "payment_status", nullable = false, columnDefinition = "NVARCHAR(50)")
     private PaymentStatus paymentStatus = PaymentStatus.DaThanhToan;
 
+    // Enums
     public enum PaymentMethod {
         TienMat, The, ChuyenKhoan
     }
@@ -33,12 +41,12 @@ public class Invoice {
         DaThanhToan, ChuaThanhToan
     }
 
-    public long getÍd() {
-        return íd;
+    public long getId() {
+        return id;
     }
 
-    public void setÍd(long íd) {
-        this.íd = íd;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Booking getBooking() {

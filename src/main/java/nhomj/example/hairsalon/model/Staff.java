@@ -12,30 +12,49 @@ public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "avatar", columnDefinition = "NVARCHAR(MAX)")
     private String avatar;
+
+    @Column(name = "name", nullable = false, columnDefinition = "NVARCHAR(255)")
     private String name;
+
+    @Column(name = "email", nullable = false, unique = true, columnDefinition = "NVARCHAR(255)")
     private String email;
+
+    @Column(name = "phone", columnDefinition = "NVARCHAR(50)")
     private String phone;
+
+    @Column(name = "address", columnDefinition = "NVARCHAR(255)")
     private String address;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "gender", columnDefinition = "NVARCHAR(10)")
     private GenderStaff gender;
+
     private LocalDate birthday;
+
+    @Column(name = "password", nullable = false, columnDefinition = "NVARCHAR(255)")
     private String password;
+
+    @Column(name = "experience", columnDefinition = "NVARCHAR(MAX)")
     private String experience;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "role", columnDefinition = "NVARCHAR(50)")
     private Role role = Role.NhanVien;
+
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
     private List<StaffSalary> salaries;
 
-    @OneToMany(mappedBy = "staff" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
     private List<StaffShift> shifts;
 
     @OneToMany(mappedBy = "staff")
     private List<Notification> notifications;
-    // Getters and Setters
 
     public enum GenderStaff {
         Nam, Nu

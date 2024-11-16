@@ -13,24 +13,31 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name", nullable = false, columnDefinition = "NVARCHAR(255)")
     private String name;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, columnDefinition = "VARCHAR(255)")
     private String email;
 
+    @Column(nullable = false, columnDefinition = "VARCHAR(20)")
     private String phone;
 
+    @Column(columnDefinition = "NVARCHAR(255)")
     private String address;
 
-    private LocalDate birthday; // Sử dụng LocalDate không cần @Temporal
+    @Column(nullable = false, columnDefinition = "DATE")
+    private LocalDate birthday;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "NVARCHAR(10)")
     private Gender gender;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookingCustomers;
 
+    @Column(nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime createdDate;
+
 
 
     public User() {

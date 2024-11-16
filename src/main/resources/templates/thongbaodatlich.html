@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thông Báo Đặt Lịch Thành Công</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #4CAF50;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .details {
+            font-size: 16px;
+            margin-bottom: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Đặt Lịch Thành Công!</h1>
+    <p>Cảm ơn bạn đã đặt lịch tại salon của chúng tôi. Chúng tôi rất vui được phục vụ bạn!</p>
+
+    <div class="details">
+        <p><strong>Khách hàng:</strong> ${customer}</p>
+        <p><strong>Ngày hẹn:</strong> ${date}</p>
+        <p><strong>Giờ hẹn:</strong> ${appointmentTime}</p>
+        <p><strong>Dịch vụ:</strong>${service}</p>
+        <p><strong>Nhân viên phục vụ:</strong> ${staff}</p>
+    </div>
+    <p>Lưu ý : Quý khách vui lòng đến trước 5 phút để được phục vụ tốt hơn trân trọng cảm ơn</p>
+</div>
+
+</body>
+</html>

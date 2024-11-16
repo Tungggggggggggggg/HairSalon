@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "staff_shift")
 public class StaffShift {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -18,17 +20,25 @@ public class StaffShift {
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;
 
-    @OneToMany(mappedBy = "staffShift", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Booking> bookings;
-    
+    @OneToMany(mappedBy = "staffShift", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Booking> bookings = new ArrayList<>();
 
+    @Column(name = "shift_date", nullable = false)
     private LocalDate shiftDate;
-    private String time;
+
+    @Column(name = "start_time", nullable = false)
+    private LocalTime startTime;
+
+    @Column(name = "end_time", nullable = false)
+    private LocalTime endTime;
+
     @Enumerated(EnumType.STRING)
-    private  Status status;
+    @Column(nullable = false)
+    private Status status = Status.Trong;
+
     public enum Status {
         Trong, CoLich, Nghi
-        //TRỐNG ,CÓ LỊCH, NGHỈ
+        // Trống, Có Lịch, Nghỉ
     }
 
     public long getId() {
@@ -61,14 +71,6 @@ public class StaffShift {
 
     public void setShiftDate(LocalDate shiftDate) {
         this.shiftDate = shiftDate;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public Status getStatus() {

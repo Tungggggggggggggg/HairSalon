@@ -13,15 +13,19 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "avatar", columnDefinition = "NVARCHAR(255)")
     private String avatar;
 
+    @Column(name = "name", nullable = false, columnDefinition = "NVARCHAR(255)")
     private String name;
 
+    @Column(name = "description", columnDefinition = "NVARCHAR(MAX)")
     private String description;
 
-    @Column(precision = 10, scale = 2)
+    @Column(name = "price", nullable = false, precision = 10, scale = 2, columnDefinition = "DECIMAL(10, 2)")
     private BigDecimal price;
 
+    @Column(name = "duration_minutes", nullable = false)
     private Integer durationMinutes;
 
     @ManyToMany(mappedBy = "services")

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
+@Table(name = "notification")
 public class Notification {
 
     @Id
@@ -16,10 +17,11 @@ public class Notification {
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;
 
+    @Column(nullable = false, columnDefinition = "NVARCHAR(500)")
     private String message;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime notificationDate;
+    @Column(name = "notification_date", nullable = false, columnDefinition = "TIMESTAMP")
+    private LocalDateTime notificationDate = LocalDateTime.now();
 
     public Long getId() {
         return id;
