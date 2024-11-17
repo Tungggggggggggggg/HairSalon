@@ -4,16 +4,17 @@
 INSERT INTO staff
     (name, email, password, phone, address, experience, gender, birthday, role)
 VALUES
-    ('Nguyễn Thị Hồng', 'hong@example.com', 'password123', '0123-456-789', '123 Đường Lê Lợi', 2, 'Nu', '1985-02-14', 'NhanVien'),
-    ('Trần Văn Minh', 'minh@example.com', 'password123', '0987-654-321', '456 Đường Trần Phú', 3, 'Nam', '1990-06-21', 'NhanVien'),
-    ('Phạm Tuấn Anh', 'tuananh@example.com', 'password123', '0912-345-678', '789 Đường Hùng Vương', 4, 'Nam', '1987-09-13', 'NhanVien'),
-    ('Lê Thu Hà', 'thuha@example.com', 'password123', '0222-333-444', '101 Đường Nguyễn Huệ', 5, 'Nu', '1982-11-05', 'NhanVien'),
-    ('Đặng Ngọc Lan', 'ngoclan@example.com', 'password123', '0111-222-333', '202 Đường Trần Hưng Đạo', 1, 'Nu', '1995-04-18', 'NhanVien'),
-    ('Vũ Hữu Phước', 'phuoc@example.com', 'password123', '0777-888-999', '303 Đường Bạch Đằng', 6, 'Nam', '1988-12-02', 'NhanVien'),
-    ('Trương Thị Mỹ', 'my@example.com', 'password123', '0444-555-666', '404 Đường Phan Đình Phùng', 7, 'Nu', '1993-08-07', 'Admin'),
-    ('Hoàng Quốc Bảo', 'bao@example.com', 'password123', '0666-777-888', '505 Đường Nguyễn Trãi', 8, 'Nam', '1986-01-25', 'Admin'),
-    ('Lý Minh Châu', 'minhchau@example.com', 'password123', '0333-444-555', '606 Đường Quang Trung', 9, 'Nu', '1984-03-30', 'Admin'),
-    ('Ngô Bá Vinh', 'vinh@example.com', 'password123', '0999-000-111', '707 Đường Nguyễn Thái Học', 10, 'Nam', '1992-05-15', 'Admin');
+    (N'Nguyễn Thị Hồng', 'hong@example.com', 'password123', '0123-456-789', N'123 Đường Lê Lợi', 2, N'Nu', '1985-02-14', 'NhanVien'),
+    (N'Trần Văn Minh', 'minh@example.com', 'password123', '0987-654-321', N'456 Đường Trần Phú', 3, N'Nam', '1990-06-21', 'NhanVien'),
+    (N'Phạm Tuấn Anh', 'tuananh@example.com', 'password123', '0912-345-678', N'789 Đường Hùng Vương', 4, N'Nam', '1987-09-13', 'NhanVien'),
+    (N'Lê Thu Hà', 'thuha@example.com', 'password123', '0222-333-444', N'101 Đường Nguyễn Huệ', 5, N'Nu', '1982-11-05', 'NhanVien'),
+    (N'Đặng Ngọc Lan', 'ngoclan@example.com', 'password123', '0111-222-333', N'202 Đường Trần Hưng Đạo', 1, N'Nu', '1995-04-18', 'NhanVien'),
+    (N'Vũ Hữu Phước', 'phuoc@example.com', 'password123', '0777-888-999', N'303 Đường Bạch Đằng', 6, N'Nam', '1988-12-02', 'NhanVien'),
+    (N'Trương Thị Mỹ', 'my@example.com', 'password123', '0444-555-666', N'404 Đường Phan Đình Phùng', 7, N'Nu', '1993-08-07', 'Admin'),
+    (N'Hoàng Quốc Bảo', 'bao@example.com', 'password123', '0666-777-888', N'505 Đường Nguyễn Trãi', 8, N'Nam', '1986-01-25', 'Admin'),
+    (N'Lý Minh Châu', 'minhchau@example.com', 'password123', '0333-444-555', N'606 Đường Quang Trung', 9, N'Nu', '1984-03-30', 'Admin'),
+    (N'Ngô Bá Vinh', 'vinh@example.com', 'password123', '0999-000-111', N'707 Đường Nguyễn Thái Học', 10, N'Nam', '1992-05-15', 'Admin');
+
 
 
 -- chưa sửa
@@ -172,21 +173,24 @@ VALUES
 
 
 -- Insert data into service table
-INSERT INTO service
-    (name, description, price, duration_minutes)
-VALUES
-    ('Cắt tóc nam cơ bản', 'Dịch vụ cắt tóc nam đơn giản, nhanh chóng', 30.00, 20),
-    ('Cắt tóc nam cao cấp', 'Cắt tóc và tạo kiểu chuyên nghiệp cho nam', 50.00, 40),
-    ('Nhuộm tóc nam', 'Nhuộm tóc với màu sắc thời trang dành cho nam', 100.00, 60),
-    ('Nhuộm phủ bạc nam', 'Dành cho nam muốn che phủ tóc bạc', 80.00, 45),
-    ('Tạo kiểu tóc nam', 'Tạo kiểu tóc thời trang cho các dịp đặc biệt', 60.00, 30),
-    ('Cạo và tỉa râu', 'Cạo và tỉa râu tạo sự gọn gàng', 20.00, 15),
-    ('Combo Cắt tóc - Gội đầu - Sấy', 'Bao gồm cắt tóc, gội đầu và sấy khô', 45.00, 30),
-    ('Combo Nhuộm tóc - Gội đầu - Sấy', 'Bao gồm nhuộm tóc, gội đầu và sấy khô', 120.00, 70),
-    ('Chăm sóc da mặt nam', 'Làm sạch và chăm sóc da mặt dành riêng cho nam giới', 50.00, 30),
-    ('Massage đầu thư giãn', 'Gội đầu kèm massage thư giãn da đầu', 30.00, 25),
-    ('Combo Tạo kiểu - Cạo râu - Gội đầu', 'Combo chăm sóc tóc và râu, tạo phong cách lịch lãm', 70.00, 50);
-
+INSERT INTO service (avatar, name, description, price, duration_minutes)
+VALUE
+    ('Cattocnamcoban.jpg', N'Cắt tóc nam cơ bản', N'Cắt tóc gọn gàng, nhanh chóng.', 50000, 20),
+    ('Cattocnucoban.jpg', N'Cắt tóc nữ cơ bản', N'Tỉa tóc, tạo kiểu đơn giản.', 100000, 30),
+    ('Cattoctreem.jpg', N'Cắt tóc trẻ em', N'Dành cho trẻ nhỏ, nhẹ nhàng và an toàn.', 50000, 25),
+    ('Cattoctaokieuthoitrang.jpg', N'Cắt tóc tạo kiểu thời trang', N'Phong cách cá nhân, phù hợp xu hướng.', 200000, 40),
+    ('Nhuomtocthoitrang.jpg', N'Nhuộm tóc thời trang', N'Các màu sáng, highlight hoặc balayage.', 200000, 60),
+    ('Nhuomphubac.jpg', N'Nhuộm phủ bạc', N'Dành cho khách hàng muốn che tóc bạc.', 200000, 60),
+    ('Goidauthuong.jpg', N'Gội đầu thông thường', N'Làm sạch tóc, da đầu.', 50000, 20),
+    ('Goidaukhemmassage.jpg', N'Gội đầu kèm massage thư giãn', N'Massage da đầu, giảm căng thẳng.', 150000, 30),
+    ('Utocphuchoi.jpg', N'Ủ tóc phục hồi', N'Sử dụng sản phẩm dưỡng chuyên sâu.', 200000, 40),
+    ('Taokieudongian.jpg', N'Tạo kiểu đơn giản', N'Dành cho các dịp thường ngày.', 150000, 30),
+    ('Taokieudutiec.jpg', N'Tạo kiểu dự tiệc', N'Kiểu tóc cầu kỳ, sang trọng cho sự kiện.', 200000, 60),
+    ('Uonxoanlon.jpg', N'Uốn xoăn lọn to/nhỏ', N'Tạo sóng bồng bềnh hoặc uốn cổ điển.', 500000, 75),
+    ('Duoitocthangtunhien.jpg', N'Duỗi tóc thẳng tự nhiên', N'Làm tóc thẳng và bóng mượt.', 400000, 90),
+    ('Duoitockeratin.jpg', N'Duỗi tóc keratin', N'Duỗi phục hồi, giảm xơ rối.', 500000, 120),
+    ('Combotocgoisay.jpg', N'Combo cắt tóc - gội đầu - sấy tóc', N'Trọn gói dịch vụ cơ bản.', 250000, 75),
+    ('Combonam.jpg', N'Combo tạo kiểu - cạo râu - gội đầu', N'Phong cách lịch lãm cho nam.', 400000, 100);
 
 -- chưa sửa
 -- -- Insert data into booking table
