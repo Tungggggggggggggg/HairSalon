@@ -42,7 +42,6 @@
                                 <th>Dịch vụ</th>
                                 <th>Ngày đặt</th>
                                 <th>Trạng thái</th>
-                                <th>Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -59,20 +58,6 @@
                                         </td>
                                         <td>${booking.getFormattedDate()}</td>
                                         <td>${booking.getStatusDisplayName()}</td>
-                                        <td>
-                                            <form action="acceptAppointment" method="post" style="display:inline;">
-                                                <input type="hidden" name="appointmentId" value="${booking.id}">
-                                                <button type="submit" class="btn btn-success btn-sm">Nhận</button>
-                                            </form>
-                                            <form action="updateAppointment" method="post" style="display:inline;">
-                                                <input type="hidden" name="appointmentId" value="${booking.id}">
-                                                <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
-                                                    <option value="">Chọn trạng thái</option>
-                                                    <option value="CONFIRMED">Xác nhận</option>
-                                                    <option value="CANCELED">Hủy</option>
-                                                </select>
-                                            </form>
-                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:if>

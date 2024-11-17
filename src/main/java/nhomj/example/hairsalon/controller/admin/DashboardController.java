@@ -6,6 +6,8 @@ import nhomj.example.hairsalon.model.Service;
 import nhomj.example.hairsalon.service.BookingService;
 import nhomj.example.hairsalon.service.NotificationService;
 import nhomj.example.hairsalon.service.RevenueService;
+import nhomj.example.hairsalon.model.User;
+import nhomj.example.hairsalon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,12 +21,14 @@ public class DashboardController {
     private final RevenueService revenueService;
     private final BookingService bookingService;
     public NotificationService notificationService;
+    private final UserService userService;
 
     @Autowired
-    public DashboardController(RevenueService revenueService, BookingService bookingService, NotificationService notificationService) {
+    public DashboardController(RevenueService revenueService, BookingService bookingService, NotificationService notificationService, UserService userService) {
         this.revenueService = revenueService;
         this.bookingService = bookingService;
         this.notificationService = notificationService;
+        this.userService = userService;
     }
 
     @GetMapping("/admin")
@@ -34,6 +38,7 @@ public class DashboardController {
         long countNotication = this.notificationService.countNotifications();
 
         List<Booking> bookings = this.bookingService.getAllBookings();
+        List<User> users = this.userService.getAllUsers();
         double tongDoanhThu = 0;
         if(bookings != null)
         {
@@ -50,6 +55,8 @@ public class DashboardController {
         model.addAttribute("countReven", countReven);
         model.addAttribute("countBooking", countBooking);
         model.addAttribute("countNotication", countNotication);
+        model.addAttribute("bookings", bookings);
+        model.addAttribute("users", users);
         model.addAttribute("doanhthu", tongDoanhThu);
 
         return "admin/dashboard/show";
