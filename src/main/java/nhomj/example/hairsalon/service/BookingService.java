@@ -43,4 +43,8 @@ public class BookingService {
     public List<Service> getAllServices() {
         return serviceRepository.findAll();
     }
+
+    public List<Booking> getBookingsByStaffId(Long staffId) {
+        return bookingRepository.findByStaffId(staffId);
+    }
 }

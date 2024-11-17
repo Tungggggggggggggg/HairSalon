@@ -21,6 +21,11 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
                         Lương nhân viên
                     </a>
+
+                    <a class="nav-link" href="../Staff_Booking/${loggedInStaff.id}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
+                        Lịch hẹn
+                    </a>
                 </c:if>
 
             </div>

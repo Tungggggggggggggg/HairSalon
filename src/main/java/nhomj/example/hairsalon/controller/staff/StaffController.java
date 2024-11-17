@@ -4,10 +4,10 @@ import nhomj.example.hairsalon.model.Staff;
 import nhomj.example.hairsalon.service.StaffSalaryService;
 import nhomj.example.hairsalon.service.StaffService;
 import nhomj.example.hairsalon.model.StaffSalary;
-import nhomj.example.hairsalon.service.StaffService;
+import nhomj.example.hairsalon.model.Booking;
+import nhomj.example.hairsalon.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +20,13 @@ public class StaffController {
 
     private final StaffService staffService;
     private final StaffSalaryService staffSalaryService;
+    private final BookingService bookingService;
 
     @Autowired
-    public StaffController(StaffService staffService, StaffSalaryService staffSalaryService) {
+    public StaffController(StaffService staffService, StaffSalaryService staffSalaryService, BookingService bookingService) {
         this.staffService = staffService;
         this.staffSalaryService = staffSalaryService;
+        this.bookingService = bookingService;
 
     }
 
@@ -66,5 +68,13 @@ public class StaffController {
             model.addAttribute("errorMessage", "Nhân viên không tồn tại.");
             return "error"; // Redirect to error page
         }
+    }
+
+    @GetMapping("/Staff_Booking/{id}")
+    public String myBookings(@PathVariable long id, Model model, Authentication authentication) {
+        addLoggedInStaffToModel(model, authentication);
+        List<Booking> bookings = bookingService.getBookingsByStaffId(id);
+        model.addAttribute("bookingList", bookings);
+        return "staff/Staff_Booking"; // New view to display bookings
     }
 }
