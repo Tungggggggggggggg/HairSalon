@@ -6,9 +6,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-/**
- * Đại diện cho người dùng trong hệ thống.
- */
 @Entity
 @Table(name = "users")
 public class User {
@@ -42,16 +39,11 @@ public class User {
     @Column(nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime createdDate;
 
-    /**
-     * Constructor mặc định.
-     */
     public User() {
         super();
     }
 
-    // =====================
     // Getters và Setters
-    // =====================
 
     public Long getId() {
         return id;
@@ -125,10 +117,6 @@ public class User {
         this.createdDate = createdDate;
     }
 
-    // =====================
-    // Phương thức bổ sung
-    // =====================
-
     /**
      * Trả về ngày sinh đã được định dạng dưới dạng "dd/MM/yyyy".
      *
@@ -172,9 +160,6 @@ public class User {
         return "";
     }
 
-    /**
-     * Enum đại diện cho giới tính của người dùng.
-     */
     public enum Gender {
         Nam, Nu
     }
