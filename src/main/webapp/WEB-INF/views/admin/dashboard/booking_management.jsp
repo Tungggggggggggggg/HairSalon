@@ -1,4 +1,4 @@
-<<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
@@ -79,7 +79,20 @@
                                                     <i class="fas fa-eye"></i> Chi tiết
                                                 </button>
                                                 <button class="btn btn-sm btn-warning"
-                                                    onclick="openModal('edit', '${booking.id}', '${booking.customer.id}', '${booking.formattedDate}', '${booking.formattedAppointmentTime}', '${not empty booking.services ? booking.services[0].id : ''}', '${booking.status}', '${booking.staff.id}', '${booking.customer.name}', '${booking.customer.email}', '${booking.customer.phone}', '${booking.customer.address}', '${booking.customer.birthday}', '${booking.customer.gender}')">
+                                                    onclick="openModal('edit', 
+                                                        '${booking.id}', 
+                                                        '${booking.customer.id}', 
+                                                        '${booking.formattedDate}', 
+                                                        '${booking.formattedAppointmentTime}', 
+                                                        '${not empty booking.services ? booking.services[0].id : ''}', 
+                                                        '${booking.status}', 
+                                                        '${booking.staff.id}', 
+                                                        '${booking.customer.name}', 
+                                                        '${booking.customer.email}', 
+                                                        '${booking.customer.phone}', 
+                                                        '${booking.customer.address}', 
+                                                        '${booking.customer.formattedBirthday}', 
+                                                        '${booking.customer.gender}')">
                                                     <i class="fas fa-edit"></i> Sửa
                                                 </button>
                                                 <button type="button" class="btn btn-sm btn-danger" 
@@ -148,9 +161,7 @@
 
                                         <label for="service">Dịch vụ:</label>
                                         <form:select class="form-control" path="services" id="service" multiple="true">
-                                            <c:forEach var="service" items="${servicesList}">
-                                                <option value="${service.id}">${service.name}</option>
-                                            </c:forEach>
+                                            <form:options items="${servicesList}" itemValue="id" itemLabel="name" />
                                         </form:select>
 
                                         <label for="staff">Nhân viên:</label>
@@ -213,7 +224,8 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="cancelModalLabel">Xác nhận hủy lịch hẹn</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <p>Bạn có chắc chắn muốn hủy lịch hẹn <strong id="cancelName"></strong>?</p>
@@ -221,7 +233,8 @@
                         <div class="modal-footer">
                             <form:form id="cancelForm" action="/admin/booking_management/cancel" method="post" modelAttribute="cancelBooking">
                                 <form:hidden path="id" />
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Hủy</button>
                                 <button type="submit" class="btn btn-warning">Xác nhận hủy</button>
                             </form:form>
                         </div>

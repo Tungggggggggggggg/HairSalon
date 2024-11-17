@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -50,12 +51,7 @@
 
                 <label for="serviceType">Loại dịch vụ:</label>
                 <form:select id="serviceType" path="services" multiple="true" required="true" class="form-select">
-                    <c:forEach var="service" items="${services}">
-                        <option value="${service.id}" 
-                            <c:if test="${booking.services.contains(service.id)}">selected</c:if>>
-                            ${service.name}
-                        </option>
-                    </c:forEach>
+                    <form:options items="${services}" itemValue="id" itemLabel="name" />
                 </form:select><br /><br />
 
                 <label for="stylist">Chọn nhân viên:</label>

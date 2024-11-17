@@ -1,8 +1,8 @@
 package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -60,21 +60,26 @@ public class Staff {
         Nam, Nu
     }
 
-    public GenderStaff getGender() {
-        return gender;
+    public enum Role {
+        NhanVien, Admin
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
+    /**
+     * Constructor mặc định.
+     */
+    public Staff() {
+        super();
     }
 
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
+    // Getters và Setters
+
+    public Long getId() {
+        return id;
     }
 
-    public void setGender(GenderStaff gender) {
-        this.gender = gender;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
     public String getAvatar() {
         return avatar;
@@ -82,22 +87,6 @@ public class Staff {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -108,81 +97,112 @@ public class Staff {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
     public String getPhone() {
         return phone;
     }
-
+    
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
+    
+    public String getAddress() {
+        return address;
+    }
+    
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    public GenderStaff getGender() {
+        return gender;
+    }
+    
+    public void setGender(GenderStaff gender) {
+        this.gender = gender;
+    }
+    
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+    
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+    
     public String getPassword() {
         return password;
     }
-
+    
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
     public String getExperience() {
         return experience;
     }
-
+    
     public void setExperience(String experience) {
         this.experience = experience;
     }
-
+    
     public Role getRole() {
         return role;
     }
-
+    
     public void setRole(Role role) {
         this.role = role;
     }
-
+    
     public List<Booking> getBookings() {
         return bookings;
     }
-
+    
     public void setBookings(List<Booking> bookings) {
         this.bookings = bookings;
     }
-
+    
     public List<StaffSalary> getSalaries() {
         return salaries;
     }
-
+    
     public void setSalaries(List<StaffSalary> salaries) {
         this.salaries = salaries;
     }
-
+    
     public List<StaffShift> getShifts() {
         return shifts;
     }
-
+    
     public void setShifts(List<StaffShift> shifts) {
         this.shifts = shifts;
     }
-
+    
     public List<Notification> getNotifications() {
         return notifications;
     }
-
+    
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
     }
 
-    public enum Role {
-        NhanVien, Admin
+    /**
+     * Trả về ngày sinh đã được định dạng dưới dạng "dd/MM/yyyy".
+     *
+     * @return Ngày sinh dưới dạng String. Nếu birthday là null, trả về chuỗi rỗng.
+     */
+    public String getFormattedBirthday() {
+        if (this.birthday != null) {
+            return this.birthday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        }
+        return "";
     }
-
 
 }

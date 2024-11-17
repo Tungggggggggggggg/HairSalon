@@ -173,7 +173,7 @@ VALUES
 
 -- Insert data into service table
 INSERT INTO service (avatar, name, description, price, duration_minutes)
-VALUE
+VALUES
     ('Cattocnamcoban.jpg', N'Cắt tóc nam cơ bản', N'Cắt tóc gọn gàng, nhanh chóng.', 50000, 20),
     ('Cattocnucoban.jpg', N'Cắt tóc nữ cơ bản', N'Tỉa tóc, tạo kiểu đơn giản.', 100000, 30),
     ('Cattoctreem.jpg', N'Cắt tóc trẻ em', N'Dành cho trẻ nhỏ, nhẹ nhàng và an toàn.', 50000, 25),

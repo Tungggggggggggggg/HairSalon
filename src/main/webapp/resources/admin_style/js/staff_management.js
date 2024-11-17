@@ -19,7 +19,7 @@ let staffBirthdayPicker;
 // Khởi tạo Flatpickr cho trường "Ngày sinh"
 staffBirthdayPicker = flatpickr("#staffBirthday", {
     dateFormat: "d/m/Y", // Định dạng ngày: dd/MM/yyyy
-    maxDate: "today", // Ngày sinh không thể chọn trong tương lai
+    maxDate: "today",
     locale: "vi",
     defaultDate: null
 });
@@ -45,8 +45,8 @@ function openModal(type, id = '', avatar = '', name = '', email = '', password =
         staffNameInput.value = '';
         staffEmailInput.value = '';
         staffPassword.value = '';
-        staffPhoneInput.value = '';
-        staffAddressInput.value = '';
+        staffPhone.value = '';
+        staffAddress.value = '';
         staffGender.value = '';
         staffBirthdayPicker.clear();
         staffExperience.value = '';
@@ -75,8 +75,7 @@ function openDeleteModal(id, name) {
     new bootstrap.Modal(document.getElementById('deleteStaffModal')).show();
 }
 
-
-function viewDetails(id, name, email, password, phone, address, gender, birthday, experience, role, ) {
+function viewDetails(id, name, email, password, phone, address, gender, birthday, experience, role) {
     document.getElementById("detailId").textContent = id;
     document.getElementById("detailName").textContent = name;
     document.getElementById("detailEmail").textContent = email;
@@ -87,5 +86,4 @@ function viewDetails(id, name, email, password, phone, address, gender, birthday
     document.getElementById("detailBirthday").textContent = birthday;
     document.getElementById("detailExperience").textContent = experience;
     document.getElementById("detailRole").textContent = role;
-
 }

@@ -33,8 +33,7 @@ prefix="c" %>
                                 <strong>Giá:</strong>
                                 <fmt:formatNumber
                                     value="${service.price}"
-                                    pattern="#,###"
-                                />đ
+                                    pattern="#,###" />đ
                             </p>
                             <p>
                                 <strong>Thời gian thực hiện:</strong>

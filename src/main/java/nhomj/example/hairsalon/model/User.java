@@ -3,6 +3,7 @@ package nhomj.example.hairsalon.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Entity
@@ -38,8 +39,9 @@ public class User {
     @Column(nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime createdDate;
 
-
-
+    /**
+     * Constructor mặc định.
+     */
     public User() {
         super();
     }
@@ -50,13 +52,13 @@ public class User {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
     public void setName(String name) {
         this.name = name;
@@ -65,57 +67,69 @@ public class User {
     public String getEmail() {
         return email;
     }
-
+    
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
     public String getPhone() {
         return phone;
     }
-
+    
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
+    
     public String getAddress() {
         return address;
     }
-
+    
     public void setAddress(String address) {
         this.address = address;
     }
-
+    
     public LocalDate getBirthday() {
         return birthday;
     }
-
+    
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
-
+    
     public Gender getGender() {
         return gender;
     }
-
+    
     public void setGender(Gender gender) {
         this.gender = gender;
     }
-
+    
     public List<Booking> getBookingCustomers() {
         return bookingCustomers;
     }
-
+    
     public void setBookingCustomers(List<Booking> bookingCustomers) {
         this.bookingCustomers = bookingCustomers;
     }
-
+    
     public LocalDateTime getCreatedDate() {
         return createdDate;
     }
-
+    
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
+    }
+
+    /**
+     * Trả về ngày sinh đã được định dạng dưới dạng "dd/MM/yyyy".
+     *
+     * @return Ngày sinh dưới dạng String. Nếu birthday là null, trả về chuỗi rỗng.
+     */
+    public String getFormattedBirthday() {
+        if (this.birthday != null) {
+            return this.birthday.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        }
+        return "";
     }
 
     public enum Gender {

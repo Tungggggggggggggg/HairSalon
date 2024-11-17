@@ -95,6 +95,10 @@ document.addEventListener("DOMContentLoaded", function () {
         else if (gender === 'Nu') genderText = 'Nữ';
         else if (gender === 'Khac') genderText = 'Khác';
 
+        // Xử lý ngày sinh để định dạng đúng
+        const [day, month, year] = birthday.split('/');
+        const formattedBirthday = `${day}/${month}/${year}`;
+
         // Điền thông tin vào modal
         document.getElementById('confirmDate').textContent = date;
         document.getElementById('confirmTime').textContent = time;
@@ -105,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('confirmPhone').textContent = phone;
         document.getElementById('confirmEmail').textContent = email;
         document.getElementById('confirmGender').textContent = genderText;
-        document.getElementById('confirmBirthday').textContent = birthday;
+        document.getElementById('confirmBirthday').textContent = formattedBirthday;
         document.getElementById('confirmAddress').textContent = address;
     });
 
