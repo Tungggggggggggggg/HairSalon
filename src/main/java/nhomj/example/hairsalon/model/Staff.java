@@ -6,9 +6,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-/**
- * Đại diện cho nhân viên trong hệ thống.
- */
 @Entity
 @Table(name = "staff")
 public class Staff {
@@ -63,30 +60,19 @@ public class Staff {
     @OneToMany(mappedBy = "staff")
     private List<Notification> notifications;
 
-    /**
-     * Enum đại diện cho giới tính của nhân viên.
-     */
     public enum GenderStaff {
         Nam, Nu
     }
 
-    /**
-     * Enum đại diện cho vai trò của nhân viên.
-     */
     public enum Role {
         NhanVien, Admin
     }
 
-    /**
-     * Constructor mặc định.
-     */
     public Staff() {
         super();
     }
 
-    // =====================
     // Getters và Setters
-    // =====================
 
     public Long getId() {
         return id;
@@ -180,8 +166,6 @@ public class Staff {
         return createdDate;
     }
 
-    // Không cung cấp setter cho createdDate để đảm bảo tính không thay đổi sau khi tạo
-
     public List<Booking> getBookings() {
         return bookings;
     }
@@ -213,10 +197,6 @@ public class Staff {
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
     }
-
-    // =====================
-    // Phương thức bổ sung
-    // =====================
 
     /**
      * Trả về ngày sinh đã được định dạng dưới dạng "dd/MM/yyyy".
