@@ -51,6 +51,17 @@ public class Booking {
     @Column(nullable = false, columnDefinition = "NVARCHAR(20)")
     private Status status = Status.DaDat;
 
+    @OneToOne(mappedBy = "booking")
+    private Invoice invoice;
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
     public enum Status {
         DaDat,
         HoanThanh,
