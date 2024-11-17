@@ -71,7 +71,7 @@ prefix="c" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
         <!-- Phần Top Stylist -->
         <section id="top-stylist" class="top-stylist-section">
             <div class="container">
-                <h1 class="section-title">TOP THỢ CẮT TRONG THÁNG</h1>
+                <h1 class="section-title">TOP NHÂN VIÊN XUẤT SẮC TRONG THÁNG</h1>
                 <div class="carousel-container">
                     <div class="stylist-container" id="stylist-list">
                         <!-- Stylists will be displayed here -->
