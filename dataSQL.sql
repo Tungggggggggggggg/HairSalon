@@ -14,6 +14,10 @@ VALUES
     (N'Hoàng Quốc Bảo', 'bao@example.com', 'password123', '0666-777-888', N'505 Đường Nguyễn Trãi', 8, N'Nam', '1986-01-25', 'Admin'),
     (N'Lý Minh Châu', 'minhchau@example.com', 'password123', '0333-444-555', N'606 Đường Quang Trung', 9, N'Nu', '1984-03-30', 'Admin'),
     (N'Ngô Bá Vinh', 'vinh@example.com', 'password123', '0999-000-111', N'707 Đường Nguyễn Thái Học', 10, N'Nam', '1992-05-15', 'Admin');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8b4402f2c1e7919b3c570665656420f15d607100
 
 
 -- chưa sửa
@@ -190,8 +194,11 @@ VALUE
     ('Duoitockeratin.jpg', N'Duỗi tóc keratin', N'Duỗi phục hồi, giảm xơ rối.', 500000, 120),
     ('Combotocgoisay.jpg', N'Combo cắt tóc - gội đầu - sấy tóc', N'Trọn gói dịch vụ cơ bản.', 250000, 75),
     ('Combonam.jpg', N'Combo tạo kiểu - cạo râu - gội đầu', N'Phong cách lịch lãm cho nam.', 400000, 100);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 8b4402f2c1e7919b3c570665656420f15d607100
 
 -- chưa sửa
 -- -- Insert data into booking table

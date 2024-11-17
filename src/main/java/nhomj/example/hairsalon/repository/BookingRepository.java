@@ -4,7 +4,9 @@ import nhomj.example.hairsalon.model.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-    // Không cần khai báo lại findAll(), save(), deleteById() vì JpaRepository đã có sẵn
+    List<Booking> findByStaffId(Long staffId);
 }
