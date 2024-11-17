@@ -44,23 +44,30 @@ prefix="c" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
         <section class="services-section">
             <h1>DỊCH VỤ</h1>
-            <div class="services-container">
-                <c:forEach var="service" items="${services}">
-                    <div class="service-card-wrapper">
-                        <a href="/user/service/${service.id}" class="service-link">
-                            <div class="service-card">
-                                <div class="image-container">
-                                    <img src="/images/service/${service.avatar}" alt="${service.name}" />
+            <div class="carousel-container">
+                <div class="carousel" id="service-list">
+                    <c:forEach var="service" items="${services}">
+                        <div class="service-card-wrapper">
+                            <a href="/user/service/${service.id}" class="service-link">
+                                <div class="service-card">
+                                    <div class="image-container">
+                                        <img src="/images/service/${service.avatar}" alt="${service.name}" />
+                                    </div>
+                                    <h3>${service.name}</h3>
+                                    <p>${service.description}</p>
+                                    <p class="price">Giá từ <fmt:formatNumber value="${service.price}" pattern="#,###" />đ</p>
                                 </div>
-                                <h3>${service.name}</h3>
-                                <p>${service.description}</p>
-                                <p class="price">Giá từ <fmt:formatNumber value="${service.price}" pattern="#,###" />đ</p>
-                            </div>
-                        </a>
-                    </div>
-                </c:forEach>
+                            </a>
+                        </div>
+                    </c:forEach>
+                </div>
+                <!-- Navigation Buttons -->
+                <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+                <button class="next" onclick="moveSlide(1)">&#10095;</button>
             </div>
         </section>
+        <script src="user_style/js/script.js"></script>
+
 
         <!-- Phần đánh giá khách hàng -->
         <section id="reviews" class="reviews-section">
