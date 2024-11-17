@@ -33,7 +33,7 @@ public class UserService {
      * @param id ID của người dùng
      * @return đối tượng User nếu tìm thấy, ngược lại trả về null
      */
-    public User findOneById(long id) {
+    public User findOneById(Long id) {
         return this.userRepository.findOneById(id);
     }
 
@@ -42,7 +42,7 @@ public class UserService {
      *
      * @param id ID của người dùng cần xóa
      */
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         this.userRepository.deleteById(id);
     }
 

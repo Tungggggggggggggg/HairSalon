@@ -34,7 +34,6 @@ public class StaffControllers {
         this.staffService = staffService;
         this.upLoadService = upLoadService;
         this.passwordEncoder = passwordEncoder;
-
     }
 
     @InitBinder
@@ -48,6 +47,12 @@ public class StaffControllers {
         });
     }
 
+    /**
+     * Hiển thị trang quản lý nhân viên.
+     *
+     * @param model Đối tượng Model để truyền dữ liệu đến view
+     * @return Trang staff_management.jsp
+     */
     @GetMapping("/admin/staff_management")
     public String staffManagement(Model model) {
         List<Staff> staffs = this.staffService.getAllStaff();
@@ -57,30 +62,38 @@ public class StaffControllers {
         return "admin/dashboard/staff_management";
     }
 
-    //Dùng để lưu khi tạo nhân viên mới và lưa khi chỉnh sửa nhân viên
+    /**
+     * Xử lý lưu thông tin nhân viên mới hoặc cập nhật nhân viên hiện tại.
+     *
+     * @param staff Đối tượng Staff chứa thông tin nhân viên
+     * @param file  Tệp avatar tải lên
+     * @return Chuyển hướng đến trang quản lý nhân viên
+     */
     @PostMapping("/admin/staff_management/save")
-    public String saveStaff(@ModelAttribute("newStaff") Staff staff,@RequestParam("file") MultipartFile file) {
+    public String saveStaff(@ModelAttribute("newStaff") Staff staff, @RequestParam("file") MultipartFile file) {
         String avatar = "";
-        if(!file.isEmpty()){
+        if (!file.isEmpty()) {
             avatar = this.upLoadService.handleSaveUploadFile(file, "avatar");
         }
         Staff checkStaff = null;
-        if(staff.getId() != null) {
+        if (staff.getId() != null) {
             checkStaff = staffService.getStaffById(staff.getId());
         }
-        if(checkStaff != null) {
+        if (checkStaff != null) {
             checkStaff.setName(staff.getName());
             checkStaff.setEmail(staff.getEmail());
             checkStaff.setPhone(staff.getPhone());
             checkStaff.setAddress(staff.getAddress());
-            if(avatar != null) {
+            if (avatar != null && !avatar.isEmpty()) {
                 checkStaff.setAvatar(avatar);
             }
             checkStaff.setPassword(staff.getPassword());
-
             checkStaff.setRole(staff.getRole());
+            checkStaff.setBirthday(staff.getBirthday());
+            checkStaff.setGender(staff.getGender());
+            checkStaff.setExperience(staff.getExperience());
             staffService.saveStaff(checkStaff);
-        }else{
+        } else {
             staff.setPassword(this.passwordEncoder.encode(staff.getPassword()));
             staff.setAvatar(avatar);
             staff.setRole(Staff.Role.NhanVien);
@@ -89,7 +102,13 @@ public class StaffControllers {
         return "redirect:/admin/staff_management";
     }
 
-
+    /**
+     * Xử lý xóa nhân viên dựa trên ID.
+     *
+     * @param staff Đối tượng Staff chứa ID nhân viên cần xóa
+     * @param model Đối tượng Model để truyền dữ liệu đến view nếu cần
+     * @return Chuyển hướng đến trang quản lý nhân viên
+     */
     @PostMapping("/admin/staff_management/delete")
     public String deleteStaff(@ModelAttribute("deleteStaff") Staff staff, Model model) {
         this.staffService.deleteStaff(staff);

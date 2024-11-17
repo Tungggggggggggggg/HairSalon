@@ -1,3 +1,4 @@
+// Khởi tạo bảng dữ liệu với Simple DataTables và thiết lập ngôn ngữ tiếng Việt
 const staffTable = new simpleDatatables.DataTable("#staffTable", {
     perPageSelect: false,
     searchable: true,
@@ -24,7 +25,7 @@ staffBirthdayPicker = flatpickr("#staffBirthday", {
     defaultDate: null
 });
 
-let staffModal;
+let staffModal; // Biến để lưu modal instance
 
 // Hàm openModal để thêm/sửa nhân viên
 function openModal(type, id = '', avatar = '', name = '', email = '', password = '', phone = '', address = '', gender = '', birthday = '', experience = '', role = '') {
@@ -38,6 +39,7 @@ function openModal(type, id = '', avatar = '', name = '', email = '', password =
     const staffGender = document.getElementById('staffGender');
     const staffExperience = document.getElementById('staffExperience');
     const staffRole = document.getElementById('staffRole');
+    const avatarPreview = $("#avatarPreview");
 
     if (type === 'new') {
         modalTitle.textContent = 'Thêm mới nhân viên';
@@ -51,6 +53,7 @@ function openModal(type, id = '', avatar = '', name = '', email = '', password =
         staffBirthdayPicker.clear();
         staffExperience.value = '';
         staffRole.value = 'NhanVien';
+        avatarPreview.attr("src", "").css({ "display": "none" }); // Reset avatar preview
     } else if (type === 'edit') {
         modalTitle.textContent = 'Chỉnh sửa nhân viên';
         staffId.value = id;
@@ -63,19 +66,28 @@ function openModal(type, id = '', avatar = '', name = '', email = '', password =
         staffBirthdayPicker.setDate(birthday, true, "d/m/Y");
         staffExperience.value = experience;
         staffRole.value = role;
+        if (avatar) {
+            avatarPreview.attr("src", `/images/avatar/${avatar}`).css({ "display": "block" });
+        } else {
+            avatarPreview.attr("src", "").css({ "display": "none" });
+        }
     }
 
-    // const staffModal = new bootstrap.Modal(document.getElementById('staffModal'));
-    // staffModal.show();
+    if (!staffModal) {
+        staffModal = new bootstrap.Modal(document.getElementById("staffModal"));
+    }
+    staffModal.show();
 }
 
+// Hàm mở modal xác nhận xóa nhân viên
 function openDeleteModal(id, name) {
     document.getElementById("deleteStaffId").value = id;
     document.getElementById("deleteStaffName").innerText = name;
     new bootstrap.Modal(document.getElementById('deleteStaffModal')).show();
 }
 
-function viewDetails(id, name, email, password, phone, address, gender, birthday, experience, role) {
+// Hàm hiển thị chi tiết nhân viên
+function viewDetails(id, name, email, password, phone, address, gender, birthday, experience, role, createdDate) {
     document.getElementById("detailId").textContent = id;
     document.getElementById("detailName").textContent = name;
     document.getElementById("detailEmail").textContent = email;
@@ -86,4 +98,5 @@ function viewDetails(id, name, email, password, phone, address, gender, birthday
     document.getElementById("detailBirthday").textContent = birthday;
     document.getElementById("detailExperience").textContent = experience;
     document.getElementById("detailRole").textContent = role;
+    document.getElementById("detailCreatedDate").textContent = createdDate; // Hiển thị ngày tạo
 }

@@ -2,9 +2,13 @@ package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Đại diện cho nhân viên trong hệ thống.
+ */
 @Entity
 @Table(name = "staff")
 public class Staff {
@@ -44,6 +48,9 @@ public class Staff {
     @Column(name = "role", columnDefinition = "NVARCHAR(50)")
     private Role role = Role.NhanVien;
 
+    @Column(name = "created_date", nullable = false, updatable = false)
+    private LocalDateTime createdDate;
+
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
@@ -56,10 +63,16 @@ public class Staff {
     @OneToMany(mappedBy = "staff")
     private List<Notification> notifications;
 
+    /**
+     * Enum đại diện cho giới tính của nhân viên.
+     */
     public enum GenderStaff {
         Nam, Nu
     }
 
+    /**
+     * Enum đại diện cho vai trò của nhân viên.
+     */
     public enum Role {
         NhanVien, Admin
     }
@@ -71,7 +84,9 @@ public class Staff {
         super();
     }
 
+    // =====================
     // Getters và Setters
+    // =====================
 
     public Long getId() {
         return id;
@@ -161,6 +176,12 @@ public class Staff {
         this.role = role;
     }
     
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    // Không cung cấp setter cho createdDate để đảm bảo tính không thay đổi sau khi tạo
+
     public List<Booking> getBookings() {
         return bookings;
     }
@@ -193,6 +214,10 @@ public class Staff {
         this.notifications = notifications;
     }
 
+    // =====================
+    // Phương thức bổ sung
+    // =====================
+
     /**
      * Trả về ngày sinh đã được định dạng dưới dạng "dd/MM/yyyy".
      *
@@ -205,4 +230,61 @@ public class Staff {
         return "";
     }
 
+    /**
+     * Trả về giới tính đã được định dạng.
+     *
+     * @return "Nam" hoặc "Nữ"
+     */
+    public String getFormattedGender() {
+        if (this.gender != null) {
+            switch (this.gender) {
+                case Nam:
+                    return "Nam";
+                case Nu:
+                    return "Nữ";
+                default:
+                    return "Khác";
+            }
+        }
+        return "";
+    }
+
+    /**
+     * Trả về chức vụ đã được định dạng.
+     *
+     * @return "Nhân viên" hoặc "Admin"
+     */
+    public String getFormattedRole() {
+        if (this.role != null) {
+            switch (this.role) {
+                case NhanVien:
+                    return "Nhân viên";
+                case Admin:
+                    return "Admin";
+                default:
+                    return this.role.name();
+            }
+        }
+        return "";
+    }
+
+    /**
+     * Trả về ngày tạo đã được định dạng dưới dạng "dd/MM/yyyy HH:mm:ss".
+     *
+     * @return Ngày tạo dưới dạng String. Nếu createdDate là null, trả về chuỗi rỗng.
+     */
+    public String getFormattedCreatedDate() {
+        if (this.createdDate != null) {
+            return this.createdDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        }
+        return "";
+    }
+
+    /**
+     * Được gọi trước khi thực hiện persist để thiết lập createdDate.
+     */
+    @PrePersist
+    protected void onCreate() {
+        this.createdDate = LocalDateTime.now();
+    }
 }

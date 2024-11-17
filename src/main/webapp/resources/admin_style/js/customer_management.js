@@ -15,7 +15,7 @@ const datatablesSimple = new simpleDatatables.DataTable("#datatablesSimple", {
 });
 
 // Hàm mở modal và thiết lập dữ liệu
-function openModal(type, id = '', name = '', email = '', password = '', phone = '',address = '', gender = '', birthday = '', createdDate = '') {
+function openModal(type, id = '', name = '', email = '', password = '', phone = '', address = '', gender = '', birthday = '', createdDate = '') {
     const modalTitle = document.getElementById('customerModalLabel');
     const customerId = document.getElementById('customerId');
     const customerName = document.getElementById('customerName');
@@ -49,13 +49,11 @@ function openModal(type, id = '', name = '', email = '', password = '', phone = 
     }
 }
 
-
 function openDeleteModal(id, name) {
     document.getElementById("deleteCustomerId").value = id;
     document.getElementById("deleteCustomerName").innerText = name;
     new bootstrap.Modal(document.getElementById('deleteCustomerModal')).show();
 }
-
 
 function viewDetails(id, name, email, phone, address, gender, birthday, createdDate) {
     document.getElementById("detailId").textContent = id;
@@ -67,7 +65,3 @@ function viewDetails(id, name, email, phone, address, gender, birthday, createdD
     document.getElementById("detailBirthday").textContent = birthday;
     document.getElementById("detailCreatedDate").textContent = createdDate;
 }
-
-
-
-

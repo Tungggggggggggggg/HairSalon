@@ -19,9 +19,13 @@
         $(document).ready(() => {
             const avatarFile = $("#avatarFile");
             avatarFile.change(function (e) {
-                const imgURL = URL.createObjectURL(e.target.files[0]);
-                $("#avatarPreview").attr("src", imgURL).css({ "display": "block" });
-                avatarFile.on('load', () => URL.revokeObjectURL(imgURL));  // Giải phóng bộ nhớ
+                if (e.target.files && e.target.files[0]) {
+                    const imgURL = URL.createObjectURL(e.target.files[0]);
+                    $("#avatarPreview").attr("src", imgURL).css({ "display": "block" });
+                    avatarFile.on('load', () => URL.revokeObjectURL(imgURL));  // Giải phóng bộ nhớ
+                } else {
+                    $("#avatarPreview").attr("src", "").css({ "display": "none" });
+                }
             });
         });
     </script>
@@ -68,24 +72,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Dữ liệu mẫu -->
+                                    <!-- Dữ liệu nhân viên -->
                                     <c:forEach var="staff" items="${staffs}">
                                         <tr>
                                             <td>${staff.id}</td>
-                                            <td><img style="width: 100px; height: 100px;" src="/images/avatar/${staff.avatar}" onerror="this.src='/images/avatar/default.png';" alt="Avatar"></td>
+                                            <td>
+                                                <img style="width: 100px; height: 100px;" 
+                                                     src="/images/avatar/${staff.avatar}" 
+                                                     onerror="this.src='/images/avatar/default.png';" 
+                                                     alt="Avatar">
+                                            </td>
                                             <td>${staff.name}</td>
                                             <td>${staff.email}</td>
                                             <td>${staff.phone}</td>
-                                            <td>${staff.role}</td>
+                                            <td>${staff.formattedRole}</td> <!-- Sử dụng formattedRole -->
 
                                             <td>
                                                 <button class="btn btn-sm btn-info" data-bs-toggle="modal"
                                                     data-bs-target="#detailModal"
-                                                    onclick="viewDetails('${staff.id}','${staff.name}', '${staff.email}', '${staff.password}', '${staff.phone}', '${staff.address}', '${staff.gender}', '${staff.formattedBirthday}', '${staff.experience}','${staff.role}')">
+                                                    onclick="viewDetails('${staff.id}', '${staff.name}', '${staff.email}', '${staff.password}', '${staff.phone}', '${staff.address}', '${staff.formattedGender}', '${staff.formattedBirthday}', '${staff.experience}', '${staff.formattedRole}', '${staff.formattedCreatedDate}')">
                                                     <i class="fas fa-eye"></i> Chi tiết
                                                 </button>
                                                 <button class="btn btn-sm btn-warning"
-                                                    data-bs-toggle="modal" data-bs-target="#staffModal"
                                                     onclick="openModal('edit', 
                                                         '${staff.id}',
                                                         '${staff.avatar}',
@@ -136,7 +144,7 @@
                             <p><strong>Năm sinh:</strong> <span id="detailBirthday"></span></p>
                             <p><strong>Kinh nghiệm:</strong> <span id="detailExperience"></span> năm</p>
                             <p><strong>Chức vụ:</strong> <span id="detailRole"></span></p>
-
+                            <p><strong>Ngày tạo:</strong> <span id="detailCreatedDate"></span></p>
                         </div>
 
                         <div class="modal-footer">
@@ -224,9 +232,8 @@
                                     <div class="col-12 col-md-4">
                                         <label for="staffRole" class="form-label">Chức vụ</label>
                                         <form:select class="form-select" path="role" id="staffRole">
-                                            <form:option value="NhanVien">NHÂN VIÊN</form:option>
-                                            <form:option value="Admin">ADMIN</form:option>
-
+                                            <form:option value="NhanVien">Nhân viên</form:option> <!-- Đã chỉnh sửa -->
+                                            <form:option value="Admin">Admin</form:option>
                                         </form:select>
                                     </div>
                                     <div class="col-12 col-md-8">
@@ -240,7 +247,6 @@
                                         <img style="max-height: 100px; display: none;" alt="avatar preview"
                                              id="avatarPreview" />
                                     </div>
-
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
@@ -249,30 +255,27 @@
                                 </div>
                             </form:form>
                         </div>
-
                     </div>
                 </div>
-
             </div>
+
             <!-- Modal xác nhận xóa Nhân viên -->
             <div class="modal fade" id="deleteStaffModal" tabindex="-1"
                 aria-labelledby="deleteStaffModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteStaffModalLabel">Xác nhận xóa Nhân viên
-                            </h5>
+                            <h5 class="modal-title" id="deleteStaffModalLabel">Xác nhận xóa Nhân viên</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p>Bạn có chắc chắn muốn xóa Nhân viên <strong id="deleteStaffName"></strong>?
-                            </p>
+                            <p>Bạn có chắc chắn muốn xóa Nhân viên <strong id="deleteStaffName"></strong>?</p>
                         </div>
                         <div class="modal-footer">
                             <form:form id="deleteStaffForm" action="/admin/staff_management/delete"
                                 method="post" modelAttribute="deleteStaff">
-                                <form:hidden path="id" />
+                                <form:hidden path="id" id="deleteStaffId" /> <!-- Thêm id="deleteStaffId" -->
                                 <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Hủy</button>
                                 <button type="submit" class="btn btn-danger">Xóa</button>
@@ -281,7 +284,6 @@
                     </div>
                 </div>
             </div>
-
 
             <jsp:include page="../layout/footer.jsp" />
         </div>
