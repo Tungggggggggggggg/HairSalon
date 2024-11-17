@@ -74,8 +74,8 @@
     display: flex;
     gap: 20px;
     transition: transform 0.3s ease-in-out;
+    width: calc(100% + 40px); /* Thêm chiều rộng để chứa đủ các dịch vụ */
 }
-
 .service-link {
     text-decoration: none;
     color: inherit;
