@@ -16,12 +16,13 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                         Thông tin nhân viên: ${loggedInStaff.name}
                     </a>
+
+                    <a class="nav-link" href="../Staff_Salary/${loggedInStaff.id}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
+                        Lương nhân viên
+                    </a>
                 </c:if>
 
-                <a class="nav-link" href="../Staff_Salary">
-                    <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
-                    Lương nhân viên
-                </a>
             </div>
         </div>
 

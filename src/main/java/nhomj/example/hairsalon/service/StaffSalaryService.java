@@ -31,6 +31,10 @@ public class StaffSalaryService {
         staffSalaryRepository.save(staffSalary);
     }
 
+    public List<StaffSalary> getStaffSalaryByStaffId(Long staffId) {
+        return staffSalaryRepository.findByStaffId(staffId);
+    }
+
     public Double getTotalSalary(List<StaffSalary> staffSalaries) {
         Double totalSalary = 0.0;
         for (StaffSalary staffSalary : staffSalaries) {

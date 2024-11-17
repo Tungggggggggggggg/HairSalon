@@ -28,37 +28,6 @@
                     <li class="breadcrumb-item active">Lương</li>
                 </ol>
 
-                <!-- Form chọn tháng/năm -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <i class="fas fa-calendar-alt me-1"></i> Chọn tháng và năm để xem lương
-                    </div>
-                    <div class="card-body">
-                        <form action="viewSalary" method="get">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="month" class="form-label">Tháng</label>
-                                        <select class="form-select" id="month" name="month" required>
-                                            <c:forEach var="m" begin="1" end="12">
-                                                <option value="${m}">${m}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label for="year" class="form-label">Năm</label>
-                                        <input type="number" class="```jsp
-form-control" id="year" name="year" value="${currentYear}" required min="2000" max="2100">
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Xem lương</button>
-                        </form>
-                    </div>
-                </div>
-
                 <!-- Lương hàng tháng -->
                 <div class="card mb-4">
                     <div class="card-header">
@@ -68,27 +37,28 @@ form-control" id="year" name="year" value="${currentYear}" required min="2000" m
                         <table id="monthlySalaryTable" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>Tháng/Năm</th>
+                                <th>ID Lương</th>
                                 <th>Lương cơ bản (VNĐ)</th>
                                 <th>Thưởng (VNĐ)</th>
                                 <th>Tổng lương (VNĐ)</th>
+                                <th>Ngày cấp lương</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <!-- Dữ liệu lương sẽ được lặp qua đây -->
                             <c:if test="${not empty salaryList}">
                                 <c:forEach var="salary" items="${salaryList}">
                                     <tr>
-                                        <td>${salary.month}/${salary.year}</td>
+                                        <td>${salary.salaryId}</td>
                                         <td>${salary.baseSalary}</td>
                                         <td>${salary.bonus}</td>
                                         <td>${salary.totalSalary}</td>
+                                        <td>${salary.createDate}</td>
                                     </tr>
                                 </c:forEach>
                             </c:if>
                             <c:if test="${empty salaryList}">
                                 <tr>
-                                    <td colspan="4" class="text-center">Không có dữ liệu cho tháng/năm đã chọn.</td>
+                                    <td colspan="6" class="text-center">Không có dữ liệu cho tháng/năm đã chọn.</td>
                                 </tr>
                             </c:if>
                             </tbody>
