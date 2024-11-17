@@ -164,6 +164,102 @@ button.prev:hover, button.next:hover {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+/* Phần Top Stylist */
+.top-stylist-section {
+    text-align: center;
+    margin: 40px auto;
+    width: 100%;
+    padding: 20px;
+}
+
+.top-stylist-section .section-title {
+    font-size: 36px;
+    color: #003366;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.carousel-container {
+    position: relative;
+    display: flex;
+    justify-content: flex-start; /* Bắt đầu từ bên trái */
+    align-items: center;
+    overflow: hidden; /* Giữ phần thừa không hiển thị */
+    margin: 0 auto;
+    width: 100%;
+    height: auto;
+}
+
+.stylist-container {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.4s ease-in-out; /* Hiệu ứng trượt */
+    flex-wrap: nowrap; /* Các mục luôn nằm trên cùng một dòng */
+    width: max-content; /* Tự động mở rộng theo nội dung */
+}
+
+.stylist-item {
+    width: 300px;
+    text-align: center;
+    padding: 10px;
+    flex-shrink: 0; /* Không cho các mục co lại */
+}
+
+.stylist-item img {
+    width: 100%;
+    max-width: 300px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stylist-item:hover img {
+    transform: scale(1.1);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.stylist-item p {
+    color: #003366;
+    font-size: 20px;
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+/* Nút điều hướng */
+button.prev, button.next {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 28px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button.prev:hover, button.next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+
+button.prev {
+    left: 20px;
+}
+
+button.next {
+    right: 20px;
+}
+
+
 
 /* Phần đánh giá khách hàng */
 .reviews-section {
