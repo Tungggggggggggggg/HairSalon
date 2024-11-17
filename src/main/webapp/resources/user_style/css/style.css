@@ -58,11 +58,10 @@
 
 .services-section h1 {
     font-size: 48px;
-    color: #003366; /* Title color to match theme */
+    color: #003366;
     margin-bottom: 30px;
 }
 
-/* Container for the horizontal service carousel */
 .carousel-container {
     position: relative;
     display: flex;
@@ -86,7 +85,7 @@
 
 .service-card {
     width: 250px;
-    height: 350px; /* Set fixed height for equal card sizes */
+    height: 350px;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
@@ -106,7 +105,7 @@
 
 .image-container {
     position: relative;
-    height: 150px; /* Ensure fixed height for image container */
+    height: 150px;
     overflow: hidden;
     border-radius: 8px;
 }
@@ -114,31 +113,31 @@
 .image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures image fills the container */
+    object-fit: cover;
     border-radius: 8px;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-/* Làm mờ ảnh khi hover */
+
 .service-card:hover img {
     transform: scale(1.1);
     opacity: 0.5;
 }
 
 .service-card h3 {
-    color: #003366; /* Heading color */
+    color: #003366;
     font-size: 18px;
     margin: 10px 0;
 }
 
 .service-card .price {
     font-size: 16px;
-    color: #e74c3c; /* Price color */
+    color: #e74c3c;
     font-weight: bold;
     margin: 10px 0;
 }
 
-/* Navigation buttons */
+
 button.prev, button.next {
     position: absolute;
     top: 50%;
