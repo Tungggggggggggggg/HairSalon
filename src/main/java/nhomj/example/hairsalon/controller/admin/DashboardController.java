@@ -3,6 +3,7 @@ package nhomj.example.hairsalon.controller.admin;
 import nhomj.example.hairsalon.model.Booking;
 import nhomj.example.hairsalon.model.FeedbackList;
 import nhomj.example.hairsalon.model.Service;
+import nhomj.example.hairsalon.model.Revenue;
 import nhomj.example.hairsalon.service.BookingService;
 import nhomj.example.hairsalon.service.NotificationService;
 import nhomj.example.hairsalon.service.RevenueService;
