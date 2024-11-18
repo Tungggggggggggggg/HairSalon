@@ -1,4 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
@@ -160,7 +162,6 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:if test="${not empty users}">
                                 <c:forEach var="user" items="${users}">
                                     <tr>
                                         <td>${user.id}</td>
@@ -172,12 +173,6 @@
                                         <td>${user.phone}</td>
                                     </tr>
                                 </c:forEach>
-                            </c:if>
-                            <c:if test="${empty users}">
-                                <tr>
-                                    <td colspan="7" class="text-center">Không có dữ liệu người dùng.</td>
-                                </tr>
-                            </c:if>
                             </tbody>
                         </table>
                     </div>
