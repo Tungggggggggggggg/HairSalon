@@ -1,12 +1,9 @@
 package nhomj.example.hairsalon.controller.admin;
 
-import nhomj.example.hairsalon.model.Booking;
-import nhomj.example.hairsalon.model.FeedbackList;
-import nhomj.example.hairsalon.model.Service;
+import nhomj.example.hairsalon.model.*;
 import nhomj.example.hairsalon.service.BookingService;
 import nhomj.example.hairsalon.service.FeedbackListService;
 import nhomj.example.hairsalon.service.RevenueService;
-import nhomj.example.hairsalon.model.User;
 import nhomj.example.hairsalon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -21,13 +19,15 @@ public class DashboardController {
     private final BookingService bookingService;
     private final UserService userService;
     private final FeedbackListService feedbackListService;
+    private final RevenueService revenueService;
 
 
     @Autowired
-    public DashboardController( BookingService bookingService, UserService userService, FeedbackListService feedbackListService) {
+    public DashboardController( BookingService bookingService, UserService userService, FeedbackListService feedbackListService, RevenueService revenueService ) {
         this.bookingService = bookingService;
         this.userService = userService;
         this.feedbackListService = feedbackListService;
+        this.revenueService = revenueService;
     }
 
     @GetMapping("/admin")
@@ -36,6 +36,9 @@ public class DashboardController {
         long countBooking = this.bookingService.countBooking();
         List<Booking> bookings = this.bookingService.getAllBookings();
         List<User> users = this.userService.getAllUsers();
+        List<Revenue> revenues = this.revenueService.getAllRevenues();
+        List<BigDecimal> week = revenueService.getRevenueByWeek();
+        List<BigDecimal> month  = revenueService.getRevenueByMonth();
         double tongDoanhThu = 0;
         if(bookings != null)
         {
@@ -53,6 +56,9 @@ public class DashboardController {
         model.addAttribute("countBooking", countBooking);
         model.addAttribute("bookings", bookings);
         model.addAttribute("users", users);
+        model.addAttribute("revenues", revenues);
+        model.addAttribute("week", week);
+        model.addAttribute("month", month);
         model.addAttribute("doanhthu", tongDoanhThu);
         return "admin/dashboard/show";
     }
