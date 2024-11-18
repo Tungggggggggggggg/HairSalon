@@ -1,14 +1,46 @@
 /* Banner Section Styling */
 .banner {
     background-color: #f0f0f0;
-    background-image: url("../images/logo.jpg");
-    background-size: 90% 120%;
+    background-size: cover;
     background-position: center;
     padding: 120px 0;
     color: #333333;
     text-align: center;
     position: relative;
     box-shadow: inset 0 0 0 2000px rgba(255, 255, 255, 0.8);
+    animation: changeBackground 20s ease-in-out infinite;
+    transition: background-image 2s ease-in-out;
+}
+
+/* Keyframes cho hiệu ứng chuyển tiếp ảnh */
+@keyframes changeBackground {
+    0% {
+        background-image: url("../images/logo.jpg");
+    }
+    12.5% {
+        background-image: url("../images/uontoc.webp");
+    }
+    25% {
+        background-image: url("../images/cattoc.webp");
+    }
+    37.5% {
+        background-image: url("../images/nhuomtoc.jpg");
+    }
+    50% {
+        background-image: url("../images/duoitoc.jpg");
+    }
+    62.5% {
+        background-image: url("../images/goidau.jpg");
+    }
+    75% {
+        background-image: url("../images/taokieu.jpg");
+    }
+    87.5% {
+        background-image: url("../images/m-tp.jpg");
+    }
+    100% {
+        background-image: url("../images/logo.jpg");
+    }
 }
 
 .banner-logo {
