@@ -15,4 +15,7 @@ public interface StaffRepository extends JpaRepository<Staff, Long> {
     Staff findById(long id);
 
     Staff findStaffByEmail(String email);
+    
+    // Thêm phương thức để tìm nhân viên theo vai trò
+    List<Staff> findByRole(Staff.Role role);
 }

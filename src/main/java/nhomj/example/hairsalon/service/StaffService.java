@@ -83,4 +83,14 @@ public class StaffService {
     public Staff getStaffByEmail(String email) {
         return this.staffRepository.findStaffByEmail(email);
     }
+    
+    /**
+     * Lấy danh sách nhân viên theo vai trò.
+     *
+     * @param role Vai trò của nhân viên
+     * @return danh sách nhân viên theo vai trò
+     */
+    public List<Staff> getStaffByRole(Staff.Role role) {
+        return staffRepository.findByRole(role);
+    }
 }

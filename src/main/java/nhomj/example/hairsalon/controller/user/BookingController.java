@@ -54,8 +54,8 @@ public class BookingController {
     @GetMapping("/booking")
     public String showBookingPage(@RequestParam(value = "serviceId", required = false) Long serviceId, Model model) {
         List<Service> services = serviceShopService.getAllServiceShops();
-        List<Staff> staffList = staffService.getAllStaff();
-    
+        List<Staff> staffList = staffService.getStaffByRole(Staff.Role.NhanVien); // Đã chỉnh sửa
+
         Booking booking = new Booking();
         booking.setCustomer(new User()); // Khởi tạo customer
         if (serviceId != null) {
@@ -64,11 +64,11 @@ public class BookingController {
                 booking.getServices().add(selectedService);
             }
         }
-    
+
         model.addAttribute("booking", booking);
         model.addAttribute("services", services);
-        model.addAttribute("staffList", staffList);
-    
+        model.addAttribute("staffList", staffList); // Chỉ lấy nhân viên có vai trò "Nhân viên"
+
         return "user/booking"; // Trang booking.jsp
     }
 
@@ -88,7 +88,7 @@ public class BookingController {
             // Ghi log chi tiết các lỗi
             bindingResult.getAllErrors().forEach(error -> logger.error("Binding Error: {}", error.toString()));
             List<Service> services = serviceShopService.getAllServiceShops();
-            List<Staff> staffList = staffService.getAllStaff();
+            List<Staff> staffList = staffService.getStaffByRole(Staff.Role.NhanVien); // Đã chỉnh sửa
             model.addAttribute("services", services);
             model.addAttribute("staffList", staffList);
             return "user/booking";
@@ -114,7 +114,7 @@ public class BookingController {
             bindingResult.rejectValue("customer.email", "error.booking", "Thông tin khách hàng không đầy đủ");
             logger.error("Thông tin khách hàng không đầy đủ.");
             List<Service> services = serviceShopService.getAllServiceShops();
-            List<Staff> staffList = staffService.getAllStaff();
+            List<Staff> staffList = staffService.getStaffByRole(Staff.Role.NhanVien); // Đã chỉnh sửa
             model.addAttribute("services", services);
             model.addAttribute("staffList", staffList);
             return "user/booking";
@@ -125,21 +125,21 @@ public class BookingController {
             bindingResult.rejectValue("staff.id", "error.booking", "Không được bỏ trống nhân viên.");
             logger.error("Không được bỏ trống nhân viên.");
             List<Service> services = serviceShopService.getAllServiceShops();
-            List<Staff> staffList = staffService.getAllStaff();
+            List<Staff> staffList = staffService.getStaffByRole(Staff.Role.NhanVien); // Đã chỉnh sửa
             model.addAttribute("services", services);
             model.addAttribute("staffList", staffList);
             return "user/booking";
         } else {
             // Đảm bảo rằng staff đã được tải từ DB
             Staff staff = staffService.getStaffById(booking.getStaff().getId());
-            if (staff != null) {
+            if (staff != null && staff.getRole() == Staff.Role.NhanVien) { // Kiểm tra vai trò nhân viên
                 booking.setStaff(staff);
                 logger.info("Đã gán nhân viên: {}", staff.getName());
             } else {
-                bindingResult.rejectValue("staff.id", "error.booking", "Nhân viên không tồn tại.");
-                logger.error("Nhân viên không tồn tại với ID: {}", booking.getStaff().getId());
+                bindingResult.rejectValue("staff.id", "error.booking", "Nhân viên không tồn tại hoặc không hợp lệ.");
+                logger.error("Nhân viên không tồn tại hoặc không hợp lệ với ID: {}", booking.getStaff().getId());
                 List<Service> services = serviceShopService.getAllServiceShops();
-                List<Staff> staffList = staffService.getAllStaff();
+                List<Staff> staffList = staffService.getStaffByRole(Staff.Role.NhanVien); // Đã chỉnh sửa
                 model.addAttribute("services", services);
                 model.addAttribute("staffList", staffList);
                 return "user/booking";

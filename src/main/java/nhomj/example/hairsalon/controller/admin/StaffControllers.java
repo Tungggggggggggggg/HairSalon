@@ -96,7 +96,8 @@ public class StaffControllers {
         } else {
             staff.setPassword(this.passwordEncoder.encode(staff.getPassword()));
             staff.setAvatar(avatar);
-            staff.setRole(Staff.Role.NhanVien);
+            // Đã loại bỏ dòng sau để cho phép thiết lập vai trò từ form
+            // staff.setRole(Staff.Role.NhanVien);
             staffService.saveStaff(staff);
         }
         return "redirect:/admin/staff_management";

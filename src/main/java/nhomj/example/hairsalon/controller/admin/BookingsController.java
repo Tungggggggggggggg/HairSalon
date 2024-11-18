@@ -46,7 +46,7 @@ public class BookingsController {
         model.addAttribute("command", new Booking());
         model.addAttribute("cancelBooking", new Booking());
         model.addAttribute("servicesList", bookingService.getAllServices());
-        model.addAttribute("staffList", staffService.getAllStaff());
+        model.addAttribute("staffList", staffService.getStaffByRole(Staff.Role.NhanVien)); // Đã chỉnh sửa
 
         // Tạo danh sách các giờ hẹn từ 8:00 đến 21:00 cách nhau 30 phút
         List<String> appointmentTimes = new ArrayList<>();
@@ -137,7 +137,7 @@ public class BookingsController {
         model.addAttribute("bookings", bookings);
         model.addAttribute("cancelBooking", new Booking());
         model.addAttribute("servicesList", bookingService.getAllServices());
-        model.addAttribute("staffList", staffService.getAllStaff());
+        model.addAttribute("staffList", staffService.getStaffByRole(Staff.Role.NhanVien)); // Đã chỉnh sửa
 
         // Tạo danh sách các giờ hẹn từ 8:00 đến 21:00 cách nhau 30 phút
         List<String> appointmentTimes = new ArrayList<>();
