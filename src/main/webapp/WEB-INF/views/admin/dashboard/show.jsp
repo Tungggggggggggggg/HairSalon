@@ -1,5 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +31,10 @@
                             <div class="card-body">
                                 <h3>Tổng doanh thu</h3>
                                 <hr>
-                                <h2 style="font-size: 2em; margin: 0;">${doanhthu}đ</h2>
+                                <h2 style="font-size: 2em; margin: 0;">
+                                    <fmt:formatNumber value="${doanhthu}" type="number" pattern="#,###" /> VNĐ
+                                </h2>
+
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <a class="small stretched-link" href="/admin/revenue_management">Xem thêm</a>
