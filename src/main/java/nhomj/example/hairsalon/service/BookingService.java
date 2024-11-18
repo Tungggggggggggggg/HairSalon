@@ -21,29 +21,35 @@ public class BookingService {
         this.serviceRepository = serviceRepository;
         this.emailService = emailService;
     }
+
     public long countBooking() {
         return bookingRepository.count();
     }
+
     // Lấy danh sách tất cả các booking
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }
+
     // Lưu hoặc cập nhật một booking
     public Booking save(Booking booking) {
         Booking newBooking = bookingRepository.save(booking);
         if (newBooking != null) {
-            emailService.sendHtmlEmailDL(new EmailDetails(newBooking.getCustomer().getEmail(), "Chào mừng " + newBooking.getCustomer().getName().toString()+ "Cảm ơn bạn đã đăng ký tài khoản với chúng tôi!"), newBooking);
+            emailService.sendHtmlEmailDL(new EmailDetails(newBooking.getCustomer().getEmail(), "Chào mừng " + newBooking.getCustomer().getName() + "Cảm ơn bạn đã đăng ký tài khoản với chúng tôi!"), newBooking);
         }
         return newBooking;
     }
+
     public Booking findById(Long id) {
         return bookingRepository.findById(id).orElse(null);
     }
+
     // Lấy danh sách tất cả các dịch vụ
     public List<Service> getAllServices() {
         return serviceRepository.findAll();
     }
 
+    // Lấy danh sách booking theo staffId
     public List<Booking> getBookingsByStaffId(Long staffId) {
         return bookingRepository.findByStaffId(staffId);
     }

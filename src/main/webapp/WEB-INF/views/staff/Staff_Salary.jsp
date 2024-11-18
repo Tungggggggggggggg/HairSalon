@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Trang nhân viên</title>
+    <title>Lương nhân viên</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="/admin_style/css/styles.css" rel="stylesheet" />
     <link href="/staff_style/css/staff.css" rel="stylesheet" />
@@ -58,7 +58,7 @@
                             </c:if>
                             <c:if test="${empty salaryList}">
                                 <tr>
-                                    <td colspan="6" class="text-center">Không có dữ liệu cho tháng/năm đã chọn.</td>
+                                    <td colspan="5" class="text-center">Không có dữ liệu cho tháng/năm đã chọn.</td>
                                 </tr>
                             </c:if>
                             </tbody>
@@ -74,7 +74,30 @@
 
 <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/staff_style/js/staff.js"></script>
-<script src="/admin_style/js/scripts.js"></script>
+<!-- Thêm script cho simple-datatables -->
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/simple-datatables.js"></script>
+<script>
+    // Khởi tạo DataTable cho bảng lương
+    document.addEventListener('DOMContentLoaded', function() {
+        const salaryTable = document.querySelector("#monthlySalaryTable");
+        if (salaryTable) {
+            new simpleDatatables.DataTable(salaryTable, {
+                perPage: 10,
+                perPageSelect: false,
+                searchable: true,
+                fixedHeight: true,
+                labels: {
+                    placeholder: "Tìm kiếm...",
+                    noRows: "Không có dữ liệu",
+                    info: "Hiển thị {start} đến {end} của {rows} lương",
+                    pagination: {
+                        previous: "Trước",
+                        next: "Tiếp theo"
+                    }
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>

@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -40,9 +39,28 @@
                 </div>
 
             </div>
-
-
         </main>
+
+        <!-- Modal Chi Tiết Lịch Hẹn -->
+        <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="eventModalLabel">Chi tiết lịch hẹn</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Tên dịch vụ:</strong> <span id="eventTitle"></span></p>
+                        <p><strong>Tên khách hàng:</strong> <span id="eventCustomer"></span></p>
+                        <p><strong>Giờ hẹn:</strong> <span id="eventAppointmentTime"></span></p>
+                        <p><strong>Trạng thái:</strong> <span id="eventStatus"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <jsp:include page="/WEB-INF/views/staff/layout/footer.jsp" />
 
@@ -55,6 +73,6 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales-all.global.min.js"></script>
 <script src="/staff_style/js/staff.js"></script>
-<script src="/admin_style/js/scripts.js"></script>
+
 </body>
 </html>

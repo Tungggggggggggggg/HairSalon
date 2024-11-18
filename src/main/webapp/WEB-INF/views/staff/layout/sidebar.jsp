@@ -6,23 +6,23 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Menu</div>
-                <a class="nav-link" href="../staff">
+                <a class="nav-link" href="${pageContext.request.contextPath}/staff">
                     <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
                     Lịch làm việc
                 </a>
 
                 <c:if test="${not empty loggedInStaff}">
-                    <a class="nav-link" href="../Staff_Information/${loggedInStaff.id}">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/staff/information">
                         <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                         Thông tin nhân viên: ${loggedInStaff.name}
                     </a>
 
-                    <a class="nav-link" href="../Staff_Salary/${loggedInStaff.id}">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/staff/salary">
                         <div class="sb-nav-link-icon"><i class="fas fa-money-check-alt"></i></div>
                         Lương nhân viên
                     </a>
 
-                    <a class="nav-link" href="../Staff_Booking/${loggedInStaff.id}">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/staff/bookings">
                         <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
                         Lịch hẹn
                     </a>

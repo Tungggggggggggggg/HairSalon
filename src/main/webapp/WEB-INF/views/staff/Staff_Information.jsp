@@ -35,29 +35,35 @@
                     </div>
                     <div class="card-body">
                         <form>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Tên</label>
-                                <input type="text" class="form-control" id="name" value="${staff.name}" readonly aria-label="Tên">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Tên</label>
+                                    <input type="text" class="form-control" id="name" value="${staff.name}" readonly aria-label="Tên">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email (Tên đăng nhập)</label>
+                                    <input type="email" class="form-control" id="email" value="${staff.email}" readonly aria-label="Email">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email (Tên đăng nhập)</label>
-                                <input type="text" class="form-control" id="email" value="${staff.email}" readonly aria-label="Email">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Số điện thoại</label>
+                                    <input type="tel" class="form-control" id="phone" value="${staff.phone}" readonly aria-label="Số điện thoại">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="address" class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="address" value="${staff.address}" readonly aria-label="Địa chỉ">
+                                </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Số điện thoại</label>
-                                <input type="tel" class="form-control" id="phone" value="${staff.phone}" readonly aria-label="Số điện thoại">
-                            </div>
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control" id="address" value="${staff.address}" readonly aria-label="Địa chỉ">
-                            </div>
-                            <div class="mb-3">
-                                <label for="gender" class="form-label">Giới tính</label>
-                                <input type="text" class="form-control" id="gender" value="${staff.gender}" readonly aria-label="Giới tính">
-                            </div>
-                            <div class="mb-3">
-                                <label for="birthday" class="form-label">Ngày sinh</label>
-                                <input type="date" class="form-control" id="birthday" value="${staff.birthday}" readonly aria-label="Ngày sinh">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="gender" class="form-label">Giới tính</label>
+                                    <input type="text" class="form-control" id="gender" value="${staff.gender}" readonly aria-label="Giới tính">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="birthday" class="form-label">Ngày sinh</label>
+                                    <input type="date" class="form-control" id="birthday" value="${staff.birthday}" readonly aria-label="Ngày sinh">
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="experience" class="form-label">Kinh nghiệm làm việc</label>
