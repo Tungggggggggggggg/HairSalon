@@ -97,7 +97,7 @@
 <div class="container">
     <h1>Phản hồi từ khách hàng</h1>
 
-    <form action="/report/save" method="post" >
+    <form action="/home/report/save" method="post" >
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
         <label for="name">Họ và tên</label>
         <input type="text" id="name" name="userName"  placeholder="Nhập họ và tên của bạn" required />

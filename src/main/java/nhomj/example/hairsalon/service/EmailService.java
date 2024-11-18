@@ -4,6 +4,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import nhomj.example.hairsalon.model.Booking;
 import nhomj.example.hairsalon.model.EmailDetails;
+import nhomj.example.hairsalon.model.FeedbackList;
 import nhomj.example.hairsalon.model.Invoice;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +110,32 @@ public class EmailService{
             htmlTemplate = htmlTemplate.replace("${invoiceDate}", invoice.getInvoiceDate().toString());
             htmlTemplate = htmlTemplate.replace("${totalAmount}", invoice.getTotalAmount().toString());
             htmlTemplate = htmlTemplate.replace("${paymentMethod}", invoice.getPaymentMethod().toString());
+            System.out.println(htmlTemplate);
+            mimeMessage.setContent(htmlTemplate, "text/html; charset=utf-8");
+
+            javaMailSender.send(mimeMessage);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Async
+    public void sendHtmlEmailFeedback(EmailDetails details , FeedbackList feedbackList){
+        try{
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+            mimeMessage.setFrom(sender);
+            mimeMessage.setRecipients(MimeMessage.RecipientType.TO, details.getRecipient());
+            mimeMessage.setSubject(details.getSubject());
+
+            ClassLoader classLoader = getClass().getClassLoader();
+            Path filePath = Paths.get(classLoader.getResource("templates/thongbaophanhoi.html").toURI());
+
+            String htmlTemplate = Files.readString(filePath);
+            htmlTemplate = htmlTemplate.replace("userName", feedbackList.getUserName());
+            htmlTemplate = htmlTemplate.replace("feedbackDate", feedbackList.getFeedBackDate().toString());
+            htmlTemplate = htmlTemplate.replace("feedbackType", feedbackList.getFeedbackType().toString());
+            htmlTemplate = htmlTemplate.replace("message", feedbackList.getMessage() );
             System.out.println(htmlTemplate);
             mimeMessage.setContent(htmlTemplate, "text/html; charset=utf-8");
 

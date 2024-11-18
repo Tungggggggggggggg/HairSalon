@@ -30,16 +30,6 @@
                         <li class="breadcrumb-item active">Quản lý khách hàng</li>
                     </ol>
 
-                    <!-- Nút thêm khách hàng mới -->
-                    <%-- 
-                    <div class="mb-3">
-                        <button class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#customerModal" onclick="openModal('new')">
-                            <i class="fas fa-user-plus"></i> Thêm mới khách hàng
-                        </button>
-                    </div>
-                    --%>
-
                     <!-- Bảng danh sách khách hàng -->
                     <div class="card mb-4">
                         <div class="card-header">
@@ -118,83 +108,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <!-- Modal thêm/sửa khách hàng -->
-    <%-- 
-    <div class="modal fade " id="customerModal" tabindex="-1" aria-labelledby="customerModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg ">
-            <div class="modal-content ">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="customerModalLabel">Thêm mới khách hàng</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Đóng"></button>
-                </div>
-                <div class="modal-body col-12 mx-auto">
-                    <form:form id="customerForm" action="/admin/customer_management/save"
-                        method="post" modelAttribute="newCustomer">
-                        <form:input type="hidden" id="customerId" path="id"  />
-                        <div class="mb-3 row">
-                            <div class="col-12 col-md-6">
-                                <label for="customerName" class="form-label">Tên khách hàng</label>
-                                <form:input type="text" class="form-control" id="customerName"
-                                    path="name" />
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label for="customerPhone" class="form-label">Số điện thoại</label>
-                                <form:input type="text" class="form-control" id="customerPhone"
-                                    path="phone" />
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-12 col-md-7">
-                                <label for="customerEmail" class="form-label">Email</label>
-                                <form:input type="email" class="form-control" id="customerEmail"
-                                    path="email" />
-                            </div>
-
-                            <div class="col-12 col-md-5">
-                                <label for="customerPassword" class="form-label">PassWord</label>
-                                <form:input type="text" class="form-control" id="customerPassword"
-                                    path="password" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="customerPhone" class="form-label">Địa chỉ</label>
-                            <form:input type="text" class="form-control" id="customerAddress"
-                                path="address" />
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-12 col-md-6">
-                                <label for="customerPhone" class="form-label">Giới tính</label>
-                                <form:select class="form-select" path="gender" id="customerGender">
-                                    <form:option value="">Trống</form:option>
-                                    <form:option value="Nam">Nam</form:option>
-                                    <form:option value="Nu">Nữ</form:option>
-                                    <form:option value="Khac">Khác</form:option>
-                                </form:select>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <label for="customerBirthday" class="form-label">Năm sinh</label>
-                                <input type="date" class="form-control" id="customerBirthday"
-                                    name="birthday" placeholder="dd-MM-yyyy" />
-                            </div>
-
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-primary">Lưu</button>
-                        </div>
-                    </form:form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    --%>
 
             <!-- Modal xác nhận xóa khách hàng -->
     <%-- 

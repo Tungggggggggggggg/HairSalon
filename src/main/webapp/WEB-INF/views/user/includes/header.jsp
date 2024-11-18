@@ -20,9 +20,9 @@ pageEncoding="UTF-8"%>
             <ul class="nav-left">
                 <li><a href="/home">Trang chủ</a></li>
                 <li><a href="/home#about">Giới thiệu</a></li>
-                <li><a href="/user/service">Dịch vụ</a></li> 
-                <li><a href="/report">Phản hồi</a></li>
-                <li><a href="#contact">Liên hệ</a></li>
+                <li><a href="/home/service">Dịch vụ</a></li>
+                <li><a href="/home/report">Phản hồi</a></li>
+<%--                <li><a href="#contact">Liên hệ</a></li>--%>
             </ul>
         </nav>
     </header>

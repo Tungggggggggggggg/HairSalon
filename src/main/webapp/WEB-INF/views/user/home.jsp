@@ -48,7 +48,7 @@ prefix="c" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
                 <div class="carousel" id="service-list">
                     <c:forEach var="service" items="${services}">
                         <div class="service-card-wrapper">
-                            <a href="/user/service/${service.id}" class="service-link">
+                            <a href="/home/service/${service.id}" class="service-link">
                                 <div class="service-card">
                                     <div class="image-container">
                                         <img src="/images/service/${service.avatar}" alt="${service.name}" />

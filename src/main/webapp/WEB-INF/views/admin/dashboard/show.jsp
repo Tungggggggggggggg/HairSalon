@@ -26,7 +26,7 @@
                     <li class="breadcrumb-item active">Trang chính</li>
                 </ol>
                 <div class="row">
-                    <div class="col-xl-3 col-md-6">
+                    <div class="col-xl-4 col-md-6">
                         <div class="card mb-4 text-center">
                             <div class="card-body">
                                 <h3>Tổng doanh thu</h3>
@@ -42,20 +42,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card mb-4 text-center">
-                            <div class="card-body">
-                                <h3>Thông báo</h3>
-                                <hr>
-                                <h2 style="font-size: 2em; margin: 0;">${countNotication}</h2>
-                            </div>
-                            <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small stretched-link" href="/admin/notification_management">Xem thêm</a>
-                                <div class="small"><i class="fas fa-angle-right"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
+                    <div class="col-xl-4 col-md-6">
                         <div class="card mb-4 text-center">
                             <div class="card-body">
                                 <h3>Số lượng đặt lịch</h3>
@@ -68,15 +55,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-6">
+                    <div class="col-xl-4 col-md-6">
                         <div class="card mb-4 text-center">
                             <div class="card-body">
                                 <h3>Phản hồi</h3>
                                 <hr>
-                                <h2 style="font-size: 2em; margin: 0;">${countReven}</h2>
+                                <h2 style="font-size: 2em; margin: 0;">${countFeedback}</h2>
                             </div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
-                                <a class="small stretched-link" href="#">Xem thêm</a>
+                                <a class="small stretched-link" href="/admin/feedback_management">Xem thêm</a>
                                 <div class="small"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
