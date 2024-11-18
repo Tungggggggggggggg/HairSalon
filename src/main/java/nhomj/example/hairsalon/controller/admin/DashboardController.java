@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -38,6 +39,9 @@ public class DashboardController {
 
         List<Booking> bookings = this.bookingService.getAllBookings();
         List<User> users = this.userService.getAllUsers();
+        List<Revenue> revenues = this.revenueService.getAllRevenues();
+        List<BigDecimal> week = revenueService.getRevenueByWeek();
+        List<BigDecimal> month  = revenueService.getRevenueByMonth();
         double tongDoanhThu = 0;
         if(bookings != null)
         {
@@ -56,6 +60,9 @@ public class DashboardController {
         model.addAttribute("countNotication", countNotication);
         model.addAttribute("bookings", bookings);
         model.addAttribute("users", users);
+        model.addAttribute("revenues", revenues);
+        model.addAttribute("week", week);
+        model.addAttribute("month", month);
         model.addAttribute("doanhthu", tongDoanhThu);
 
         return "admin/dashboard/show";

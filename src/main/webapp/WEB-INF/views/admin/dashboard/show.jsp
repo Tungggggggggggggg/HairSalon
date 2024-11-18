@@ -1,4 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
@@ -198,7 +200,7 @@
             labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
             datasets: [{
                 label: 'Doanh thu',
-                data: [12000, 19000, 30000, 50000, 23000, 34000, 45000, 50000, 60000, 80000, 75000, 90000],
+                data: ${month},
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 2,
@@ -216,7 +218,7 @@
         }
     });
 
-    // Biểu đồ doanh thu tuần (giả sử)
+    // Biểu đồ doanh thu tuần
     const ctx2 = document.getElementById('revenueChart').getContext('2d');
     const revenueChart = new Chart(ctx2, {
         type: 'bar',
@@ -224,7 +226,7 @@
             labels: ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'],
             datasets: [{
                 label: 'Doanh thu tuần',
-                data: [12000, 19000, 30000, 50000],
+                data: ${week},
                 backgroundColor: [
                     'rgba(75, 192, 192, 0.5)',
                     'rgba(153, 102, 255, 0.5)',
