@@ -1,6 +1,6 @@
 package nhomj.example.hairsalon.service;
 
-import nhomj.example.hairsalon.model.Notification;
+import nhomj.example.hairsalon.model.FeedbackList;
 import nhomj.example.hairsalon.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +20,15 @@ public class NotificationService {
     {
         return notificationRepository.count();
     }
-    public List<Notification> getAllNotifications() {
+    public List<FeedbackList> getAllNotifications() {
         return notificationRepository.findAll();
     }
 
-    public Notification saveNotification(Notification notification) {
+    public FeedbackList saveNotification(FeedbackList notification) {
         return notificationRepository.save(notification);
     }
 
-    public Notification getNotificationById(long id) {
+    public FeedbackList getNotificationById(long id) {
         return this.notificationRepository.findById(id);
     }
 

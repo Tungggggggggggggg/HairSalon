@@ -41,17 +41,12 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         if (session == null) {
             return;
         }
-
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
-
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
-
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-
         String targetUrl = determineTargetUrl(authentication);
         if (response.isCommitted()) {
 

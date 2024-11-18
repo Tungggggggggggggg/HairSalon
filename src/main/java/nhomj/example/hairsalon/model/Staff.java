@@ -57,8 +57,6 @@ public class Staff {
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
     private List<StaffShift> shifts;
 
-    @OneToMany(mappedBy = "staff")
-    private List<Notification> notifications;
 
     public enum GenderStaff {
         Nam, Nu
@@ -189,14 +187,7 @@ public class Staff {
     public void setShifts(List<StaffShift> shifts) {
         this.shifts = shifts;
     }
-    
-    public List<Notification> getNotifications() {
-        return notifications;
-    }
-    
-    public void setNotifications(List<Notification> notifications) {
-        this.notifications = notifications;
-    }
+
 
     /**
      * Trả về ngày sinh đã được định dạng dưới dạng "dd/MM/yyyy".

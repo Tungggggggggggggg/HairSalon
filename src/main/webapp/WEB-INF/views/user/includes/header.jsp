@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%>
                 <li><a href="/home">Trang chủ</a></li>
                 <li><a href="/home#about">Giới thiệu</a></li>
                 <li><a href="/user/service">Dịch vụ</a></li> 
-                <li><a href="#reviews">Đánh giá</a></li>
+                <li><a href="/report">Phản hồi</a></li>
                 <li><a href="#contact">Liên hệ</a></li>
             </ul>
         </nav>

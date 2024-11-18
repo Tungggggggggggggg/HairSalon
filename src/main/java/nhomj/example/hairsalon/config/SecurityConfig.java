@@ -19,7 +19,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class SecurityConfig {
 
-    public StaffService staffService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {

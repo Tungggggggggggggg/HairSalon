@@ -6,6 +6,7 @@ footer {
     padding: 40px 20px;
     display: flex;
     flex-wrap: wrap;
+    border-top: 1px solid #ddd; /* Thêm đường viền trên để phân tách footer với nội dung */
 }
 
 .footer-container {
@@ -37,6 +38,8 @@ footer {
     color: #333333; /* Đổi từ trắng sang xám đậm */
     text-decoration: none;
     font-size: 1em;
+    display: block;
+    margin-bottom: 8px; /* Thêm khoảng cách giữa các liên kết */
 }
 
 .footer-container ul li a:hover {
@@ -64,5 +67,15 @@ footer {
     .store-info,
     .social-links {
         margin-bottom: 20px;
+        flex: none; /* Đảm bảo các phần không chiếm hết chiều rộng khi thay đổi thành cột */
+    }
+
+    .social-links a {
+        font-size: 30px; /* Tăng kích thước biểu tượng trên màn hình di động */
+        margin: 10px 15px;
+    }
+
+    .footer-container ul li a {
+        font-size: 1.2em; /* Tăng kích thước văn bản cho dễ đọc trên di động */
     }
 }

@@ -1,7 +1,7 @@
 package nhomj.example.hairsalon.controller.admin;
 
 import nhomj.example.hairsalon.model.Booking;
-import nhomj.example.hairsalon.model.Notification;
+import nhomj.example.hairsalon.model.FeedbackList;
 import nhomj.example.hairsalon.model.Service;
 import nhomj.example.hairsalon.service.BookingService;
 import nhomj.example.hairsalon.service.NotificationService;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -64,10 +63,10 @@ public class DashboardController {
 
     @GetMapping("/admin/notification_management")
     public String notification(Model model) {
-        List<Notification> notifications = this.notificationService.getAllNotifications();
+        List<FeedbackList> notifications = this.notificationService.getAllNotifications();
         model.addAttribute("notifications", notifications);
-        model.addAttribute("newNotification", new Notification());
-        model.addAttribute("deleteNotification", new Notification());
+        model.addAttribute("newNotification", new FeedbackList());
+        model.addAttribute("deleteNotification", new FeedbackList());
         return "admin/dashboard/notification_management";
     }
 
