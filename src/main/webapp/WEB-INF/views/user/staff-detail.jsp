@@ -6,7 +6,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spa-JShop</title>
+    <title>JSalon</title>
+    <link rel="icon" href="/user_style/images/logo_icon.png" type="image/icon type">
     <link rel="stylesheet" href="/user_style/css/service-detail.css" />
 </head>
 <body>
@@ -16,13 +17,12 @@
     <h1 class="page-title">Chi tiết nhân viên</h1>
     <div class="service-detail">
         <div class="service-image-container">
-            <img src="/user_style/images/${staff.avatar}" alt="${staff.name}" class="service-image" />
+            <img src="/images/avatar/${staff.avatar}" alt="${staff.name}" class="service-image" />
         </div>
         <div class="service-info">
             <h2>${staff.name}</h2>
             <p class="description">Email : ${staff.email}</p>
             <p class="price">
-<%--                <strong>Giá:</strong>--%>
                 <fmt:formatNumber value="${staff.experience}" pattern="#,###" /> Năm kinh nghiệm trong nghề
             </p>
             <p>

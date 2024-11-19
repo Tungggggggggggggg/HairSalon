@@ -54,16 +54,19 @@
                     <form:options items="${services}" itemValue="id" itemLabel="name" />
                 </form:select><br /><br />
 
-                <label for="stylist">Chọn nhân viên:</label>
-                <form:select id="stylist" path="staff.id"  required="true" class="form-select">
-                    <option value="">Chọn nhân viên</option>
-                    <c:forEach var="staff" items="${staffList}">
-                        <option value="${staff.id}" 
-                            <c:if test="${booking.staff != null && booking.staff.id == staff.id}">selected</c:if>>
-                            ${staff.name}
-                        </option>
-                    </c:forEach>
-                </form:select><br /><br />
+                <label for="staff-list">Chọn nhân viên:</label>
+                <div style="position: relative; width: 100%; max-width: 500px; margin: auto; overflow: hidden;">
+                    <button id="scroll-left" type="button"
+                        style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); background: #007bff; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; z-index: 10; cursor: pointer; display: none;">‹</button>
+                    <div id="staff-list"
+                        style="display: flex; gap: 15px; overflow: hidden; padding: 10px;">
+                        <!-- Danh sách nhân viên sẽ được cập nhật bằng JavaScript -->
+                    </div>
+                    <button id="scroll-right" type="button"
+                        style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); background: #007bff; color: white; border: none; border-radius: 50%; width: 30px; height: 30px; z-index: 10; cursor: pointer; display: none;">›</button>
+                </div>
+                <!-- Input hidden để lưu ID nhân viên được chọn -->
+                <input type="hidden" id="selected-staff-id" name="staff.id" value="${booking.staff != null ? booking.staff.id : ''}">
             </div>
 
             <!-- Bên phải: Thông tin khách hàng -->
@@ -137,6 +140,7 @@
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
+                <!-- Nội dung của modal không thay đổi -->
                 <div class="modal-header">
                     <h5 class="modal-title">Xác nhận đặt lịch</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
@@ -168,6 +172,8 @@
     </div>
 
     <jsp:include page="/WEB-INF/views/user/includes/footer.jsp" />
+    <!-- Thêm thư viện jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/user_style/js/vi.js"></script>

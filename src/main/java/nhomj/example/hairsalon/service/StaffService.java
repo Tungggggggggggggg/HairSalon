@@ -1,6 +1,7 @@
 package nhomj.example.hairsalon.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import nhomj.example.hairsalon.model.Booking;
 import nhomj.example.hairsalon.model.Staff;
 import nhomj.example.hairsalon.model.User;
 import nhomj.example.hairsalon.repository.StaffRepository;
@@ -8,21 +9,26 @@ import nhomj.example.hairsalon.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class StaffService {
 
-    public StaffRepository staffRepository;
-    public UserRepository userRepository;
-    public UpLoadService upLoadService;
+    private final StaffRepository staffRepository;
+    private final UserRepository userRepository;
+    private final UpLoadService upLoadService;
+    private final BookingService bookingService;
 
     @Autowired
-    public StaffService(StaffRepository staffRepository, UserRepository userRepository, UpLoadService upLoadService) {
+    public StaffService(StaffRepository staffRepository, UserRepository userRepository, UpLoadService upLoadService, BookingService bookingService) {
         this.staffRepository = staffRepository;
         this.userRepository = userRepository;
         this.upLoadService = upLoadService;
+        this.bookingService = bookingService;
     }
 
     /**
@@ -49,7 +55,7 @@ public class StaffService {
      *
      * @return Thời gian hiện tại dưới dạng LocalDateTime
      */
-    public LocalDateTime date(){
+    public LocalDateTime date() {
         return LocalDateTime.now();
     }
 
@@ -70,7 +76,7 @@ public class StaffService {
     public void deleteStaff(Staff staff) {
         Staff checkStaff = getStaffById(staff.getId());
         System.out.println(checkStaff.getAvatar());
-        upLoadService.deleteFile(checkStaff.getAvatar(),"avatar" );
+        upLoadService.deleteFile(checkStaff.getAvatar(), "avatar");
         staffRepository.delete(checkStaff);
     }
 
@@ -83,7 +89,7 @@ public class StaffService {
     public Staff getStaffByEmail(String email) {
         return this.staffRepository.findStaffByEmail(email);
     }
-    
+
     /**
      * Lấy danh sách nhân viên theo vai trò.
      *
@@ -92,5 +98,29 @@ public class StaffService {
      */
     public List<Staff> getStaffByRole(Staff.Role role) {
         return staffRepository.findByRole(role);
+    }
+
+    /**
+     * Lấy danh sách nhân viên khả dụng dựa trên ngày, giờ và thời lượng.
+     *
+     * @param date                Ngày hẹn
+     * @param time                Giờ hẹn
+     * @param durationMinutes     Thời lượng dịch vụ
+     * @param bookingId           ID của booking hiện tại (nếu đang chỉnh sửa)
+     * @return danh sách nhân viên khả dụng
+     */
+    public List<Staff> getAvailableStaff(LocalDate date, LocalTime time, int durationMinutes, Long bookingId) {
+        // Lấy danh sách tất cả nhân viên
+        List<Staff> allStaff = staffRepository.findByRole(Staff.Role.NhanVien);
+
+        // Kiểm tra tính khả dụng của từng nhân viên
+        List<Staff> availableStaff = new ArrayList<>();
+        for (Staff staff : allStaff) {
+            boolean isAvailable = bookingService.isStaffAvailable(staff.getId(), date, time, durationMinutes, bookingId);
+            if (isAvailable) {
+                availableStaff.add(staff);
+            }
+        }
+        return availableStaff;
     }
 }

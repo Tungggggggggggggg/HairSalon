@@ -163,4 +163,14 @@ public class Booking {
                 return "";
         }
     }
+
+    // Phương thức tính tổng thời lượng của các dịch vụ
+    public int getTotalDurationMinutes() {
+        if (services == null || services.isEmpty()) {
+            return 0;
+        }
+        return services.stream()
+                .mapToInt(Service::getDurationMinutes)
+                .sum();
+    }
 }

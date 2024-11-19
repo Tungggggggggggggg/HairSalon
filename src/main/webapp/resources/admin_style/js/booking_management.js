@@ -66,6 +66,9 @@ window.openModal = function(
         serviceSelect.selectedIndex = -1; // Đặt lại select dịch vụ
         statusSelect.value = "DaDat"; // Đặt trạng thái mặc định là Đã Đặt
         staffSelect.value = "";
+
+        // Xóa danh sách nhân viên khi thêm mới
+        staffSelect.innerHTML = '<option value="">Chọn nhân viên</option>';
     } else if (type === "edit") {
         modalTitle.textContent = "Chỉnh sửa lịch hẹn";
         bookingId.value = id;
@@ -77,7 +80,12 @@ window.openModal = function(
         customerGenderSelect.value = customerGender;
         bookingDatePicker.setDate(date, true, "d/m/Y"); // Đặt ngày đã định dạng
         appointmentTimePicker.setDate(appointmentTime, true, "H:i"); // Đặt giờ đã định dạng
-        serviceSelect.value = serviceId;
+        // Đặt lại dịch vụ đã chọn
+        if (serviceId) {
+            Array.from(serviceSelect.options).forEach(option => {
+                option.selected = serviceId.includes(option.value);
+            });
+        }
         statusSelect.value = status;
         staffSelect.value = staffId;
     }
@@ -113,6 +121,9 @@ bookingDatePicker = flatpickr("#bookingDate", {
             // Nếu là ngày khác, đặt minTime là giờ mở cửa (ví dụ: 08:00)
             appointmentTimePicker.set('minTime', "08:00");
         }
+
+        // Gọi hàm cập nhật danh sách nhân viên
+        fetchAvailableStaff();
     }
 });
 
@@ -150,8 +161,59 @@ appointmentTimePicker = flatpickr("#appointmentTime", {
                 instance.set('minTime', "08:00");
             }
         }
+    },
+    onChange: function(selectedDates, dateStr, instance) {
+        // Gọi hàm cập nhật danh sách nhân viên
+        fetchAvailableStaff();
     }
 });
+
+// Thêm sự kiện khi thay đổi dịch vụ
+document.getElementById("service").addEventListener("change", fetchAvailableStaff);
+
+function fetchAvailableStaff() {
+    const date = document.getElementById("bookingDate").value;
+    const time = document.getElementById("appointmentTime").value;
+    const bookingId = document.getElementById("bookingForm").querySelector("input[name='id']").value;
+
+    // Lấy danh sách dịch vụ đã chọn
+    const serviceSelect = document.getElementById("service");
+    const selectedServices = Array.from(serviceSelect.selectedOptions).map(option => option.value);
+
+    if (date && time) {
+        // Gửi yêu cầu AJAX tới server
+        $.ajax({
+            url: '/admin/booking_management/available_staff',
+            type: 'GET',
+            traditional: true,
+            data: {
+                date: date,
+                time: time,
+                bookingId: bookingId || null,
+                services: selectedServices
+            },
+            success: function(data) {
+                // Cập nhật danh sách nhân viên
+                const staffSelect = document.getElementById("staff");
+                const selectedStaffId = staffSelect.value; // Lưu lại lựa chọn hiện tại
+
+                // Xóa các tùy chọn cũ
+                staffSelect.innerHTML = '<option value="">Chọn nhân viên</option>';
+                // Thêm các tùy chọn mới
+                data.forEach(function(staff) {
+                    const option = document.createElement('option');
+                    option.value = staff.id;
+                    option.textContent = staff.name;
+                    staffSelect.appendChild(option);
+                });
+                // Đặt lại nhân viên đã chọn nếu có
+                if (selectedStaffId) {
+                    staffSelect.value = selectedStaffId;
+                }
+            }
+        });
+    }
+}
 
 function viewDetails(
     id,

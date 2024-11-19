@@ -1,5 +1,6 @@
 package nhomj.example.hairsalon.controller.user;
 
+import nhomj.example.hairsalon.dto.StaffDTO;
 import nhomj.example.hairsalon.model.Booking;
 import nhomj.example.hairsalon.model.Service;
 import nhomj.example.hairsalon.model.Staff;
@@ -14,13 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -173,5 +175,39 @@ public class BookingController {
     @GetMapping("/booking_success")
     public String showBookingSuccessPage() {
         return "user/booking_success";
+    }
+
+        /**
+     * API để lấy danh sách nhân viên khả dụng dựa trên ngày, giờ và dịch vụ
+     */
+    @GetMapping("/booking/available_staff")
+    @ResponseBody
+    public List<StaffDTO> getAvailableStaff(
+            @RequestParam("date") String dateStr,
+            @RequestParam("time") String timeStr,
+            @RequestParam(value = "services", required = false) List<Long> serviceIds) {
+
+        // Chuyển đổi định dạng ngày và giờ
+        LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        LocalTime time = LocalTime.parse(timeStr, DateTimeFormatter.ofPattern("HH:mm"));
+
+        int requestedDurationMinutes = 30; // Thời lượng mặc định
+        if (serviceIds != null && !serviceIds.isEmpty()) {
+            // Tính tổng thời lượng từ các dịch vụ
+            List<Service> services = bookingService.getServicesByIds(serviceIds);
+            requestedDurationMinutes = services.stream()
+                    .mapToInt(Service::getDurationMinutes)
+                    .sum();
+        }
+
+        // Lấy danh sách nhân viên khả dụng
+        List<Staff> availableStaff = staffService.getAvailableStaff(date, time, requestedDurationMinutes, null);
+
+        // Chuyển đổi sang StaffDTO để tránh vấn đề tuần hoàn trong JSON
+        List<StaffDTO> staffDTOs = availableStaff.stream()
+                .map(staff -> new StaffDTO(staff.getId(), staff.getName()))
+                .collect(Collectors.toList());
+
+        return staffDTOs;
     }
 }

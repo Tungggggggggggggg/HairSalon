@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ServiceRepository extends JpaRepository<Service, Long> {
-    // Không cần khai báo lại findAll(), save(), findById() vì JpaRepository đã có sẵn
 }

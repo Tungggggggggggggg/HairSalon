@@ -7,7 +7,8 @@ prefix="c" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>JSalon - Trang Chủ</title>
+        <title>JSalon</title>
+        <link rel="icon" href="/user_style/images/logo_icon.png" type="image/icon type">
         <link
             rel="stylesheet"
             href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
@@ -77,7 +78,7 @@ prefix="c" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
                         <!-- Stylists will be displayed here -->
                         <c:forEach var="staff" items="${staffs}">
                             <div class="stylist-item">
-                                <a href="/home/detail_staff/${staff.id}"><img src="/user_style/images/${staff.avatar}" class="stylist-photo" alt="${staff.name}" /></a>
+                                <a href="/home/detail_staff/${staff.id}"><img src="/images/avatar/${staff.avatar}" class="stylist-photo" alt="${staff.name}" /></a>
                                 <p class="stylist-name">${staff.name}</p>
                             </div>
                         </c:forEach>
