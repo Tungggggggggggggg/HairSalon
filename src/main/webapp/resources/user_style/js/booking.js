@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         dateFormat: "d/m/Y", // dd/MM/yyyy
         minDate: "today",
         locale: "vi",
-        onChange: function (selectedDates, dateStr, instance) {
+        onChange: function(selectedDates, dateStr, instance) {
             const selectedDate = selectedDates[0];
             const today = new Date();
 
@@ -267,13 +267,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Xử lý khi nhấn nút "Xác nhận đặt lịch" trong modal
     document.getElementById('confirmSubmit').addEventListener('click', function () {
-
         // Gửi form
         document.getElementById('bookingForm').submit();
     });
 
     // Kiểm tra khi chọn giờ hẹn không được đặt ở quá khứ
-    document.getElementById("bookingForm").addEventListener("submit", function (event) {
+    document.getElementById("bookingForm").addEventListener("submit", function(event) {
         const bookingDate = appointmentDatePicker.input.value;
         const appointmentTime = appointmentTimePicker.input.value;
 
@@ -289,10 +288,4 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-
 });
-
-
-
-
-
