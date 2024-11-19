@@ -58,7 +58,7 @@
                                                     style="display: none; position: absolute; top: 5px; right: 5px; background: #007bff; color: white; border-radius: 50%; width: 20px; height: 20px; font-size: 14px; text-align: center; line-height: 20px;">
                                                     ✓
                                                 </div>
-                                                <img src="/user_style/images/${staff.avatar}" alt="${staff.name}"
+                                                <img src="/images/avatar/${staff.avatar}" alt="${staff.name}"
                                                     style="width: 200px; height: 200px; border-radius: 10px; object-fit: cover; margin-bottom: 10px;">
 
                                                 <p style="margin: 0; font-size: 14px; font-weight: bold;">${staff.name}
