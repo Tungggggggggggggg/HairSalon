@@ -75,35 +75,12 @@ prefix="c" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
                 <div class="carousel-container">
                     <div class="stylist-container" id="stylist-list">
                         <!-- Stylists will be displayed here -->
-                        <div class="stylist-item">
-                            <img src="/user_style/images/HoangQuocBao.jpg" class="stylist-photo" alt="Hoàng Quốc Bảo" />
-                            <p class="stylist-name">Hoàng Quốc Bảo</p>
-                        </div>
-                        <div class="stylist-item">
-                            <img src="/user_style/images/LeThuHa.jpg" class="stylist-photo" alt="Lê Thu Hà" />
-                            <p class="stylist-name">Lê Thu Hà</p>
-                        </div>
-                        <div class="stylist-item">
-                            <img src="/user_style/images/NgoBaVinh.jpg" class="stylist-photo" alt="Ngô Bá Vinh" />
-                            <p class="stylist-name">Ngô Bá Vinh</p>
-                        </div>
-                        <div class="stylist-item">
-                            <img src="/user_style/images/NguyenThiHong.jpg" class="stylist-photo" alt="Nguyễn Thị Hồng" />
-                            <p class="stylist-name">Nguyễn Thị Hồng</p>
-                        </div>
-                        <!-- Additional Stylists -->
-                        <div class="stylist-item">
-                            <img src="/user_style/images/PhamTuanAnh.jpg" class="stylist-photo" alt="Phạm Tuấn Anh" />
-                            <p class="stylist-name">Phạm Tuấn Anh</p>
-                        </div>
-                        <div class="stylist-item">
-                            <img src="/user_style/images/TranVanMinh.jpg" class="stylist-photo" alt="Trần Văn Minh" />
-                            <p class="stylist-name">Trần Văn Minh</p>
-                        </div>
-                        <div class="stylist-item">
-                            <img src="/user_style/images/NguyenVanChung.jpg" class="stylist-photo" alt="Nguyễn Văn Chung" />
-                            <p class="stylist-name">Nguyễn Văn Chung</p>
-                        </div>
+                        <c:forEach var="staff" items="${staffs}">
+                            <div class="stylist-item">
+                                <a href="/home/detail_staff/${staff.id}"><img src="/user_style/images/${staff.avatar}" class="stylist-photo" alt="${staff.name}" /></a>
+                                <p class="stylist-name">${staff.name}</p>
+                            </div>
+                        </c:forEach>
                     </div>
                     <button id="prev-stylist" class="prev">&#10094;</button>
                     <button id="next-stylist" class="next">&#10095;</button>

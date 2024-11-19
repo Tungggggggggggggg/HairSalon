@@ -26,7 +26,7 @@ public class Staff {
     @Column(name = "phone", columnDefinition = "NVARCHAR(50)")
     private String phone;
 
-    @Column(name = "address", columnDefinition = "NVARCHAR(255)")
+    @Column(name = "address", columnDefinition = "NVARCHAR(MAX)")
     private String address;
 
     @Enumerated(EnumType.STRING)
@@ -45,7 +45,7 @@ public class Staff {
     @Column(name = "role", columnDefinition = "NVARCHAR(50)")
     private Role role = Role.NhanVien;
 
-    @Column(name = "created_date", nullable = false, updatable = false)
+    @Column(name = "created_date", updatable = false)
     private LocalDateTime createdDate;
 
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)

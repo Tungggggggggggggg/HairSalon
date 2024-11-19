@@ -28,7 +28,7 @@
                     <li class="breadcrumb-item active">Trang chính</li>
                 </ol>
                 <div class="row">
-                    <div class="col-xl-4 col-md-6">
+                    <div class="col-xl-4">
                         <div class="card mb-4 text-center">
                             <div class="card-body">
                                 <h3>Tổng doanh thu</h3>
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-md-6">
+                    <div class="col-xl-4">
                         <div class="card mb-4 text-center">
                             <div class="card-body">
                                 <h3>Số lượng đặt lịch</h3>
@@ -57,7 +57,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-md-6">
+                    <div class="col-xl-4">
                         <div class="card mb-4 text-center">
                             <div class="card-body">
                                 <h3>Phản hồi</h3>

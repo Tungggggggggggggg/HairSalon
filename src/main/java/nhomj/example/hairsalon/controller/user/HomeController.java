@@ -2,9 +2,11 @@ package nhomj.example.hairsalon.controller.user;
 
 import nhomj.example.hairsalon.model.FeedbackList;
 import nhomj.example.hairsalon.model.Service;
+import nhomj.example.hairsalon.model.Staff;
 import nhomj.example.hairsalon.service.EmailService;
 import nhomj.example.hairsalon.service.FeedbackListService;
 import nhomj.example.hairsalon.service.ServiceShopService;
+import nhomj.example.hairsalon.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,18 +22,20 @@ import java.util.List;
 public class HomeController {
     private final ServiceShopService serviceShopService;
     private final FeedbackListService feedbackListService;
-    private final EmailService emailService;
+    private final StaffService staffService;
 
     @Autowired
-    public HomeController(ServiceShopService serviceShopService, FeedbackListService feedbackListService, EmailService emailService) {
+    public HomeController(ServiceShopService serviceShopService, FeedbackListService feedbackListService, StaffService staffService) {
         this.serviceShopService = serviceShopService;
         this.feedbackListService = feedbackListService;
-        this.emailService = emailService;
+        this.staffService = staffService;
     }
     @GetMapping("")
     public String showHomePage(Model model) {
-        List<Service> services = serviceShopService.getAllServiceShops(); // Lấy danh sách dịch vụ
-        model.addAttribute("services", services); // Đưa danh sách vào model
+        List<Service> services = serviceShopService.getAllServiceShops();
+        List<Staff> staffs = staffService.getStaffByRole(Staff.Role.NhanVien);
+        model.addAttribute("services", services);
+        model.addAttribute("staffs", staffs);
         return "user/home"; // Trả về view "home.jsp"
     }
     @GetMapping("/report")

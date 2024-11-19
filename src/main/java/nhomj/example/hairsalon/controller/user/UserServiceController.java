@@ -1,7 +1,9 @@
 package nhomj.example.hairsalon.controller.user;
 
 import nhomj.example.hairsalon.model.Service;
+import nhomj.example.hairsalon.model.Staff;
 import nhomj.example.hairsalon.service.ServiceShopService;
+import nhomj.example.hairsalon.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,12 @@ import java.util.List;
 public class UserServiceController {
 
     private final ServiceShopService serviceShopService;
+    private final StaffService staffService;
 
     @Autowired
-    public UserServiceController(ServiceShopService serviceShopService) {
+    public UserServiceController(ServiceShopService serviceShopService, StaffService staffService) {
         this.serviceShopService = serviceShopService;
+        this.staffService = staffService;
     }
 
     /**
@@ -45,5 +49,12 @@ public class UserServiceController {
         Service service = serviceShopService.getServiceById(id);
         model.addAttribute("service", service);
         return "user/service-detail"; // Trang service-detail.jsp hiển thị thông tin chi tiết dịch vụ
+    }
+
+    @GetMapping("/detail_staff/{id}")
+    public String getDetailStaff(@PathVariable Long id, Model model) {
+        Staff staff = this.staffService.getStaffById(id);
+        model.addAttribute("staff", staff);
+        return "user/staff-detail";
     }
 }

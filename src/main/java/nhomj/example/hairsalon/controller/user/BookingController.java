@@ -52,7 +52,7 @@ public class BookingController {
      * @return trang booking.jsp
      */
     @GetMapping("/booking")
-    public String showBookingPage(@RequestParam(value = "serviceId", required = false) Long serviceId, Model model) {
+    public String showBookingPage(@RequestParam(value = "serviceId", required = false) Long serviceId,@RequestParam(value = "staffId", required = false) Long staffId, Model model) {
         List<Service> services = serviceShopService.getAllServiceShops();
         List<Staff> staffList = staffService.getStaffByRole(Staff.Role.NhanVien); // Đã chỉnh sửa
 
@@ -62,6 +62,12 @@ public class BookingController {
             Service selectedService = serviceShopService.getServiceById(serviceId);
             if (selectedService != null) {
                 booking.getServices().add(selectedService);
+            }
+        }
+        if (staffId != null) {
+            Staff selectedStaff = staffService.getStaffById(staffId);
+            if (selectedStaff != null) {
+                booking.setStaff(selectedStaff);
             }
         }
 
