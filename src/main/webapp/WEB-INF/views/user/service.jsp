@@ -8,8 +8,10 @@ prefix="c" %>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Danh sách dịch vụ</title>
+        <title>JSalon</title>
+        <link rel="icon" href="/user_style/images/logo_icon.png" type="image/icon type">
         <link rel="stylesheet" href="/user_style/css/service.css" />
+
     </head>
     <body>
         <jsp:include page="/WEB-INF/views/user/includes/header.jsp" />

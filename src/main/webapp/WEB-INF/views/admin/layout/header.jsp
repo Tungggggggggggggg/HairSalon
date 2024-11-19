@@ -30,6 +30,8 @@
                     </form>
                     <hr>
                     <a class="dropdown-item" href="/staff">Đến Trang Nhân Viên</a>
+                    <hr>
+                    <a class="dropdown-item" href="/home">Đến trang chủ</a>
                 </li>
             </ul>
         </li>

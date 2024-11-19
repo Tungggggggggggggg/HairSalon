@@ -1,67 +1,19 @@
 
-
 -- Insert data into users table
-INSERT INTO staff
-    (name, email, password, phone, address, experience, gender, birthday, role)
+INSERT INTO staff (name, avatar ,email, password, phone, address, experience, gender, birthday, role)
 VALUES
-    (N'Nguyễn Thị Hồng', 'hong@example.com', 'password123', '0123-456-789', N'123 Đường Lê Lợi', 2, N'Nu', '1985-02-14', 'NhanVien'),
-    (N'Trần Văn Minh', 'minh@example.com', 'password123', '0987-654-321', N'456 Đường Trần Phú', 3, N'Nam', '1990-06-21', 'NhanVien'),
-    (N'Phạm Tuấn Anh', 'tuananh@example.com', 'password123', '0912-345-678', N'789 Đường Hùng Vương', 4, N'Nam', '1987-09-13', 'NhanVien'),
-    (N'Lê Thu Hà', 'thuha@example.com', 'password123', '0222-333-444', N'101 Đường Nguyễn Huệ', 5, N'Nu', '1982-11-05', 'NhanVien'),
-    (N'Đặng Ngọc Lan', 'ngoclan@example.com', 'password123', '0111-222-333', N'202 Đường Trần Hưng Đạo', 1, N'Nu', '1995-04-18', 'NhanVien'),
-    (N'Vũ Hữu Phước', 'phuoc@example.com', 'password123', '0777-888-999', N'303 Đường Bạch Đằng', 6, N'Nam', '1988-12-02', 'NhanVien'),
-    (N'Trương Thị Mỹ', 'my@example.com', 'password123', '0444-555-666', N'404 Đường Phan Đình Phùng', 7, N'Nu', '1993-08-07', 'Admin'),
-    (N'Hoàng Quốc Bảo', 'bao@example.com', 'password123', '0666-777-888', N'505 Đường Nguyễn Trãi', 8, N'Nam', '1986-01-25', 'Admin'),
-    (N'Lý Minh Châu', 'minhchau@example.com', 'password123', '0333-444-555', N'606 Đường Quang Trung', 9, N'Nu', '1984-03-30', 'Admin'),
-    (N'Ngô Bá Vinh', 'vinh@example.com', 'password123', '0999-000-111', N'707 Đường Nguyễn Thái Học', 10, N'Nam', '1992-05-15', 'Admin');
+  (N'Nguyễn Thị Hồng','NguyenThiHong.jpg','hong@example.com', 'password123', '0123-456-789', N'123 Đường Lê Lợi', 2, 'Nu', '1985-02-14', 'NhanVien'),
+  (N'Trần Văn Minh', 'TranVanMinh.jpg','minh@example.com', 'password123', '0987-654-321', N'456 Đường Trần Phú', 3, 'Nam', '1990-06-21', 'NhanVien'),
+  (N'Phạm Tuấn Anh','PhamTuanAnh.jpg' ,'tuananh@example.com', 'password123', '0912-345-678', N'789 Đường Hùng Vương', 4, 'Nam', '1987-09-13', 'NhanVien'),
+  (N'Lê Thu Hà',  'LeThuHa.jpg' , 'thuha@example.com', 'password123', '0222-333-444', N'101 Đường Nguyễn Hệ', 5, 'Nu', '1982-11-05', 'NhanVien'),
+  (N'Đặng Lan Ngọc','DangLanNgoc.jpg' ,'ngoclan@example.com', 'password123', '0111-222-333', N'202 Đường Trần Hưng Đạo', 1, 'Nu', '1995-04-18', 'NhanVien'),
+  (N'Vũ Hữu Phước','VuHuuPhuoc.jpg' ,'phuoc@example.com', 'password123', '0777-888-999', N'303 Đường Bạch Đằng', 6, 'Nam', '1988-12-02', 'NhanVien'),
+  (N'Trương Thị My','TruongThiMy.jpg' ,'my@example.com', 'password123', '0444-555-666', N'404 Đường Phan Đình Phùng', 7, 'Nu', '1993-08-07', 'NhanVien'),
+  (N'Hoàng Quốc Bảo', 'HoangQuocBao.jpg','bao@example.com', 'password123', '0666-777-888', N'505 Đường Nguyễn Trãi', 8, 'Nam', '1986-01-25', 'NhanVien'),
+  (N'Nguyễn Văn Chung','NguyenVanChung.jpg' ,'chung@example.com', 'password123', '0333-444-555', N'606 Đường Quang Trung', 9, 'Nam', '1984-03-30', 'NhanVien'),
+  (N'Ngô Bá Vinh','NgoBaVinh.jpg' ,'vinh@example.com', 'password123', '0999-000-111', N'707 Đường Nguyễn Thái Học', 10, 'Nam', '1992-05-15', 'NhanVien');
 
 
--- chưa sửa
--- INSERT INTO notification ( message, notification_date)
--- VALUES
---     (N'Welcome to our platform!', '2024-10-01 08:30:00'),
---     (N'Your profile has been updated successfully.', '2024-10-02 09:15:00' ),
---     (N'You have a new friend request.', '2024-10-03 10:45:00' ),
---     (N'Don''t miss our latest features!', '2024-10-04 11:00:00'),
---     (N'Your subscription expires soon. Renew now!', '2024-10-05 12:30:00'),
---     (N'Password changed successfully.', '2024-10-06 14:00:00'),
---     (N'New message received from admin.', '2024-10-07 15:20:00'),
---     (N'System maintenance on Oct 10, 2024.', '2024-10-08 16:00:00'),
---     (N'Check out our new tutorial series!', '2024-10-09 18:15:00'),
---     (N'Account security alert: new login detected.', '2024-10-10 19:45:00');
-
-
--- Insert data into staff table
-DECLARE @staff_id INT;
-DECLARE @shift_date DATE = CAST(GETDATE() AS DATE);
-DECLARE @end_date DATE = DATEADD(DAY, 6, @shift_date);
--- 7 ngày tới
-
-WHILE @shift_date <= @end_date
-BEGIN
-    -- Duyệt qua từng nhân viên (1 - 10)
-    SET @staff_id = 1;
-    WHILE @staff_id <= 10
-BEGIN
-        -- Chèn 9 ca làm việc mỗi ngày cho mỗi nhân viên
-        INSERT INTO staff_shift
-            (shift_date, time, status, staff_id)
-        VALUES
-            (@shift_date, '08:00 - 09:30', 'Trong', @staff_id),
-            (@shift_date, '09:30 - 11:00', 'Trong', @staff_id),
-            (@shift_date, '11:00 - 12:30', 'Trong', @staff_id),
-
-            (@shift_date, '14:00 - 15:30', 'Trong', @staff_id),
-            (@shift_date, '15:30 - 17:00', 'Trong', @staff_id),
-            (@shift_date, '17:00 - 18:30', 'Trong', @staff_id),
-            (@shift_date, '18:30 - 20:00', 'Trong', @staff_id),
-            (@shift_date, '20:00 - 21:30', 'Trong', @staff_id);
-        -- Tăng staff_id để tiếp tục với nhân viên tiếp theo
-        SET @staff_id = @staff_id + 1;
-    END
-    -- Tăng ngày lên 1
-    SET @shift_date = DATEADD(DAY, 1, @shift_date);
-END
 
 -- Dữ liệu cho tháng 9 năm 2024
 INSERT INTO revenue
@@ -191,22 +143,6 @@ VALUES
     ('Combotocgoisay.jpg', N'Combo cắt tóc - gội đầu - sấy tóc', N'Trọn gói dịch vụ cơ bản.', 250000, 75),
     ('Combonam.jpg', N'Combo tạo kiểu - cạo râu - gội đầu', N'Phong cách lịch lãm cho nam.', 400000, 100);
 
-
--- chưa sửa
--- -- Insert data into booking table
--- INSERT INTO booking (customer_id, staff_id, staff_shift_id, date, status) VALUES
--- (1, 3, 1, '2023-10-10', 'CONFIRMED'),
--- (2, 4, 2, '2023-10-11', 'COMPLETED'),
--- (5, 7, 3, '2023-10-12', 'CANCELED'),
--- (6, 10, 4, '2023-10-13', 'PENDING'),
--- (8, 3, 5, '2023-10-14', 'CONFIRMED'),
--- (9, 4, 6, '2023-10-15', 'COMPLETED'),
--- (1, 7, 7, '2023-10-16', 'CANCELED'),
--- (2, 10, 8, '2023-10-17', 'PENDING'),
--- (5, 3, 9, '2023-10-18', 'CONFIRMED'),
--- (6, 4, 10, '2023-10-19', 'COMPLETED');
-
--- Insert data into revenue table
 
 
 

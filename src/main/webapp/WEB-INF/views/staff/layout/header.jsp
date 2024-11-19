@@ -25,7 +25,8 @@
                     </form>
                     <hr>
                     <a class="dropdown-item" href="/admin">Đến trang Admin(nếu bạn là Admin)</a>
-
+                    <hr>
+                    <a class="dropdown-item" href="/home">Đến trang chủ</a>
                 </li>
             </ul>
         </li>
