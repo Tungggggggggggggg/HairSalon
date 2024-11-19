@@ -1,10 +1,72 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+    const staffList = document.getElementById('staff-list');
+    const staffCards = document.querySelectorAll('.staff-card');
+    const hiddenInput = document.getElementById('selected-staff-id');
+
+    const scrollLeftBtn = document.getElementById('scroll-left');
+    const scrollRightBtn = document.getElementById('scroll-right');
+
+    // Số lượng nhân viên hiển thị mỗi lần
+    const visibleStaffCount = 2;
+    const cardWidth = staffCards[0].offsetWidth + 15; // Chiều rộng card + khoảng cách giữa các card
+    let scrollPosition = 0;
+
+    // Hiển thị hoặc ẩn nút điều hướng
+    function updateScrollButtons() {
+        scrollLeftBtn.style.display = scrollPosition > 0 ? 'block' : 'none';
+        scrollRightBtn.style.display = (scrollPosition + visibleStaffCount) < staffCards.length ? 'block' : 'none';
+    }
+
+    // Xử lý sự kiện bấm nút trái
+    scrollLeftBtn.addEventListener('click', () => {
+        event.stopPropagation();
+        scrollPosition = Math.max(0, scrollPosition - visibleStaffCount);
+        staffList.scrollTo({ left: scrollPosition * cardWidth, behavior: 'smooth' });
+        updateScrollButtons();
+    });
+
+    // Xử lý sự kiện bấm nút phải
+    scrollRightBtn.addEventListener('click', () => {
+        event.stopPropagation();
+        scrollPosition = Math.min(staffCards.length - visibleStaffCount, scrollPosition + visibleStaffCount);
+        staffList.scrollTo({ left: scrollPosition * cardWidth, behavior: 'smooth' });
+        updateScrollButtons();
+    });
+
+    let staffName = 'Không có';
+
+    // Chọn nhân viên
+    staffCards.forEach(card => {
+        card.addEventListener('click', () => {
+            // Bỏ chọn tất cả nhân viên
+            staffCards.forEach(c => {
+                c.style.border = '2px solid transparent';
+                c.querySelector('.check-icon').style.display = 'none';
+            });
+
+            // Đánh dấu nhân viên được chọn
+            card.style.border = '2px solid #007bff';
+            card.querySelector('.check-icon').style.display = 'block';
+
+            // Lưu ID của nhân viên được chọn
+            const staffId = card.getAttribute('data-staff-id');
+            hiddenInput.value = staffId;
+
+            staffName = card.getAttribute('data-name');
+
+        });
+    });
+
+    // Gọi hàm cập nhật nút điều hướng khi tải trang
+    updateScrollButtons();
+
     // Khởi tạo Flatpickr cho trường ngày hẹn với định dạng dd/MM/yyyy, ngôn ngữ tiếng Việt
     const appointmentDatePicker = flatpickr("#appointmentDate", {
         dateFormat: "d/m/Y", // dd/MM/yyyy
         minDate: "today",
         locale: "vi",
-        onChange: function(selectedDates, dateStr, instance) {
+        onChange: function (selectedDates, dateStr, instance) {
             const selectedDate = selectedDates[0];
             const today = new Date();
 
@@ -64,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Lấy thông tin lịch hẹn
         const date = formData.get('date') || 'Không có';
         const time = formData.get('appointmentTime') || 'Không có';
-        
+
         // Lấy danh sách dịch vụ đã chọn
         const servicesSelect = document.getElementById('serviceType');
         const selectedOptions = Array.from(servicesSelect.selectedOptions);
@@ -72,14 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const servicesList = services.length > 0 ? services.join(', ') : 'Không có';
 
         // Lấy thông tin nhân viên phụ trách
-        const staffId = formData.get('staff.id');
-        let staffName = 'Không có';
-        if (staffId) {
-            const staffOption = document.querySelector(`#stylist option[value="${staffId}"]`);
-            if (staffOption) {
-                staffName = staffOption.textContent.trim();
-            }
-        }
+
 
         // Lấy thông tin khách hàng
         const fullName = formData.get('customer.name') || 'Không có';
@@ -115,12 +170,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Xử lý khi nhấn nút "Xác nhận đặt lịch" trong modal
     document.getElementById('confirmSubmit').addEventListener('click', function () {
+
         // Gửi form
         document.getElementById('bookingForm').submit();
     });
 
     // Kiểm tra khi chọn giờ hẹn không được đặt ở quá khứ
-    document.getElementById("bookingForm").addEventListener("submit", function(event) {
+    document.getElementById("bookingForm").addEventListener("submit", function (event) {
         const bookingDate = appointmentDatePicker.input.value;
         const appointmentTime = appointmentTimePicker.input.value;
 
@@ -136,4 +192,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
 });
+
+
+
+
+

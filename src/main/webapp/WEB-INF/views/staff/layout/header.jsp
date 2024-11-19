@@ -23,6 +23,8 @@
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <button class="dropdown-item">Đăng xuất</button>
                     </form>
+                    <hr>
+                    <a class="dropdown-item" href="/admin">Đến trang Admin(nếu bạn là Admin)</a>
 
                 </li>
             </ul>
