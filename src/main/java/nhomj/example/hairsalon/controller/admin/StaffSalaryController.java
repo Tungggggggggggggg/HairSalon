@@ -40,13 +40,27 @@ public class StaffSalaryController {
 
     @PostMapping("/admin/salary_management/save")
     public String saveSalary(@ModelAttribute("newSalary") StaffSalary staffSalary, @RequestParam Long staffId, Model model) {
-        try {
-            Staff staff = staffService.getStaffById(staffId);
-            staffSalary.setStaff(staff);
+        Staff staff = staffService.getStaffById(staffId);
+        staffSalary.setStaff(staffSalary.getStaff());
+        StaffSalary existingSalary = null;
+
+        if (staffSalary.getSalaryId() != null) {
+            // Update existing salary
+            existingSalary = staffSalaryService.getStaffSalaryById(staffSalary.getSalaryId());
+        }
+        if (existingSalary != null) {
+            // Update fields
+            existingSalary.setBaseSalary(staffSalary.getBaseSalary());
+            existingSalary.setBonus(staffSalary.getBonus());
+            existingSalary.setMonth(staffSalary.getMonth());
+            existingSalary.setYear(staffSalary.getYear());
+            existingSalary.setStatus(staffSalary.getStatus());
+            existingSalary.setCreateDate(staffSalary.getCreateDate());
+            staffSalaryService.saveStaffSalary(existingSalary);
+        }
+        else {
+            // Create new salary
             staffSalaryService.saveStaffSalary(staffSalary);
-        } catch (Exception e) {
-            model.addAttribute("errorMessage", "Error saving salary: " + e.getMessage());
-            return "admin/dashboard/salary_management"; // Trả về trang với thông báo lỗi
         }
         return "redirect:/admin/salary_management";
     }

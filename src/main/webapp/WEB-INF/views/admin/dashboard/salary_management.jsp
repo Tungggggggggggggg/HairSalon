@@ -72,12 +72,8 @@
                                     <td>${staffSalary.status}</td>
                                     <td>
                                         <button class="btn btn-sm btn-warning"
-                                                onclick="openSalaryModal('edit', ${staffSalary.salaryId}, '${staffSalary.staff.name}', ${staffSalary.baseSalary}, ${staffSalary.bonus})">
+                                                onclick="openSalaryModal('edit', ${staffSalary.salaryId}, '${staffSalary.staff.id}', ${staffSalary.baseSalary}, ${staffSalary.bonus})">
                                             <i class="fas fa-edit"></i> Sửa
-                                        </button>
-                                        <button class="btn btn-sm btn-info"
-                                                onclick="openHistoryModal('${staffSalary.staff.name}')">
-                                            <i class="fas fa-history"></i> Lịch sử lương
                                         </button>
                                     </td>
                                 </tr>
@@ -106,7 +102,7 @@
                     </div>
                     <div class="modal-body">
                         <form:form id="salaryForm" action="/admin/salary_management/save" method="post" modelAttribute="newSalary">
-                            <input type="hidden" id="salaryId" name="id" />
+                            <input type="hidden" id="salaryId" name="salaryId" />
                             <div class="mb-3">
                                 <label for="staffName" class="form-label">Tên nhân viên</label>
                                 <select class="form-select" id="staffName" name="staffId" required>
@@ -139,44 +135,6 @@
                                 <button type="submit" class="btn btn-primary">Lưu</button>
                             </div>
                         </form:form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal lịch sử lương -->
-        <div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="historyModalLabel">Lịch sử lương</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Tháng/Năm</th>
-                                <th>Lương cơ bản (VNĐ)</th>
-                                <th>Thưởng (VNĐ)</th>
-                                <th>Tổng lương (VNĐ)</th>
-                            </tr>
-                            </thead>
-                            <tbody id="historyTableBody">
-                            <tr>
-                                <td>09/2024</td>
-                                <td>5,000,000</td>
-                                <td>500,000</td>
-                                <td>5,500,000</td>
-                            </tr>
-                            <tr>
-                                <td>08/2024</td>
-                                <td>5,000,000</td>
-                                <td>300,000</td>
-                                <td>5,300,000</td>
-                            </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

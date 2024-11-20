@@ -15,7 +15,7 @@ const salaryTable = new simpleDatatables.DataTable("#salaryTable", {
 
 let salaryModal;
 
-function openSalaryModal(type, id = '', name = '', baseSalary = '', bonus = '') {
+function openSalaryModal(type, id = '', staffId = '', baseSalary = '', bonus = '') {
     const modalTitle = document.getElementById('salaryModalLabel');
     const salaryId = document.getElementById('salaryId');
     const staffNameInput = document.getElementById('staffName');
@@ -25,18 +25,19 @@ function openSalaryModal(type, id = '', name = '', baseSalary = '', bonus = '') 
     if (type === 'new') {
         modalTitle.textContent = 'Thêm mới lương';
         salaryId.value = '';
-        staffNameInput.value = '';
+        staffNameInput.value = ''; // Clear the dropdown for new entry
         baseSalaryInput.value = '';
         bonusInput.value = '';
     } else if (type === 'edit') {
         modalTitle.textContent = 'Chỉnh sửa lương';
         salaryId.value = id;
-        staffNameInput.value = name;
+        staffNameInput.value = staffId; // Set the selected staff ID
         baseSalaryInput.value = baseSalary;
         bonusInput.value = bonus;
     }
 
-    salaryModal = new bootstrap.Modal(document.getElementById('salaryModal'));
+    // Hiển thị modal
+    const salaryModal = new bootstrap.Modal(document.getElementById('salaryModal'));
     salaryModal.show();
 }
 
