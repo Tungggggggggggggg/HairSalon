@@ -102,7 +102,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         checkIcon.textContent = '✓';
 
                         const img = document.createElement('img');
-                        img.src = '/user_style/images/' + staff.avatar;
+                        let avatarSrc = staff.avatar ? '/images/avatar/' + staff.avatar : '/images/avatar/default.png';
+                        img.src = avatarSrc;
+                        img.onerror = function() {
+                            this.src = '/images/avatar/default.png';
+                        };
                         img.alt = staff.name;
                         img.style.cssText = 'width: 200px; height: 200px; border-radius: 10px; object-fit: cover; margin-bottom: 10px;';
 

@@ -6,8 +6,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "staff")
+@JsonIgnoreProperties({"bookings", "salaries", "shifts"})
 public class Staff {
 
     @Id

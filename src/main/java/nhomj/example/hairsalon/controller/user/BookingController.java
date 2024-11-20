@@ -177,7 +177,7 @@ public class BookingController {
         return "user/booking_success";
     }
 
-        /**
+    /**
      * API để lấy danh sách nhân viên khả dụng dựa trên ngày, giờ và dịch vụ
      */
     @GetMapping("/booking/available_staff")
@@ -205,7 +205,7 @@ public class BookingController {
 
         // Chuyển đổi sang StaffDTO để tránh vấn đề tuần hoàn trong JSON
         List<StaffDTO> staffDTOs = availableStaff.stream()
-                .map(staff -> new StaffDTO(staff.getId(), staff.getName()))
+                .map(staff -> new StaffDTO(staff.getId(), staff.getName(), staff.getAvatar()))
                 .collect(Collectors.toList());
 
         return staffDTOs;

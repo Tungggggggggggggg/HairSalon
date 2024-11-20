@@ -177,7 +177,7 @@ public class BookingsController {
 
         // Chuyển đổi sang StaffDTO để tránh vấn đề tuần hoàn trong JSON
         List<StaffDTO> staffDTOs = availableStaff.stream()
-                .map(staff -> new StaffDTO(staff.getId(), staff.getName()))
+                .map(staff -> new StaffDTO(staff.getId(), staff.getName(), staff.getAvatar()))
                 .collect(Collectors.toList());
 
         return staffDTOs;
