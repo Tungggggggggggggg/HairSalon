@@ -1,11 +1,15 @@
 package nhomj.example.hairsalon.controller.admin;
 
 import java.beans.PropertyEditorSupport;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import jakarta.servlet.http.HttpServletResponse;
 import nhomj.example.hairsalon.service.UpLoadService;
+import nhomj.example.hairsalon.service.exportToExCelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,12 +32,14 @@ public class StaffControllers {
     public final StaffService staffService;
     public final UpLoadService upLoadService;
     public final PasswordEncoder passwordEncoder;
+    public final exportToExCelService exportToExCelService;
 
     @Autowired
-    public StaffControllers(StaffService staffService, UpLoadService upLoadService, PasswordEncoder passwordEncoder) {
+    public StaffControllers(StaffService staffService, UpLoadService upLoadService, PasswordEncoder passwordEncoder, exportToExCelService exportToExCelService) {
         this.staffService = staffService;
         this.upLoadService = upLoadService;
         this.passwordEncoder = passwordEncoder;
+        this.exportToExCelService = exportToExCelService;
     }
 
     @InitBinder
@@ -113,6 +119,23 @@ public class StaffControllers {
     @PostMapping("/admin/staff_management/delete")
     public String deleteStaff(@ModelAttribute("deleteStaff") Staff staff, Model model) {
         this.staffService.deleteStaff(staff);
+        return "redirect:/admin/staff_management";
+    }
+
+    @GetMapping("/admin/staff_management/excel")
+    public String staffManagementExcel(HttpServletResponse response) throws IOException {
+        List<Staff> staffs = this.staffService.getAllStaff();
+
+        byte[] excelFile = exportToExCelService.exportStaffToExcel(staffs);
+
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader("Content-Disposition", "attachment; filename=DanhsachNhanvien.xlsx");
+
+        OutputStream os = response.getOutputStream();
+        os.write(excelFile);
+        os.flush();
+        os.close();
+
         return "redirect:/admin/staff_management";
     }
 

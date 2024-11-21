@@ -95,4 +95,7 @@ public class RevenueService {
         return testList;
     }
 
+    public List<Revenue> getRevenueByDate(LocalDate startDate, LocalDate endDate) {
+        return this.revenueRepository.findAllDate(startDate, endDate);
+    }
 }

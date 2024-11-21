@@ -15,6 +15,9 @@ public interface RevenueRepository extends JpaRepository<Revenue, Long> {
 
     List<Revenue> findAll( Sort sort);
 
+    @Query("SELECT r FROM Revenue r WHERE r.summaryDate BETWEEN :startDate AND :endDate")
+    List<Revenue> findAllDate(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
     @Query("SELECT r.totalRevenue FROM Revenue r WHERE r.summaryDate BETWEEN :startDate AND CURRENT_DATE")
     List<BigDecimal> findByDateRange(@Param("startDate") LocalDate startDate);
 

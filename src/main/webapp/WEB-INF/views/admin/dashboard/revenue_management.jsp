@@ -37,15 +37,15 @@
                         <i class="fas fa-filter me-1"></i> Lọc doanh thu
                     </div>
                     <div class="card-body">
-                        <form id="filterForm" onsubmit="return filterRevenue()">
+                        <form  method="get" action="/admin/revenue_management/filter">
                             <div class="row mb-3">
                                 <div class="col-md-5">
                                     <label for="startDate" class="form-label">Từ ngày</label>
-                                    <input type="date" id="startDate" class="form-control" required>
+                                    <input type="date" name="startDate"  id="startDate" class="form-control" required>
                                 </div>
                                 <div class="col-md-5">
                                     <label for="endDate" class="form-label">Đến ngày</label>
-                                    <input type="date" id="endDate" class="form-control" required>
+                                    <input type="date" name="endDate" id="endDate" class="form-control" required>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-end">
                                     <button type="submit" class="btn btn-primary w-100">Lọc</button>
@@ -59,9 +59,7 @@
                 <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between">
                         <span><i class="fas fa-table me-1"></i> Danh sách doanh thu</span>
-                        <button class="btn btn-success" onclick="exportToExcel()">
-                            <i class="fas fa-file-excel"></i> Xuất ra Excel
-                        </button>
+                        <a class="btn btn-success" href="/admin/revenue_management/excel"><i class="fas fa-file-excel"></i> Xuất ra Excel </a>
                     </div>
                     <div class="card-body">
                         <table id="revenueTable" class="table table-bordered table-hover">
@@ -141,17 +139,19 @@
                             const currentDate = new Date();
                             const currentMonth = currentDate.getMonth() + 1;
                             const currentYear = currentDate.getFullYear();
+                            console.log(currentDate,${currentYear});
+                            console.log(`Ngày ${i}/${currentMonth}/${currentYear}`);
                             if (timeFilter === "week") {
                                 labels = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'];
                                 data = ${week};
                             } else if (timeFilter === "month") {
                                 const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
                                 for (let i = 1; i <= daysInMonth; i++) {
-                                    labels.push(`Ngày ${i}/${currentMonth}/${currentYear}`);
+                                    labels.push(`Ngày`+ i+`/`+currentMonth+`/`+currentYear);
                                 }
                                 data = ${month};
                             } else if (timeFilter === "year") {
-                                labels = Array.from({ length: 12 }, (_, i) => `Tháng ${i + 1}/${currentYear}`);
+                                labels = Array.from({ length: 12 }, (_, i) => `Tháng`+(i + 1) + `/` + currentYear);
                                 data = ${year};
                             }
 
