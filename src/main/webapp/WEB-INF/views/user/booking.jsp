@@ -49,10 +49,17 @@
                     placeholder="Chọn giờ"
                 /><br /><br />
 
+                <small class="note">
+                    *Cách để chọn nhiều dịch vụ:<br />
+                    Trên Windows: Giữ nút <strong>Ctrl</strong> trong khi chọn<br />
+                    Trên Mac: Giữ nút <strong>Command</strong> trong khi chọn
+                </small>
+
                 <label for="serviceType">Loại dịch vụ:</label>
                 <form:select id="serviceType" path="services" multiple="true" required="true" class="form-select">
                     <form:options items="${services}" itemValue="id" itemLabel="name" />
-                </form:select><br /><br />
+                </form:select>
+
 
                 <label for="staff-list">Chọn nhân viên:</label>
                 <div style="position: relative; width: 100%; max-width: 500px; margin: auto; overflow: hidden;">

@@ -30,9 +30,14 @@ public class BookingService {
         return bookingRepository.count();
     }
 
-    // Lấy danh sách tất cả các booking
+    // Lấy danh sách tất cả các booking, sắp xếp mới nhất lên đầu
     public List<Booking> getAllBookings() {
-        return bookingRepository.findAll();
+        return bookingRepository.findAllByOrderByCreatedDateDesc();
+    }
+
+    // Lấy danh sách tất cả các booking, sắp xếp từ cũ đến mới
+    public List<Booking> getAllBookingsSortedByCreatedDateAsc() {
+        return bookingRepository.findAllByOrderByCreatedDateAsc();
     }
 
     // Lưu hoặc cập nhật một booking

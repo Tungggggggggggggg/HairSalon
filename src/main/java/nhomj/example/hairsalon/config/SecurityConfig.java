@@ -62,7 +62,7 @@ public class SecurityConfig {
         //                         "/images/**"
         //                 ).permitAll()
         //                 .requestMatchers("/admin/**").hasRole("Admin")
-        //                 .requestMatchers("/staff/**").hasRole("NhanVien") // Thêm quyền cho nhân viên
+        //                 .requestMatchers("/staff/**").hasRole("NhanVien")
         //                 .anyRequest().authenticated())
 
         //         .formLogin(formLogin -> formLogin

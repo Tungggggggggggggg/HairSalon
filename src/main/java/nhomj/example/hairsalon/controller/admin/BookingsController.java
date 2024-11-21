@@ -1,5 +1,6 @@
 package nhomj.example.hairsalon.controller.admin;
 
+import nhomj.example.hairsalon.util.BookingExcelExporter;
 import nhomj.example.hairsalon.dto.StaffDTO;
 import nhomj.example.hairsalon.model.Booking;
 import nhomj.example.hairsalon.model.Service;
@@ -16,6 +17,8 @@ import org.springframework.validation.BindingResult;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -44,6 +47,7 @@ public class BookingsController {
         model.addAttribute("bookings", bookings);
         model.addAttribute("command", new Booking());
         model.addAttribute("cancelBooking", new Booking());
+        model.addAttribute("completeBooking", new Booking());
         model.addAttribute("servicesList", bookingService.getAllServices());
         model.addAttribute("staffList", staffService.getStaffByRole(Staff.Role.NhanVien));
 
@@ -131,10 +135,21 @@ public class BookingsController {
         return "redirect:/admin/booking_management";
     }
 
+    @PostMapping("/admin/booking_management/complete")
+    public String completeBooking(@ModelAttribute("completeBooking") Booking booking) {
+        Booking existingBooking = bookingService.findById(booking.getId());
+        if (existingBooking != null) {
+            existingBooking.setStatus(Booking.Status.HoanThanh);
+            bookingService.save(existingBooking);
+        }
+        return "redirect:/admin/booking_management";
+    }
+
     private void prepareModelAttributes(Model model) {
         List<Booking> bookings = bookingService.getAllBookings();
         model.addAttribute("bookings", bookings);
         model.addAttribute("cancelBooking", new Booking());
+        model.addAttribute("completeBooking", new Booking());
         model.addAttribute("servicesList", bookingService.getAllServices());
         model.addAttribute("staffList", staffService.getStaffByRole(Staff.Role.NhanVien));
 
@@ -181,5 +196,20 @@ public class BookingsController {
                 .collect(Collectors.toList());
 
         return staffDTOs;
+    }
+
+    // Thêm phương thức export dữ liệu ra Excel
+    @GetMapping("/admin/booking_management/export")
+    public void exportToExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=bookings.xlsx";
+        response.setHeader(headerKey, headerValue);
+
+        List<Booking> bookings = bookingService.getAllBookingsSortedByCreatedDateAsc();
+
+        BookingExcelExporter excelExporter = new BookingExcelExporter(bookings);
+
+        excelExporter.export(response);
     }
 }

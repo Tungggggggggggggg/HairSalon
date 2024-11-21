@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +18,11 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "customer_id", nullable = false)
     private User customer;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "staff_id", nullable = false)
     private Staff staff;
 
@@ -53,6 +54,14 @@ public class Booking {
 
     @OneToOne(mappedBy = "booking")
     private Invoice invoice;
+
+    @Column(nullable = false)
+    private LocalDateTime createdDate;
+
+    @PrePersist
+    protected void onCreate() {
+        createdDate = LocalDateTime.now();
+    }
 
     public Invoice getInvoice() {
         return invoice;
@@ -134,6 +143,14 @@ public class Booking {
         this.status = status;
     }
     
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
     // Phương thức trả về ngày đã định dạng
     public String getFormattedDate() {
         if (this.date != null) {
@@ -172,5 +189,13 @@ public class Booking {
         return services.stream()
                 .mapToInt(Service::getDurationMinutes)
                 .sum();
+    }
+
+    // Phương thức trả về ngày tạo đã định dạng
+    public String getFormattedCreatedDate() {
+        if (this.createdDate != null) {
+            return this.createdDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        }
+        return "";
     }
 }

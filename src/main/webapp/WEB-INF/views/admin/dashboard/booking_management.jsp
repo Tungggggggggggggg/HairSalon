@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>JSalon-Quản Tri</title>
     <link rel="icon" href="/user_style/images/logo_icon.png" type="image/icon type">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
@@ -37,6 +37,9 @@
                     <div class="mb-3">
                         <button type="button" class="btn btn-primary" onclick="openModal('new')">
                             <i class="fas fa-calendar-plus"></i> Thêm lịch hẹn mới
+                        </button>
+                        <button type="button" class="btn btn-success" onclick="window.location.href='/admin/booking_management/export'">
+                            <i class="fas fa-file-excel"></i> Xuất Excel
                         </button>
                     </div>
 
@@ -74,36 +77,47 @@
                                             </td>
                                             <td>${booking.statusDisplayName}</td>
                                             <td>
+                                                <!-- Chuẩn bị danh sách dịch vụ dưới dạng mảng JavaScript -->
+                                                <c:set var="serviceNames">
+                                                    [<c:forEach var="service" items="${booking.services}" varStatus="loop">
+                                                        '${fn:escapeXml(service.name)}'<c:if test="${!loop.last}">,</c:if>
+                                                    </c:forEach>]
+                                                </c:set>
+
                                                 <button class="btn btn-sm btn-info" data-bs-toggle="modal"
                                                     data-bs-target="#detailModal"
-                                                    onclick="viewDetails('${booking.id}', '${booking.customer.name}', '${booking.staff.name}', '${not empty booking.services ? booking.services[0].name : ''}', '${booking.formattedDate}', '${booking.formattedAppointmentTime}', '${booking.statusDisplayName}')">
-                                                    <i class="fas fa-eye"></i> Chi tiết
-                                                </button>
-                                                <button class="btn btn-sm btn-warning"
-                                                    onclick="openModal('edit', 
+                                                    onclick="viewDetails(
                                                         '${booking.id}', 
-                                                        '${booking.customer.id}', 
+                                                        '${booking.customer.name}', 
+                                                        '${booking.staff.name}', 
                                                         '${booking.formattedDate}', 
                                                         '${booking.formattedAppointmentTime}', 
-                                                        '${not empty booking.services ? booking.services[0].id : ''}', 
-                                                        '${booking.status}', 
-                                                        '${booking.staff.id}', 
-                                                        '${booking.customer.name}', 
+                                                        '${booking.statusDisplayName}', 
                                                         '${booking.customer.email}', 
                                                         '${booking.customer.phone}', 
                                                         '${booking.customer.address}', 
                                                         '${booking.customer.formattedBirthday}', 
-                                                        '${booking.customer.gender}')">
-                                                    <i class="fas fa-edit"></i> Sửa
+                                                        '${booking.customer.gender}', 
+                                                        '${booking.formattedCreatedDate}', 
+                                                        ${serviceNames}
+                                                        )">
+                                                    <i class="fas fa-eye"></i> Chi tiết
                                                 </button>
-                                                <button type="button" class="btn btn-sm btn-danger" 
-                                                    onclick="openCancelModal('${booking.id}', '${booking.customer.name}')">
-                                                    <i class="fas fa-times-circle"></i> Hủy
-                                                </button>
+
+                                                <!-- Chỉ hiển thị nút Hoàn thành và Hủy nếu trạng thái là Đã Đặt -->
+                                                <c:if test="${booking.status eq 'DaDat'}">
+                                                    <button type="button" class="btn btn-sm btn-success" 
+                                                        onclick="openCompleteModal('${booking.id}', '${booking.customer.name}')">
+                                                        <i class="fas fa-check-circle"></i> Hoàn thành
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-danger" 
+                                                        onclick="openCancelModal('${booking.id}', '${booking.customer.name}')">
+                                                        <i class="fas fa-times-circle"></i> Hủy
+                                                    </button>
+                                                </c:if>
                                             </td>
                                         </tr>
                                     </c:forEach>
-                                    <!-- Các dữ liệu mẫu khác tương tự... -->
                                 </tbody>
                             </table>
                         </div>
@@ -114,7 +128,7 @@
             <!-- Modal Xem chi tiết Booking -->
             <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel"
                 aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="detailModalLabel">Chi tiết lịch hẹn</h5>
@@ -122,13 +136,23 @@
                                 aria-label="Đóng"></button>
                         </div>
                         <div class="modal-body">
+                            <h5>Thông tin lịch hẹn</h5>
                             <p><strong>ID:</strong> <span id="detailId"></span></p>
-                            <p><strong>Tên khách hàng:</strong> <span id="detailUser"></span></p>
+                            <p><strong>Trạng thái:</strong> <span id="detailStatus"></span></p>
+                            <p><strong>Ngày tạo:</strong> <span id="detailCreatedDate"></span></p>
+                            <p><strong>Ngày hẹn:</strong> <span id="detailDate"></span></p>
+                            <p><strong>Giờ hẹn:</strong> <span id="detailAppointmentTime"></span></p>
                             <p><strong>Dịch vụ:</strong> <span id="detailService"></span></p>
                             <p><strong>Nhân viên phụ trách:</strong> <span id="detailStaff"></span></p>
-                            <p><strong>Ngày:</strong> <span id="detailDate"></span></p>
-                            <p><strong>Giờ hẹn:</strong> <span id="detailAppointmentTime"></span></p>
-                            <p><strong>Trạng thái lịch hẹn:</strong> <span id="detailStatus"></span></p>
+
+                            <hr>
+                            <h5>Thông tin khách hàng</h5>
+                            <p><strong>Tên khách hàng:</strong> <span id="detailUser"></span></p>
+                            <p><strong>Email:</strong> <span id="detailEmail"></span></p>
+                            <p><strong>Điện thoại:</strong> <span id="detailPhone"></span></p>
+                            <p><strong>Địa chỉ:</strong> <span id="detailAddress"></span></p>
+                            <p><strong>Ngày sinh:</strong> <span id="detailBirthday"></span></p>
+                            <p><strong>Giới tính:</strong> <span id="detailGender"></span></p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
@@ -138,7 +162,7 @@
                 </div>
             </div>
 
-            <!-- Modal thêm/sửa lịch hẹn -->
+            <!-- Modal thêm lịch hẹn -->
             <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -236,7 +260,31 @@
                                 <form:hidden path="id" />
                                 <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-warning">Xác nhận hủy</button>
+                                <button type="submit" class="btn btn-danger">Xác nhận hủy</button>
+                            </form:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal xác nhận hoàn thành Booking -->
+            <div class="modal fade" id="completeModal" tabindex="-1" aria-labelledby="completeModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="completeModalLabel">Xác nhận hoàn thành lịch hẹn</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc chắn muốn đánh dấu lịch hẹn của <strong id="completeName"></strong> là hoàn thành?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form:form id="completeForm" action="/admin/booking_management/complete" method="post" modelAttribute="completeBooking">
+                                <form:hidden path="id" />
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-success">Xác nhận hoàn thành</button>
                             </form:form>
                         </div>
                     </div>

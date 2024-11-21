@@ -69,25 +69,6 @@ window.openModal = function(
 
         // Xóa danh sách nhân viên khi thêm mới
         staffSelect.innerHTML = '<option value="">Chọn nhân viên</option>';
-    } else if (type === "edit") {
-        modalTitle.textContent = "Chỉnh sửa lịch hẹn";
-        bookingId.value = id;
-        customerNameInput.value = customerName;
-        customerEmailInput.value = customerEmail;
-        customerPhoneInput.value = customerPhone;
-        customerAddressInput.value = customerAddress;
-        customerBirthdayPicker.setDate(customerBirthday, true, "d/m/Y"); // Đặt ngày đã định dạng
-        customerGenderSelect.value = customerGender;
-        bookingDatePicker.setDate(date, true, "d/m/Y"); // Đặt ngày đã định dạng
-        appointmentTimePicker.setDate(appointmentTime, true, "H:i"); // Đặt giờ đã định dạng
-        // Đặt lại dịch vụ đã chọn
-        if (serviceId) {
-            Array.from(serviceSelect.options).forEach(option => {
-                option.selected = serviceId.includes(option.value);
-            });
-        }
-        statusSelect.value = status;
-        staffSelect.value = staffId;
     }
 
     bookingModal = new bootstrap.Modal(document.getElementById("bookingModal"));
@@ -219,27 +200,50 @@ function viewDetails(
     id,
     name,
     nameStaff,
-    service,
     date,
     appointmentTime,
-    statusDisplayName
+    statusDisplayName,
+    email,
+    phone,
+    address,
+    birthday,
+    gender,
+    createdDate,
+    services
 ) {
     document.getElementById("detailId").textContent = id;
     document.getElementById("detailUser").textContent = name;
-    document.getElementById("detailService").textContent = service;
     document.getElementById("detailStaff").textContent = nameStaff;
-    // Format date to dd/MM/yyyy
-    const [day, month, year] = date.split("/");
-    const formattedDate = `${day}/${month}/${year}`;
-    document.getElementById("detailDate").textContent = formattedDate;
+    document.getElementById("detailDate").textContent = date;
     document.getElementById("detailAppointmentTime").textContent = appointmentTime;
     document.getElementById("detailStatus").textContent = statusDisplayName;
+    document.getElementById("detailEmail").textContent = email;
+    document.getElementById("detailPhone").textContent = phone;
+    document.getElementById("detailAddress").textContent = address;
+    document.getElementById("detailBirthday").textContent = birthday;
+    document.getElementById("detailGender").textContent = gender;
+    document.getElementById("detailCreatedDate").textContent = createdDate;
+
+    // Hiển thị danh sách dịch vụ
+    let serviceList = "";
+    if (services && services.length > 0) {
+        services.forEach(serviceName => {
+            serviceList += serviceName + "<br/>";
+        });
+    }
+    document.getElementById("detailService").innerHTML = serviceList;
 }
 
 function openCancelModal(id, name) {
     document.getElementById("cancelForm").querySelector("input[name='id']").value = id;
     document.getElementById("cancelName").innerText = name;
     new bootstrap.Modal(document.getElementById("cancelModal")).show();
+}
+
+function openCompleteModal(id, name) {
+    document.getElementById("completeForm").querySelector("input[name='id']").value = id;
+    document.getElementById("completeName").innerText = name;
+    new bootstrap.Modal(document.getElementById("completeModal")).show();
 }
 
 // Thêm console.log để kiểm tra xem hàm có được gọi hay không
