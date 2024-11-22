@@ -1,5 +1,3 @@
-// revenue_management.js
-
 // Khởi tạo Flatpickr cho các trường ngày
 document.addEventListener('DOMContentLoaded', function() {
     flatpickr("#startDate", {

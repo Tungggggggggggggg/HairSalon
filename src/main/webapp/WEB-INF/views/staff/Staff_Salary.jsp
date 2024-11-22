@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -12,7 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="/admin_style/css/styles.css" rel="stylesheet" />
     <link href="/staff_style/css/staff.css" rel="stylesheet" />
-    <link rel="icon" href="/user_style/images/logo_icon.png" type="image/icon type">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="/admin_style/js/scripts.js"></script>
@@ -37,13 +37,14 @@
                         <i class="fas fa-money-bill-wave me-1"></i> Lương hàng tháng
                     </div>
                     <div class="card-body">
+                        <fmt:setLocale value="vi_VN"/>
                         <table id="monthlySalaryTable" class="table table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th>ID Lương</th>
-                                <th>Lương cơ bản (VNĐ)</th>
-                                <th>Thưởng (VNĐ)</th>
-                                <th>Tổng lương (VNĐ)</th>
+                                <th>Lương cơ bản</th>
+                                <th>Thưởng</th>
+                                <th>Tổng lương</th>
                                 <th>Ngày cấp lương</th>
                             </tr>
                             </thead>
@@ -52,10 +53,18 @@
                                 <c:forEach var="salary" items="${salaryList}">
                                     <tr>
                                         <td>${salary.salaryId}</td>
-                                        <td>${salary.baseSalary}</td>
-                                        <td>${salary.bonus}</td>
-                                        <td>${salary.totalSalary}</td>
-                                        <td>${salary.createDate}</td>
+                                        <td>
+                                            <fmt:formatNumber value="${salary.baseSalary}" pattern="#,##0 '₫'" />
+                                        </td>
+                                        <td>
+                                            <fmt:formatNumber value="${salary.bonus}" pattern="#,##0 '₫'" />
+                                        </td>
+                                        <td>
+                                            <fmt:formatNumber value="${salary.totalSalary}" pattern="#,##0 '₫'" />
+                                        </td>
+                                        <td>
+                                            <c:out value="${salary.formattedCreateDate}" default="" />
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:if>
