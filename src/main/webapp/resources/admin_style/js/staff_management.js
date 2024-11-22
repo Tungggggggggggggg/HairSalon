@@ -87,11 +87,10 @@ function openDeleteModal(id, name) {
 }
 
 // Hàm hiển thị chi tiết nhân viên
-function viewDetails(id, name, email, password, phone, address, gender, birthday, experience, role, createdDate) {
+function viewDetails(id, name, email,  phone, address, gender, birthday, experience, role, createdDate) {
     document.getElementById("detailId").textContent = id;
     document.getElementById("detailName").textContent = name;
     document.getElementById("detailEmail").textContent = email;
-    document.getElementById("detailPassword").textContent = password;
     document.getElementById("detailPhone").textContent = phone;
     document.getElementById("detailAddress").textContent = address;
     document.getElementById("detailGender").textContent = gender;

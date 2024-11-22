@@ -1,11 +1,8 @@
 package nhomj.example.hairsalon.controller.admin;
 
+import nhomj.example.hairsalon.model.*;
 import nhomj.example.hairsalon.util.BookingExcelExporter;
 import nhomj.example.hairsalon.dto.StaffDTO;
-import nhomj.example.hairsalon.model.Booking;
-import nhomj.example.hairsalon.model.Service;
-import nhomj.example.hairsalon.model.Staff;
-import nhomj.example.hairsalon.model.User;
 import nhomj.example.hairsalon.service.BookingService;
 import nhomj.example.hairsalon.service.EmailService;
 import nhomj.example.hairsalon.service.StaffService;
@@ -32,6 +29,7 @@ public class BookingsController {
     private final UserService userService;
     private final StaffService staffService;
     private final EmailService emailService;
+
 
     @Autowired
     public BookingsController(final BookingService bookingService, final UserService userService, final StaffService staffService, EmailService emailService) {
@@ -130,17 +128,19 @@ public class BookingsController {
         Booking existingBooking = bookingService.findById(booking.getId());
         if (existingBooking != null) {
             existingBooking.setStatus(Booking.Status.DaHuy);
-            bookingService.save(existingBooking);
+            bookingService.saveCancel(existingBooking);
         }
         return "redirect:/admin/booking_management";
     }
 
     @PostMapping("/admin/booking_management/complete")
-    public String completeBooking(@ModelAttribute("completeBooking") Booking booking) {
+    public String completeBooking(@ModelAttribute("completeBooking") Booking booking , @RequestParam("payMethod") String payMethod  ) {
         Booking existingBooking = bookingService.findById(booking.getId());
+        Invoice.PaymentMethod paymentMethod = Invoice.PaymentMethod.valueOf(payMethod);
+        Invoice invoice = new Invoice(Invoice.PaymentStatus.DaThanhToan ,paymentMethod, LocalDate.now());
         if (existingBooking != null) {
             existingBooking.setStatus(Booking.Status.HoanThanh);
-            bookingService.save(existingBooking);
+            bookingService.saveComplete(existingBooking, invoice);
         }
         return "redirect:/admin/booking_management";
     }

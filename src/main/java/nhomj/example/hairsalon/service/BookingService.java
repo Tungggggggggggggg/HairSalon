@@ -2,13 +2,17 @@ package nhomj.example.hairsalon.service;
 
 import nhomj.example.hairsalon.model.Booking;
 import nhomj.example.hairsalon.model.EmailDetails;
+import nhomj.example.hairsalon.model.Invoice;
 import nhomj.example.hairsalon.model.Service;
 import nhomj.example.hairsalon.repository.BookingRepository;
 import nhomj.example.hairsalon.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -18,12 +22,16 @@ public class BookingService {
     private final BookingRepository bookingRepository;
     private final ServiceRepository serviceRepository;
     private final EmailService emailService;
+    private final InvoiceService invoiceService;
+    private final RevenueService revenueService;
 
     @Autowired
-    public BookingService(BookingRepository bookingRepository, ServiceRepository serviceRepository, EmailService emailService) {
+    public BookingService(BookingRepository bookingRepository, ServiceRepository serviceRepository, EmailService emailService, InvoiceService invoiceService, RevenueService revenueService) {
         this.bookingRepository = bookingRepository;
         this.serviceRepository = serviceRepository;
         this.emailService = emailService;
+        this.invoiceService = invoiceService;
+        this.revenueService = revenueService;
     }
 
     public long countBooking() {
@@ -45,6 +53,43 @@ public class BookingService {
         Booking newBooking = bookingRepository.save(booking);
         if (newBooking != null) {
             emailService.sendHtmlEmailDL(new EmailDetails(newBooking.getCustomer().getEmail(), "Chào mừng " + newBooking.getCustomer().getName() + " Cảm ơn bạn đã đăng ký tài khoản với chúng tôi!"), newBooking);
+        }
+        return newBooking;
+    }
+
+    public Booking saveComplete(Booking booking, Invoice invoice) {
+
+        this.revenueService.save();
+
+        Booking newBooking = bookingRepository.save(booking);
+
+        BigDecimal totalPrice = BigDecimal.ZERO;
+
+        List<Service> services = newBooking.getServices();
+
+        if (services != null && !services.isEmpty()) {
+            for (Service service : services) {
+                if (service.getPrice() != null) {
+                    totalPrice = totalPrice.add(service.getPrice());
+                }
+            }
+        }
+        if (newBooking != null && invoice != null) {
+            invoice.setBooking(newBooking);
+            invoice.setTotalAmount(totalPrice);
+            this.invoiceService.saveInvoice(invoice);
+            emailService.sendHtmlEmailTT(new EmailDetails(newBooking.getCustomer().getEmail(), "Thông báo thanh toán JSalon"), newBooking);
+        }
+
+        return newBooking;
+    }
+
+
+    public Booking saveCancel(Booking booking) {
+        Booking newBooking = bookingRepository.save(booking);
+        System.out.println(newBooking);
+        if (newBooking != null ) {
+            emailService.sendHtmlEmailCancel(new EmailDetails(newBooking.getCustomer().getEmail(),"Thông Báo !!"), newBooking);
         }
         return newBooking;
     }
