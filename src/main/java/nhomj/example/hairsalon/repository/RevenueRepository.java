@@ -29,4 +29,5 @@ public interface RevenueRepository extends JpaRepository<Revenue, Long> {
     @Query("SELECT r.totalRevenue FROM Revenue r WHERE FUNCTION('YEAR', r.summaryDate) = FUNCTION('YEAR', CURRENT_DATE)")
     List<BigDecimal> findAllInCurrentYear();
 
+    Revenue findOneBySummaryDate(@Param("summaryDate") LocalDate summaryDate);
 }

@@ -93,7 +93,7 @@ public class StaffControllers {
             if (avatar != null && !avatar.isEmpty()) {
                 checkStaff.setAvatar(avatar);
             }
-            checkStaff.setPassword(staff.getPassword());
+            checkStaff.setPassword(this.passwordEncoder.encode(staff.getPassword()));
             checkStaff.setRole(staff.getRole());
             checkStaff.setBirthday(staff.getBirthday());
             checkStaff.setGender(staff.getGender());
@@ -102,8 +102,6 @@ public class StaffControllers {
         } else {
             staff.setPassword(this.passwordEncoder.encode(staff.getPassword()));
             staff.setAvatar(avatar);
-            // Đã loại bỏ dòng sau để cho phép thiết lập vai trò từ form
-            // staff.setRole(Staff.Role.NhanVien);
             staffService.saveStaff(staff);
         }
         return "redirect:/admin/staff_management";

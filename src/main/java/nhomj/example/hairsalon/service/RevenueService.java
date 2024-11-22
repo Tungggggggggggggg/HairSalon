@@ -16,13 +16,35 @@ import java.util.List;
 public class RevenueService {
 
     public final RevenueRepository revenueRepository;
+    public final InvoiceService invoiceService;
 
     public long countReven()
     {
         return revenueRepository.count();
     }
-    public RevenueService(RevenueRepository revenueRepository) {
+    public RevenueService(RevenueRepository revenueRepository, InvoiceService invoiceService) {
         this.revenueRepository = revenueRepository;
+        this.invoiceService = invoiceService;
+    }
+
+    BigDecimal TotalPrice = BigDecimal.ZERO;
+    public void save(){
+        Revenue revenue = this.revenueRepository.findOneBySummaryDate(LocalDate.now());
+        TotalPrice = invoiceService.getTotalInvoice(LocalDate.now());
+        if(revenue!=null){
+            revenue.setTotalRevenue(TotalPrice);
+            revenue.setNumberOfBookings(this.invoiceService.numberOfInvoices());
+            revenue.setTotalServices(this.invoiceService.numberServiceOfInvoices());
+            revenueRepository.save(revenue);
+        }
+        else {
+            revenue = new Revenue();
+            revenue.setSummaryDate(LocalDate.now());
+            revenue.setTotalRevenue(TotalPrice);
+            revenue.setNumberOfBookings(this.invoiceService.numberOfInvoices());
+            revenue.setTotalServices(this.invoiceService.numberServiceOfInvoices());
+            revenueRepository.save(revenue);
+        }
     }
 
     public List<Revenue> getAllRevenues() {
@@ -31,7 +53,6 @@ public class RevenueService {
 
     public LocalDate monday(){
         LocalDate today = LocalDate.now();
-        // Go backward to get Monday
         LocalDate monday = today;
         while (monday.getDayOfWeek() != DayOfWeek.MONDAY)
         {
@@ -40,16 +61,16 @@ public class RevenueService {
         return monday;
     }
 
-    public LocalDate sunday(){
-        LocalDate today = LocalDate.now();
-        // Go forward to get Sunday
-        LocalDate sunday = today;
-        while (sunday.getDayOfWeek() != DayOfWeek.SUNDAY)
-        {
-            sunday = sunday.plusDays(1);
-        }
-        return sunday;
-    }
+//    public LocalDate sunday(){
+//        LocalDate today = LocalDate.now();
+//        // Go forward to get Sunday
+//        LocalDate sunday = today;
+//        while (sunday.getDayOfWeek() != DayOfWeek.SUNDAY)
+//        {
+//            sunday = sunday.plusDays(1);
+//        }
+//        return sunday;
+//    }
 
     public int numberMonth(){
         YearMonth currentMonth = YearMonth.now();
@@ -77,13 +98,14 @@ public class RevenueService {
         }
         return testList;
     }
-    public double getNumMounth(List<BigDecimal> month){
-        double sum = 0;
-        for(int i = 0; i < month.size(); i++){
-            sum += month.get(i).doubleValue();
-        }
-        return sum;
-    }
+
+//    public double getNumMounth(List<BigDecimal> month){
+//        double sum = 0;
+//        for(int i = 0; i < month.size(); i++){
+//            sum += month.get(i).doubleValue();
+//        }
+//        return sum;
+//    }
 
     public List<BigDecimal> getRevenueByYear() {
         List<BigDecimal> testList = revenueRepository.findAllInCurrentYear();
@@ -98,4 +120,6 @@ public class RevenueService {
     public List<Revenue> getRevenueByDate(LocalDate startDate, LocalDate endDate) {
         return this.revenueRepository.findAllDate(startDate, endDate);
     }
+
+
 }

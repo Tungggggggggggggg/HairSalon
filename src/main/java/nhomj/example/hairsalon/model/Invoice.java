@@ -19,7 +19,7 @@ public class Invoice {
     private Booking booking;
 
     @Column(name = "invoice_date", nullable = false, columnDefinition = "DATE")
-    private LocalDate invoiceDate = LocalDate.now();
+    private LocalDate invoiceDate ;
 
     @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount;
@@ -30,7 +30,11 @@ public class Invoice {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "payment_status", nullable = false, columnDefinition = "NVARCHAR(50)")
-    private PaymentStatus paymentStatus = PaymentStatus.DaThanhToan;
+    private PaymentStatus paymentStatus ;
+
+    public Invoice() {
+
+    }
 
     // Enums
     public enum PaymentMethod {
@@ -39,6 +43,24 @@ public class Invoice {
 
     public enum PaymentStatus {
         DaThanhToan, ChuaThanhToan
+    }
+
+    public Invoice(PaymentStatus paymentStatus, PaymentMethod paymentMethod, LocalDate invoiceDate) {
+        this.paymentStatus = paymentStatus;
+        this.paymentMethod = paymentMethod;
+        this.invoiceDate = invoiceDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "id=" + id +
+                ", booking=" + booking +
+                ", invoiceDate=" + invoiceDate +
+                ", totalAmount=" + totalAmount +
+                ", paymentMethod=" + paymentMethod +
+                ", paymentStatus=" + paymentStatus +
+                '}';
     }
 
     public long getId() {

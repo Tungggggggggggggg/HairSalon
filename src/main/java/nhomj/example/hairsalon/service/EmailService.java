@@ -1,6 +1,6 @@
 package nhomj.example.hairsalon.service;
 
-import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import nhomj.example.hairsalon.model.Booking;
 import nhomj.example.hairsalon.model.EmailDetails;
@@ -38,6 +38,7 @@ public class EmailService{
     private JavaMailSender javaMailSender;
 
     @Value("${spring.mail.username}") private String sender;
+    String displayName = "JSalon";
 
     public String sendSimpleMail(EmailDetails details)
     {
@@ -56,13 +57,14 @@ public class EmailService{
             return "Error while Sending Mail";
         }
     }
+
     @Async
     public void sendHtmlEmailDL(EmailDetails details , Booking booking){
 
         try{
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
-            mimeMessage.setFrom(sender);
+            mimeMessage.setFrom(new InternetAddress(sender, displayName));
             mimeMessage.setRecipients(MimeMessage.RecipientType.TO, details.getRecipient());
             mimeMessage.setSubject(details.getSubject());
 
@@ -93,12 +95,12 @@ public class EmailService{
         }
     }
     @Async
-    public void sendHtmlEmailTB(EmailDetails details , Booking booking){
+    public void sendHtmlEmailTT(EmailDetails details , Booking booking){
         try{
             Invoice invoice = invoiceService.getInvoice(booking.getId());
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
-            mimeMessage.setFrom(sender);
+            mimeMessage.setFrom(new InternetAddress(sender, displayName));
             mimeMessage.setRecipients(MimeMessage.RecipientType.TO, details.getRecipient());
             mimeMessage.setSubject(details.getSubject());
 
@@ -124,7 +126,7 @@ public class EmailService{
         try{
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
-            mimeMessage.setFrom(sender);
+            mimeMessage.setFrom(new InternetAddress(sender, displayName));
             mimeMessage.setRecipients(MimeMessage.RecipientType.TO, details.getRecipient());
             mimeMessage.setSubject(details.getSubject());
 
@@ -144,6 +146,34 @@ public class EmailService{
             e.printStackTrace();
         }
     }
+
+    @Async
+    public void sendHtmlEmailCancel(EmailDetails details , Booking booking){
+        try{
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+            mimeMessage.setFrom(new InternetAddress(sender, displayName));
+            mimeMessage.setRecipients(MimeMessage.RecipientType.TO, details.getRecipient());
+            mimeMessage.setSubject(details.getSubject());
+
+            ClassLoader classLoader = getClass().getClassLoader();
+            Path filePath = Paths.get(classLoader.getResource("templates/thongbaohuy.html").toURI());
+
+            String htmlTemplate = Files.readString(filePath);
+            htmlTemplate = htmlTemplate.replace("bookingId", booking.getId().toString());
+            htmlTemplate = htmlTemplate.replace("cancelDate", booking.getDate().toString());
+            htmlTemplate = htmlTemplate.replace("serviceName", booking.getServices().get(0).getName());
+
+            System.out.println(htmlTemplate);
+            mimeMessage.setContent(htmlTemplate, "text/html; charset=utf-8");
+
+            javaMailSender.send(mimeMessage);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 
 }
 
