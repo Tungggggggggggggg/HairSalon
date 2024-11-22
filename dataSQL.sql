@@ -27,31 +27,35 @@ VALUES
     (N'Đỗ Mạnh Hùng', 'hung@gmail.com', '0919999999', N'345 Đường Trần Hưng Đạo', '1990-10-10', 'Nam', '2024-11-20 13:30:00'),
     (N'Trương Thị Vân', 'van@gmail.com', '0900000000', N'456 Đường Hai Bà Trưng', '1997-04-04', 'Nu', '2024-11-20 14:00:00');
 
--- Thêm nhiều dữ liệu hơn vào bảng booking
-INSERT INTO booking (customer_id, staff_id, date, appointment_time, service, status, created_date)
+-- Thêm dữ liệu vào bảng booking
+INSERT INTO booking (customer_id, staff_id, staff_shift_id, date, appointment_time, status, created_date)
 VALUES
-    (1, 1, '2024-11-21', '14:00:00', N'Cắt tóc nam', 'DaDat', '2024-11-20 14:00:00'),
-    (2, 2, '2024-11-22', '15:00:00', N'Uốn tóc nữ', 'DaDat', '2024-11-20 15:00:00'),
-    (3, 3, '2024-11-23', '16:00:00', N'Nhuộm tóc', 'HoanThanh', '2024-11-20 16:00:00'),
-    (4, 4, '2024-11-24', '17:00:00', N'Dưỡng tóc', 'DaHuy', '2024-11-20 17:00:00'),
-    (5, 5, '2024-11-25', '18:00:00', N'Cắt tóc nữ', 'DaDat', '2024-11-20 18:00:00'),
-    (6, 6, '2024-11-26', '14:00:00', N'Cạo râu', 'DaDat', '2024-11-20 09:30:00'),
-    (7, 7, '2024-11-26', '15:00:00', N'Tạo kiểu tóc', 'HoanThanh', '2024-11-20 10:00:00'),
-    (8, 8, '2024-11-26', '16:00:00', N'Gội đầu', 'DaHuy', '2024-11-20 10:30:00'),
-    (9, 9, '2024-11-27', '14:30:00', N'Uốn tóc nam', 'DaDat', '2024-11-20 11:00:00'),
-    (10, 10, '2024-11-27', '15:30:00', N'Cắt tóc trẻ em', 'HoanThanh', '2024-11-20 11:30:00'),
-    (1, 2, '2024-11-28', '16:30:00', N'Tư vấn tóc', 'DaDat', '2024-11-20 12:00:00'),
-    (2, 3, '2024-11-28', '17:00:00', N'Tẩy tóc', 'HoanThanh', '2024-11-20 12:30:00'),
-    (3, 4, '2024-11-29', '14:00:00', N'Làm tóc xoăn', 'DaHuy', '2024-11-20 13:00:00'),
-    (4, 5, '2024-11-29', '15:00:00', N'Cắt tóc layer', 'DaDat', '2024-11-20 13:30:00'),
-    (5, 1, '2024-11-30', '16:00:00', N'Duỗi tóc', 'HoanThanh', '2024-11-20 14:00:00'),
-    (6, 2, '2024-12-01', '14:00:00', N'Tạo kiểu tóc đặc biệt', 'DaDat', '2024-11-20 14:30:00'),
-    (7, 3, '2024-12-02', '15:00:00', N'Massage da đầu', 'HoanThanh', '2024-11-20 15:00:00'),
-    (8, 4, '2024-12-03', '16:00:00', N'Chăm sóc da mặt', 'DaHuy', '2024-11-20 15:30:00'),
-    (9, 5, '2024-12-04', '17:00:00', N'Thử kiểu tóc mới', 'DaDat', '2024-11-20 16:00:00'),
-    (10, 6, '2024-12-05', '18:00:00', N'Cắt tóc mái', 'HoanThanh', '2024-11-20 16:30:00');
+    (1, 1, NULL, '2024-11-23', '09:00:00', 'DaDat', '2024-11-20 09:00:00'),
+    (2, 2, NULL, '2024-11-23', '10:30:00', 'DaDat', '2024-11-20 10:00:00'),
+    (3, 3, NULL, '2024-11-24', '14:00:00', 'HoanThanh', '2024-11-20 14:00:00'),
+    (4, 4, NULL, '2024-11-25', '13:30:00', 'DaDat', '2024-11-21 13:00:00'),
+    (5, 5, NULL, '2024-11-25', '15:00:00', 'DaHuy', '2024-11-21 15:00:00'),
+    (6, 6, NULL, '2024-11-26', '09:30:00', 'HoanThanh', '2024-11-22 09:00:00'),
+    (7, 7, NULL, '2024-11-26', '11:00:00', 'DaDat', '2024-11-22 10:00:00'),
+    (8, 8, NULL, '2024-11-27', '14:30:00', 'DaHuy', '2024-11-22 14:00:00'),
+    (9, 9, NULL, '2024-11-28', '16:00:00', 'DaDat', '2024-11-22 15:00:00'),
+    (10, 10, NULL, '2024-11-29', '17:30:00', 'HoanThanh', '2024-11-22 16:00:00');
 
--- Thêm nhiều dữ liệu hơn vào bảng staff_salary
+-- Thêm dữ liệu vào bảng booking_service (liên kết giữa booking và service)
+INSERT INTO booking_service (booking_id, service_id)
+VALUES
+    (1, 1), (1, 7),
+    (2, 2),
+    (3, 4), (3, 10),
+    (4, 5),
+    (5, 6),
+    (6, 11),
+    (7, 13),
+    (8, 9), (8, 14),
+    (9, 15),
+    (10, 16);
+
+-- Thêm dữ liệu vào bảng staff_salary
 INSERT INTO staff_salary (staff_id, month, year, base_salary, bonus, total_salary, create_date, update_date, status)
 VALUES
     (6, 10, 2024, 4500000, 500000, 5000000, '2024-10-31 10:00:00', '2024-11-01 10:00:00', 'DaThanhToan'),
@@ -65,8 +69,8 @@ VALUES
     (4, 10, 2024, 4800000, 200000, 5000000, '2024-10-31 14:00:00', '2024-11-01 14:00:00', 'ChuaThanhToan'),
     (5, 10, 2024, 5000000, 100000, 5100000, '2024-10-31 14:30:00', '2024-11-01 14:30:00', 'DaThanhToan');
 
--- Thêm nhiều dữ liệu hơn vào bảng feedbacklist
-INSERT INTO feedbacklist (userName, phone, email, feedback_date, message)
+-- Thêmdữ liệu vào bảng feedbacklist
+INSERT INTO feedbacklist (user_name, phone, email, feedback_date, message)
 VALUES
     (N'Nguyễn Văn Khánh', '0911111111', 'khanh@gmail.com', '2024-11-20 10:00:00', N'Dịch vụ rất tốt, tôi cảm thấy hài lòng.'),
     (N'Lê Thị Lan', '0912222222', 'lan@gmail.com', '2024-11-20 10:30:00', N'Nhân viên rất chu đáo, dịch vụ tuyệt vời.'),
