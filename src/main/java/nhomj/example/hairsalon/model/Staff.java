@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "staff")
-@JsonIgnoreProperties({"bookings", "salaries", "shifts"})
+@JsonIgnoreProperties({"bookings", "salaries"})
 public class Staff {
 
     @Id
