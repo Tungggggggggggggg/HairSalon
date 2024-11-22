@@ -72,8 +72,8 @@ public class SecurityConfig {
                 .exceptionHandling(ex -> ex.accessDeniedPage("/accessdenied"));
         return http.build();
 
-//        http
-//                .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
-//        return http.build();
+    //    http
+    //            .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
+    //    return http.build();
     }
 }

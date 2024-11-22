@@ -2,6 +2,7 @@ package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,13 +33,14 @@ public class FeedbackList {
     private String message;
 
     @Column(name = "feedback_date")
-    private LocalDateTime feedBackDate = LocalDateTime.now() ;
+    private LocalDateTime feedBackDate = LocalDateTime.now();
 
     public FeedbackList() {
         super();
     }
 
-    // Getters and setters
+    // Getters và Setters
+
     public Long getId() {
         return id;
     }
@@ -106,5 +108,30 @@ public class FeedbackList {
                 ", message='" + message + '\'' +
                 ", feedBackDate=" + feedBackDate +
                 '}';
+    }
+
+    /**
+     * Phương thức trả về ngày phản hồi đã được định dạng dưới dạng String.
+     *
+     * @return ngày phản hồi đã định dạng (dd/MM/yyyy HH:mm:ss)
+     */
+    public String getFormattedFeedBackDate() {
+        if (this.feedBackDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            return this.feedBackDate.format(formatter);
+        }
+        return "";
+    }
+
+    /**
+     * Phương thức trả về mục phản hồi đã được định dạng dưới dạng String.
+     *
+     * @return mục phản hồi dưới dạng String, ví dụ: "Dịch vụ"
+     */
+    public String getFormattedFeedbackType() {
+        if (this.feedbackType != null && !this.feedbackType.isEmpty()) {
+            return String.join(", ", this.feedbackType);
+        }
+        return "";
     }
 }
