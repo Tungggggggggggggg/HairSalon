@@ -27,7 +27,7 @@ VALUES
   (N'Lê Thu Hà',  'LeThuHa.jpg' , 'thuha@gmail.com', 'password123', '0222-333-444', N'101 Đường Nguyễn Hệ', 5, 'Nu', '1982-11-05', 'NhanVien'),
   (N'Đặng Lan Ngọc','DangLanNgoc.jpg' ,'ngoclan@gmail.com', 'password123', '0111-222-333', N'202 Đường Trần Hưng Đạo', 1, 'Nu', '1995-04-18', 'NhanVien'),
   (N'Vũ Hữu Phước','VuHuuPhuoc.jpg' ,'phuoc@gmail.com', 'password123', '0777-888-999', N'303 Đường Bạch Đằng', 6, 'Nam', '1988-12-02', 'NhanVien'),
-  (N'Trương Thị My','TruongThiMy.jpg' ,'my@gmail.com', 'password123', '0444-555-666', N'404 Đường Phan Đình Phùng', 7, 'Nu', '1993-08-07', 'NhanVien'),
+  (N'Trương Thị My','TruongThiMy.png' ,'my@gmail.com', 'password123', '0444-555-666', N'404 Đường Phan Đình Phùng', 7, 'Nu', '1993-08-07', 'NhanVien'),
   (N'Hoàng Quốc Bảo', 'HoangQuocBao.jpg','bao@gmail.com', 'password123', '0666-777-888', N'505 Đường Nguyễn Trãi', 8, 'Nam', '1986-01-25', 'NhanVien'),
   (N'Nguyễn Văn Chung','NguyenVanChung.jpg' ,'chung@gmail.com', 'password123', '0333-444-555', N'606 Đường Quang Trung', 9, 'Nam', '1984-03-30', 'NhanVien'),
   (N'Ngô Bá Vinh','NgoBaVinh.jpg' ,'vinh@gmail.com', 'password123', '0999-000-111', N'707 Đường Nguyễn Thái Học', 10, 'Nam', '1992-05-15', 'NhanVien');
@@ -159,8 +159,9 @@ VALUES
     (37, 15),
     (38, 16),
     (39, 1),
-    (40, 2);
-
+    (40, 2),
+    (41, 1),
+    (42, 8);
 
 -- Insert data into invoice table
 INSERT INTO invoice (booking_id, invoice_date, total_amount, payment_method, payment_status)
