@@ -24,7 +24,7 @@
     <div class="booking-container">
         <form:form
             id="bookingForm"
-            action="/booking/submit"
+            action="/home/booking/submit"
             method="POST"
             modelAttribute="booking"
         >

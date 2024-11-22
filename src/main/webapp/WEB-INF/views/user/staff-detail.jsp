@@ -32,7 +32,7 @@
             <p class="duration">
                 <strong>SDT: ${staff.phone}</strong>
             </p>
-            <button class="booking-button" onclick="window.location.href='/booking?staffId=${staff.id}';">Đặt lịch ngay</button>
+            <button class="booking-button" onclick="window.location.href='/home/booking?staffId=${staff.id}';">Đặt lịch ngay</button>
             <button class="booking-button" onclick="window.location.href='/home?#top-stylist';">Trở lại trang chủ</button>
 
         </div>
