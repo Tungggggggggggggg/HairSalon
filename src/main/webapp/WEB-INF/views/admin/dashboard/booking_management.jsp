@@ -286,7 +286,7 @@
                             <select name="payMethod" id="pay" class="form-select">
                                 <option value="TienMat">Tiền mặt</option>
                                 <option value="The">Thẻ</option>
-                                <option value="ChuyenKhoang">Chuyển khoản</option>
+                                <option value="ChuyenKhoan">Chuyển khoản</option>
                             </select>
                             <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Hủy</button>
