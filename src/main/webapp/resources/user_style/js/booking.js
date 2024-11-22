@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (date && time) {
             // Gửi yêu cầu AJAX tới server
             $.ajax({
-                url: '/booking/available_staff',
+                url: '/home/booking/available_staff',
                 type: 'GET',
                 traditional: true,
                 data: {

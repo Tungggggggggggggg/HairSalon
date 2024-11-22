@@ -1,22 +1,5 @@
 package nhomj.example.hairsalon.controller.user;
 
-import nhomj.example.hairsalon.dto.StaffDTO;
-import nhomj.example.hairsalon.model.Booking;
-import nhomj.example.hairsalon.model.Service;
-import nhomj.example.hairsalon.model.Staff;
-import nhomj.example.hairsalon.model.User;
-import nhomj.example.hairsalon.service.BookingService;
-import nhomj.example.hairsalon.service.ServiceShopService;
-import nhomj.example.hairsalon.service.StaffService;
-import nhomj.example.hairsalon.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-
-import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -26,6 +9,27 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import jakarta.validation.Valid;
+import nhomj.example.hairsalon.dto.StaffDTO;
+import nhomj.example.hairsalon.model.Booking;
+import nhomj.example.hairsalon.model.Service;
+import nhomj.example.hairsalon.model.Staff;
+import nhomj.example.hairsalon.model.User;
+import nhomj.example.hairsalon.service.BookingService;
+import nhomj.example.hairsalon.service.ServiceShopService;
+import nhomj.example.hairsalon.service.StaffService;
+import nhomj.example.hairsalon.service.UserService;
 
 @Controller
 @RequestMapping("/home")
