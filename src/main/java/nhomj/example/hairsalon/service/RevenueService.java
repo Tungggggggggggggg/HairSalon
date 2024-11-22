@@ -15,13 +15,37 @@ import java.util.Optional;
 public class RevenueService {
 
     public final RevenueRepository revenueRepository;
+    public final InvoiceService invoiceService;
 
-    public RevenueService(RevenueRepository revenueRepository) {
-        this.revenueRepository = revenueRepository;
+
+    public long countReven()
+    {
+        return revenueRepository.count();
     }
 
-    public long countReven() {
-        return revenueRepository.count();
+    public RevenueService(RevenueRepository revenueRepository, InvoiceService invoiceService) {
+        this.revenueRepository = revenueRepository;
+        this.invoiceService = invoiceService;
+    }
+
+    BigDecimal TotalPrice = BigDecimal.ZERO;
+    public void save(){
+        Revenue revenue = this.revenueRepository.findOneBySummaryDate(LocalDate.now());
+        TotalPrice = invoiceService.getTotalInvoice(LocalDate.now());
+        if(revenue!=null){
+            revenue.setTotalRevenue(TotalPrice);
+            revenue.setNumberOfBookings(this.invoiceService.numberOfInvoices());
+            revenue.setTotalServices(this.invoiceService.numberServiceOfInvoices());
+            revenueRepository.save(revenue);
+        }
+        else {
+            revenue = new Revenue();
+            revenue.setSummaryDate(LocalDate.now());
+            revenue.setTotalRevenue(TotalPrice);
+            revenue.setNumberOfBookings(this.invoiceService.numberOfInvoices());
+            revenue.setTotalServices(this.invoiceService.numberServiceOfInvoices());
+            revenueRepository.save(revenue);
+        }
     }
 
     public List<Revenue> getAllRevenues() {
@@ -30,7 +54,6 @@ public class RevenueService {
 
     public LocalDate monday() {
         LocalDate today = LocalDate.now();
-        // Tìm ngày thứ Hai gần nhất
         LocalDate monday = today;
         while (monday.getDayOfWeek() != DayOfWeek.MONDAY) {
             monday = monday.minusDays(1);
@@ -47,6 +70,7 @@ public class RevenueService {
         }
         return sunday;
     }
+
 
     public int numberMonth() {
         YearMonth currentMonth = YearMonth.now();
@@ -81,6 +105,7 @@ public class RevenueService {
         }
         return sum;
     }
+
 
     public List<BigDecimal> getRevenueByYear() {
         List<BigDecimal> testList = revenueRepository.findAllInCurrentYear();
@@ -124,4 +149,6 @@ public class RevenueService {
     public List<Revenue> getRevenueByDate(LocalDate startDate, LocalDate endDate) {
         return this.revenueRepository.findAllDate(startDate, endDate);
     }
+
+
 }

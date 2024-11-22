@@ -112,13 +112,13 @@
         <label for="Feedback">Lựa chọn nội dung bạn muốn phản hồi</label>
         <div class="checkbox-group">
             <div class="checkbox-item">
-                <input type="checkbox" id="service" name="feedbackType" value="Dịch vụ" />
-                <label for="service">Dịch vụ</label>
+                <input type="checkbox" id="service" name="feedbackType" value="Hủy dịch vụ" />
+                <label for="service">Hủy dịch vụ</label>
             </div>
 
             <div class="checkbox-item">
-                <input type="checkbox" id="quality" name="feedbackType" value="Chất lượng sản phẩm" />
-                <label for="quality">Chất lượng sản phẩm</label>
+                <input type="checkbox" id="quality" name="feedbackType" value="Chất lượng dịch vụ" />
+                <label for="quality">Chất lượng dịch vụ</label>
             </div>
 
             <div class="checkbox-item">
@@ -143,7 +143,7 @@
         </div>
 
         <label for="message">Nội dung phản hồi</label>
-        <textarea id="message" name="message" rows="5" placeholder="Nhập nội dung phản hồi" required></textarea>
+        <textarea id="message" name="message" rows="5" placeholder="Nhập chi tiết nội dung phản hồi" required></textarea>
 
         <button type="submit">Gửi phản hồi</button>
     </form>

@@ -15,6 +15,7 @@
     <link rel="icon" href="/user_style/images/logo_icon.png" type="image/icon type">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="/admin_style/js/scripts.js"></script>
 </head>
 
 <body class="sb-nav-fixed">
