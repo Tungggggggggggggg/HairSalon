@@ -169,7 +169,7 @@ public class BookingController {
         bookingService.save(booking);
         logger.info("Đã lưu Booking với ID: {}", booking.getId());
 
-        return "redirect:/booking_success";
+        return "redirect:/home/booking/booking_success";
     }
 
     /**
@@ -177,7 +177,7 @@ public class BookingController {
      *
      * @return trang booking_success.jsp
      */
-    @GetMapping("/booking_success")
+    @GetMapping("/booking/booking_success")
     public String showBookingSuccessPage() {
         return "user/booking_success";
     }
