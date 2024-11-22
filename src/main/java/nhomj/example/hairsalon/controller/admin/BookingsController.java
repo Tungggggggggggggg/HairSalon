@@ -146,7 +146,7 @@ public class BookingsController {
             bookingService.save(existingBooking);
 
             // Chỉ gọi updateRevenueForBooking một lần ở đây
-            revenueService.updateRevenueForBooking(existingBooking);
+//            revenueService.updateRevenueForBooking(existingBooking);
             bookingService.saveComplete(existingBooking, invoice);
         }
         return "redirect:/admin/booking_management";

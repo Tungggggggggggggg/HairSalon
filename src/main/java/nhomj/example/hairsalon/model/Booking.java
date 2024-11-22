@@ -30,7 +30,7 @@ public class Booking {
     @JoinColumn(name = "staff_shift_id")
     private StaffShift staffShift;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "booking_service",
             joinColumns = @JoinColumn(name = "booking_id"),

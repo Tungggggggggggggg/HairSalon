@@ -117,34 +117,34 @@ public class RevenueService {
         return testList;
     }
 
-    public void updateRevenueForBooking(Booking booking) {
-        if (booking.getStatus() != Booking.Status.HoanThanh) {
-            return;
-        }
-        LocalDate date = booking.getDate();
-        Optional<Revenue> optionalRevenue = revenueRepository.findBySummaryDate(date);
-        Revenue revenue = optionalRevenue.orElse(null);
-
-        BigDecimal bookingTotalPrice = booking.getServices().stream()
-                .map(Service::getPrice)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-        int totalServices = booking.getServices().size();
-
-        if (revenue == null) {
-            // Tạo mới bản ghi doanh thu
-            revenue = new Revenue();
-            revenue.setSummaryDate(date);
-            revenue.setTotalRevenue(bookingTotalPrice);
-            revenue.setNumberOfBookings(1);
-            revenue.setTotalServices(totalServices);
-        } else {
-            // Cập nhật bản ghi doanh thu
-            revenue.setTotalRevenue(revenue.getTotalRevenue().add(bookingTotalPrice));
-            revenue.setNumberOfBookings(revenue.getNumberOfBookings() + 1);
-            revenue.setTotalServices(revenue.getTotalServices() + totalServices);
-        }
-        revenueRepository.save(revenue);
-    }
+//    public void updateRevenueForBooking(Booking booking) {
+//        if (booking.getStatus() != Booking.Status.HoanThanh) {
+//            return;
+//        }
+//        LocalDate date = booking.getDate();
+//        Optional<Revenue> optionalRevenue = revenueRepository.findBySummaryDate(date);
+//        Revenue revenue = optionalRevenue.orElse(null);
+//
+//        BigDecimal bookingTotalPrice = booking.getServices().stream()
+//                .map(Service::getPrice)
+//                .reduce(BigDecimal.ZERO, BigDecimal::add);
+//        int totalServices = booking.getServices().size();
+//
+//        if (revenue == null) {
+//            // Tạo mới bản ghi doanh thu
+//            revenue = new Revenue();
+//            revenue.setSummaryDate(date);
+//            revenue.setTotalRevenue(bookingTotalPrice);
+//            revenue.setNumberOfBookings(1);
+//            revenue.setTotalServices(totalServices);
+//        } else {
+//            // Cập nhật bản ghi doanh thu
+//            revenue.setTotalRevenue(revenue.getTotalRevenue().add(bookingTotalPrice));
+//            revenue.setNumberOfBookings(revenue.getNumberOfBookings() + 1);
+//            revenue.setTotalServices(revenue.getTotalServices() + totalServices);
+//        }
+//        revenueRepository.save(revenue);
+//    }
 
     public List<Revenue> getRevenueByDate(LocalDate startDate, LocalDate endDate) {
         return this.revenueRepository.findAllDate(startDate, endDate);

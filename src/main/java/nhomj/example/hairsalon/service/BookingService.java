@@ -51,6 +51,9 @@ public class BookingService {
     public Booking save(Booking booking) {
         Booking newBooking = bookingRepository.save(booking);
         // Loại bỏ việc gọi updateRevenueForBooking ở đây để tránh đếm trùng
+        if(newBooking != null) {
+            emailService.sendHtmlEmailDL(new EmailDetails(newBooking.getCustomer().getEmail(), "Thông báo từ JSalon"), newBooking);
+        }
         return newBooking;
     }
 
@@ -80,7 +83,6 @@ public class BookingService {
 
         return newBooking;
     }
-
 
     public Booking saveCancel(Booking booking) {
         Booking newBooking = bookingRepository.save(booking);
