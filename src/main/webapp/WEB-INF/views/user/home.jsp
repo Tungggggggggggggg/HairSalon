@@ -38,7 +38,7 @@ prefix="c" %> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
                 bước click chuột, để có được mái tóc ưng ý mà không cần phải lo
                 lắng về việc chờ đợi.
             </p>
-            <form action="/booking" method="get" style="display: inline">
+            <form action="/home/booking" method="get" style="display: inline">
                 <button type="submit">Đặt lịch ngay</button>
             </form>
         </section>

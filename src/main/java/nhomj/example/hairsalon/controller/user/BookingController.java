@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Controller
+@RequestMapping("/home")
 public class BookingController {
 
     private static final Logger logger = LoggerFactory.getLogger(BookingController.class);
