@@ -1,12 +1,9 @@
 package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "revenue")
@@ -27,6 +24,8 @@ public class Revenue {
 
     @Column(name = "total_services", nullable = false)
     private Integer totalServices;
+
+    // Các getter và setter hiện tại...
 
     public Integer getSummaryId() {
         return summaryId;
@@ -66,5 +65,14 @@ public class Revenue {
 
     public void setTotalServices(Integer totalServices) {
         this.totalServices = totalServices;
+    }
+
+    // Thêm phương thức định dạng ngày
+    public String getFormattedSummaryDate() {
+        if (summaryDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            return summaryDate.format(formatter);
+        }
+        return "";
     }
 }

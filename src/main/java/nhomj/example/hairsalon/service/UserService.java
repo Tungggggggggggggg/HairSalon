@@ -19,12 +19,12 @@ public class UserService {
     }
 
     /**
-     * Lấy danh sách tất cả người dùng.
+     * Lấy danh sách tất cả người dùng, sắp xếp theo ngày tạo mới nhất.
      *
      * @return danh sách người dùng
      */
     public List<User> getAllUsers() {
-        return this.userRepository.findAll();
+        return this.userRepository.findAllByOrderByCreatedDateDesc();
     }
 
     /**

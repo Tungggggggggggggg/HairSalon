@@ -1,11 +1,10 @@
 package nhomj.example.hairsalon.service;
 
 import nhomj.example.hairsalon.model.Booking;
-import nhomj.example.hairsalon.model.EmailDetails;
+// Đảm bảo sử dụng tên đầy đủ cho lớp Service để tránh xung đột
 import nhomj.example.hairsalon.model.Service;
 import nhomj.example.hairsalon.repository.BookingRepository;
 import nhomj.example.hairsalon.repository.ServiceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,13 +16,10 @@ import java.util.stream.StreamSupport;
 public class BookingService {
     private final BookingRepository bookingRepository;
     private final ServiceRepository serviceRepository;
-    private final EmailService emailService;
 
-    @Autowired
-    public BookingService(BookingRepository bookingRepository, ServiceRepository serviceRepository, EmailService emailService) {
+    public BookingService(BookingRepository bookingRepository, ServiceRepository serviceRepository) {
         this.bookingRepository = bookingRepository;
         this.serviceRepository = serviceRepository;
-        this.emailService = emailService;
     }
 
     public long countBooking() {
@@ -40,12 +36,9 @@ public class BookingService {
         return bookingRepository.findAllByOrderByCreatedDateAsc();
     }
 
-    // Lưu hoặc cập nhật một booking
     public Booking save(Booking booking) {
         Booking newBooking = bookingRepository.save(booking);
-        if (newBooking != null) {
-            emailService.sendHtmlEmailDL(new EmailDetails(newBooking.getCustomer().getEmail(), "Chào mừng " + newBooking.getCustomer().getName() + " Cảm ơn bạn đã đăng ký tài khoản với chúng tôi!"), newBooking);
-        }
+        // Loại bỏ việc gọi updateRevenueForBooking ở đây để tránh đếm trùng
         return newBooking;
     }
 

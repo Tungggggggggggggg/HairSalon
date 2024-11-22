@@ -8,6 +8,7 @@ import nhomj.example.hairsalon.model.Staff;
 import nhomj.example.hairsalon.model.User;
 import nhomj.example.hairsalon.service.BookingService;
 import nhomj.example.hairsalon.service.EmailService;
+import nhomj.example.hairsalon.service.RevenueService;
 import nhomj.example.hairsalon.service.StaffService;
 import nhomj.example.hairsalon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,15 @@ public class BookingsController {
     private final UserService userService;
     private final StaffService staffService;
     private final EmailService emailService;
+    private final RevenueService revenueService;
 
     @Autowired
-    public BookingsController(final BookingService bookingService, final UserService userService, final StaffService staffService, EmailService emailService) {
+    public BookingsController(final BookingService bookingService, final UserService userService, final StaffService staffService, EmailService emailService, RevenueService revenueService) {
         this.bookingService = bookingService;
         this.userService = userService;
         this.staffService = staffService;
         this.emailService = emailService;
+        this.revenueService = revenueService;
     }
 
     @GetMapping("/admin/booking_management")
@@ -141,6 +144,9 @@ public class BookingsController {
         if (existingBooking != null) {
             existingBooking.setStatus(Booking.Status.HoanThanh);
             bookingService.save(existingBooking);
+
+            // Chỉ gọi updateRevenueForBooking một lần ở đây
+            revenueService.updateRevenueForBooking(existingBooking);
         }
         return "redirect:/admin/booking_management";
     }

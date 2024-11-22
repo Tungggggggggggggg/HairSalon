@@ -176,6 +176,16 @@
                                          id="avatarPreview" />
                                 </div>
                             </div>
+                            <c:if test="${not empty newService.id}">
+                                <div class="mb-3 row">
+                                    <div class="col-12 col-md-4">
+                                        <label>Avatar hiện tại:</label>
+                                        <img style="max-height: 100px;" alt="avatar preview"
+                                            src="/images/service/${newService.avatar}" onerror="this.src='/images/service/default.jpg';" />
+                                    </div>
+                                </div>
+                            </c:if>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Hủy</button>

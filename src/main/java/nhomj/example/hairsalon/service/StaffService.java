@@ -32,12 +32,12 @@ public class StaffService {
     }
 
     /**
-     * Lấy danh sách tất cả nhân viên.
+     * Lấy danh sách tất cả nhân viên, sắp xếp theo ngày tạo mới nhất.
      *
      * @return danh sách nhân viên
      */
     public List<Staff> getAllStaff() {
-        return this.staffRepository.findAll();
+        return this.staffRepository.findAllByOrderByCreatedDateDesc();
     }
 
     /**

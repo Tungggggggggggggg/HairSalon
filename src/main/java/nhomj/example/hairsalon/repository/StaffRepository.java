@@ -18,4 +18,6 @@ public interface StaffRepository extends JpaRepository<Staff, Long> {
     
     // Thêm phương thức để tìm nhân viên theo vai trò
     List<Staff> findByRole(Staff.Role role);
+
+    List<Staff> findAllByOrderByCreatedDateDesc(); // Thêm phương thức này
 }

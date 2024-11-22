@@ -57,7 +57,6 @@ function viewDetails(id, name, description, price, durationMinutes) {
     document.getElementById("detailName").textContent = name;
     document.getElementById("detailName1").textContent = name;
     document.getElementById("detailDescription").textContent = description;
-    document.getElementById("detailPrice").textContent = price;
-    document.getElementById("detailDurationMinutes").textContent = durationMinutes;
-
+    document.getElementById("detailPrice").textContent = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+    document.getElementById("detailDurationMinutes").textContent = durationMinutes + " phút";
 }

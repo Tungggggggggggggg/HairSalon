@@ -18,7 +18,7 @@ public class ServiceShopService {
     }
 
     public List<Service> getAllServiceShops() {
-        return serviceRepository.findAll();
+        return serviceRepository.findAllByOrderByIdDesc();
     }
 
     public Service getServiceById(long id) {

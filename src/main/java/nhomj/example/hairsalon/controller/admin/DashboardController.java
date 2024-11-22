@@ -77,19 +77,9 @@ public class DashboardController {
         return "redirect:/admin/feedback_management";
     }
 
-
-
-
-
-
-
-
     @GetMapping("/admin/response_management")
     public String responseManagement(Model model) {
         return "admin/dashboard/response_management";
     }
-
-
-
 
 }

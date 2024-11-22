@@ -25,4 +25,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     // Các phương thức khác đã được kế thừa từ JpaRepository
+
+    List<User> findAllByOrderByCreatedDateDesc(); // Thêm phương thức này
 }

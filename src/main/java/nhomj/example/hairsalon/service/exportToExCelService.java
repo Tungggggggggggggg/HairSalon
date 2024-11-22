@@ -2,6 +2,9 @@ package nhomj.example.hairsalon.service;
 
 import nhomj.example.hairsalon.model.Revenue;
 import nhomj.example.hairsalon.model.Staff;
+
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -14,37 +17,49 @@ import java.util.List;
 
 @Service
 public class exportToExCelService {
-    public byte[] exportRevenueToExcel(List<Revenue> revenues) throws IOException {
+public byte[] exportRevenueToExcel(List<Revenue> revenues) throws IOException {
+    Workbook workbook = new XSSFWorkbook();
+    Sheet sheet = workbook.createSheet("Danh sách Doanh Thu");
 
-        Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("DanhsachDoanhThu");
+    // Tạo định dạng cho header
+    CellStyle headerStyle = workbook.createCellStyle();
+    Font headerFont = workbook.createFont();
+    headerFont.setBold(true);
+    headerStyle.setFont(headerFont);
 
+    Row headerRow = sheet.createRow(0);
+    headerRow.createCell(0).setCellValue("ID");
+    headerRow.createCell(1).setCellValue("Ngày");
+    headerRow.createCell(2).setCellValue("Số Dịch Vụ");
+    headerRow.createCell(3).setCellValue("Số Lượng Booking");
+    headerRow.createCell(4).setCellValue("Tổng Tiền");
 
-        Row headerRow = sheet.createRow(0);
-        headerRow.createCell(0).setCellValue("ID");
-        headerRow.createCell(1).setCellValue("Ngày");
-        headerRow.createCell(2).setCellValue("Số Dịch Vụ");
-        headerRow.createCell(3).setCellValue("Số Lượng Booking");
-        headerRow.createCell(4).setCellValue("Tổng Tiền");
-
-
-        int rowNum = 1;
-        for (Revenue revenue : revenues) {
-            Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(revenue.getSummaryId());
-            row.createCell(1).setCellValue(revenue.getSummaryDate());
-            row.createCell(2).setCellValue(revenue.getTotalServices());
-            row.createCell(3).setCellValue(revenue.getNumberOfBookings());
-            row.createCell(4).setCellValue(revenue.getTotalRevenue().doubleValue());
-        }
-
-
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        workbook.write(byteArrayOutputStream);
-        workbook.close();
-
-        return byteArrayOutputStream.toByteArray();
+    // Áp dụng định dạng cho header
+    for (int i = 0; i <= 4; i++) {
+        headerRow.getCell(i).setCellStyle(headerStyle);
     }
+
+    int rowNum = 1;
+    for (Revenue revenue : revenues) {
+        Row row = sheet.createRow(rowNum++);
+        row.createCell(0).setCellValue(revenue.getSummaryId());
+        row.createCell(1).setCellValue(revenue.getSummaryDate().toString());
+        row.createCell(2).setCellValue(revenue.getTotalServices());
+        row.createCell(3).setCellValue(revenue.getNumberOfBookings());
+        row.createCell(4).setCellValue(revenue.getTotalRevenue().doubleValue());
+    }
+
+    // Tự động điều chỉnh độ rộng cột
+    for (int i = 0; i <= 4; i++) {
+        sheet.autoSizeColumn(i);
+    }
+
+    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    workbook.write(byteArrayOutputStream);
+    workbook.close();
+
+    return byteArrayOutputStream.toByteArray();
+}
 
     public byte[] exportStaffToExcel(List<Staff> staffList) throws IOException {
 

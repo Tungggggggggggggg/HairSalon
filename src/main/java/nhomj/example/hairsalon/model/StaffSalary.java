@@ -1,11 +1,10 @@
 package nhomj.example.hairsalon.model;
 
 import jakarta.persistence.*;
-
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.math.RoundingMode;
 
 @Entity
 @Table(name = "staff_salary")
@@ -21,18 +20,27 @@ public class StaffSalary {
 
     private Integer month;
     private Integer year;
-    private float baseSalary;
-    private float bonus;
-    private float totalSalary;
+    private BigDecimal baseSalary;
+    private BigDecimal bonus;
+    private BigDecimal totalSalary;
 
-    @Temporal(TemporalType.DATE)
-    private LocalDate createDate;
+    private LocalDateTime createDate;
+
+    @Column(name = "update_date")
+    private LocalDateTime updateDate;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    // Getters and Setters
+    public enum Status {
+        DaThanhToan, ChuaThanhToan
+    }
 
+    public StaffSalary() {
+        super();
+    }
+
+    // Getters và Setters
 
     public Long getSalaryId() {
         return salaryId;
@@ -66,41 +74,37 @@ public class StaffSalary {
         this.year = year;
     }
 
-    public float getBaseSalary() {
+    public BigDecimal getBaseSalary() {
         return baseSalary;
     }
 
-    public void setBaseSalary(float baseSalary) {
-        this.baseSalary = baseSalary;
+    public void setBaseSalary(BigDecimal baseSalary) {
+        this.baseSalary = baseSalary.setScale(2, RoundingMode.HALF_UP);
         updateTotalSalary();
     }
 
-    public float getBonus() {
+    public BigDecimal getBonus() {
         return bonus;
     }
 
-    public void setBonus(float bonus) {
-        this.bonus = bonus;
+    public void setBonus(BigDecimal bonus) {
+        this.bonus = bonus.setScale(2, RoundingMode.HALF_UP);
         updateTotalSalary();
     }
 
-    private void updateTotalSalary() {
-        this.totalSalary = this.baseSalary + this.bonus;
-    }
-
-    public float getTotalSalary() {
+    public BigDecimal getTotalSalary() {
         return totalSalary;
     }
 
-    public void setTotalSalary(float totalSalary) {
-        this.totalSalary = totalSalary;
+    public void setTotalSalary(BigDecimal totalSalary) {
+        this.totalSalary = totalSalary.setScale(2, RoundingMode.HALF_UP);
     }
 
-    public LocalDate getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -111,10 +115,56 @@ public class StaffSalary {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-    public enum Status {
-        DaThanhToan, ChuaThanhToan
+    
+    /**
+     * Phương thức trả về ngày tạo đã được định dạng dưới dạng String.
+     *
+     * @return ngày tạo đã định dạng (dd/MM/yyyy HH:mm:ss)
+     */
+    public String getFormattedCreateDate() {
+        if (this.createDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            return this.createDate.format(formatter);
+        }
+        return "";
     }
 
+    private void updateTotalSalary() {
+        if (this.baseSalary != null && this.bonus != null) {
+            this.totalSalary = this.baseSalary.add(this.bonus).setScale(2, RoundingMode.HALF_UP);
+        }
+    }
+
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    /**
+     * Trả về ngày cập nhật đã được định dạng dưới dạng String.
+     *
+     * @return ngày cập nhật đã định dạng (dd/MM/yyyy HH:mm:ss)
+     */
+    public String getFormattedUpdateDate() {
+        if (this.updateDate != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            return this.updateDate.format(formatter);
+        }
+        return "";
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createDate = LocalDateTime.now();
+        this.updateDate = this.createDate;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updateDate = LocalDateTime.now();
+    }
 
 }
