@@ -93,6 +93,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Thêm script cho simple-datatables -->
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/simple-datatables.js"></script>
+<script src="/admin_style/js/scripts.js"></script>
 <script>
     // Khởi tạo DataTable cho bảng lịch hẹn
     document.addEventListener('DOMContentLoaded', function() {

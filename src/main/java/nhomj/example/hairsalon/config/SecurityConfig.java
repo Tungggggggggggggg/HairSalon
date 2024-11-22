@@ -49,31 +49,31 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeHttpRequests(authorize -> authorize
-//                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
-//                                DispatcherType.INCLUDE)
-//                        .permitAll()
-//                        .requestMatchers("/login",
-//                                "/home/**",
-//                                "/admin_style/**",
-//                                "/staff_style/**",
-//                                "/user_style/**",
-//                                "/images/**"
-//                        ).permitAll()
-//                        .requestMatchers("/admin/**").hasRole("Admin")
-//                        .anyRequest().authenticated())
-//
-//                .formLogin(formLogin -> formLogin
-//                        .loginPage("/login")
-//                        .failureUrl("/login?error")
-//                        .successHandler(customSuccessHandler())
-//                        .permitAll())
-//                .exceptionHandling(ex -> ex.accessDeniedPage("/accessdenied"));
-//        return http.build();
-
         http
-                .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
+                .authorizeHttpRequests(authorize -> authorize
+                        .dispatcherTypeMatchers(DispatcherType.FORWARD,
+                                DispatcherType.INCLUDE)
+                        .permitAll()
+                        .requestMatchers("/login",
+                                "/home/**",
+                                "/admin_style/**",
+                                "/staff_style/**",
+                                "/user_style/**",
+                                "/images/**"
+                        ).permitAll()
+                        .requestMatchers("/admin/**").hasRole("Admin")
+                        .anyRequest().authenticated())
+
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login")
+                        .failureUrl("/login?error")
+                        .successHandler(customSuccessHandler())
+                        .permitAll())
+                .exceptionHandling(ex -> ex.accessDeniedPage("/accessdenied"));
         return http.build();
+
+//        http
+//                .authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
+//        return http.build();
     }
 }

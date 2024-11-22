@@ -66,7 +66,7 @@
     <div class="success-icon">✔</div>
     <h1>Phản hồi của bạn đã được gửi thành công!</h1>
     <p>Cảm ơn bạn đã dành thời gian phản hồi. Chúng tôi rất trân trọng ý kiến của bạn và sẽ sử dụng nó để cải thiện dịch vụ.</p>
-    <a href="/home/report/sucess">Quay lại trang phản hồi</a>
+    <a href="/home/report/sucess">Quay lại trang chủ</a>
 </div>
 
 <jsp:include page="/WEB-INF/views/user/includes/footer.jsp" />

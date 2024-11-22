@@ -266,7 +266,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Modal xác nhận hoàn thành Booking -->
         <div class="modal fade" id="completeModal" tabindex="-1" aria-labelledby="completeModalLabel" aria-hidden="true">
             <div class="modal-dialog">
