@@ -274,22 +274,4 @@ document.addEventListener("DOMContentLoaded", function () {
         // Gửi form
         document.getElementById('bookingForm').submit();
     });
-
-    // Kiểm tra khi chọn giờ hẹn không được đặt ở quá khứ
-    document.getElementById("bookingForm").addEventListener("submit", function(event) {
-        const bookingDate = appointmentDatePicker.input.value;
-        const appointmentTime = appointmentTimePicker.input.value;
-
-        if (bookingDate && appointmentTime) {
-            // Chuyển đổi định dạng ngày từ d/m/Y sang yyyy-MM-dd để tạo đối tượng Date chính xác
-            const [day, month, year] = bookingDate.split('/');
-            const selectedDateTime = new Date(`${year}-${month}-${day}T${appointmentTime}`);
-            const now = new Date();
-
-            if (selectedDateTime < now) {
-                event.preventDefault();
-                alert("Giờ hẹn không được đặt ở quá khứ.");
-            }
-        }
-    });
 });

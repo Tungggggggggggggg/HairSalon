@@ -41,7 +41,7 @@ prefix="c" %>
                                 <strong>Thời gian thực hiện:</strong>
                                 ${service.durationMinutes} phút
                             </p>
-                            <button class="booking-button" onclick="window.location.href='/booking?serviceId=${service.id}';">Đặt lịch ngay</button>
+                            <button class="booking-button" onclick="window.location.href='/home/booking?serviceId=${service.id}';">Đặt lịch ngay</button>
                         </div>
                     </div>
                 </c:forEach>
