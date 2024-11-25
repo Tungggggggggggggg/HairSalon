@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 
 import java.math.BigDecimal;
 import java.time.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +53,15 @@ public class RevenueService {
         return revenueRepository.findAll(Sort.by(Sort.Order.desc("summaryDate")));
     }
 
+    public BigDecimal getTotalRevenue() {
+        List<Revenue> revenues = getAllRevenues();
+        BigDecimal totalRevenue = BigDecimal.ZERO;
+        for(Revenue revenue:revenues){
+            totalRevenue = totalRevenue.add(revenue.getTotalRevenue());
+        }
+        return totalRevenue;
+    }
+
     public LocalDate monday() {
         LocalDate today = LocalDate.now();
         LocalDate monday = today;
@@ -61,20 +71,9 @@ public class RevenueService {
         return monday;
     }
 
-    public LocalDate sunday() {
-        LocalDate today = LocalDate.now();
-        // Tìm ngày Chủ Nhật gần nhất
-        LocalDate sunday = today;
-        while (sunday.getDayOfWeek() != DayOfWeek.SUNDAY) {
-            sunday = sunday.plusDays(1);
-        }
-        return sunday;
-    }
-
 
     public int numberMonth() {
         YearMonth currentMonth = YearMonth.now();
-        // Lấy số ngày trong tháng hiện tại
         return currentMonth.lengthOfMonth();
     }
 
@@ -89,13 +88,19 @@ public class RevenueService {
     }
 
     public List<BigDecimal> getRevenueByMonth() {
-        List<BigDecimal> testList = revenueRepository.findAllInCurrentMonth();
-        if (testList.size() < numberMonth()) {
-            for (int i = testList.size(); i < numberMonth(); i++) {
-                testList.add(BigDecimal.ZERO);
-            }
-        }
+        List<BigDecimal> testList = revenueRepository.findTotalRevenueByMonthAndYear(11, 2024);
+        System.out.println(testList.size());
+        System.out.println(testList);
         return testList;
+    }
+
+    public BigDecimal getTotalRevenueByMonth() {
+        List<BigDecimal> testList = getRevenueByMonth();
+        BigDecimal totalRevenue = BigDecimal.ZERO;
+        for(BigDecimal revenue:testList){
+            totalRevenue = totalRevenue.add(revenue);
+        }
+        return totalRevenue;
     }
 
     public double getNumMonth(List<BigDecimal> month) {
@@ -107,15 +112,22 @@ public class RevenueService {
     }
 
 
+
     public List<BigDecimal> getRevenueByYear() {
-        List<BigDecimal> testList = revenueRepository.findAllInCurrentYear();
-        if (testList.size() < 12) {
-            for (int i = testList.size(); i < 12; i++) {
-                testList.add(BigDecimal.ZERO);
-            }
+        List<BigDecimal> testList = new ArrayList<>(); // Khởi tạo danh sách
+
+        for (int i = 1; i <= 12; i++) {
+            List<BigDecimal> news = revenueRepository.findTotalRevenueByMonthAndYear(i, 2024);
+
+            BigDecimal totalRevenue = news.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+
+            testList.add(totalRevenue);
         }
+        System.out.println(testList);
         return testList;
     }
+
+
 
 //    public void updateRevenueForBooking(Booking booking) {
 //        if (booking.getStatus() != Booking.Status.HoanThanh) {

@@ -57,7 +57,6 @@ public class EmailService{
             return "Error while Sending Mail";
         }
     }
-
     @Async
     public void sendHtmlEmailDL(EmailDetails details , Booking booking){
 
@@ -94,6 +93,7 @@ public class EmailService{
             System.out.println("Error while Sending Mail" + e.getMessage());
         }
     }
+
     @Async
     public void sendHtmlEmailTT(EmailDetails details , Booking booking){
         try{
@@ -108,7 +108,7 @@ public class EmailService{
             Path filePath = Paths.get(classLoader.getResource("templates/thongbaothanhtoan.html").toURI());
 
             String htmlTemplate = Files.readString(filePath);
-            htmlTemplate = htmlTemplate.replace("${id}", String.valueOf(booking.getId()));
+            htmlTemplate = htmlTemplate.replace("${id}", Long.toString(invoice.getId()));
             htmlTemplate = htmlTemplate.replace("${invoiceDate}", invoice.getInvoiceDate().toString());
             htmlTemplate = htmlTemplate.replace("${totalAmount}", invoice.getTotalAmount().toString());
             htmlTemplate = htmlTemplate.replace("${paymentMethod}", invoice.getPaymentMethod().toString());

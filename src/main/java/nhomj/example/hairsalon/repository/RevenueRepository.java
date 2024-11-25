@@ -28,8 +28,16 @@ public interface RevenueRepository extends JpaRepository<Revenue, Long> {
             "AND CURRENT_DATE")
     List<BigDecimal> findAllInCurrentMonth();
 
-    @Query("SELECT r.totalRevenue FROM Revenue r WHERE FUNCTION('YEAR', r.summaryDate) = FUNCTION('YEAR', CURRENT_DATE)")
-    List<BigDecimal> findAllInCurrentYear();
+    @Query("SELECT r.totalRevenue FROM Revenue r WHERE " +
+            "YEAR(r.summaryDate) = :year AND " +
+            "MONTH(r.summaryDate) = :month " +
+            "ORDER BY r.summaryDate ASC")
+    List<BigDecimal> findTotalRevenueByMonthAndYear(@Param("month") int month, @Param("year") int year);
+
+
+
+//    @Query("SELECT r.totalRevenue FROM Revenue r WHERE FUNCTION('YEAR', r.summaryDate) = FUNCTION('YEAR', CURRENT_DATE)")
+//    List<BigDecimal> findAllInCurrentYear();
 
     Revenue findOneBySummaryDate(@Param("summaryDate") LocalDate summaryDate);
 }

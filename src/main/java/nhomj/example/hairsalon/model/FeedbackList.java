@@ -23,7 +23,7 @@ public class FeedbackList {
     @Column(columnDefinition = "NVARCHAR(255)")
     private String email;
 
-    // Sử dụng @ElementCollection để lưu List<String> vào cơ sở dữ liệu
+
     @ElementCollection
     @CollectionTable(name = "feedback_type", joinColumns = @JoinColumn(name = "feedbacklist_id"))
     @Column(name = "feedback_type" , columnDefinition = "NVARCHAR(255)")
@@ -39,7 +39,6 @@ public class FeedbackList {
         super();
     }
 
-    // Getters và Setters
 
     public Long getId() {
         return id;
@@ -97,24 +96,6 @@ public class FeedbackList {
         this.feedBackDate = feedBackDate;
     }
 
-    @Override
-    public String toString() {
-        return "FeedbackList{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", feedbackType=" + feedbackType +
-                ", message='" + message + '\'' +
-                ", feedBackDate=" + feedBackDate +
-                '}';
-    }
-
-    /**
-     * Phương thức trả về ngày phản hồi đã được định dạng dưới dạng String.
-     *
-     * @return ngày phản hồi đã định dạng (dd/MM/yyyy HH:mm:ss)
-     */
     public String getFormattedFeedBackDate() {
         if (this.feedBackDate != null) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -123,11 +104,6 @@ public class FeedbackList {
         return "";
     }
 
-    /**
-     * Phương thức trả về mục phản hồi đã được định dạng dưới dạng String.
-     *
-     * @return mục phản hồi dưới dạng String, ví dụ: "Dịch vụ"
-     */
     public String getFormattedFeedbackType() {
         if (this.feedbackType != null && !this.feedbackType.isEmpty()) {
             return String.join(", ", this.feedbackType);

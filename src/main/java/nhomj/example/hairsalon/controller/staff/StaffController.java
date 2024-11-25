@@ -35,45 +35,25 @@ public class StaffController {
         this.bookingService = bookingService;
     }
 
-    /**
-     * Thêm thông tin nhân viên đăng nhập vào Model.
-     *
-     * @param model           đối tượng Model để truyền dữ liệu đến view
-     * @param authentication đối tượng Authentication chứa thông tin người dùng đăng nhập
-     */
     private void addLoggedInStaffToModel(Model model, Authentication authentication) {
         if (authentication != null) {
-            String email = authentication.getName(); // Giả sử email là tên đăng nhập
+            String email = authentication.getName();
             Staff loggedInStaff = staffService.getStaffByEmail(email);
             if (loggedInStaff != null) {
                 model.addAttribute("loggedInStaff", loggedInStaff);
             } else {
-                // Xử lý nếu không tìm thấy nhân viên
                 model.addAttribute("errorMessage", "Nhân viên không tồn tại.");
             }
         }
     }
 
-    /**
-     * Hiển thị trang chính của nhân viên, bao gồm lịch làm việc.
-     *
-     * @param model           đối tượng Model để truyền dữ liệu đến view
-     * @param authentication đối tượng Authentication chứa thông tin người dùng đăng nhập
-     * @return Trang staff/staff.jsp
-     */
+
     @GetMapping("/staff")
     public String staffDashboard(Model model, Authentication authentication) {
         addLoggedInStaffToModel(model, authentication);
-        return "staff/staff"; // Trang staff.jsp hiển thị lịch làm việc
+        return "staff/staff";
     }
 
-    /**
-     * Hiển thị trang thông tin lương của nhân viên đăng nhập.
-     *
-     * @param model           đối tượng Model để truyền dữ liệu đến view
-     * @param authentication đối tượng Authentication chứa thông tin người dùng đăng nhập
-     * @return Trang staff/Staff_Salary.jsp
-     */
     @GetMapping("/staff/salary")
     public String staffSalary(Model model, Authentication authentication) {
         addLoggedInStaffToModel(model, authentication);
@@ -83,20 +63,13 @@ public class StaffController {
         if (loggedInStaff != null) {
             List<StaffSalary> salaryList = staffSalaryService.getStaffSalaryByStaffId(loggedInStaff.getId());
             model.addAttribute("salaryList", salaryList);
-            return "staff/Staff_Salary"; // Hiển thị danh sách lương
+            return "staff/Staff_Salary";
         } else {
             model.addAttribute("errorMessage", "Nhân viên không tồn tại.");
-            return "error"; // Trang lỗi
+            return "error";
         }
     }
 
-    /**
-     * Hiển thị trang thông tin chi tiết của nhân viên đăng nhập.
-     *
-     * @param model           đối tượng Model để truyền dữ liệu đến view
-     * @param authentication đối tượng Authentication chứa thông tin người dùng đăng nhập
-     * @return Trang staff/Staff_Information.jsp
-     */
     @GetMapping("/staff/information")
     public String staffInformation(Model model, Authentication authentication) {
         addLoggedInStaffToModel(model, authentication);
@@ -105,20 +78,13 @@ public class StaffController {
 
         if (loggedInStaff != null) {
             model.addAttribute("staff", loggedInStaff);
-            return "staff/Staff_Information"; // Hiển thị thông tin chi tiết của nhân viên
+            return "staff/Staff_Information";
         } else {
             model.addAttribute("errorMessage", "Nhân viên không tồn tại.");
             return "error"; // Trang lỗi
         }
     }
 
-    /**
-     * Hiển thị trang lịch hẹn của nhân viên đăng nhập.
-     *
-     * @param model           đối tượng Model để truyền dữ liệu đến view
-     * @param authentication đối tượng Authentication chứa thông tin người dùng đăng nhập
-     * @return Trang staff/Staff_Booking.jsp
-     */
     @GetMapping("/staff/bookings")
     public String myBookings(Model model, Authentication authentication) {
         addLoggedInStaffToModel(model, authentication);
@@ -128,19 +94,13 @@ public class StaffController {
         if (loggedInStaff != null) {
             List<Booking> bookings = bookingService.getBookingsByStaffId(loggedInStaff.getId());
             model.addAttribute("bookingList", bookings);
-            return "staff/Staff_Booking"; // Hiển thị danh sách lịch hẹn
+            return "staff/Staff_Booking";
         } else {
             model.addAttribute("errorMessage", "Nhân viên không tồn tại.");
             return "error"; // Trang lỗi
         }
     }
 
-    /**
-     * API Endpoint để lấy danh sách lịch hẹn của nhân viên dưới dạng JSON.
-     *
-     * @param authentication Đối tượng Authentication chứa thông tin người dùng đăng nhập
-     * @return Danh sách các BookingEvent
-     */
     @GetMapping("/staff/bookings/events")
     public @ResponseBody List<BookingEvent> getStaffBookings(Authentication authentication) {
         if (authentication == null) {
@@ -160,28 +120,22 @@ public class StaffController {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
         for (Booking booking : bookings) {
-            if (booking.getStatus() == Booking.Status.DaHuy) {
-                continue; // Bỏ qua các lịch hẹn đã hủy
+            if (booking.getStatus() == Booking.Status.DaHuy || booking.getStatus() == Booking.Status.HoanThanh) {
+                continue;
             }
-
             String services = booking.getServices().stream()
                     .map(Service::getName) 
                     .collect(Collectors.joining(", "));
             String title = services;
-
             LocalDateTime startDateTime = booking.getDate().atTime(booking.getAppointmentTime());
-            LocalDateTime endDateTime = startDateTime.plusHours(1); // Giả sử mỗi lịch hẹn kéo dài 1 giờ
-
+            LocalDateTime endDateTime = startDateTime.plusHours(1);
             String start = startDateTime.format(formatter);
             String end = endDateTime.format(formatter);
-
             String customerName = booking.getCustomer().getName();
             String status = booking.getStatusDisplayName();
-
             BookingEvent event = new BookingEvent(title, start, end, customerName, status);
             events.add(event);
         }
-
         return events;
     }
 

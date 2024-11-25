@@ -1,6 +1,5 @@
 package nhomj.example.hairsalon.config;
 
-import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -49,7 +48,6 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String targetUrl = determineTargetUrl(authentication);
         if (response.isCommitted()) {
-
             return;
         }
         redirectStrategy.sendRedirect(request, response, targetUrl);

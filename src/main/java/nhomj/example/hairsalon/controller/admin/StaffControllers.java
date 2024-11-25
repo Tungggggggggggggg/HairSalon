@@ -53,12 +53,6 @@ public class StaffControllers {
         });
     }
 
-    /**
-     * Hiển thị trang quản lý nhân viên.
-     *
-     * @param model Đối tượng Model để truyền dữ liệu đến view
-     * @return Trang staff_management.jsp
-     */
     @GetMapping("/admin/staff_management")
     public String staffManagement(Model model) {
         List<Staff> staffs = this.staffService.getAllStaff();
@@ -68,13 +62,6 @@ public class StaffControllers {
         return "admin/dashboard/staff_management";
     }
 
-    /**
-     * Xử lý lưu thông tin nhân viên mới hoặc cập nhật nhân viên hiện tại.
-     *
-     * @param staff Đối tượng Staff chứa thông tin nhân viên
-     * @param file  Tệp avatar tải lên
-     * @return Chuyển hướng đến trang quản lý nhân viên
-     */
     @PostMapping("/admin/staff_management/save")
     public String saveStaff(@ModelAttribute("newStaff") Staff staff, @RequestParam("file") MultipartFile file) {
         String avatar = "";
@@ -107,13 +94,6 @@ public class StaffControllers {
         return "redirect:/admin/staff_management";
     }
 
-    /**
-     * Xử lý xóa nhân viên dựa trên ID.
-     *
-     * @param staff Đối tượng Staff chứa ID nhân viên cần xóa
-     * @param model Đối tượng Model để truyền dữ liệu đến view nếu cần
-     * @return Chuyển hướng đến trang quản lý nhân viên
-     */
     @PostMapping("/admin/staff_management/delete")
     public String deleteStaff(@ModelAttribute("deleteStaff") Staff staff, Model model) {
         this.staffService.deleteStaff(staff);

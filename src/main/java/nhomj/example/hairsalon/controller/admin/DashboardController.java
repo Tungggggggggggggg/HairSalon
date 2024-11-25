@@ -37,29 +37,15 @@ public class DashboardController {
         List<Booking> bookings = this.bookingService.getAllBookings();
         List<User> users = this.userService.getAllUsers();
         List<Revenue> revenues = this.revenueService.getAllRevenues();
-        List<BigDecimal> week = revenueService.getRevenueByWeek();
-        List<BigDecimal> month  = revenueService.getRevenueByMonth();
-        double tongDoanhThu = 0;
-        if(bookings != null)
-        {
-            for(Booking booking : bookings)
-            {
-                List<Service> services = booking.getServices();
-                for(Service service : services)
-                {
-                      tongDoanhThu += service.getPrice().doubleValue();
-                }
+        List<BigDecimal> month  = revenueService.getRevenueByYear();
 
-            }
-        }
         model.addAttribute("countFeedback", countFeedback);
         model.addAttribute("countBooking", countBooking);
         model.addAttribute("bookings", bookings);
         model.addAttribute("users", users);
         model.addAttribute("revenues", revenues);
-        model.addAttribute("week", week);
         model.addAttribute("month", month);
-        model.addAttribute("doanhthu", tongDoanhThu);
+        model.addAttribute("doanhthu", revenueService.getTotalRevenueByMonth());
         return "admin/dashboard/show";
     }
 

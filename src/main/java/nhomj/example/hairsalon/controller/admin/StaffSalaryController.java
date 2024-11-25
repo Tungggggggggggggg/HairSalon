@@ -47,12 +47,12 @@ public class StaffSalaryController {
             model.addAttribute("staffSalaries", latestSalaries);
             model.addAttribute("staffList", staffList);
             model.addAttribute("newSalary", new StaffSalary());
-            model.addAttribute("currentYear", java.time.LocalDate.now().getYear()); // Để sử dụng trong JSP
+            model.addAttribute("currentYear", java.time.LocalDate.now().getYear());
             return "admin/dashboard/salary_management";
         } catch (Exception e) {
             logger.error("Error loading salary management page", e);
-            // Redirect to an error page or return an error view
-            return "redirect:/admin/error"; // Bạn cần tạo trang error hoặc xử lý phù hợp
+
+            return "redirect:/admin/error";
         }
     }
 
@@ -62,7 +62,6 @@ public class StaffSalaryController {
             logger.warn("Validation errors while saving salary: {}", bindingResult.getAllErrors());
             return "redirect:/admin/salary_management";
         }
-
         try {
             Staff staff = staffSalary.getStaff();
             if (staff == null || staff.getId() == null) {
@@ -76,12 +75,10 @@ public class StaffSalaryController {
             }
             staffSalary.setStaff(staff);
 
-            // Thiết lập tháng và năm cho lương mới
             LocalDate currentDate = LocalDate.now();
             staffSalary.setMonth(currentDate.getMonthValue());
             staffSalary.setYear(currentDate.getYear());
 
-            // Lưu lương
             staffSalaryService.saveStaffSalary(staffSalary);
             logger.info("Saved salary for staff ID {}", staff.getId());
         } catch (Exception e) {
@@ -103,7 +100,6 @@ public class StaffSalaryController {
         }
         catch (Exception e) {
             logger.error("Error deleting salary with ID " + salaryId, e);
-            // Optionally, redirect to an error page
         }
         return "redirect:/admin/salary_management";
     }
@@ -113,7 +109,6 @@ public class StaffSalaryController {
         try {
             List<StaffSalary> staffSalaries = staffSalaryService.getAllStaffSalaries();
 
-            // Export
             StaffSalaryExcelExporter excelExporter = new StaffSalaryExcelExporter(staffSalaries);
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
             String headerKey = "Content-Disposition";

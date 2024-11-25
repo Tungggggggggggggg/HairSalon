@@ -38,19 +38,19 @@ public class BookingService {
         return bookingRepository.count();
     }
 
-    // Lấy danh sách tất cả các booking, sắp xếp mới nhất lên đầu
+
     public List<Booking> getAllBookings() {
         return bookingRepository.findAllByOrderByCreatedDateDesc();
     }
 
-    // Lấy danh sách tất cả các booking, sắp xếp từ cũ đến mới
+
     public List<Booking> getAllBookingsSortedByCreatedDateAsc() {
         return bookingRepository.findAllByOrderByCreatedDateAsc();
     }
 
-    public Booking save(Booking booking) {
+    public Booking saveNew(Booking booking) {
         Booking newBooking = bookingRepository.save(booking);
-        // Loại bỏ việc gọi updateRevenueForBooking ở đây để tránh đếm trùng
+
         if(newBooking != null) {
             emailService.sendHtmlEmailDL(new EmailDetails(newBooking.getCustomer().getEmail(), "Thông báo từ JSalon"), newBooking);
         }

@@ -19,39 +19,22 @@ public class UserController {
         this.userService = userService;
     }
 
-    /**
-     * Hiển thị trang quản lý khách hàng.
-     *
-     * @param model Đối tượng Model để truyền dữ liệu đến view
-     * @return Trang customer_management.jsp
-     */
     @GetMapping("/admin/customer_management")
     public String customerManagement(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users);
         model.addAttribute("newCustomer", new User());
-        model.addAttribute("deleteCustomer", new User()); // Thêm deleteCustomer vào Model
+        model.addAttribute("deleteCustomer", new User());
         return "admin/dashboard/customer_management";
     }
 
-    /**
-     * Xử lý lưu thông tin khách hàng mới hoặc cập nhật khách hàng hiện tại.
-     *
-     * @param user Đối tượng User chứa thông tin khách hàng
-     * @return Chuyển hướng đến trang quản lý khách hàng
-     */
     @PostMapping("/admin/customer_management/save")
     public String customerManagementSave(@ModelAttribute("newCustomer") User user) {
         this.userService.saveUser(user);
         return "redirect:/admin/customer_management";
     }
 
-    /**
-     * Xử lý xóa khách hàng dựa trên ID.
-     *
-     * @param id ID của khách hàng cần xóa
-     * @return Chuyển hướng đến trang quản lý khách hàng
-     */
+
     @PostMapping("/admin/customer_management/delete")
     public String deleteCustomer(@ModelAttribute("deleteCustomer") User user) {
         this.userService.deleteById(user.getId());

@@ -78,15 +78,6 @@
                     <div class="col-xl-9">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-chart-bar me-1"></i>
-                                Doanh thu theo tuần trong tháng
-                            </div>
-                            <div class="card-body">
-                                <canvas id="revenueChart" width="100%" height="50"></canvas>
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
                                 <i class="fas fa-chart-area me-1"></i>
                                 Doanh thu theo tháng trong năm
                             </div>
@@ -207,39 +198,39 @@
         }
     });
 
-    // Biểu đồ doanh thu tuần (giả sử)
-    const ctx2 = document.getElementById('revenueChart').getContext('2d');
-    const revenueChart = new Chart(ctx2, {
-        type: 'bar',
-        data: {
-            labels: ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'],
-            datasets: [{
-                label: 'Doanh thu tuần',
-                data: ${week},
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 159, 64, 0.5)',
-                    'rgba(255, 99, 132, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+    <%--// Biểu đồ doanh thu tuần (giả sử)--%>
+    <%--const ctx2 = document.getElementById('revenueChart').getContext('2d');--%>
+    <%--const revenueChart = new Chart(ctx2, {--%>
+    <%--    type: 'bar',--%>
+    <%--    data: {--%>
+    <%--        labels: ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'],--%>
+    <%--        datasets: [{--%>
+    <%--            label: 'Doanh thu tuần',--%>
+    <%--            data: ${week},--%>
+    <%--            backgroundColor: [--%>
+    <%--                'rgba(75, 192, 192, 0.5)',--%>
+    <%--                'rgba(153, 102, 255, 0.5)',--%>
+    <%--                'rgba(255, 159, 64, 0.5)',--%>
+    <%--                'rgba(255, 99, 132, 0.5)'--%>
+    <%--            ],--%>
+    <%--            borderColor: [--%>
+    <%--                'rgba(75, 192, 192, 1)',--%>
+    <%--                'rgba(153, 102, 255, 1)',--%>
+    <%--                'rgba(255, 159, 64, 1)',--%>
+    <%--                'rgba(255, 99, 132, 1)'--%>
+    <%--            ],--%>
+    <%--            borderWidth: 1--%>
+    <%--        }]--%>
+    <%--    },--%>
+    <%--    options: {--%>
+    <%--        responsive: true,--%>
+    <%--        scales: {--%>
+    <%--            y: {--%>
+    <%--                beginAtZero: true--%>
+    <%--            }--%>
+    <%--        }--%>
+    <%--    }--%>
+    <%--});--%>
 
     // Biểu đồ performance staff (giả sử)
     const ctx3 = document.getElementById('staffPerformanceChart').getContext('2d');

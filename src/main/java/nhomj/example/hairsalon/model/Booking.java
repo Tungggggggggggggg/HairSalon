@@ -151,7 +151,6 @@ public class Booking {
         this.createdDate = createdDate;
     }
 
-    // Phương thức trả về ngày đã định dạng
     public String getFormattedDate() {
         if (this.date != null) {
             return this.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -159,7 +158,6 @@ public class Booking {
         return "";
     }
 
-    // Phương thức trả về giờ đã định dạng
     public String getFormattedAppointmentTime() {
         if (this.appointmentTime != null) {
             return this.appointmentTime.format(DateTimeFormatter.ofPattern("HH:mm"));
@@ -167,7 +165,6 @@ public class Booking {
         return "";
     }
 
-    // Phương thức trả về tên hiển thị của trạng thái
     public String getStatusDisplayName() {
         switch (this.status) {
             case DaDat:
@@ -181,7 +178,6 @@ public class Booking {
         }
     }
 
-    // Phương thức tính tổng thời lượng của các dịch vụ
     public int getTotalDurationMinutes() {
         if (services == null || services.isEmpty()) {
             return 0;
@@ -191,7 +187,6 @@ public class Booking {
                 .sum();
     }
 
-    // Phương thức trả về ngày tạo đã định dạng
     public String getFormattedCreatedDate() {
         if (this.createdDate != null) {
             return this.createdDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));

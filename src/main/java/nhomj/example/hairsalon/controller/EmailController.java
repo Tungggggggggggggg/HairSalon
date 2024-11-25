@@ -29,5 +29,4 @@ public class EmailController {
         return "thành công";
     }
 
-    String msgBody = "Quý khách hàng : ";
 }

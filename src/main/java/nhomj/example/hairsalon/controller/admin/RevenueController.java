@@ -34,7 +34,6 @@ public class RevenueController {
         model.addAttribute("week", week);
         model.addAttribute("month", month);
         model.addAttribute("year", year);
-        // Pass empty strings for startDate and endDate
         model.addAttribute("startDate", "");
         model.addAttribute("endDate", "");
         return "admin/dashboard/revenue_management";
@@ -74,11 +73,9 @@ public class RevenueController {
                 LocalDate endDate = LocalDate.parse(endDateStr, formatter);
                 revenues = revenueService.getRevenueByDate(startDate, endDate);
             } else {
-                // Export all revenues
                 revenues = revenueService.getAllRevenues();
             }
         } catch (DateTimeParseException e) {
-            // Trả về lỗi 400 Bad Request nếu ngày không hợp lệ
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Ngày không hợp lệ.");
             return;
         }

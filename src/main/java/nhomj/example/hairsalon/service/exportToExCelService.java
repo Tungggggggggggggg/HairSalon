@@ -49,7 +49,6 @@ public byte[] exportRevenueToExcel(List<Revenue> revenues) throws IOException {
         row.createCell(4).setCellValue(revenue.getTotalRevenue().doubleValue());
     }
 
-    // Tự động điều chỉnh độ rộng cột
     for (int i = 0; i <= 4; i++) {
         sheet.autoSizeColumn(i);
     }
